@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\workshops\workshop01.cpp" />
+    <ClCompile Include="src\workshops\workshop02.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\announce.hpp" />
     <ClInclude Include="src\workshops\workshop01.hpp" />
+    <ClInclude Include="src\workshops\workshop02.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -104,6 +106,8 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
+      <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,6 +126,8 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
+      <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,6 +146,8 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
+      <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -158,6 +166,8 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
       <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
+      <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
+      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
