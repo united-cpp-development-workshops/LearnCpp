@@ -19,19 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\workshops\workshop01.cpp" />
-    <ClCompile Include="src\workshops\workshop02.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\workshops\workshop01.hpp" />
-    <ClInclude Include="src\workshops\workshop02.hpp" />
+    <ClInclude Include="src\announce.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c2c89bbe-0ad8-47ae-9be7-691e5ed7e656}</ProjectGuid>
-    <RootNamespace>Chapter00</RootNamespace>
+    <ProjectGuid>{11114b17-aaac-4643-a703-9283f3eed97a}</ProjectGuid>
+    <RootNamespace>Base</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -104,9 +98,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)Base\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
       <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -124,9 +117,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)Base\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
       <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,9 +136,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)Base\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
       <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -164,9 +155,8 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <TreatWarningAsError>true</TreatWarningAsError>
-      <AdditionalIncludeDirectories>src;$(SolutionDir)Base\src;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src</AdditionalIncludeDirectories>
       <AdditionalOptions>/w44365 %(AdditionalOptions)</AdditionalOptions>
-      <ExternalWarningLevel>Level3</ExternalWarningLevel>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

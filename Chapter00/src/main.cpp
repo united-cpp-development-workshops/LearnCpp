@@ -1,5 +1,3 @@
-#include <iostream>
-
 #include "announce.hpp"
 #include "workshops/workshop01.hpp"
 #include "workshops/workshop02.hpp"
