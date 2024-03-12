@@ -167,7 +167,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\chapter.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\quizes\quiz01.cpp" />
+    <ClCompile Include="src\workshops\workshop01.cpp" />
+    <ClCompile Include="src\workshops\workshop02.cpp" />
+    <ClCompile Include="src\workshops\workshop03.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\chapter.hpp" />
+    <ClInclude Include="src\quizes\quiz01.hpp" />
+    <ClInclude Include="src\workshops\workshop01.hpp" />
+    <ClInclude Include="src\workshops\workshop02.hpp" />
+    <ClInclude Include="src\workshops\workshop03.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

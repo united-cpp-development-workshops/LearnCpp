@@ -2,6 +2,5 @@
 
 int main()
 {
-  Chapter00::run();
-  return 0;
+  Chapter02::run();
 }

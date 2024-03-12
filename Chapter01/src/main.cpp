@@ -1,7 +1,7 @@
-#include "announce.hpp"
+#include "chapter.hpp"
 
 int main()
 {
-  ANNOUNCE_CHAPTER("Chapter 01: Basics");
+  Chapter01::run();
   return 0;
 }

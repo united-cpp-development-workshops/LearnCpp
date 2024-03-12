@@ -1,11 +1,12 @@
+#include "workshops/workshop02.hpp"
+
 #include "announce.hpp"
-#include "workshop02.hpp"
 
 const int numStandards = 7;
 const long stdCode[numStandards] = { 199711L, 201103L, 201402L, 201703L, 202002L, 202302L, 202612L };
 const char* stdName[numStandards] = { "Pre-C++11", "C++11", "C++14", "C++17", "C++20", "C++23", "C++26" };
 
-long getCPPStandard()
+static long getCPPStandard()
 {
   // Visual Studio is non-conforming in support for __cplusplus (unless you set a specific compiler flag, which you probably haven't)
   // In Visual Studio 2015 or newer we can use _MSVC_LANG instead
