@@ -1,7 +1,0 @@
-#include "chapter.hpp"
-
-int main()
-{
-  Chapter00::run();
-  return 0;
-}
