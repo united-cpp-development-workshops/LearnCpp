@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35004.147
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter00", "projects\Chapter00\Chapter00.vcxproj", "{D5FE08A1-C4FF-46B5-87CB-144FC861887C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{19A8955F-A281-4407-B59E-D08463EEE7FD}"
+	ProjectSection(SolutionItems) = preProject
+		.clang-tidy = .clang-tidy
+		.clang-format = .clang-format
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter01", "projects\Chapter01\Chapter01.vcxproj", "{650F560A-055D-4CEA-B744-AA9449B1E18C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter02", "projects\Chapter02\Chapter02.vcxproj", "{98D638B1-A3D8-44E9-8F5E-89065829A764}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D5FE08A1-C4FF-46B5-87CB-144FC861887C}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{D5FE08A1-C4FF-46B5-87CB-144FC861887C}.Debug|ARM64.Build.0 = Debug|ARM64
+		{D5FE08A1-C4FF-46B5-87CB-144FC861887C}.Debug|x64.ActiveCfg = Debug|x64
+		{D5FE08A1-C4FF-46B5-87CB-144FC861887C}.Debug|x64.Build.0 = Debug|x64
+		{D5FE08A1-C4FF-46B5-87CB-144FC861887C}.Release|ARM64.ActiveCfg = Release|ARM64
+		{D5FE08A1-C4FF-46B5-87CB-144FC861887C}.Release|ARM64.Build.0 = Release|ARM64
+		{D5FE08A1-C4FF-46B5-87CB-144FC861887C}.Release|x64.ActiveCfg = Release|x64
+		{D5FE08A1-C4FF-46B5-87CB-144FC861887C}.Release|x64.Build.0 = Release|x64
+		{650F560A-055D-4CEA-B744-AA9449B1E18C}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{650F560A-055D-4CEA-B744-AA9449B1E18C}.Debug|ARM64.Build.0 = Debug|ARM64
+		{650F560A-055D-4CEA-B744-AA9449B1E18C}.Debug|x64.ActiveCfg = Debug|x64
+		{650F560A-055D-4CEA-B744-AA9449B1E18C}.Debug|x64.Build.0 = Debug|x64
+		{650F560A-055D-4CEA-B744-AA9449B1E18C}.Release|ARM64.ActiveCfg = Release|ARM64
+		{650F560A-055D-4CEA-B744-AA9449B1E18C}.Release|ARM64.Build.0 = Release|ARM64
+		{650F560A-055D-4CEA-B744-AA9449B1E18C}.Release|x64.ActiveCfg = Release|x64
+		{650F560A-055D-4CEA-B744-AA9449B1E18C}.Release|x64.Build.0 = Release|x64
+		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Debug|ARM64.Build.0 = Debug|ARM64
+		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Debug|x64.ActiveCfg = Debug|x64
+		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Debug|x64.Build.0 = Debug|x64
+		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Release|ARM64.ActiveCfg = Release|ARM64
+		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Release|ARM64.Build.0 = Release|ARM64
+		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Release|x64.ActiveCfg = Release|x64
+		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A75DD69D-8280-44EB-AD76-982A5D2A147A}
+	EndGlobalSection
+EndGlobal
