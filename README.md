@@ -11,7 +11,9 @@ a Visual Studio solution.
 
 ## Workshops
 
-- **[Chapter 00](./projects/Chapter00/) | Introduction / Getting Started:**
-Hello World.
-- **[Chapter 01](./projects/Chapter01/) | C++ Basics:** Aspect Ratio Calculator.
-- **[Chapter 02](./projects/Chapter02/) | Functions and Files:** Random Charts.
+- **[Chapter 00](./projects/Chapter00/): Introduction / Getting Started**
+  - Hello World.
+- **[Chapter 01](./projects/Chapter01/): C++ Basics**
+  - Aspect Ratio Calculator.
+- **[Chapter 02](./projects/Chapter02/): Functions and Files**
+  - Random Charts.
