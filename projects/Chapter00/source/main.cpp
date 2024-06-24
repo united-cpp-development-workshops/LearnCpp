@@ -11,14 +11,14 @@ namespace
     // readability-magic-numbers)
     switch (cppStandard)
     {
-      case 199'711L: return "Pre-C++11";
-      case 201'103L: return "C++11";
-      case 201'402L: return "C++14";
-      case 201'703L: return "C++17";
-      case 202'002L: return "C++20";
-      case 202'302L: return "C++23";
-      case 202'612 : return "C++26";
-      default      : return "Unknown C++ standard";
+    case 199'711L: return "Pre-C++11";
+    case 201'103L: return "C++11";
+    case 201'402L: return "C++14";
+    case 201'703L: return "C++17";
+    case 202'002L: return "C++20";
+    case 202'302L: return "C++23";
+    case 202'612 : return "C++26";
+    default      : return "Unknown C++ standard";
     }
     // NOLINTEND(cppcoreguidelines-avoid-magic-numbers,
     // readability-magic-numbers)

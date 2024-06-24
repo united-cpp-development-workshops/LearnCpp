@@ -1,6 +1,6 @@
 # *----------------------------------------------------------------------------*
 # |                       C++ Clang-Format Configuration                       |
-# |                              Version 24.06.21                              |
+# |                              Version 24.06.24                              |
 # *----------------------------------------------------------------------------*
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Format, a formatting tool for C, C++, |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-06-21                                                  |
+# | Date         : 2024-06-24                                                  |
 # *----------------------------------------------------------------------------*
 ---
 BasedOnStyle: LLVM
@@ -157,7 +157,7 @@ IncludeCategories:
 IncludeIsMainRegex: $       # Main header
 IncludeIsMainSourceRegex: $ # Main source
 IndentAccessModifiers: false
-IndentCaseBlocks: true
+IndentCaseBlocks: false
 IndentCaseLabels: false
 IndentExternBlock: AfterExternBlock
 IndentGotoLabels: true
