@@ -7,8 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter00", "projects\Chapt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{19A8955F-A281-4407-B59E-D08463EEE7FD}"
 	ProjectSection(SolutionItems) = preProject
-		.clang-tidy = .clang-tidy
 		.clang-format = .clang-format
+		.clang-tidy = .clang-tidy
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
@@ -19,6 +19,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter01", "projects\Chapter01\Chapter01.vcxproj", "{650F560A-055D-4CEA-B744-AA9449B1E18C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter02", "projects\Chapter02\Chapter02.vcxproj", "{98D638B1-A3D8-44E9-8F5E-89065829A764}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter03", "projects\Chapter03\Chapter03.vcxproj", "{718C78D6-7C8D-4852-9A80-B16A5748A30D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,6 +54,14 @@ Global
 		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Release|ARM64.Build.0 = Release|ARM64
 		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Release|x64.ActiveCfg = Release|x64
 		{98D638B1-A3D8-44E9-8F5E-89065829A764}.Release|x64.Build.0 = Release|x64
+		{718C78D6-7C8D-4852-9A80-B16A5748A30D}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{718C78D6-7C8D-4852-9A80-B16A5748A30D}.Debug|ARM64.Build.0 = Debug|ARM64
+		{718C78D6-7C8D-4852-9A80-B16A5748A30D}.Debug|x64.ActiveCfg = Debug|x64
+		{718C78D6-7C8D-4852-9A80-B16A5748A30D}.Debug|x64.Build.0 = Debug|x64
+		{718C78D6-7C8D-4852-9A80-B16A5748A30D}.Release|ARM64.ActiveCfg = Release|ARM64
+		{718C78D6-7C8D-4852-9A80-B16A5748A30D}.Release|ARM64.Build.0 = Release|ARM64
+		{718C78D6-7C8D-4852-9A80-B16A5748A30D}.Release|x64.ActiveCfg = Release|x64
+		{718C78D6-7C8D-4852-9A80-B16A5748A30D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
