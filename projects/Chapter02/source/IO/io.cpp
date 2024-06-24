@@ -1,6 +1,7 @@
 #include "IO/io.hpp"
 
 #include "Math/math.hpp"
+#include "Utility/utility.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -65,17 +66,17 @@ namespace
     switch (alignment)
     {
     case Alignment::LEFT:
-      {
-        std::cout << input;
-        printPadding();
-        break;
-      }
+    {
+      std::cout << input;
+      printPadding();
+      break;
+    }
     case Alignment::RIGHT:
-      {
-        printPadding();
-        std::cout << input;
-        break;
-      }
+    {
+      printPadding();
+      std::cout << input;
+      break;
+    }
     }
 
     // Return output stream
@@ -212,6 +213,15 @@ namespace
     return {};
   }
 
+  auto resetInputBuffer() -> void
+  {
+    // Clear input buffer and error flags
+    std::cin.clear();
+    if (std::cin.rdbuf()->in_avail() > 0)
+    {
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
+  }
 } // namespace
 
 auto IO::printWelcome() -> void
@@ -242,16 +252,35 @@ auto IO::printInformative() -> void
 
 auto IO::getSamplesCountInput() -> std::size_t
 {
+  resetInputBuffer();
+
   std::cout << " [i]: Please input the 'Sample size' parameter: ";
 
-  std::size_t sampleSize{};
-  std::cin >> sampleSize;
+  std::uint16_t sampleSize{};
+
+  // Loop until valid input
+  while (true)
+  {
+    resetInputBuffer();
+
+    // Assign inputs
+    std::cin >> sampleSize;
+
+    // Check if inputs are larger than 0
+    if (sampleSize > 0) { break; }
+
+    // Wrong input
+    std::cout
+      << " [X]: 'Sample size' must be larger than 0, please try again: ";
+  }
 
   return sampleSize;
 }
 
 auto IO::getLowerBoundInput() -> int
 {
+  resetInputBuffer();
+
   std::cout << " [i]: Please input the 'Lower bound' parameter: ";
 
   int lowerBound{};
@@ -262,6 +291,8 @@ auto IO::getLowerBoundInput() -> int
 
 auto IO::getUpperBoundInput() -> int
 {
+  resetInputBuffer();
+
   std::cout << " [i]: Please input the 'Upper bound' parameter: ";
 
   int upperBound{};
@@ -270,14 +301,31 @@ auto IO::getUpperBoundInput() -> int
   return upperBound;
 }
 
-auto IO::getChartSizesInput() -> std::pair<int, int>
+auto IO::getPreferredChartSizeInput() -> std::pair<std::uint16_t, std::uint16_t>
 {
+  resetInputBuffer();
+
   std::cout
     << " [i]: Please input the 'Chart sizes' parameter (width height): ";
 
-  int width{};
-  int height{};
-  std::cin >> width >> height;
+  std::uint16_t width{};
+  std::uint16_t height{};
+
+  // Loop until valid input
+  while (true)
+  {
+    resetInputBuffer();
+
+    // Assign inputs
+    std::cin >> width >> height;
+
+    // Check if inputs are larger than 0
+    if (width > 0 and height > 0) { break; }
+
+    // Wrong input
+    std::cout
+      << " [X]: Width and Height must be larger than 0, please try again: ";
+  }
 
   return {width, height};
 }
@@ -416,14 +464,14 @@ auto IO::printOptionsHeader() -> void
 
 auto IO::getOptionInput() -> Option
 {
+  resetInputBuffer();
+
   std::cout << " [i]: Please input your option: ";
 
   // Loop until valid input
   while (true)
   {
-    // Clear input buffer and error flags
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    resetInputBuffer();
 
     // Get the option input
     std::string option{};
@@ -457,5 +505,28 @@ auto IO::getOptionInput() -> Option
 
     // Wrong input
     std::cout << " [X]: Invalid option input, please try again: ";
+  }
+}
+
+auto IO::printNoFurtherZoom(Utility::Direction direction) -> void
+{
+  std::cout << " [X]: No further zoom ";
+  switch (direction)
+  {
+  case Utility::Direction::BOTH:
+  {
+    std::cout << "in any direction is possible.\n";
+    break;
+  }
+  case Utility::Direction::HORIZONTAL:
+  {
+    std::cout << "in horizontal direction is possible.\n";
+    break;
+  }
+  case Utility::Direction::VERTICAL:
+  {
+    std::cout << "in vertical direction is possible.\n";
+    break;
+  }
   }
 }

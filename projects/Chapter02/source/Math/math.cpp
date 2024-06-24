@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cmath>
+#include <cstdint>
 #include <GSL/narrow>
 #include <map>
 #include <ranges>
@@ -9,11 +10,11 @@
 #include <vector>
 
 auto Math::generateChartFeed(
-  const std::vector<int>& values,
-  int                     lowerBound,
-  int                     upperBound,
-  std::pair<int, int>     chartSize
-) -> std::pair<ChartFeed, std::pair<int, int>>
+  const std::vector<int>&                 values,
+  int                                     lowerBound,
+  int                                     upperBound,
+  std::pair<std::uint16_t, std::uint16_t> chartSize
+) -> std::pair<ChartFeed, std::pair<std::uint16_t, std::uint16_t>>
 {
   // Calculate x-axis interval respecting column count
   const int xAxisInterval{
@@ -65,8 +66,9 @@ auto Math::generateChartFeed(
   };
 
   // Calculate the chart size with respect to intervals
-  const std::pair<int, int> resultingChartSize{
-    gsl::narrow<int>(frequencyMap.size()), maxFrequency / yAxisInterval
+  const std::pair<std::uint16_t, std::uint16_t> resultingChartSize{
+    gsl::narrow<std::uint16_t>(frequencyMap.size()),
+    maxFrequency / yAxisInterval
   };
 
   return {chartFeed, resultingChartSize};

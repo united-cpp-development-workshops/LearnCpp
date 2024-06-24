@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstdint>
 #include <map>
 #include <utility>
 #include <vector>
@@ -40,9 +41,9 @@ namespace Math
   };
 
   auto generateChartFeed(
-    const std::vector<int>& values,
-    int                     lowerBound,
-    int                     upperBound,
-    std::pair<int, int>     chartSize
-  ) -> std::pair<ChartFeed, std::pair<int, int>>;
+    const std::vector<int>&                 values,
+    int                                     lowerBound,
+    int                                     upperBound,
+    std::pair<std::uint16_t, std::uint16_t> chartSize
+  ) -> std::pair<ChartFeed, std::pair<std::uint16_t, std::uint16_t>>;
 } // namespace Math

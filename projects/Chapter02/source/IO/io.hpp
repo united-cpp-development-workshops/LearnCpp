@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Math/math.hpp"
+#include "Utility/utility.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -35,11 +36,12 @@ namespace IO
   [[nodiscard]]
   auto getUpperBoundInput() -> int;
   [[nodiscard]]
-  auto getChartSizesInput() -> std::pair<int, int>;
+  auto getPreferredChartSizeInput() -> std::pair<std::uint16_t, std::uint16_t>;
   auto printResultsHeader() -> void;
   auto printChart(const Math::ChartFeed& chartFeed) -> void;
   auto printStatistics(const std::vector<int>& values) -> void;
   auto printOptionsHeader() -> void;
   [[nodiscard]]
   auto getOptionInput() -> Option;
+  auto printNoFurtherZoom(Utility::Direction direction) -> void;
 } // namespace IO
