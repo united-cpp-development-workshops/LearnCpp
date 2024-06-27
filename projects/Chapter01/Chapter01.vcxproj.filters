@@ -23,10 +23,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\foundation.hpp">
+    <ClInclude Include="source\pch.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\pch.hpp">
+    <ClInclude Include="source\wrappers.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\types.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "foundation.hpp"
 #include "Math/math.hpp"
+#include "types.hpp"
 
 #include <map>
 #include <optional>

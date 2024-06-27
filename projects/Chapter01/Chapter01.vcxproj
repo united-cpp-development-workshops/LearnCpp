@@ -213,7 +213,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\pch.hpp" />
-    <ClInclude Include="source\foundation.hpp" />
+    <ClInclude Include="source\types.hpp" />
+    <ClInclude Include="source\wrappers.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\GSL\algorithm" />

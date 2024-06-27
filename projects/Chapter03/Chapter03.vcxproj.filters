@@ -21,6 +21,15 @@
     <ClCompile Include="source\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\Game\game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Math\math.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\GSL\algorithm" />
@@ -35,10 +44,22 @@
     <None Include="include\GSL\zstring" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\foundation.hpp">
+    <ClInclude Include="source\types.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\pch.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\wrappers.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Game\game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\io.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Math\math.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

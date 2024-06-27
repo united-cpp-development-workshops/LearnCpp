@@ -216,12 +216,13 @@
     <ClCompile Include="source\Utility\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\foundation.hpp" />
     <ClInclude Include="source\Math\math.hpp" />
     <ClInclude Include="source\pch.hpp" />
     <ClInclude Include="source\Random\random.hpp" />
     <ClInclude Include="source\IO\io.hpp" />
+    <ClInclude Include="source\types.hpp" />
     <ClInclude Include="source\Utility\utility.hpp" />
+    <ClInclude Include="source\wrappers.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="include\GSL\algorithm" />

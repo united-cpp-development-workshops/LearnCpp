@@ -2,7 +2,8 @@
 
 // NOLINTBEGIN
 
-// Add the foundation header
-#include "foundation.hpp"
+// Foundation headers
+#include "types.hpp"
+#include "wrappers.hpp"
 
 // NOLINTEND

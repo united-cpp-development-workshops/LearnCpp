@@ -117,9 +117,9 @@ BreakBeforeBraces: Custom
 BreakBeforeConceptDeclarations: Always
 BreakBeforeInlineASMColon: OnlyMultiline
 BreakBeforeTernaryOperators: true
-BreakConstructorInitializers: AfterColon
+BreakConstructorInitializers: BeforeComma
 # BreakFunctionDefinitionParameters: // v19
-BreakInheritanceList: AfterColon
+BreakInheritanceList: BeforeComma
 BreakStringLiterals: true
 # BreakTemplateDeclarations // v19
 ColumnLimit: 80
@@ -197,7 +197,7 @@ NamespaceIndentation: All
 # ObjCSpaceAfterProperty:          // Unused (Not C++)
 # ObjCSpaceBeforeProtocolList:     // Unused (Not C++)
 PPIndentWidth: -1 # Uses IndentWidth
-PackConstructorInitializers: NextLine
+PackConstructorInitializers: Never
 PenaltyBreakAssignment: 125
 PenaltyBreakBeforeFirstCallParameter: 5
 PenaltyBreakComment: 250

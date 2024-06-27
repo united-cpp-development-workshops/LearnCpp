@@ -2,7 +2,8 @@
 
 #include "Math/math.hpp"
 
-#include "foundation.hpp"
+#include "types.hpp"
+#include "wrappers.hpp"
 
 #include <algorithm>
 #include <cmath>

@@ -1,9 +1,7 @@
 #pragma once
 
-#include <cstddef>
 #include <cstdint>
 #include <cstdlib>
-#include <GSL/narrow>
 
 // -------------------------------< Integers >------------------------------- //
 
@@ -66,20 +64,3 @@ using wdef = wchar_t;
 // C-style strings
 using cstr = const cdef*;
 using wstr = const wdef*;
-
-// -------------------------------< Wrappers >------------------------------- //
-
-// NOLINTBEGIN(misc-unused-using-decls)
-
-// Narrowing
-using gsl::narrow;
-
-// NOLINTEND(misc-unused-using-decls)
-
-// NOLINTBEGIN(clang-diagnostic-unused-const-variable)
-
-// Exit codes
-constexpr idef TERMINATE_SUCCESS{EXIT_SUCCESS};
-constexpr idef TERMINATE_FAILURE{EXIT_FAILURE};
-
-// NOLINTEND(clang-diagnostic-unused-const-variable)

@@ -225,8 +225,9 @@
     <None Include="include\GSL\zstring" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\foundation.hpp" />
     <ClInclude Include="source\pch.hpp" />
+    <ClInclude Include="source\types.hpp" />
+    <ClInclude Include="source\wrappers.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
