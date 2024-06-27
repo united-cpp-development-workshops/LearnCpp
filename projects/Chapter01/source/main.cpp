@@ -1,45 +1,55 @@
-#include <cstdlib>
+#include "pch.hpp"
+
+#include "foundation.hpp"
+
+#include <cassert>
 #include <iostream>
 
 namespace
 {
-  constexpr auto GCD(int number1, int number2) noexcept -> int
+  constexpr auto GCD(u32l number1, u32l number2) -> u32l
   {
     while (number2 != 0)
     {
-      const auto temp = number2;
-      number2         = number1 % number2;
-      number1         = temp;
+      const auto tempNumber2{number2};
+      number2 = {number1 % number2};
+      number1 = {tempNumber2};
     }
     return number1;
   }
 } // namespace
 
-auto main() noexcept -> int
+auto main() noexcept -> idef
 try
 {
+  // Print title
   std::cout << "Aspect Ratio Calculator\n";
 
   // Get the width from the user
   std::cout << "Enter the width: ";
-  int width{};
+  u32l width{};
   std::cin >> width;
 
   // Get the height from the user
   std::cout << "Enter the height: ";
-  int height{};
+  u32l height{};
   std::cin >> height;
 
   // Calculate greatest common divisor
-  const auto gcd = GCD(width, height);
+  const auto gcd{GCD(width, height)};
+
+  // Assert that the greatest common divisor is not zero
+  assert(gcd != 0);
 
   // Calculate and print the aspect ratio
   std::cout << "Aspect Ratio of " << width << "x" << height << " is "
             << width / gcd << ":" << height / gcd << '\n';
 
-  return EXIT_SUCCESS;
+  // Return success
+  return TERMINATE_SUCCESS;
 }
 catch (...)
 {
-  return EXIT_FAILURE;
+  // Return failure
+  return TERMINATE_FAILURE;
 }

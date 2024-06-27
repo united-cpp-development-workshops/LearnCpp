@@ -115,6 +115,7 @@
       <EnablePREfast>true</EnablePREfast>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,6 +141,7 @@
       <EnablePREfast>true</EnablePREfast>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -165,6 +167,7 @@
       <EnablePREfast>true</EnablePREfast>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -190,6 +193,7 @@
       <EnablePREfast>true</EnablePREfast>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <DisableAnalyzeExternal>true</DisableAnalyzeExternal>
+      <PrecompiledHeader>Use</PrecompiledHeader>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -200,13 +204,21 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="source\Math\math.cpp" />
+    <ClCompile Include="source\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="source\Random\random.cpp" />
     <ClCompile Include="source\IO\io.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Utility\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\foundation.hpp" />
     <ClInclude Include="source\Math\math.hpp" />
+    <ClInclude Include="source\pch.hpp" />
     <ClInclude Include="source\Random\random.hpp" />
     <ClInclude Include="source\IO\io.hpp" />
     <ClInclude Include="source\Utility\utility.hpp" />

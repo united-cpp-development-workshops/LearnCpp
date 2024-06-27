@@ -1,6 +1,6 @@
 # *----------------------------------------------------------------------------*
 # |                       C++ Clang-Format Configuration                       |
-# |                              Version 24.06.24                              |
+# |                              Version 24.06.27                              |
 # *----------------------------------------------------------------------------*
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Format, a formatting tool for C, C++, |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-06-24                                                  |
+# | Date         : 2024-06-27                                                  |
 # *----------------------------------------------------------------------------*
 ---
 BasedOnStyle: LLVM
@@ -210,15 +210,15 @@ PenaltyExcessCharacter: 1000000
 PenaltyIndentedWhitespace: 5
 PenaltyReturnTypeOnItsOwnLine: 200
 PointerAlignment: Left
-QualifierAlignment: Left
-# QualifierOrder:   // Unused
+QualifierAlignment: Custom
+QualifierOrder: [static, inline, constexpr, friend, const, volatile, type, restrict]
 # RawStringFormats: // Unused
 ReferenceAlignment: Pointer
 ReflowComments: true
 RemoveBracesLLVM: false
 RemoveParentheses: ReturnStatement
 RemoveSemicolon: true
-RequiresClausePosition: WithPreceding
+RequiresClausePosition: OwnLine
 RequiresExpressionIndentation: OuterScope
 SeparateDefinitionBlocks: Always
 ShortNamespaceLines: 0

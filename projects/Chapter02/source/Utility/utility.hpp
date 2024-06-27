@@ -1,7 +1,8 @@
 #pragma once
+
+#include "foundation.hpp"
 #include "Math/math.hpp"
 
-#include <cstdint>
 #include <map>
 #include <optional>
 #include <utility>
@@ -9,7 +10,7 @@
 
 namespace Utility
 {
-  enum class Direction : std::uint8_t
+  enum class Direction : u8f
   {
     BOTH,
     HORIZONTAL,
@@ -17,31 +18,29 @@ namespace Utility
   };
 
   auto optionsHandler(
-    std::pair<std::uint16_t, std::uint16_t>& preferredChartSize,
-    std::pair<std::uint16_t, std::uint16_t>& currentChartSize,
-    int&                                     xAxisInterval,
-    int&                                     yAxisInterval,
-    std::map<int, int>&                      frequencyMap,
-    const std::vector<int>&                  values,
-    int                                      lowerBound,
-    int                                      upperBound
+    std::pair<u16f, u16f>&   preferredChartSize,
+    std::pair<u16f, u16f>&   currentChartSize,
+    u32f&                    xAxisInterval,
+    u32f&                    yAxisInterval,
+    std::map<i32f, u32f>&    frequencyMap,
+    const std::vector<i32f>& values,
+    i32f                     lowerBound,
+    i32f                     upperBound
   ) -> bool;
-
   auto noFurtherZoomHandler(
-    bool                      zoomIn,
-    Direction                 direction,
-    int                       xAxisInterval,
-    int                       yAxisInterval,
-    const std::map<int, int>& frequencyMap
+    bool                        zoomIn,
+    Direction                   direction,
+    u32f                        xAxisInterval,
+    u32f                        yAxisInterval,
+    const std::map<i32f, u32f>& frequencyMap
   ) -> bool;
-
   auto chartZoom(
-    bool                                     zoomIn,
-    Direction                                zoomDirection,
-    std::pair<std::uint16_t, std::uint16_t>& preferredChartSize,
-    std::pair<std::uint16_t, std::uint16_t>& currentChartSize,
-    const std::vector<int>&                  values,
-    int                                      lowerBound,
-    int                                      upperBound
+    bool                     zoomIn,
+    Direction                zoomDirection,
+    std::pair<u16f, u16f>&   preferredChartSize,
+    std::pair<u16f, u16f>&   currentChartSize,
+    const std::vector<i32f>& values,
+    i32f                     lowerBound,
+    i32f                     upperBound
   ) -> std::optional<Math::ChartFeed>;
 } // namespace Utility

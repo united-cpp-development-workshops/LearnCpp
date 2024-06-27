@@ -1,11 +1,12 @@
+#include "pch.hpp"
+
 #include "Utility/utility.hpp"
 
+#include "foundation.hpp"
 #include "IO/io.hpp"
 #include "Math/math.hpp"
 
 #include <algorithm>
-#include <cstdint>
-#include <GSL/narrow>
 #include <map>
 #include <optional>
 #include <ranges>
@@ -14,14 +15,14 @@
 #include <vector>
 
 auto Utility::optionsHandler(
-  std::pair<std::uint16_t, std::uint16_t>& preferredChartSize,
-  std::pair<std::uint16_t, std::uint16_t>& currentChartSize,
-  int&                                     xAxisInterval,
-  int&                                     yAxisInterval,
-  std::map<int, int>&                      frequencyMap,
-  const std::vector<int>&                  values,
-  int                                      lowerBound,
-  int                                      upperBound
+  std::pair<u16f, u16f>&   preferredChartSize,
+  std::pair<u16f, u16f>&   currentChartSize,
+  u32f&                    xAxisInterval,
+  u32f&                    yAxisInterval,
+  std::map<i32f, u32f>&    frequencyMap,
+  const std::vector<i32f>& values,
+  i32f                     lowerBound,
+  i32f                     upperBound
 ) -> bool
 {
   // Options loop
@@ -164,11 +165,11 @@ auto Utility::optionsHandler(
 
 // NOLINTNEXTLINE(readability-function-cognitive-complexity)
 auto Utility::noFurtherZoomHandler(
-  bool                      zoomIn,
-  const Utility::Direction  direction,
-  int                       xAxisInterval,
-  int                       yAxisInterval,
-  const std::map<int, int>& frequencyMap
+  bool                        zoomIn,
+  const Utility::Direction    direction,
+  u32f                        xAxisInterval,
+  u32f                        yAxisInterval,
+  const std::map<i32f, u32f>& frequencyMap
 ) -> bool
 {
   // Check if we can zoom further
@@ -188,7 +189,7 @@ auto Utility::noFurtherZoomHandler(
     else
     {
       // Find max frequency
-      const int maxFrequency{
+      const u32f maxFrequency{
         *std::ranges::max_element(std::views::values(frequencyMap))
       };
 
@@ -237,7 +238,7 @@ auto Utility::noFurtherZoomHandler(
     else
     {
       // Find max frequency
-      const int maxFrequency{
+      const u32f maxFrequency{
         *std::ranges::max_element(std::views::values(frequencyMap))
       };
 
@@ -255,23 +256,18 @@ auto Utility::noFurtherZoomHandler(
 }
 
 auto Utility::chartZoom(
-  bool                                     zoomIn,
-  Direction                                zoomDirection,
-  std::pair<std::uint16_t, std::uint16_t>& preferredChartSize,
-  std::pair<std::uint16_t, std::uint16_t>& currentChartSize,
-  const std::vector<int>&                  values,
-  int                                      lowerBound,
-  int                                      upperBound
+  bool                     zoomIn,
+  Direction                zoomDirection,
+  std::pair<u16f, u16f>&   preferredChartSize,
+  std::pair<u16f, u16f>&   currentChartSize,
+  const std::vector<i32f>& values,
+  i32f                     lowerBound,
+  i32f                     upperBound
 ) -> std::optional<Math::ChartFeed>
 {
   // Save old chart sizes
-  const std::pair<std::uint16_t, std::uint16_t> oldPreferredChartSize{
-    preferredChartSize
-  };
-  const std::pair<std::uint16_t, std::uint16_t> oldChartSize{currentChartSize};
-
-  // Determine zoom direction
-  const std::int16_t zoomConstant{gsl::narrow<std::int16_t>(zoomIn ? 1 : -1)};
+  const std::pair<u16f, u16f> oldPreferredChartSize{preferredChartSize};
+  const std::pair<u16f, u16f> oldChartSize{currentChartSize};
 
   // Initialize new chart feed and size
   Math::ChartFeed newChartFeed;
@@ -284,20 +280,28 @@ auto Utility::chartZoom(
     if (zoomDirection == Direction::BOTH
         or zoomDirection == Direction::HORIZONTAL)
     {
-      preferredChartSize.first += zoomConstant;
+      preferredChartSize.first = {
+        zoomIn ? preferredChartSize.first + u16f{1}
+               : preferredChartSize.first - u16f{1}
+      };
     }
 
     // Increase preferred row count if direction allows it
     if (zoomDirection == Direction::BOTH
         or zoomDirection == Direction::VERTICAL)
     {
-      preferredChartSize.second += zoomConstant;
+      preferredChartSize.first = {
+        zoomIn ? preferredChartSize.first + u16f{1}
+               : preferredChartSize.first - u16f{1}
+      };
     }
 
     if (preferredChartSize.first == 0 or preferredChartSize.second == 0)
     {
       preferredChartSize = {oldPreferredChartSize};
       currentChartSize   = {oldChartSize};
+
+      // Return empty optional
       return {};
     }
 

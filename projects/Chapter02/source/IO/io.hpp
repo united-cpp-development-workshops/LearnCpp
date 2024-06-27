@@ -1,21 +1,22 @@
 #pragma once
 
+#include "foundation.hpp"
 #include "Math/math.hpp"
 #include "Utility/utility.hpp"
 
-#include <cstddef>
-#include <cstdint>
 #include <utility>
 #include <vector>
 
 namespace IO
 {
   // NOLINTBEGIN(clang-diagnostic-unused-const-variable)
-  constexpr const char* X_AXIS_NAME{"Value"};
-  constexpr const char* Y_AXIS_NAME{"Frequency"};
+
+  constexpr cstr X_AXIS_NAME{"Value"};
+  constexpr cstr Y_AXIS_NAME{"Frequency"};
+
   // NOLINTEND(clang-diagnostic-unused-const-variable)
 
-  enum class Option : std::uint8_t
+  enum class Option : u8f
   {
     ZOOM_IN,
     ZOOM_IN_HORIZONTAL,
@@ -30,16 +31,16 @@ namespace IO
   auto printWelcome() -> void;
   auto printInformative() -> void;
   [[nodiscard]]
-  auto getSamplesCountInput() -> std::size_t;
+  auto getSamplesCountInput() -> size;
   [[nodiscard]]
-  auto getLowerBoundInput() -> int;
+  auto getLowerBoundInput() -> i32f;
   [[nodiscard]]
-  auto getUpperBoundInput() -> int;
+  auto getUpperBoundInput() -> i32f;
   [[nodiscard]]
-  auto getPreferredChartSizeInput() -> std::pair<std::uint16_t, std::uint16_t>;
+  auto getPreferredChartSizeInput() -> std::pair<u16f, u16f>;
   auto printResultsHeader() -> void;
   auto printChart(const Math::ChartFeed& chartFeed) -> void;
-  auto printStatistics(const std::vector<int>& values) -> void;
+  auto printStatistics(const std::vector<i32f>& values) -> void;
   auto printOptionsHeader() -> void;
   [[nodiscard]]
   auto getOptionInput() -> Option;

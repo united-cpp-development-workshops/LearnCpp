@@ -1,13 +1,20 @@
-#include <cstdlib>
+#include "pch.hpp"
+
+#include "foundation.hpp"
+
 #include <iostream>
 
-auto main() noexcept -> int
+auto main() noexcept -> idef
 try
 {
-  std::cout << "Hello World\n";
-  return EXIT_SUCCESS;
+  // Print Hello World!
+  std::cout << "Hello World!\n";
+
+  // Return success
+  return TERMINATE_SUCCESS;
 }
 catch (...)
 {
-  return EXIT_FAILURE;
+  // Return failure
+  return TERMINATE_FAILURE;
 }

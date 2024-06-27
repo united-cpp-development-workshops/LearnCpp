@@ -1,31 +1,33 @@
+#include "pch.hpp"
+
 #include "Math/math.hpp"
+
+#include "foundation.hpp"
 
 #include <algorithm>
 #include <cmath>
-#include <cstdint>
-#include <GSL/narrow>
 #include <map>
 #include <ranges>
 #include <utility>
 #include <vector>
 
 auto Math::generateChartFeed(
-  const std::vector<int>&                 values,
-  int                                     lowerBound,
-  int                                     upperBound,
-  std::pair<std::uint16_t, std::uint16_t> chartSize
-) -> std::pair<ChartFeed, std::pair<std::uint16_t, std::uint16_t>>
+  const std::vector<i32f>& values,
+  i32f                     lowerBound,
+  i32f                     upperBound,
+  std::pair<u16f, u16f>    chartSize
+) -> std::pair<ChartFeed, std::pair<u16f, u16f>>
 {
   // Calculate x-axis interval respecting column count
-  const int xAxisInterval{
-    std::max(1, (upperBound - lowerBound) / chartSize.first)
+  const u32f xAxisInterval{
+    std::max(u32f{1}, narrow<u32f>(upperBound - lowerBound) / chartSize.first)
   };
 
   // Define the frequency map
-  std::map<int, int> frequencyMap;
+  std::map<i32f, u32f> frequencyMap;
 
   // Initialize the frequency map
-  for (int x{upperBound}; x > lowerBound; x -= xAxisInterval)
+  for (i32f x{upperBound}; x > lowerBound; x -= narrow<i32f>(xAxisInterval))
   {
     frequencyMap[x] = {0};
   }
@@ -36,12 +38,12 @@ auto Math::generateChartFeed(
   // Count the frequency of each interval
   std::ranges::for_each(
     values,
-    [&](int value) -> void
+    [&](i32f value) -> void
     {
       // Find the key in the frequency map that is closest to the value
       const auto key{*std::ranges::min_element(
         std::views::keys(frequencyMap),
-        [&](int lhs, int rhs) noexcept -> bool
+        [&](i32f lhs, i32f rhs) noexcept -> bool
         {
           return std::abs(lhs - value) < std::abs(rhs - value);
         }
@@ -53,12 +55,12 @@ auto Math::generateChartFeed(
   );
 
   // Find the maximum frequency for y-axis scaling
-  const int maxFrequency{
+  const u32f maxFrequency{
     *std::ranges::max_element(std::views::values(frequencyMap))
   };
 
   // Calculate y-axis interval respecting row count
-  const int yAxisInterval{std::max(1, maxFrequency / chartSize.second)};
+  const u32f yAxisInterval{std::max(u32f{1}, maxFrequency / chartSize.second)};
 
   // Create ChartFeed
   const ChartFeed chartFeed{
@@ -66,10 +68,10 @@ auto Math::generateChartFeed(
   };
 
   // Calculate the chart size with respect to intervals
-  const std::pair<std::uint16_t, std::uint16_t> resultingChartSize{
-    gsl::narrow<std::uint16_t>(frequencyMap.size()),
-    maxFrequency / yAxisInterval
+  const std::pair<u16f, u16f> resultingChartSize{
+    narrow<u16f>(frequencyMap.size()), maxFrequency / yAxisInterval
   };
 
+  // Return the chart feed and the resulting chart size
   return {chartFeed, resultingChartSize};
 }

@@ -1,21 +1,23 @@
+#include "pch.hpp"
+
 #include "Random/random.hpp"
 
+#include "foundation.hpp"
+
 #include <algorithm>
-#include <cstddef>
 #include <random>
 #include <vector>
 
-auto Random::distribute(
-  std::size_t numberOfElements, int lowerBound, int upperBound
-) -> std::vector<int>
+auto Random::distribute(size numberOfElements, i32f lowerBound, i32f upperBound)
+  -> std::vector<i32f>
 {
   // Create a vector of random numbers
-  std::vector<int> values(numberOfElements);
+  std::vector<i32f> values(numberOfElements);
 
   // Generate random tooling
-  std::random_device                 randomDevice;
-  std::default_random_engine         randomEngine{randomDevice()};
-  std::uniform_int_distribution<int> distribution{lowerBound, upperBound};
+  std::random_device                  randomDevice;
+  std::default_random_engine          randomEngine{randomDevice()};
+  std::uniform_int_distribution<i32f> distribution{lowerBound, upperBound};
 
   // Fill the vector with random numbers
   std::generate(

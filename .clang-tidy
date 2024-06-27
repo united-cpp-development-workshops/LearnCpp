@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
 # |                        C++ Clang-Tidy Configuration                        |
-# |                              Version 24.06.23                              |
+# |                              Version 24.06.26                              |
 # +----------------------------------------------------------------------------+
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Tidy, a static analysis tool from the |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-06-23                                                  |
+# | Date         : 2024-06-26                                                  |
 # +----------------------------------------------------------------------------+
 ---
 # ExcludeHeaderFilterRegex: ".*\\projects\\.*\\src\\Support\\.*"
@@ -67,6 +67,7 @@ Checks: >
   -clang-diagnostic-pragma-once-outside-header,
   -clang-diagnostic-pre-c++14-compat,
   -clang-diagnostic-pre-c++17-compat,
+  -clang-diagnostic-pre-c++20-compat,
   -clang-diagnostic-switch-default,
 
   -google-objc-*,
@@ -1046,7 +1047,8 @@ CheckOptions:
     value: "CamelCase"
   - key: readability-identifier-naming.TypeAliasPrefix
     value: ""
-# - key: readability-identifier-naming.TypeAliasIgnoredRegexp // None
+  - key: readability-identifier-naming.TypeAliasIgnoredRegexp
+    value: "^[iu](8|16|32|64)([lf]?)$|^[iu](def|max)$|^size$|^c(8|16|32)$|^[cw](def|str)$|^f(32|64)$"
   - key: readability-identifier-naming.TypeAliasSuffix
     value: ""
 # -
