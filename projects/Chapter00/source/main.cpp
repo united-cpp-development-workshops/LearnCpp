@@ -1,22 +1,22 @@
 #include "pch.hpp"
 
-#include "types.hpp"
-#include "wrappers.hpp"
+#include "Foundation/constants.hpp"
+#include "Foundation/types.hpp"
 
 #include <iostream>
 #include <string>
 
 namespace
 {
-  constexpr i32l CPPRE_CODE{199'711L};
-  constexpr i32l CPP11_CODE{201'103L};
-  constexpr i32l CPP14_CODE{201'402L};
-  constexpr i32l CPP17_CODE{201'703L};
-  constexpr i32l CPP20_CODE{202'002L};
-  constexpr i32l CPP23_CODE{202'302L};
-  constexpr i32l CPP26_CODE{202'612L};
+  constexpr fn::i32l CPPRE_CODE{199'711L};
+  constexpr fn::i32l CPP11_CODE{201'103L};
+  constexpr fn::i32l CPP14_CODE{201'402L};
+  constexpr fn::i32l CPP17_CODE{201'703L};
+  constexpr fn::i32l CPP20_CODE{202'002L};
+  constexpr fn::i32l CPP23_CODE{202'302L};
+  constexpr fn::i32l CPP26_CODE{202'612L};
 
-  constexpr auto GET_VERSION_STRING(i32l versionCode) -> std::string
+  constexpr auto GET_VERSION_STRING(fn::i32l versionCode) -> std::string
   {
     switch (versionCode)
     {
@@ -32,20 +32,20 @@ namespace
   }
 } // namespace
 
-auto main() noexcept -> idef
+auto main() noexcept -> fn::idef
 try
 {
   // Get cpp standard version
-  constexpr i32l CPP_STANDARD{__cplusplus};
+  constexpr fn::i32l CPP_STANDARD{__cplusplus};
 
   // Print the cpp standard version
   std::cout << "C++ Standard: " << GET_VERSION_STRING(CPP_STANDARD) << '\n';
 
   // Return success
-  return TERMINATE_SUCCESS;
+  return fn::TERMINATE_SUCCESS;
 }
 catch (...)
 {
   // Return failure
-  return TERMINATE_FAILURE;
+  return fn::TERMINATE_FAILURE;
 }

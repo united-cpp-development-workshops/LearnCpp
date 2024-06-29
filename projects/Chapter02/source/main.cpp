@@ -1,17 +1,18 @@
 #include "pch.hpp"
 
+#include "Foundation/constants.hpp"
+#include "Foundation/types.hpp"
+
 #include "IO/io.hpp"
-#include "Math/math.hpp"
+#include "Math/math.ipp"
 #include "Random/random.hpp"
-#include "types.hpp"
 #include "Utility/utility.hpp"
-#include "wrappers.hpp"
 
 #include <map>
 #include <tuple>
 #include <utility>
 
-auto main() noexcept -> idef
+auto main() noexcept -> fn::idef
 try
 {
   // Print introduction
@@ -25,10 +26,12 @@ try
     IO::printInformative();
 
     // Get user inputs
-    const size            samplesCount{IO::getSamplesCountInput()};
-    const i32f            lowerBound{IO::getLowerBoundInput()};
-    const i32f            upperBound{IO::getUpperBoundInput()};
-    std::pair<u16f, u16f> preferredChartSize{IO::getPreferredChartSizeInput()};
+    const fn::size                samplesCount{IO::getSamplesCountInput()};
+    const fn::i32f                lowerBound{IO::getLowerBoundInput()};
+    const fn::i32f                upperBound{IO::getUpperBoundInput()};
+    std::pair<fn::u16f, fn::u16f> preferredChartSize{
+      IO::getPreferredChartSizeInput()
+    };
 
     // Distribute randomly
     auto values{Random::distribute(samplesCount, lowerBound, upperBound)};
@@ -40,9 +43,9 @@ try
     )};
 
     // Remember intervals and frequencyMap to determine if we can zoom further
-    u32f                 xAxisInterval{chartFeed.xAxisInterval};
-    u32f                 yAxisInterval{chartFeed.yAxisInterval};
-    std::map<i32f, u32f> frequencyMap{chartFeed.frequencyMap};
+    fn::u32f                     xAxisInterval{chartFeed.xAxisInterval};
+    fn::u32f                     yAxisInterval{chartFeed.yAxisInterval};
+    std::map<fn::i32f, fn::u32f> frequencyMap{chartFeed.frequencyMap};
 
     // Print chart
     IO::printChart(chartFeed);
@@ -64,10 +67,10 @@ try
   }
 
   // Return success
-  return TERMINATE_SUCCESS;
+  return fn::TERMINATE_SUCCESS;
 }
 catch (...)
 {
   // Return failure
-  return TERMINATE_FAILURE;
+  return fn::TERMINATE_FAILURE;
 }

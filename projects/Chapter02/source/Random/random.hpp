@@ -1,11 +1,12 @@
 #pragma once
 
-#include "types.hpp"
+#include "Foundation/types.hpp"
 
 #include <vector>
 
 namespace Random
 {
-  auto distribute(size numberOfElements, i32f lowerBound, i32f upperBound)
-    -> std::vector<i32f>;
+  auto distribute(
+    fn::size numberOfElements, fn::i32f lowerBound, fn::i32f upperBound
+  ) -> std::vector<fn::i32f>;
 } // namespace Random

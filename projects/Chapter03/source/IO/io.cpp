@@ -2,9 +2,10 @@
 
 #include "IO/io.hpp"
 
+#include "Foundation/types.hpp"
+
 #include "Game/game.hpp"
 #include "Math/math.hpp"
-#include "types.hpp"
 
 #include <cctype>
 #include <iostream>
@@ -12,10 +13,10 @@
 #include <string>
 #include <vector>
 
-auto IO::getPlayerBet(u32f& playerBank) -> u32f
+auto IO::getPlayerBet(fn::u32f& playerBank) -> fn::u32f
 {
   // Bet input
-  u32f bet{};
+  fn::u32f bet{};
 
   // Bet validation flags
   bool exceedsMinBet{false};
@@ -64,14 +65,14 @@ auto IO::printHand(
   const std::string&             holder,
   const std::vector<Game::Card>& hand,
   bool                           hideFirstCard,
-  u16f                           adjustedHandTotal
+  fn::u16f                       adjustedHandTotal
 ) -> void
 {
   // Print holder
   std::cout << holder << ": ";
 
   // Print hand
-  for (size index{}; index < hand.size(); ++index)
+  for (fn::size index{}; index < hand.size(); ++index)
   {
     if (index == 0 and hideFirstCard)
     {

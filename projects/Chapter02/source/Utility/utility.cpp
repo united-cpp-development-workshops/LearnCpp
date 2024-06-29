@@ -2,9 +2,10 @@
 
 #include "Utility/utility.hpp"
 
+#include "Foundation/types.hpp"
+
 #include "IO/io.hpp"
-#include "Math/math.hpp"
-#include "types.hpp"
+#include "Math/math.ipp"
 
 #include <algorithm>
 #include <map>
@@ -15,14 +16,14 @@
 #include <vector>
 
 auto Utility::optionsHandler(
-  std::pair<u16f, u16f>&   preferredChartSize,
-  std::pair<u16f, u16f>&   currentChartSize,
-  u32f&                    xAxisInterval,
-  u32f&                    yAxisInterval,
-  std::map<i32f, u32f>&    frequencyMap,
-  const std::vector<i32f>& values,
-  i32f                     lowerBound,
-  i32f                     upperBound
+  std::pair<fn::u16f, fn::u16f>& preferredChartSize,
+  std::pair<fn::u16f, fn::u16f>& currentChartSize,
+  fn::u32f&                      xAxisInterval,
+  fn::u32f&                      yAxisInterval,
+  std::map<fn::i32f, fn::u32f>&  frequencyMap,
+  const std::vector<fn::i32f>&   values,
+  fn::i32f                       lowerBound,
+  fn::i32f                       upperBound
 ) -> bool
 {
   // Options loop
@@ -165,11 +166,11 @@ auto Utility::optionsHandler(
 
 // NOLINTNEXTLINE(readability-function-cognitive-complexity)
 auto Utility::noFurtherZoomHandler(
-  bool                        zoomIn,
-  const Utility::Direction    direction,
-  u32f                        xAxisInterval,
-  u32f                        yAxisInterval,
-  const std::map<i32f, u32f>& frequencyMap
+  bool                                zoomIn,
+  const Utility::Direction            direction,
+  fn::u32f                            xAxisInterval,
+  fn::u32f                            yAxisInterval,
+  const std::map<fn::i32f, fn::u32f>& frequencyMap
 ) -> bool
 {
   // Check if we can zoom further
@@ -189,7 +190,7 @@ auto Utility::noFurtherZoomHandler(
     else
     {
       // Find max frequency
-      const u32f maxFrequency{
+      const fn::u32f maxFrequency{
         *std::ranges::max_element(std::views::values(frequencyMap))
       };
 
@@ -238,7 +239,7 @@ auto Utility::noFurtherZoomHandler(
     else
     {
       // Find max frequency
-      const u32f maxFrequency{
+      const fn::u32f maxFrequency{
         *std::ranges::max_element(std::views::values(frequencyMap))
       };
 
@@ -256,18 +257,18 @@ auto Utility::noFurtherZoomHandler(
 }
 
 auto Utility::chartZoom(
-  bool                     zoomIn,
-  Direction                zoomDirection,
-  std::pair<u16f, u16f>&   preferredChartSize,
-  std::pair<u16f, u16f>&   currentChartSize,
-  const std::vector<i32f>& values,
-  i32f                     lowerBound,
-  i32f                     upperBound
+  bool                           zoomIn,
+  Direction                      zoomDirection,
+  std::pair<fn::u16f, fn::u16f>& preferredChartSize,
+  std::pair<fn::u16f, fn::u16f>& currentChartSize,
+  const std::vector<fn::i32f>&   values,
+  fn::i32f                       lowerBound,
+  fn::i32f                       upperBound
 ) -> std::optional<Math::ChartFeed>
 {
   // Save old chart sizes
-  const std::pair<u16f, u16f> oldPreferredChartSize{preferredChartSize};
-  const std::pair<u16f, u16f> oldChartSize{currentChartSize};
+  const std::pair<fn::u16f, fn::u16f> oldPreferredChartSize{preferredChartSize};
+  const std::pair<fn::u16f, fn::u16f> oldChartSize{currentChartSize};
 
   // Initialize new chart feed and size
   Math::ChartFeed newChartFeed;
@@ -281,8 +282,8 @@ auto Utility::chartZoom(
         or zoomDirection == Direction::HORIZONTAL)
     {
       preferredChartSize.first = {
-        zoomIn ? preferredChartSize.first + u16f{1}
-               : preferredChartSize.first - u16f{1}
+        zoomIn ? preferredChartSize.first + fn::u16f{1}
+               : preferredChartSize.first - fn::u16f{1}
       };
     }
 
@@ -291,8 +292,8 @@ auto Utility::chartZoom(
         or zoomDirection == Direction::VERTICAL)
     {
       preferredChartSize.first = {
-        zoomIn ? preferredChartSize.first + u16f{1}
-               : preferredChartSize.first - u16f{1}
+        zoomIn ? preferredChartSize.first + fn::u16f{1}
+               : preferredChartSize.first - fn::u16f{1}
       };
     }
 

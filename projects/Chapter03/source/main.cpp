@@ -1,15 +1,16 @@
 #include "pch.hpp"
 
+#include "Foundation/constants.hpp"
+#include "Foundation/types.hpp"
+
 #include "Game/game.hpp"
-#include "types.hpp"
-#include "wrappers.hpp"
 
 #include <consoleapi2.h>
 #include <WinNls.h>
 
 #include <iostream>
 
-auto main() noexcept -> idef
+auto main() noexcept -> fn::idef
 try
 {
   // Set console output to UTF-8
@@ -25,7 +26,7 @@ try
     std::cout << "\nWould you like to play again? (y/n) ";
 
     // Get input
-    cdef input{};
+    fn::cdef input{};
     std::cin >> input;
 
     // Exit if not 'y'
@@ -33,10 +34,10 @@ try
   }
 
   // Return success
-  return TERMINATE_SUCCESS;
+  return fn::TERMINATE_SUCCESS;
 }
 catch (...)
 {
   // Return failure
-  return TERMINATE_FAILURE;
+  return fn::TERMINATE_FAILURE;
 }

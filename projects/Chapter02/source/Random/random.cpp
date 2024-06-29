@@ -2,22 +2,23 @@
 
 #include "Random/random.hpp"
 
-#include "types.hpp"
+#include "Foundation/types.hpp"
 
 #include <algorithm>
 #include <random>
 #include <vector>
 
-auto Random::distribute(size numberOfElements, i32f lowerBound, i32f upperBound)
-  -> std::vector<i32f>
+auto Random::distribute(
+  fn::size numberOfElements, fn::i32f lowerBound, fn::i32f upperBound
+) -> std::vector<fn::i32f>
 {
   // Create a vector of random numbers
-  std::vector<i32f> values(numberOfElements);
+  std::vector<fn::i32f> values(numberOfElements);
 
   // Generate random tooling
-  std::random_device                  randomDevice;
-  std::default_random_engine          randomEngine{randomDevice()};
-  std::uniform_int_distribution<i32f> distribution{lowerBound, upperBound};
+  std::random_device                      randomDevice;
+  std::default_random_engine              randomEngine{randomDevice()};
+  std::uniform_int_distribution<fn::i32f> distribution{lowerBound, upperBound};
 
   // Fill the vector with random numbers
   std::generate(

@@ -2,10 +2,11 @@
 
 #include "Game/game.hpp"
 
+#include "Foundation/Support/narrowing.ipp"
+#include "Foundation/types.hpp"
+
 #include "IO/io.hpp"
 #include "Math/math.hpp"
-#include "types.hpp"
-#include "wrappers.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -24,17 +25,17 @@ namespace
     std::vector<Game::Card> deck{};
 
     // Create deck(s)
-    for (size index{}; index < Game::DECK_COUNT; ++index)
+    for (fn::size index{}; index < Game::DECK_COUNT; ++index)
     {
       // Loop through suits
-      for (const cstr suit : {"♥", "♦", "♣", "♠"})
+      for (const fn::cstr suit : {"♥", "♦", "♣", "♠"})
       {
         // Loop through ranks
-        for (const cdef rank :
+        for (const fn::cdef rank :
              {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'})
         {
           // Initialize value
-          u8f value{};
+          fn::u8f value{};
 
           // Assign value to rank
           if (rank == 'T' or rank == 'J' or rank == 'Q' or rank == 'K')
@@ -42,7 +43,7 @@ namespace
             value = {Game::COURT_CARD_VALUE};
           }
           else if (rank == 'A') { value = {Game::ACE_HIGH_VALUE}; }
-          else { value = narrow<u8f>(rank - '0'); }
+          else { value = fn::narrow_cast<fn::u8f>(rank - '0'); }
 
           // Add card to deck
           deck.emplace_back(suit, rank, value);
@@ -52,7 +53,7 @@ namespace
     return deck;
   }
 
-  auto adjustAces(std::vector<Game::Card>& hand, u16f& handTotal) noexcept
+  auto adjustAces(std::vector<Game::Card>& hand, fn::u16f& handTotal) noexcept
     -> void
   {
     while (handTotal > Game::BLACKJACK)
@@ -82,7 +83,7 @@ namespace
 namespace Game
 {
   // Constructors
-  Card::Card(std::string suit, cdef rank, u8f value) noexcept
+  Card::Card(std::string suit, fn::cdef rank, fn::u8f value) noexcept
     : m_suit{std::move(suit)}
     , m_rank{rank}
     , m_value{value}
@@ -97,13 +98,13 @@ namespace Game
   }
 
   [[nodiscard]]
-  auto Card::getRank() const noexcept -> cdef
+  auto Card::getRank() const noexcept -> fn::cdef
   {
     return m_rank;
   }
 
   [[nodiscard]]
-  auto Card::getValue() const noexcept -> u8f
+  auto Card::getValue() const noexcept -> fn::u8f
   {
     return m_value;
   }
@@ -115,7 +116,7 @@ namespace Game
   }
 
   // Mutators
-  auto Card::setValue(u8f value) noexcept -> void { m_value = value; }
+  auto Card::setValue(fn::u8f value) noexcept -> void { m_value = value; }
 
   // Friends
   auto operator<<(std::ostream& os, const Card& card) -> std::ostream&
@@ -129,7 +130,7 @@ namespace Game
 auto Game::play() -> void
 {
   // Reset player bank
-  u32f playerBank{PLAYER_STARTING_BANK};
+  fn::u32f playerBank{PLAYER_STARTING_BANK};
 
   // Welcome message
   std::cout << "\nDealer: Welcome sir!\n";
@@ -138,7 +139,7 @@ auto Game::play() -> void
   std::vector<Card> deck{createDeck()};
 
   // Initial deck size
-  const size initialDeckSize{deck.size()};
+  const fn::size initialDeckSize{deck.size()};
 
   // Prepare random number generator
   std::random_device         rd{};
@@ -158,8 +159,8 @@ auto Game::play() -> void
     }
 
     // Check if deck needs shuffling
-    if (narrow<f64>(deck.size())
-        < narrow<f64>(initialDeckSize) * SHUFFLE_THRESHOLD)
+    if (fn::narrow_cast<fn::f64>(deck.size())
+        < fn::narrow_cast<fn::f64>(initialDeckSize) * SHUFFLE_THRESHOLD)
     {
       // Recreate deck
       deck = createDeck();
@@ -181,14 +182,14 @@ auto Game::play() -> void
 
     // Get player bet
     std::cout << "\nDealer: Place your bet sir!\n";
-    const u32f playerBet{IO::getPlayerBet(playerBank)};
+    const fn::u32f playerBet{IO::getPlayerBet(playerBank)};
 
     // Initialize hands
     std::vector<Card> dealerHand{};
     std::vector<Card> playerHand{};
 
     // Initial deals
-    for (size index{}; index < 2; ++index)
+    for (fn::size index{}; index < 2; ++index)
     {
       // Announce card deal
       std::cout << "\nPlayer: Dealer deals " << index + 1 << ". cards.\n";
@@ -207,9 +208,9 @@ auto Game::play() -> void
       std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
-    u16f playerHandTotal{0};
-    bool playerBust{false};
-    bool playerTurn{true};
+    fn::u16f playerHandTotal{0};
+    bool     playerBust{false};
+    bool     playerTurn{true};
     while (playerTurn)
     {
       // Calculate hand total
@@ -277,8 +278,8 @@ auto Game::play() -> void
     }
 
     // Dealer turn
-    u16f dealerHandTotal{0};
-    bool dealerBust{false};
+    fn::u16f dealerHandTotal{0};
+    bool     dealerBust{false};
     while (true)
     {
       // Calculate hand total

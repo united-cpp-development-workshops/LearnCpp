@@ -2,10 +2,11 @@
 
 #include "IO/io.hpp"
 
-#include "Math/math.hpp"
-#include "types.hpp"
+#include "Foundation/Support/narrowing.ipp"
+#include "Foundation/types.hpp"
+
+#include "Math/math.ipp"
 #include "Utility/utility.hpp"
-#include "wrappers.hpp"
 
 #include <algorithm>
 #include <cmath>
@@ -24,39 +25,39 @@
 
 namespace
 {
-  enum class Alignment : u8f
+  enum class Alignment : fn::u8f
   {
     LEFT,
     RIGHT
   };
 
   template <typename T>
-  requires std::same_as<T, i32f> or std::same_as<T, cdef>
-          or std::same_as<T, cstr>
+  requires std::same_as<T, fn::i32f> or std::same_as<T, fn::cdef>
+          or std::same_as<T, fn::cstr>
   auto printAligned(
-    const T& input, cdef paddingSymbol, u16f width, Alignment alignment
+    const T& input, fn::cdef paddingSymbol, fn::u16f width, Alignment alignment
   ) -> std::ostream&
   {
     // Find the length of the input
-    u16f inputLength{};
+    fn::u16f inputLength{};
 
     // Check if the input is a character
-    if constexpr (std::same_as<T, cdef>) { inputLength = {1}; }
-    else if constexpr (std::same_as<T, cstr>)
+    if constexpr (std::same_as<T, fn::cdef>) { inputLength = {1}; }
+    else if constexpr (std::same_as<T, fn::cstr>)
     {
       // Get the length of input
-      inputLength = {narrow<u16f>(std::strlen(input))};
+      inputLength = {fn::narrow_cast<fn::u16f>(std::strlen(input))};
     }
     else { inputLength = {Math::NUMBER_LENGTH(input)}; }
 
     // Calculate the padding
-    const u16f padding{width - inputLength};
+    const fn::u16f padding{width - inputLength};
 
     // Print padding lambda
     auto printPadding{
       [&paddingSymbol, &padding]() -> void
       {
-        for (u16f position{}; position < padding; position++)
+        for (fn::u16f position{}; position < padding; position++)
         {
           std::cout << paddingSymbol;
         }
@@ -85,19 +86,20 @@ namespace
   }
 
   auto printChartRow(
-    const std::map<i32f, u32f>& frequencyMap,
-    i32f                        lowerBound,
-    u32f                        xAxisInterval,
-    u16f                        xAxisLabelWidth,
-    bool                        lastRow,
-    u32f                        y,
-    u32f                        yAxisInterval,
-    u16f                        yAxisLabelWidth
+    const std::map<fn::i32f, fn::u32f>& frequencyMap,
+    fn::i32f                            lowerBound,
+    fn::u32f                            xAxisInterval,
+    fn::u16f                            xAxisLabelWidth,
+    bool                                lastRow,
+    fn::u32f                            y,
+    fn::u32f                            yAxisInterval,
+    fn::u16f                            yAxisLabelWidth
   ) -> void
   {
     // Print y-axis label and prefix
-    printAligned(narrow<i32f>(y), ' ', yAxisLabelWidth, Alignment::RIGHT)
-      << "-|";
+    printAligned(
+      fn::narrow_cast<fn::i32f>(y), ' ', yAxisLabelWidth, Alignment::RIGHT
+    ) << "-|";
 
     // If y-axis is zero, print the x-axis line
     if (lastRow)
@@ -120,9 +122,9 @@ namespace
 
       // Print y-axis label and prefix
       printAligned(
-        lowerBound - narrow<i32f>(xAxisInterval),
+        lowerBound - fn::narrow_cast<fn::i32f>(xAxisInterval),
         ' ',
-        yAxisLabelWidth + u16f{2},
+        yAxisLabelWidth + fn::u16f{2},
         Alignment::RIGHT
       );
 
@@ -154,7 +156,7 @@ namespace
       )};
 
       // Initialize the input between columns to space
-      cdef symbolBetweenColumns{' '};
+      fn::cdef symbolBetweenColumns{' '};
 
       // Determine if we need to print horizontal grid
       if (iteratorToNextColumnNeedingGrid != frequencyMap.end())
@@ -259,13 +261,13 @@ auto IO::printInformative() -> void
   std::cout << '\n';
 }
 
-auto IO::getSamplesCountInput() -> size
+auto IO::getSamplesCountInput() -> fn::size
 {
   resetInputBuffer();
 
   std::cout << " [i]: Please input the 'Sample size' parameter: ";
 
-  size sampleSize{};
+  fn::size sampleSize{};
 
   // Loop until valid input
   while (true)
@@ -286,39 +288,39 @@ auto IO::getSamplesCountInput() -> size
   return sampleSize;
 }
 
-auto IO::getLowerBoundInput() -> i32f
+auto IO::getLowerBoundInput() -> fn::i32f
 {
   resetInputBuffer();
 
   std::cout << " [i]: Please input the 'Lower bound' parameter: ";
 
-  i32f lowerBound{};
+  fn::i32f lowerBound{};
   std::cin >> lowerBound;
 
   return lowerBound;
 }
 
-auto IO::getUpperBoundInput() -> i32f
+auto IO::getUpperBoundInput() -> fn::i32f
 {
   resetInputBuffer();
 
   std::cout << " [i]: Please input the 'Upper bound' parameter: ";
 
-  i32f upperBound{};
+  fn::i32f upperBound{};
   std::cin >> upperBound;
 
   return upperBound;
 }
 
-auto IO::getPreferredChartSizeInput() -> std::pair<u16f, u16f>
+auto IO::getPreferredChartSizeInput() -> std::pair<fn::u16f, fn::u16f>
 {
   resetInputBuffer();
 
   std::cout
     << " [i]: Please input the 'Chart sizes' parameter (width height): ";
 
-  u16f width{};
-  u16f height{};
+  fn::u16f width{};
+  fn::u16f height{};
 
   // Loop until valid input
   while (true)
@@ -329,7 +331,7 @@ auto IO::getPreferredChartSizeInput() -> std::pair<u16f, u16f>
     std::cin >> width >> height;
 
     // Check if inputs are larger than 0
-    if (width > u16f{0} and height > u16f{0}) { break; }
+    if (width > fn::u16f{0} and height > fn::u16f{0}) { break; }
 
     // Wrong input
     std::cout
@@ -355,29 +357,31 @@ auto IO::printChart(const Math::ChartFeed& chartFeed) -> void
   std::cout << '\n';
 
   // Find label width for x-axis
-  const u16f xAxisLabelWidth{
+  const fn::u16f xAxisLabelWidth{
     std::ranges::max(
       chartFeed.frequencyMap | std::views::keys
       | std::views::transform(Math::NUMBER_LENGTH)
     )
-    + u16f{1}
+    + fn::u16f{1}
   };
 
   // Find label width for y-axis
-  u16f yAxisLabelWidth{};
+  fn::u16f yAxisLabelWidth{};
 
   // Determine if lower bound or max frequency is longer in length
   if (Math::NUMBER_LENGTH(
-        chartFeed.lowerBound - narrow<i32f>(chartFeed.xAxisInterval)
-      ) - u16f{2}
-      > Math::NUMBER_LENGTH(narrow<i32f>(chartFeed.maxFrequency)))
+        chartFeed.lowerBound
+        - fn::narrow_cast<fn::i32f>(chartFeed.xAxisInterval)
+      ) - fn::u16f{2}
+      > Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency)))
   {
-    yAxisLabelWidth = {Math::NUMBER_LENGTH(chartFeed.lowerBound) - u16f{1}};
+    yAxisLabelWidth = {Math::NUMBER_LENGTH(chartFeed.lowerBound) - fn::u16f{1}};
   }
   else
   {
     yAxisLabelWidth = {
-      Math::NUMBER_LENGTH(narrow<i32f>(chartFeed.maxFrequency)) + u16f{1}
+      Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency))
+      + fn::u16f{1}
     };
   }
 
@@ -385,22 +389,25 @@ auto IO::printChart(const Math::ChartFeed& chartFeed) -> void
   printAligned(
     Y_AXIS_NAME,
     ' ',
-    yAxisLabelWidth + narrow<u16f>(std::strlen(Y_AXIS_NAME)) + u16f{1},
+    yAxisLabelWidth + fn::narrow_cast<fn::u16f>(std::strlen(Y_AXIS_NAME))
+      + fn::u16f{1},
     Alignment::RIGHT
   );
   std::cout << '\n';
 
   // Print y-axis end
-  printAligned('^', ' ', yAxisLabelWidth + u16f{2}, Alignment::RIGHT);
+  printAligned('^', ' ', yAxisLabelWidth + fn::u16f{2}, Alignment::RIGHT);
   std::cout << '\n';
 
   // Print row by row
-  bool lastRow{false};
-  u32f y{chartFeed.maxFrequency};
+  bool     lastRow{false};
+  fn::u32f y{chartFeed.maxFrequency};
   while (not lastRow)
   {
     // Check if we are in last row
-    if (narrow<i32f>(y) - narrow<i32f>(chartFeed.yAxisInterval) < 0)
+    if (fn::narrow_cast<fn::i32f>(y)
+          - fn::narrow_cast<fn::i32f>(chartFeed.yAxisInterval)
+        < 0)
     {
       lastRow = {true};
     }
@@ -425,33 +432,33 @@ auto IO::printChart(const Math::ChartFeed& chartFeed) -> void
   }
 }
 
-auto IO::printStatistics(const std::vector<i32f>& values) -> void
+auto IO::printStatistics(const std::vector<fn::i32f>& values) -> void
 {
   std::cout << '\n';
   std::cout << " - Statistics:\n";
 
   // Calculate the sum of the values
-  const i32f sum{std::accumulate(values.begin(), values.end(), 0)};
+  const fn::i32f sum{std::accumulate(values.begin(), values.end(), 0)};
 
   // Calculate the mean of the values
-  const f64 mean{sum / narrow<f64>(values.size())};
+  const fn::f64 mean{sum / fn::narrow_cast<fn::f64>(values.size())};
 
   // Calculate the variance of the values
-  const f64 variance{
+  const fn::f64 variance{
     std::accumulate(
       values.begin(),
       values.end(),
       0.0,
-      [&mean](f64 accumulator, i32f value) noexcept -> f64
+      [&mean](fn::f64 accumulator, fn::i32f value) noexcept -> fn::f64
       {
         return accumulator + std::pow(value - mean, 2);
       }
     )
-    / narrow<f64>(values.size())
+    / fn::narrow_cast<fn::f64>(values.size())
   };
 
   // Calculate the standard deviation of the values
-  const f64 standardDeviation{std::sqrt(variance)};
+  const fn::f64 standardDeviation{std::sqrt(variance)};
 
   // Calculate the minimum and maximum values
   const auto [min, max]{

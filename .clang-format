@@ -1,6 +1,6 @@
 # *----------------------------------------------------------------------------*
 # |                       C++ Clang-Format Configuration                       |
-# |                              Version 24.06.27                              |
+# |                              Version 24.06.29                              |
 # *----------------------------------------------------------------------------*
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Format, a formatting tool for C, C++, |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-06-27                                                  |
+# | Date         : 2024-06-29                                                  |
 # *----------------------------------------------------------------------------*
 ---
 BasedOnStyle: LLVM
@@ -138,24 +138,37 @@ FixNamespaceComments: true
 # IfMacros:      // Unused
 IncludeBlocks: Regroup
 IncludeCategories:
-  - Regex: ^\".*pch\..*\"$ # Precompiled headers
+    # Precompiled Headers
+  - Regex: ^".*pch\..+"$
     Priority: -1
-    SortPriority: 0
+    SortPriority: -1
     CaseSensitive: false
-  - Regex: ^\".*\..*\"$ # Project headers
+
+    # Foundation Headers
+  - Regex: ^"Foundation/.+\..+"$
     Priority: 1
-    SortPriority: 0
+    SortPriority: 1
     CaseSensitive: false
-  - Regex: ^<.*\..*>$ # Included headers
+
+    # Project Headers
+  - Regex: ^".+\..+"$
     Priority: 2
-    SortPriority: 0
+    SortPriority: 2
     CaseSensitive: false
-  - Regex: ^<.*>$ # Standard library headers
+
+    # Included Headers
+  - Regex: ^<.+\..+>$
     Priority: 3
-    SortPriority: 0
+    SortPriority: 3
     CaseSensitive: false
-IncludeIsMainRegex: $       # Main header
-IncludeIsMainSourceRegex: $ # Main source
+
+    # Standard Library Headers
+  - Regex: ^<.+>$
+    Priority: 4
+    SortPriority: 4
+    CaseSensitive: false
+IncludeIsMainRegex: $           # Main header
+IncludeIsMainSourceRegex: $     # Main source
 IndentAccessModifiers: false
 IndentCaseBlocks: false
 IndentCaseLabels: false

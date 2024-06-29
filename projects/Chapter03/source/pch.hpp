@@ -1,20 +1,31 @@
 #pragma once
 
-// NOLINTBEGIN
+#pragma once
 
-// Foundation headers
-#include "types.hpp"
-#include "wrappers.hpp"
+// NOLINTBEGIN(misc-include-cleaner)
 
-// Platform
+// ------------------------------< Foundation >------------------------------ //
+
+// fn headers
+#include "Foundation/constants.hpp"
+#include "Foundation/types.hpp"
+
+// fn::Support headers
+#include "Foundation/Support/narrowing.ipp"
+#include "Foundation/Support/NarrowingError.ipp"
+
+// -------------------------------< Platform >------------------------------- //
+
+// Disable min/max implementations
 #ifndef NOMINMAX
   #define NOMINMAX
 #endif
 
+// Reduced set of Win32 API
 #ifndef WIN32_LEAN_AND_MEAN
   #define WIN32_LEAN_AND_MEAN
 #endif
 
 #include <Windows.h>
 
-// NOLINTEND
+// NOLINTEND(misc-include-cleaner)

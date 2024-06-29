@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
 # |                        C++ Clang-Tidy Configuration                        |
-# |                              Version 24.06.26                              |
+# |                              Version 24.06.29                              |
 # +----------------------------------------------------------------------------+
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Tidy, a static analysis tool from the |
@@ -30,14 +30,14 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-06-26                                                  |
+# | Date         : 2024-06-29                                                  |
 # +----------------------------------------------------------------------------+
 ---
 # ExcludeHeaderFilterRegex: ".*\\projects\\.*\\src\\Support\\.*"
 ExtraArgs: ["-Weverything"]
 ExtraArgsBefore: []
 FormatStyle: "file"
-HeaderFileExtensions: ["hpp", "h", "hh", "hxx", "", "tpp"]
+HeaderFileExtensions: ["hpp", "h", "hh", "hxx", "", "ipp"]
 HeaderFilterRegex: ".*\\projects\\.*\\src\\.*"
 ImplementationFileExtensions: ["cpp", "cppm", "c", "cc", "cxx"]
 InheritParentConfig: true
@@ -687,7 +687,8 @@ CheckOptions:
     value: "UPPER_CASE"
   - key: readability-identifier-naming.ConstexprFunctionPrefix
     value: ""
-# - key: readability-identifier-naming.ConstexprFunctionIgnoredRegexp // None
+  - key: readability-identifier-naming.ConstexprFunctionIgnoredRegexp
+    value: "^narrow_cast$"
   - key: readability-identifier-naming.ConstexprFunctionSuffix
     value: ""
 # -
@@ -887,7 +888,8 @@ CheckOptions:
     value: "CamelCase"
   - key: readability-identifier-naming.NamespacePrefix
     value: ""
-# - key: readability-identifier-naming.NamespaceIgnoredRegexp // None
+  - key: readability-identifier-naming.NamespaceIgnoredRegexp
+    value: "^fn$"
   - key: readability-identifier-naming.NamespaceSuffix
     value: ""
 # -
@@ -1048,7 +1050,14 @@ CheckOptions:
   - key: readability-identifier-naming.TypeAliasPrefix
     value: ""
   - key: readability-identifier-naming.TypeAliasIgnoredRegexp
-    value: "^[iu](8|16|32|64)([lf]?)$|^[iu](def|max)$|^size$|^c(8|16|32)$|^[cw](def|str)$|^f(32|64)$"
+    value: "\
+      ^[iu](8|16|32|64)([lf]?)$|\
+      ^[iu](def|max)$|\
+      ^size$|\
+      ^c(8|16|32)$|\
+      ^[cw](def|str)$|\
+      ^f(32|64|max)$|\
+      "
   - key: readability-identifier-naming.TypeAliasSuffix
     value: ""
 # -
