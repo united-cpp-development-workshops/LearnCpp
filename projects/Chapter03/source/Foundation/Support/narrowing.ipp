@@ -2,6 +2,7 @@
 
 #include "Foundation/Support/Internal/concepts.hpp"
 #include "Foundation/Support/NarrowingError.ipp"
+#include "Foundation/types.hpp"
 
 namespace fn::inline Support
 {
@@ -44,7 +45,7 @@ namespace fn::inline Support
   constexpr auto narrow_cast(From value) -> To
   {
     // Check if signedness is different
-    constexpr bool
+    constexpr fn::bln
       DIFFERENT_SIGNEDNESS{std::is_signed_v<To> != std::is_signed_v<From>};
 
     // Static cast the value

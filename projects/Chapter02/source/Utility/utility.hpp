@@ -27,16 +27,16 @@ namespace Utility
     const std::vector<fn::i32f>&   values,
     fn::i32f                       lowerBound,
     fn::i32f                       upperBound
-  ) -> bool;
+  ) -> fn::bln;
   auto noFurtherZoomHandler(
-    bool                                zoomIn,
+    fn::bln                             zoomIn,
     Direction                           direction,
     fn::u32f                            xAxisInterval,
     fn::u32f                            yAxisInterval,
     const std::map<fn::i32f, fn::u32f>& frequencyMap
-  ) -> bool;
+  ) -> fn::bln;
   auto chartZoom(
-    bool                           zoomIn,
+    fn::bln                        zoomIn,
     Direction                      zoomDirection,
     std::pair<fn::u16f, fn::u16f>& preferredChartSize,
     std::pair<fn::u16f, fn::u16f>& currentChartSize,

@@ -7,6 +7,6 @@
 namespace Random
 {
   auto distribute(
-    fn::size numberOfElements, fn::i32f lowerBound, fn::i32f upperBound
+    fn::i32f numberOfElements, fn::i32f lowerBound, fn::i32f upperBound
   ) -> std::vector<fn::i32f>;
 } // namespace Random

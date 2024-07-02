@@ -2,6 +2,7 @@
 
 #include "Random/random.hpp"
 
+#include "Foundation/Support/narrowing.ipp"
 #include "Foundation/types.hpp"
 
 #include <algorithm>
@@ -9,11 +10,11 @@
 #include <vector>
 
 auto Random::distribute(
-  fn::size numberOfElements, fn::i32f lowerBound, fn::i32f upperBound
+  fn::i32f numberOfElements, fn::i32f lowerBound, fn::i32f upperBound
 ) -> std::vector<fn::i32f>
 {
   // Create a vector of random numbers
-  std::vector<fn::i32f> values(numberOfElements);
+  std::vector<fn::i32f> values(fn::narrow_cast<fn::size>(numberOfElements));
 
   // Generate random tooling
   std::random_device                      randomDevice;

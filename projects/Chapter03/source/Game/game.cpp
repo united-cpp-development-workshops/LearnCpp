@@ -62,7 +62,7 @@ namespace
       if (std::any_of(
             hand.begin(),
             hand.end(),
-            [](Game::Card& card) noexcept -> bool
+            [](Game::Card& card) noexcept -> fn::bln
             {
               if (card.isAce() and card.getValue() == Game::ACE_HIGH_VALUE)
               {
@@ -110,7 +110,7 @@ namespace Game
   }
 
   [[nodiscard]]
-  auto Card::isAce() const noexcept -> bool
+  auto Card::isAce() const noexcept -> fn::bln
   {
     return m_isAce;
   }
@@ -209,8 +209,8 @@ auto Game::play() -> void
     }
 
     fn::u16f playerHandTotal{0};
-    bool     playerBust{false};
-    bool     playerTurn{true};
+    fn::bln  playerBust{false};
+    fn::bln  playerTurn{true};
     while (playerTurn)
     {
       // Calculate hand total
@@ -279,7 +279,7 @@ auto Game::play() -> void
 
     // Dealer turn
     fn::u16f dealerHandTotal{0};
-    bool     dealerBust{false};
+    fn::bln  dealerBust{false};
     while (true)
     {
       // Calculate hand total

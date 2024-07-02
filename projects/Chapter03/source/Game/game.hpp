@@ -33,7 +33,7 @@ namespace Game
     [[nodiscard]]
     auto getValue() const noexcept -> fn::u8f;
     [[nodiscard]]
-    auto isAce() const noexcept -> bool;
+    auto isAce() const noexcept -> fn::bln;
 
     // Mutators
     auto setValue(fn::u8f value) noexcept -> void;
@@ -43,7 +43,7 @@ namespace Game
     std::string m_suit;
     fn::cdef    m_rank;
     fn::u8f     m_value;
-    bool        m_isAce;
+    fn::bln     m_isAce;
 
     // Friends
     friend auto operator<<(std::ostream& os, const Card& card) -> std::ostream&;

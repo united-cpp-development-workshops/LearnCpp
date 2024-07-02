@@ -19,7 +19,7 @@ namespace IO
   auto printHand(
     const std::string&             holder,
     const std::vector<Game::Card>& hand,
-    bool                           hideFirstCard,
+    fn::bln                        hideFirstCard,
     fn::u16f                       adjustedHandTotal
   ) -> void;
   auto getPlayerChoice() -> PlayerChoice;

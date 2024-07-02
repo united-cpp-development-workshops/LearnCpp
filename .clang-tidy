@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
 # |                        C++ Clang-Tidy Configuration                        |
-# |                              Version 24.06.29                              |
+# |                              Version 24.06.30                              |
 # +----------------------------------------------------------------------------+
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Tidy, a static analysis tool from the |
@@ -30,15 +30,15 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-06-29                                                  |
+# | Date         : 2024-06-30                                                  |
 # +----------------------------------------------------------------------------+
 ---
-# ExcludeHeaderFilterRegex: ".*\\projects\\.*\\src\\Support\\.*"
+# ExcludeHeaderFilterRegex: // v19
 ExtraArgs: ["-Weverything"]
 ExtraArgsBefore: []
 FormatStyle: "file"
 HeaderFileExtensions: ["hpp", "h", "hh", "hxx", "", "ipp"]
-HeaderFilterRegex: ".*\\projects\\.*\\src\\.*"
+HeaderFilterRegex: "^.*[/\\]projects[/\\].*[/\\]source[/\\].*$"
 ImplementationFileExtensions: ["cpp", "cppm", "c", "cc", "cxx"]
 InheritParentConfig: true
 SystemHeaders: false
@@ -105,7 +105,7 @@ CheckOptions:
   - key: bugprone-lambda-function-name.IgnoreMacros
     value: false
 
-  - key: bugprone-misplaced-widening-cast
+  - key: bugprone-misplaced-widening-cast.CheckImplicitCasts
     value: true
 
   - key: bugprone-non-zero-enum-to-bool-conversion.EnumIgnoreList
@@ -855,12 +855,12 @@ CheckOptions:
     value: "Off"
 # -
 # Macro Definition Naming
-  - key: readability-identifier-naming.MacroCase
+  - key: readability-identifier-naming.MacroDefinitionCase
     value: "UPPER_CASE"
-  - key: readability-identifier-naming.MacroPrefix
+  - key: readability-identifier-naming.MacroDefinitionPrefix
     value: ""
-# - key: readability-identifier-naming.MacroIgnoredRegexp // None
-  - key: readability-identifier-naming.MacroSuffix
+# - key: readability-identifier-naming.MacroDefinitionIgnoredRegexp // None
+  - key: readability-identifier-naming.MacroDefinitionSuffix
     value: ""
 # -
 # Member Naming

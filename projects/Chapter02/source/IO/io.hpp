@@ -28,7 +28,7 @@ namespace IO
   auto printWelcome() -> void;
   auto printInformative() -> void;
   [[nodiscard]]
-  auto getSamplesCountInput() -> fn::size;
+  auto getSamplesCountInput() -> fn::i32f;
   [[nodiscard]]
   auto getLowerBoundInput() -> fn::i32f;
   [[nodiscard]]

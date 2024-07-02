@@ -24,7 +24,7 @@ auto Utility::optionsHandler(
   const std::vector<fn::i32f>&   values,
   fn::i32f                       lowerBound,
   fn::i32f                       upperBound
-) -> bool
+) -> fn::bln
 {
   // Options loop
   while (true)
@@ -166,12 +166,12 @@ auto Utility::optionsHandler(
 
 // NOLINTNEXTLINE(readability-function-cognitive-complexity)
 auto Utility::noFurtherZoomHandler(
-  bool                                zoomIn,
+  fn::bln                             zoomIn,
   const Utility::Direction            direction,
   fn::u32f                            xAxisInterval,
   fn::u32f                            yAxisInterval,
   const std::map<fn::i32f, fn::u32f>& frequencyMap
-) -> bool
+) -> fn::bln
 {
   // Check if we can zoom further
   switch (direction)
@@ -257,7 +257,7 @@ auto Utility::noFurtherZoomHandler(
 }
 
 auto Utility::chartZoom(
-  bool                           zoomIn,
+  fn::bln                        zoomIn,
   Direction                      zoomDirection,
   std::pair<fn::u16f, fn::u16f>& preferredChartSize,
   std::pair<fn::u16f, fn::u16f>& currentChartSize,
@@ -274,7 +274,7 @@ auto Utility::chartZoom(
   Math::ChartFeed newChartFeed;
 
   // Zoom loop
-  bool zoomed{false};
+  fn::bln zoomed{false};
   while (not zoomed)
   {
     // Increase preferred column count if direction allows it

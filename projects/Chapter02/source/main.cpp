@@ -19,14 +19,14 @@ try
   IO::printWelcome();
 
   // Main loop
-  bool running{true};
+  fn::bln running{true};
   while (running)
   {
     // Print configuration rules
     IO::printInformative();
 
     // Get user inputs
-    const fn::size                samplesCount{IO::getSamplesCountInput()};
+    const fn::i32f                samplesCount{IO::getSamplesCountInput()};
     const fn::i32f                lowerBound{IO::getLowerBoundInput()};
     const fn::i32f                upperBound{IO::getUpperBoundInput()};
     std::pair<fn::u16f, fn::u16f> preferredChartSize{

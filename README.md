@@ -17,3 +17,7 @@ a Visual Studio solution.
   - Aspect Ratio Calculator
 - **[Chapter 02:](./projects/Chapter02/) Functions and Files**
   - Random Charts
+- **[Chapter 03:](./projects/Chapter03/) Debugging C++ Programs**
+  - Blackjack Game
+- **[Chapter 04:](./projects/Chapter04/) Fundamental Data Types**
+  - Types Explorer

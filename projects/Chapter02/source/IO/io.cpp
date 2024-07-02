@@ -90,7 +90,7 @@ namespace
     fn::i32f                            lowerBound,
     fn::u32f                            xAxisInterval,
     fn::u16f                            xAxisLabelWidth,
-    bool                                lastRow,
+    fn::bln                             lastRow,
     fn::u32f                            y,
     fn::u32f                            yAxisInterval,
     fn::u16f                            yAxisLabelWidth
@@ -149,7 +149,7 @@ namespace
       const auto& iteratorToNextColumnNeedingGrid{std::ranges::find_if(
         frequencyMap.find(x),
         frequencyMap.end(),
-        [&](const auto& pair) -> bool
+        [&](const auto& pair) -> fn::bln
         {
           return pair.second >= y and pair.second < y + yAxisInterval;
         }
@@ -180,7 +180,7 @@ namespace
     }
   }
 
-  auto zoomOptionHandler(const std::string& option, bool zoomIn)
+  auto zoomOptionHandler(const std::string& option, fn::bln zoomIn)
     -> std::optional<IO::Option>
   {
     // If directional zoom is requested, the length must be 2
@@ -261,13 +261,13 @@ auto IO::printInformative() -> void
   std::cout << '\n';
 }
 
-auto IO::getSamplesCountInput() -> fn::size
+auto IO::getSamplesCountInput() -> fn::i32f
 {
   resetInputBuffer();
 
   std::cout << " [i]: Please input the 'Sample size' parameter: ";
 
-  fn::size sampleSize{};
+  fn::i32f sampleSize{};
 
   // Loop until valid input
   while (true)
@@ -400,7 +400,7 @@ auto IO::printChart(const Math::ChartFeed& chartFeed) -> void
   std::cout << '\n';
 
   // Print row by row
-  bool     lastRow{false};
+  fn::bln  lastRow{false};
   fn::u32f y{chartFeed.maxFrequency};
   while (not lastRow)
   {

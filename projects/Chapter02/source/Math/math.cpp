@@ -46,7 +46,7 @@ auto Math::generateChartFeed(
       // Find the key in the frequency map that is closest to the value
       const auto key{*std::ranges::min_element(
         std::views::keys(frequencyMap),
-        [&](fn::i32f lhs, fn::i32f rhs) noexcept -> bool
+        [&](fn::i32f lhs, fn::i32f rhs) noexcept -> fn::bln
         {
           return std::abs(lhs - value) < std::abs(rhs - value);
         }

@@ -19,8 +19,8 @@ auto IO::getPlayerBet(fn::u32f& playerBank) -> fn::u32f
   fn::u32f bet{};
 
   // Bet validation flags
-  bool exceedsMinBet{false};
-  bool canAffordBet{false};
+  fn::bln exceedsMinBet{false};
+  fn::bln canAffordBet{false};
 
   // Input validation loop
   while (not canAffordBet or not exceedsMinBet)
@@ -64,7 +64,7 @@ auto IO::getPlayerBet(fn::u32f& playerBank) -> fn::u32f
 auto IO::printHand(
   const std::string&             holder,
   const std::vector<Game::Card>& hand,
-  bool                           hideFirstCard,
+  fn::bln                        hideFirstCard,
   fn::u16f                       adjustedHandTotal
 ) -> void
 {

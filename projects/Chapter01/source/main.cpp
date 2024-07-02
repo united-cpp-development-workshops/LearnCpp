@@ -8,7 +8,7 @@
 
 namespace
 {
-  constexpr auto GCD(fn::u32l number1, fn::u32l number2) -> fn::u32l
+  constexpr auto GCD(fn::i32l number1, fn::i32l number2) -> fn::i32l
   {
     while (number2 != 0)
     {
@@ -28,12 +28,12 @@ try
 
   // Get the width from the user
   std::cout << "Enter the width: ";
-  fn::u32l width{};
+  fn::i32l width{};
   std::cin >> width;
 
   // Get the height from the user
   std::cout << "Enter the height: ";
-  fn::u32l height{};
+  fn::i32l height{};
   std::cin >> height;
 
   // Calculate greatest common divisor
