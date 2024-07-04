@@ -21,6 +21,12 @@
     <ClCompile Include="source\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\IO\io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\Request\Help.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Foundation\types.hpp">
@@ -39,6 +45,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Foundation\Support\narrowing.ipp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\io.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\Request\IRequest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\Request\Help.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
