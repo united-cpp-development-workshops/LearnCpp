@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Project Globals -->
+  <!-- Globals -->
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{98d638b1-a3d8-44e9-8f5e-89065829a764}</ProjectGuid>
     <RootNamespace>Chapter02</RootNamespace>
   </PropertyGroup>
-  <!-- Project Props -->
+  <!-- Props -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir).build.props" />
-  <!-- Project Items -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <!-- Targets -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <!-- Items -->
   <ItemGroup>
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\pch.cpp">
@@ -35,5 +37,4 @@
     <ClInclude Include="source\IO\io.hpp" />
     <ClInclude Include="source\Utility\utility.hpp" />
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

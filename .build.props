@@ -5,13 +5,13 @@
       <Configuration>Clang - Debug</Configuration>
       <Platform>ARM64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Clang - Debug|x64">
-      <Configuration>Clang - Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="Clang - Release|ARM64">
       <Configuration>Clang - Release</Configuration>
       <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Clang - Debug|x64">
+      <Configuration>Clang - Debug</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Clang - Release|x64">
       <Configuration>Clang - Release</Configuration>
@@ -21,13 +21,13 @@
       <Configuration>MSVC - Debug</Configuration>
       <Platform>ARM64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="MSVC - Debug|x64">
-      <Configuration>MSVC - Debug</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
     <ProjectConfiguration Include="MSVC - Release|ARM64">
       <Configuration>MSVC - Release</Configuration>
       <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MSVC - Debug|x64">
+      <Configuration>MSVC - Debug</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="MSVC - Release|x64">
       <Configuration>MSVC - Release</Configuration>

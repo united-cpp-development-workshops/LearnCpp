@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Project Globals -->
+  <!-- Globals -->
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
     <ProjectGuid>{02f779bd-dae3-4be7-b298-6d20f226e173}</ProjectGuid>
     <RootNamespace>Chapter04</RootNamespace>
   </PropertyGroup>
-  <!-- Project Props -->
+  <!-- Props -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <Import Project="$(SolutionDir).build.props" />
-  <!-- Project Items -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <!-- Targets -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <!-- Items -->
   <ItemGroup>
-    <ClCompile Include="source\IO\io.cpp" />
-    <ClCompile Include="source\IO\Request\Help.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="source\IO\io.cpp" />
+    <ClCompile Include="source\IO\Request\Help.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Foundation\Support\Internal\concepts.hpp" />
@@ -31,5 +33,4 @@
     <ClInclude Include="source\pch.hpp" />
     <ClInclude Include="source\Foundation\constants.hpp" />
   </ItemGroup>
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>
