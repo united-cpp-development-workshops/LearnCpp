@@ -5,6 +5,8 @@
 
 #include "IO/io.hpp"
 
+#include <tuple>
+
 auto main() noexcept -> fn::idef
 try
 {
@@ -18,12 +20,20 @@ try
     IO::printPrompt();
 
     // Read input
-    const auto input{IO::readInput()};
+    auto input{IO::readInput()};
 
     // Parse input
-    IO::parseInput(input);
+    const auto optional{IO::parseInput(input)};
 
-    // Break
+    // Check if input is valid
+    if (not optional.has_value()) { continue; }
+
+    // Destructure input
+    const auto [ignored1, ignored2]{optional.value()};
+
+    std::ignore = ignored1;
+    std::ignore = ignored2;
+
     break;
   }
 

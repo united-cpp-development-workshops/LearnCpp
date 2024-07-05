@@ -9,7 +9,7 @@
 #include "Foundation/types.hpp"
 
 // fn::Support headers
-#include "Foundation/Support/narrowing.ipp"
 #include "Foundation/Support/NarrowingError.ipp"
+#include "Foundation/Support/narrowing.ipp"
 
 // NOLINTEND(misc-include-cleaner)

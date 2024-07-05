@@ -4,20 +4,38 @@
 
 #include "Foundation/types.hpp"
 
-#include "IO/Request/IRequest.hpp"
-
 #include <algorithm>
 #include <cctype>
 #include <iostream>
+#include <limits>
+#include <optional>
+#include <set>
 #include <string>
+#include <utility>
 
 namespace
 {
-  auto isNotAllowedCharacter(fn::cdef character) noexcept -> bool
+  auto isNotAllowedCharacter(fn::cdef character) noexcept -> fn::bln
   {
     // Check if character is allowed
     return std::isalnum(character) == 0 and character != '-'
        and character != ' ';
+  }
+
+  auto printInvalidInput() -> void
+  {
+    std::cout
+      << " [X]: Invalid input! Use 'help' command or '--help' option.\n";
+  }
+
+  auto resetInputBuffer() -> void
+  {
+    // Clear input buffer and error flags
+    std::cin.clear();
+    if (std::cin.rdbuf()->in_avail() > 0)
+    {
+      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    }
   }
 } // namespace
 
@@ -46,59 +64,51 @@ auto IO::printPrompt() -> void
   std::cout << "---------------------------------------------------------------"
                "---------\n\n";
 
-  std::cout << " > ";
+  std::cout << " [>]: ";
 }
 
+[[nodiscard]]
 auto IO::readInput() -> std::string
 {
+  // Reset input buffer
+  resetInputBuffer();
+
   // Read input as string
   std::string input;
-  std::cin >> input;
+  std::getline(std::cin, input);
 
   // Return input
   return input;
 }
 
-template <typename Option>
 [[nodiscard]]
-auto IO::parseInput(const std::string& input) -> Request::IRequest<Option>
+auto IO::parseInput(std::string& input
+) -> std::optional<std::pair<Command, std::set<Option>>>
 {
   // Check if input is empty
   if (input.empty())
   {
     // Print error message
-    std::cout << "ERROR: Invalid input. Please try again.\n";
-    return;
+    printInvalidInput();
+    return std::nullopt;
   }
 
   // Replace not allowed characters
   std::replace_if(input.begin(), input.end(), isNotAllowedCharacter, ' ');
 
-  // Check if input is 'help'
-  if (input == "help")
-  {
-    // Print help message
-    std::cout << "HELP: Use 'explore' command to start exploring types.\n";
-    std::cout << "HELP: Use 'exit' command to exit the program.\n";
-    return;
-  }
+  // Reduce input to having no consecutive spaces one after another
+  input.erase(
+    std::unique(
+      input.begin(),
+      input.end(),
+      [](fn::cdef a, fn::cdef b) noexcept -> fn::bln
+      {
+        return a == ' ' and b == ' ';
+      }
+    ),
+    input.end()
+  );
 
-  // Check if input is 'explore'
-  if (input == "explore")
-  {
-    // Print explore message
-    std::cout << "EXPLORE: Exploring types...\n";
-    return;
-  }
-
-  // Check if input is 'exit'
-  if (input == "exit")
-  {
-    // Print exit message
-    std::cout << "EXIT: Exiting program...\n";
-    return;
-  }
-
-  // Print error message
-  std::cout << "ERROR: Invalid command. Please try again.\n";
+  // TEST:
+  return std::nullopt;
 }

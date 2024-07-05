@@ -20,7 +20,6 @@
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="source\IO\io.cpp" />
-    <ClCompile Include="source\IO\Request\Help.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Foundation\Support\Internal\concepts.hpp" />
@@ -28,8 +27,6 @@
     <ClInclude Include="source\Foundation\Support\NarrowingError.ipp" />
     <ClInclude Include="source\Foundation\types.hpp" />
     <ClInclude Include="source\IO\io.hpp" />
-    <ClInclude Include="source\IO\Request\Help.hpp" />
-    <ClInclude Include="source\IO\Request\IRequest.hpp" />
     <ClInclude Include="source\pch.hpp" />
     <ClInclude Include="source\Foundation\constants.hpp" />
   </ItemGroup>
