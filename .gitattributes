@@ -2,4 +2,4 @@
 * text=auto
 
 # Set text eol to lf
-text eol=lf
+* text eol=lf
