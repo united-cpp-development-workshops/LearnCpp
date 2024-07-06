@@ -28,9 +28,10 @@ try
     // Check if input is valid
     if (not optional.has_value()) { continue; }
 
-    // Destructure input
+    // Destructured input
     const auto [ignored1, ignored2]{optional.value()};
 
+    // Ignore unused variables
     std::ignore = ignored1;
     std::ignore = ignored2;
 
