@@ -2,113 +2,112 @@
 
 #include "IO/io.hpp"
 
-#include "Foundation/types.hpp"
+#include "IO/_internal/messages.hpp"
+#include "IO/_internal/parsers.hpp"
+#include "IO/_internal/prints.hpp"
+#include "IO/_internal/utilities.hpp"
 
 #include <algorithm>
-#include <cctype>
 #include <iostream>
-#include <limits>
 #include <optional>
 #include <set>
+#include <sstream>
 #include <string>
 #include <utility>
 
 namespace
 {
-  auto isNotAllowedCharacter(fn::cdef character) noexcept -> fn::bln
+  auto getUnknownOptionWarning(const std::string& option) -> std::string
   {
-    // Check if character is allowed
-    return std::isalnum(character) == 0 and character != '-'
-       and character != ' ';
-  }
-
-  auto printInvalidInput() -> void
-  {
-    std::cout
-      << " [X]: Invalid input! Use 'help' command or '--help' option.\n";
-  }
-
-  auto resetInputBuffer() -> void
-  {
-    // Clear input buffer and error flags
-    std::cin.clear();
-    if (std::cin.rdbuf()->in_avail() > 0)
-    {
-      std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
+    return "Unknown option '" + option + "' was found and discarded!";
   }
 } // namespace
 
-auto IO::printIntroduction() -> void
+namespace IO
 {
-  std::cout << "---------------------------> Types Explorer "
-               "<---------------------------\n\n";
-
-  std::cout << " - Explore fundamental types of C++.\n";
-  std::cout << " - Learn about the sizes, ranges, and properties of "
-               "fundamental types.\n";
-  std::cout << " - Observe the behavior of fundamental types in various "
-               "contexts.\n";
-  std::cout << " - Discover fundamental type aliases in Foundation header.\n\n";
-
-  std::cout << "   :::::::::::::::::::::::::: How It Works "
-               "::::::::::::::::::::::::::\n\n";
-
-  std::cout << "   USAGE: <command> [options]\n";
-  std::cout << "   LEARN: Use 'help' command or '--help' option for more "
-               "information.\n\n";
-}
-
-auto IO::printPrompt() -> void
-{
-  std::cout << "---------------------------------------------------------------"
-               "---------\n\n";
-
-  std::cout << " [>]: ";
-}
-
-[[nodiscard]]
-auto IO::readInput() -> std::string
-{
-  // Reset input buffer
-  resetInputBuffer();
-
-  // Read input as string
-  std::string input;
-  std::getline(std::cin, input);
-
-  // Return input
-  return input;
-}
-
-[[nodiscard]]
-auto IO::parseInput(std::string& input
-) -> std::optional<std::pair<Command, std::set<Option>>>
-{
-  // Check if input is empty
-  if (input.empty())
+  auto printIntroduction() -> void
   {
-    // Print error message
-    printInvalidInput();
-    return std::nullopt;
+    std::cout << "---------------------------> Types Explorer "
+                 "<---------------------------\n\n";
+
+    std::cout << " - Explore fundamental types of C++.\n";
+    std::cout << " - Learn about the sizes, ranges, and properties of "
+                 "fundamental types.\n";
+    std::cout << " - Observe the behavior of fundamental types in various "
+                 "contexts.\n";
+    std::cout
+      << " - Discover fundamental type aliases in Foundation header.\n\n";
+
+    std::cout << "   :::::::::::::::::::::::::: How It Works "
+                 "::::::::::::::::::::::::::\n\n";
+
+    _internal::printBriefHelp();
   }
 
-  // Replace not allowed characters
-  std::replace_if(input.begin(), input.end(), isNotAllowedCharacter, ' ');
+  auto printPrompt() -> void
+  {
+    std::cout << "\n-----------------------------------------------------------"
+                 "-------------\n\n";
 
-  // Reduce input to having no consecutive spaces one after another
-  input.erase(
-    std::unique(
-      input.begin(),
-      input.end(),
-      [](fn::cdef a, fn::cdef b) noexcept -> fn::bln
-      {
-        return a == ' ' and b == ' ';
-      }
-    ),
-    input.end()
-  );
+    std::cout << " [>]: ";
+  }
 
-  // TEST:
-  return std::nullopt;
-}
+  [[nodiscard]]
+  auto readInput() -> std::string
+  {
+    // Reset input buffer
+    _internal::resetInputBuffer();
+
+    // Read input as string
+    std::string input;
+    std::getline(std::cin, input);
+
+    // Return input
+    return input;
+  }
+
+  [[nodiscard]]
+  auto parseInput(std::string& input
+  ) -> std::optional<std::pair<Command, std::set<Option>>>
+  {
+    // Check if input is empty
+    if (input.empty())
+    {
+      // Print error message
+      _internal::printInputError(_internal::GET_NO_INPUT_MSG());
+      return std::nullopt;
+    }
+
+    // Replace not allowed characters
+    std::replace_if(
+      input.begin(), input.end(), _internal::isNotAllowedCharacter, ' '
+    );
+
+    // Create input stream
+    std::istringstream inputStream{input};
+
+    // Parse command
+    std::string commandInput;
+    if (not(inputStream >> commandInput))
+    {
+      // Print error message
+      _internal::printInputError(_internal::GET_NO_COMMAND_MSG());
+      return std::nullopt;
+    }
+
+    // Get command optional
+    const auto commandOptional{_internal::parseCommand(commandInput)};
+
+    // Return if error. (error message printed in parser)
+    if (not commandOptional.has_value()) { return std::nullopt; }
+
+    // Get command
+    const auto command{commandOptional.value()};
+
+    // Parse options
+    const auto options{_internal::parseOptions(inputStream)};
+
+    // TEST:
+    return std::nullopt;
+  }
+} // namespace IO

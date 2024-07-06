@@ -1,6 +1,6 @@
 # *----------------------------------------------------------------------------*
 # |                       C++ Clang-Format Configuration                       |
-# |                              Version 24.06.29                              |
+# |                              Version 24.07.06                              |
 # *----------------------------------------------------------------------------*
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Format, a formatting tool for C, C++, |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-06-29                                                  |
+# | Date         : 2024-07-06                                                  |
 # *----------------------------------------------------------------------------*
 ---
 BasedOnStyle: LLVM
@@ -140,32 +140,32 @@ IncludeBlocks: Regroup
 IncludeCategories:
     # Precompiled Headers
   - Regex: ^".*pch\..+"$
-    Priority: -1
-    SortPriority: -1
+    Priority: -2
+    SortPriority: -2
     CaseSensitive: false
 
     # Foundation Headers
   - Regex: ^"Foundation/.+\..+"$
-    Priority: 1
-    SortPriority: 1
+    Priority: -1
+    SortPriority: -1
     CaseSensitive: false
 
     # Project Headers
   - Regex: ^".+\..+"$
-    Priority: 2
-    SortPriority: 2
+    Priority: 1
+    SortPriority: 1
     CaseSensitive: false
 
     # Included Headers
   - Regex: ^<.+\..+>$
-    Priority: 3
-    SortPriority: 3
+    Priority: 2
+    SortPriority: 2
     CaseSensitive: false
 
     # Standard Library Headers
   - Regex: ^<.+>$
-    Priority: 4
-    SortPriority: 4
+    Priority: 3
+    SortPriority: 3
     CaseSensitive: false
 IncludeIsMainRegex: $           # Main header
 IncludeIsMainSourceRegex: $     # Main source

@@ -15,6 +15,10 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <!-- Items -->
   <ItemGroup>
+    <ClCompile Include="source\IO\_internal\messages.cpp" />
+    <ClCompile Include="source\IO\_internal\parsers.cpp" />
+    <ClCompile Include="source\IO\_internal\prints.cpp" />
+    <ClCompile Include="source\IO\_internal\utilities.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -27,6 +31,10 @@
     <ClInclude Include="source\Foundation\Support\NarrowingError.ipp" />
     <ClInclude Include="source\Foundation\types.hpp" />
     <ClInclude Include="source\IO\io.hpp" />
+    <ClInclude Include="source\IO\_internal\messages.hpp" />
+    <ClInclude Include="source\IO\_internal\parsers.hpp" />
+    <ClInclude Include="source\IO\_internal\prints.hpp" />
+    <ClInclude Include="source\IO\_internal\utilities.hpp" />
     <ClInclude Include="source\pch.hpp" />
     <ClInclude Include="source\Foundation\constants.hpp" />
   </ItemGroup>

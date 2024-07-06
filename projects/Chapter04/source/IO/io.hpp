@@ -16,6 +16,7 @@ namespace IO
 
   enum class Option : fn::u8f
   {
+    HELP
   };
 
   auto printIntroduction() -> void;

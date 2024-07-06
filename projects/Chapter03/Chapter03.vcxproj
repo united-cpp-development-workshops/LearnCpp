@@ -13,6 +13,9 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <!-- Targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Debug|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
   <!-- Items -->
   <ItemGroup>
     <ClCompile Include="source\main.cpp" />
