@@ -25,8 +25,8 @@ namespace IO
     QUIT
   };
 
-  auto printWelcome() -> void;
-  auto printInformative() -> void;
+  auto printWelcome() -> fn::none;
+  auto printInformative() -> fn::none;
   [[nodiscard]]
   auto getSamplesCountInput() -> fn::i32f;
   [[nodiscard]]
@@ -35,11 +35,11 @@ namespace IO
   auto getUpperBoundInput() -> fn::i32f;
   [[nodiscard]]
   auto getPreferredChartSizeInput() -> std::pair<fn::u16f, fn::u16f>;
-  auto printResultsHeader() -> void;
-  auto printChart(const Math::ChartFeed& chartFeed) -> void;
-  auto printStatistics(const std::vector<fn::i32f>& values) -> void;
-  auto printOptionsHeader() -> void;
+  auto printResultsHeader() -> fn::none;
+  auto printChart(const Math::ChartFeed& chartFeed) -> fn::none;
+  auto printStatistics(const std::vector<fn::i32f>& values) -> fn::none;
+  auto printOptionsHeader() -> fn::none;
   [[nodiscard]]
   auto getOptionInput() -> Option;
-  auto printNoFurtherZoom(Utility::Direction direction) -> void;
+  auto printNoFurtherZoom(Utility::Direction direction) -> fn::none;
 } // namespace IO

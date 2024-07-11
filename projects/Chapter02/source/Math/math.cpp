@@ -41,7 +41,7 @@ auto Math::generateChartFeed(
   // Count the frequency of each interval
   std::ranges::for_each(
     values,
-    [&](fn::i32f value) -> void
+    [&](fn::i32f value) -> fn::none
     {
       // Find the key in the frequency map that is closest to the value
       const auto key{*std::ranges::min_element(

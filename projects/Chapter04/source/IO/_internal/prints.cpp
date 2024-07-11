@@ -2,25 +2,35 @@
 
 #include "IO/_internal/prints.hpp"
 
+#include "Foundation/types.hpp"
+
 #include <iostream>
 #include <string>
 
 namespace IO::_internal
 {
-  auto printBriefHelp() -> void
+  auto printBriefInfo() -> fn::none
   {
-    std::cout << "   USAGE: <command> [options]\n";
-    std::cout << "   LEARN: Use 'help' command or '--help' option for more "
-                 "information.\n\n";
+    std::cout << " - Explore fundamental types of C++.\n";
+    std::cout << " - Learn about the sizes, ranges and properties of "
+                 "fundamental types.\n";
+    std::cout << " - Compare fundamental types of C++.\n\n";
   }
 
-  auto printInputError(const std::string& message) -> void
+  auto printBriefHelp() -> fn::none
+  {
+    std::cout << "\n   USAGE: <command> [options]\n";
+    std::cout << "   LEARN: Use 'help' command or '--help' option for more "
+                 "information.\n";
+  }
+
+  auto printInputError(const std::string& message) -> fn::none
   {
     std::cerr << " [X]: " << message << '\n';
     printBriefHelp();
   }
 
-  auto printInputWarning(const std::string& message) -> void
+  auto printInputWarning(const std::string& message) -> fn::none
   {
     std::cerr << " [!]: " << message << '\n';
   }

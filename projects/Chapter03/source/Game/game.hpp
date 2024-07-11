@@ -36,7 +36,7 @@ namespace Game
     auto isAce() const noexcept -> fn::bln;
 
     // Mutators
-    auto setValue(fn::u8f value) noexcept -> void;
+    auto setValue(fn::u8f value) noexcept -> fn::none;
 
   private:
     // Fields
@@ -49,5 +49,5 @@ namespace Game
     friend auto operator<<(std::ostream& os, const Card& card) -> std::ostream&;
   };
 
-  auto play() -> void;
+  auto play() -> fn::none;
 } // namespace Game

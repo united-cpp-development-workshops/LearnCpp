@@ -22,10 +22,9 @@ auto Random::distribute(
   std::uniform_int_distribution<fn::i32f> distribution{lowerBound, upperBound};
 
   // Fill the vector with random numbers
-  std::generate(
-    values.begin(),
-    values.end(),
-    [&]
+  std::ranges::generate(
+    values,
+    [&]() -> fn::i32f
     {
       return distribution(randomEngine);
     }

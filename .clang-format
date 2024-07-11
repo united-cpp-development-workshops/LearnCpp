@@ -1,6 +1,6 @@
 # *----------------------------------------------------------------------------*
 # |                       C++ Clang-Format Configuration                       |
-# |                              Version 24.07.06                              |
+# |                              Version 24.07.11                              |
 # *----------------------------------------------------------------------------*
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Format, a formatting tool for C, C++, |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-07-06                                                  |
+# | Date         : 2024-07-11                                                  |
 # *----------------------------------------------------------------------------*
 ---
 BasedOnStyle: LLVM
@@ -140,32 +140,32 @@ IncludeBlocks: Regroup
 IncludeCategories:
     # Precompiled Headers
   - Regex: ^".*pch\..+"$
-    Priority: -2
-    SortPriority: -2
-    CaseSensitive: false
-
-    # Foundation Headers
-  - Regex: ^"Foundation/.+\..+"$
     Priority: -1
     SortPriority: -1
     CaseSensitive: false
 
-    # Project Headers
-  - Regex: ^".+\..+"$
+    # Foundation Headers
+  - Regex: ^"Foundation/.+\..+"$
     Priority: 1
     SortPriority: 1
     CaseSensitive: false
 
-    # Included Headers
-  - Regex: ^<.+\..+>$
+    # Project Headers
+  - Regex: ^".+\..+"$
     Priority: 2
     SortPriority: 2
     CaseSensitive: false
 
-    # Standard Library Headers
-  - Regex: ^<.+>$
+    # Included Headers
+  - Regex: ^<.+\..+>$
     Priority: 3
     SortPriority: 3
+    CaseSensitive: false
+
+    # Standard Library Headers
+  - Regex: ^<.+>$
+    Priority: 4
+    SortPriority: 4
     CaseSensitive: false
 IncludeIsMainRegex: $           # Main header
 IncludeIsMainSourceRegex: $     # Main source
@@ -236,7 +236,7 @@ RequiresExpressionIndentation: OuterScope
 SeparateDefinitionBlocks: Always
 ShortNamespaceLines: 0
 SkipMacroDefinitionBody: false
-SortIncludes: CaseSensitive
+SortIncludes: CaseInsensitive
 # SortJavaStaticImport: // Unused (Not C++)
 SortUsingDeclarations: LexicographicNumeric
 SpaceAfterCStyleCast: true

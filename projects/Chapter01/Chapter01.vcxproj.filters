@@ -26,7 +26,7 @@
     <ClInclude Include="source\pch.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\Support\Internal\concepts.hpp">
+    <ClInclude Include="source\Foundation\Support\_internal\concepts.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Foundation\Support\narrowing.ipp">

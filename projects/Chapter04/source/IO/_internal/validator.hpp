@@ -2,9 +2,12 @@
 
 #include "Foundation/types.hpp"
 
+#include "IO/io.hpp"
+
+#include <set>
+
 namespace IO::_internal
 {
   [[nodiscard]]
-  auto isNotAllowedCharacter(fn::cdef character) noexcept -> fn::bln;
-  auto resetInputBuffer() -> fn::none;
+  auto validateRequest(Command command, std::set<Option>& options) -> fn::bln;
 } // namespace IO::_internal

@@ -21,6 +21,6 @@ namespace IO
     const std::vector<Game::Card>& hand,
     fn::bln                        hideFirstCard,
     fn::u16f                       adjustedHandTotal
-  ) -> void;
+  ) -> fn::none;
   auto getPlayerChoice() -> PlayerChoice;
 } // namespace IO

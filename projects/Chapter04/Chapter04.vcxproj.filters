@@ -27,13 +27,19 @@
     <ClCompile Include="source\IO\_internal\utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\IO\_internal\prints.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="source\IO\_internal\parsers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\IO\_internal\messages.cpp">
+    <ClCompile Include="source\IO\_internal\validator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\_internal\responses.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\_internal\prints.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\IO\_internal\types.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +56,7 @@
     <ClInclude Include="source\Foundation\Support\NarrowingError.ipp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\Support\Internal\concepts.hpp">
+    <ClInclude Include="source\Foundation\Support\_internal\concepts.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Foundation\Support\narrowing.ipp">
@@ -65,10 +71,22 @@
     <ClInclude Include="source\IO\_internal\prints.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\IO\_internal\parsers.hpp">
+    <ClInclude Include="source\IO\_internal\parsers.ipp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\IO\_internal\messages.hpp">
+    <ClInclude Include="source\IO\_internal\messages.ipp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\_internal\validator.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\_internal\responses.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\_internal\platform.ipp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\_internal\types.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

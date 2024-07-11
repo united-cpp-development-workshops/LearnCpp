@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Foundation/Support/Internal/concepts.hpp"
 #include "Foundation/Support/NarrowingError.ipp"
+#include "Foundation/Support/_internal/concepts.hpp"
 #include "Foundation/types.hpp"
 
 namespace fn::inline Support
@@ -16,7 +16,7 @@ namespace fn::inline Support
    * @throws NarrowingError If the value or sign changed during the cast.
    * @warning Must be preferred over static_cast for narrowing conversions.
    */
-  template <Internal::Arithmetic To, Internal::Arithmetic From>
+  template <_internal::Arithmetic To, _internal::Arithmetic From>
   constexpr auto narrow_cast(From value) -> To;
 
   /**
@@ -29,7 +29,7 @@ namespace fn::inline Support
    * @throws NarrowingError If the value changed during the cast.
    * @warning Must be preferred over static_cast for narrowing conversions.
    */
-  template <Internal::NonArithmetic To, Internal::NonArithmetic From>
+  template <_internal::NonArithmetic To, _internal::NonArithmetic From>
   constexpr auto narrow_cast(From value) -> To;
 } // namespace fn::inline Support
 
@@ -41,7 +41,7 @@ namespace fn::inline Support
 {
 #pragma warning(disable : 26'467 26'472)
 
-  template <Internal::Arithmetic To, Internal::Arithmetic From>
+  template <_internal::Arithmetic To, _internal::Arithmetic From>
   constexpr auto narrow_cast(From value) -> To
   {
     // Check if signedness is different
@@ -62,7 +62,7 @@ namespace fn::inline Support
     return castedValue;
   }
 
-  template <Internal::NonArithmetic To, Internal::NonArithmetic From>
+  template <_internal::NonArithmetic To, _internal::NonArithmetic From>
   constexpr auto narrow_cast(From value) -> To
   {
     // Static cast the value

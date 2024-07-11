@@ -13,9 +13,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <!-- Targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Debug|x64'">
-    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
-  </PropertyGroup>
   <!-- Items -->
   <ItemGroup>
     <ClCompile Include="source\main.cpp" />
@@ -28,9 +25,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Foundation\constants.hpp" />
-    <ClInclude Include="source\Foundation\Support\Internal\concepts.hpp" />
     <ClInclude Include="source\Foundation\Support\narrowing.ipp" />
     <ClInclude Include="source\Foundation\Support\NarrowingError.ipp" />
+    <ClInclude Include="source\Foundation\Support\_internal\concepts.hpp" />
     <ClInclude Include="source\Foundation\types.hpp" />
     <ClInclude Include="source\Game\game.hpp" />
     <ClInclude Include="source\IO\io.hpp" />

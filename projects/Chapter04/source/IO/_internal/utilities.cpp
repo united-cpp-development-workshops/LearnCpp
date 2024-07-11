@@ -18,7 +18,7 @@ namespace IO::_internal
        and character != ' ';
   }
 
-  auto resetInputBuffer() -> void
+  auto resetInputBuffer() -> fn::none
   {
     // Clear input buffer and error flags
     std::cin.clear();

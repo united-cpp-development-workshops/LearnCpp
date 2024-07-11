@@ -5,8 +5,6 @@
 
 #include "IO/io.hpp"
 
-#include <tuple>
-
 auto main() noexcept -> fn::idef
 try
 {
@@ -28,14 +26,14 @@ try
     // Check if input is valid
     if (not optional.has_value()) { continue; }
 
-    // Destructured input
-    const auto [ignored1, ignored2]{optional.value()};
+    // Destructure input
+    const auto [command, options]{optional.value()};
 
-    // Ignore unused variables
-    std::ignore = ignored1;
-    std::ignore = ignored2;
+    // Exit if command is 'exit' and has no options
+    if (command == IO::Command::EXIT and options.empty()) { break; }
 
-    break;
+    // Respond
+    IO::printResponse(command, options);
   }
 
   // Return success

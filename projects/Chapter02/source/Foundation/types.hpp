@@ -5,7 +5,19 @@
 
 namespace fn
 {
-  // ------------------------------< Boolean >------------------------------- //
+  // --------------------------------< Void >-------------------------------- //
+
+  // Platform void
+  using none = void;
+
+  // ------------------------------< Pointers >------------------------------ //
+
+  // Platform pointers
+  using iptr = std::intptr_t;
+  using uptr = std::uintptr_t;
+  using nptr = std::nullptr_t;
+
+  // ------------------------------< Booleans >------------------------------ //
 
   // Platform bool
   using bln = bool;
@@ -17,8 +29,6 @@ namespace fn
   using i16 = std::int16_t;
   using i32 = std::int32_t;
   using i64 = std::int64_t;
-
-  // Fixed unsigned integers
   using u8  = std::uint8_t;
   using u16 = std::uint16_t;
   using u32 = std::uint32_t;
@@ -29,8 +39,6 @@ namespace fn
   using i16l = std::int_least16_t;
   using i32l = std::int_least32_t;
   using i64l = std::int_least64_t;
-
-  // Least unsigned integers
   using u8l  = std::uint_least8_t;
   using u16l = std::uint_least16_t;
   using u32l = std::uint_least32_t;
@@ -41,8 +49,6 @@ namespace fn
   using i16f = std::int_fast16_t;
   using i32f = std::int_fast32_t;
   using i64f = std::int_fast64_t;
-
-  // Fast unsigned integers
   using u8f  = std::uint_fast8_t;
   using u16f = std::uint_fast16_t;
   using u32f = std::uint_fast32_t;
@@ -53,8 +59,6 @@ namespace fn
   using udef = unsigned int;
   using imax = std::intmax_t;
   using umax = std::uintmax_t;
-
-  // Size unsigned integer
   using size = std::size_t;
 
   // -------------------------------< Floats >------------------------------- //

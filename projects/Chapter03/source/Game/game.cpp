@@ -54,14 +54,13 @@ namespace
   }
 
   auto adjustAces(std::vector<Game::Card>& hand, fn::u16f& handTotal) noexcept
-    -> void
+    -> fn::none
   {
     while (handTotal > Game::BLACKJACK)
     {
       // Check for aces and adjust value
-      if (std::any_of(
-            hand.begin(),
-            hand.end(),
+      if (std::ranges::any_of(
+            hand,
             [](Game::Card& card) noexcept -> fn::bln
             {
               if (card.isAce() and card.getValue() == Game::ACE_HIGH_VALUE)
@@ -116,7 +115,7 @@ namespace Game
   }
 
   // Mutators
-  auto Card::setValue(fn::u8f value) noexcept -> void { m_value = value; }
+  auto Card::setValue(fn::u8f value) noexcept -> fn::none { m_value = value; }
 
   // Friends
   auto operator<<(std::ostream& os, const Card& card) -> std::ostream&
@@ -127,7 +126,7 @@ namespace Game
 }; // namespace Game
 
 // NOLINTNEXTLINE
-auto Game::play() -> void
+auto Game::play() -> fn::none
 {
   // Reset player bank
   fn::u32f playerBank{PLAYER_STARTING_BANK};

@@ -1,10 +1,13 @@
 #pragma once
 
+#include "Foundation/types.hpp"
+
 #include <string>
 
 namespace IO::_internal
 {
-  auto printBriefHelp() -> void;
-  auto printInputError(const std::string& message) -> void;
-  auto printInputWarning(const std::string& message) -> void;
+  auto printBriefInfo() -> fn::none;
+  auto printBriefHelp() -> fn::none;
+  auto printInputError(const std::string& message) -> fn::none;
+  auto printInputWarning(const std::string& message) -> fn::none;
 } // namespace IO::_internal

@@ -15,10 +15,12 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <!-- Items -->
   <ItemGroup>
-    <ClCompile Include="source\IO\_internal\messages.cpp" />
     <ClCompile Include="source\IO\_internal\parsers.cpp" />
     <ClCompile Include="source\IO\_internal\prints.cpp" />
+    <ClCompile Include="source\IO\_internal\responses.cpp" />
+    <ClCompile Include="source\IO\_internal\types.cpp" />
     <ClCompile Include="source\IO\_internal\utilities.cpp" />
+    <ClCompile Include="source\IO\_internal\validator.cpp" />
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -26,15 +28,19 @@
     <ClCompile Include="source\IO\io.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Foundation\Support\Internal\concepts.hpp" />
+    <ClInclude Include="source\Foundation\Support\_internal\concepts.hpp" />
     <ClInclude Include="source\Foundation\Support\narrowing.ipp" />
     <ClInclude Include="source\Foundation\Support\NarrowingError.ipp" />
     <ClInclude Include="source\Foundation\types.hpp" />
     <ClInclude Include="source\IO\io.hpp" />
-    <ClInclude Include="source\IO\_internal\messages.hpp" />
-    <ClInclude Include="source\IO\_internal\parsers.hpp" />
+    <ClInclude Include="source\IO\_internal\messages.ipp" />
+    <ClInclude Include="source\IO\_internal\parsers.ipp" />
+    <ClInclude Include="source\IO\_internal\platform.ipp" />
     <ClInclude Include="source\IO\_internal\prints.hpp" />
+    <ClInclude Include="source\IO\_internal\responses.hpp" />
+    <ClInclude Include="source\IO\_internal\types.hpp" />
     <ClInclude Include="source\IO\_internal\utilities.hpp" />
+    <ClInclude Include="source\IO\_internal\validator.hpp" />
     <ClInclude Include="source\pch.hpp" />
     <ClInclude Include="source\Foundation\constants.hpp" />
   </ItemGroup>

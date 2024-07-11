@@ -66,7 +66,7 @@ auto IO::printHand(
   const std::vector<Game::Card>& hand,
   fn::bln                        hideFirstCard,
   fn::u16f                       adjustedHandTotal
-) -> void
+) -> fn::none
 {
   // Print holder
   std::cout << holder << ": ";

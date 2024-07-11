@@ -23,7 +23,7 @@ try
     Game::play();
 
     // Ask to play again
-    std::cout << "\nWould you like to play again? (y/n) ";
+    std::cout << "\nWould you like to play again? (y/n): ";
 
     // Get input
     fn::cdef input{};

@@ -1,0 +1,292 @@
+#pragma once
+
+#include "Foundation/types.hpp"
+
+#include <stdexcept>
+#include <string>
+
+namespace IO::_internal
+{
+  enum class Compiler : fn::u8f
+  {
+    UNKNOWN,
+    MSVC,
+    CLANG,
+    GCC
+  };
+
+  enum class Architecture : fn::u8f
+  {
+    UNKNOWN,
+    X86,
+    X64,
+    ARM32,
+    ARM64
+  };
+
+  enum class OperatingSystem : fn::u8f
+  {
+    UNKNOWN,
+    WINDOWS,
+    MACOS,
+    LINUX
+  };
+
+  [[nodiscard]]
+  constexpr auto GET_COMPILER() noexcept -> Compiler;
+  [[nodiscard]]
+  constexpr auto GET_COMPILER_STR(Compiler compiler) -> fn::cstr;
+  [[nodiscard]]
+  constexpr auto GET_COMPILER_VER_STR(Compiler compiler) -> std::string;
+  [[nodiscard]]
+  constexpr auto GET_LANGUAGE_STD_STR() -> std::string;
+  [[nodiscard]]
+  constexpr auto GET_ARCHITECTURE() -> Architecture;
+  [[nodiscard]]
+  constexpr auto GET_ARCHITECTURE_STR(Architecture architecture) -> fn::cstr;
+  [[nodiscard]]
+  constexpr auto GET_OPERATING_SYSTEM() -> OperatingSystem;
+  [[nodiscard]]
+  constexpr auto GET_OPERATING_SYSTEM_STR(OperatingSystem operatingSystem
+  ) -> fn::cstr;
+} // namespace IO::_internal
+
+/*----------------------------------------------------------------------------*\
+*| >>>>>>>>>>>>>>>>>>>>>>>>>>>>> Implementation <<<<<<<<<<<<<<<<<<<<<<<<<<<<< |*
+\*----------------------------------------------------------------------------*/
+
+namespace IO::_internal
+{
+  [[nodiscard]]
+  constexpr auto GET_COMPILER() noexcept -> Compiler
+  {
+#if defined(_MSC_VER) && !defined(__clang__) // Clang-cl also defines _MSC_VER
+    return Compiler::MSVC;
+#elif defined(__clang__)
+    return Compiler::CLANG;
+#elif defined(__GNUC__)
+    return Compiler::GCC
+#else
+    return Compiler::UNKNOWN;
+#endif
+  }
+
+  [[nodiscard]]
+  constexpr auto GET_COMPILER_STR(Compiler compiler) -> fn::cstr
+  {
+    switch (compiler)
+    {
+    case Compiler::UNKNOWN: return "Unknown";
+    case Compiler::MSVC   : return "Microsoft Visual C++";
+    case Compiler::CLANG  : return "Clang";
+    case Compiler::GCC    : return "GNU Compiler Collection";
+    }
+
+    // Should never reach here
+    throw std::logic_error{"Invalid compiler!"};
+  }
+
+  [[nodiscard]]
+  constexpr auto GET_COMPILER_VER_STR(Compiler compiler) -> std::string
+  {
+    switch (compiler)
+    {
+    case Compiler::UNKNOWN: return {""};
+    case Compiler::MSVC:
+    {
+      constexpr fn::u16l MSVC_VER_FIRST_DOT{2};
+      constexpr fn::u16l MSVC_VER_SECOND_DOT{5};
+
+#ifdef _MSC_FULL_VER
+      std::string version{std::to_string(_MSC_FULL_VER)};
+#else
+      std::string version{"000000000"};
+#endif
+
+      version.insert(version.begin() + MSVC_VER_FIRST_DOT, '.');
+      version.insert(version.begin() + MSVC_VER_SECOND_DOT, '.');
+
+      return version;
+    }
+    case Compiler::CLANG:
+    {
+#ifdef __clang_major__
+      constexpr fn::u16f MAJOR{__clang_major__};
+#else
+      constexpr fn::u16f MAJOR{};
+#endif
+
+#ifdef __clang_minor__
+      constexpr fn::u16f MINOR{__clang_minor__};
+#else
+      constexpr fn::u16f MINOR{};
+#endif
+
+#ifdef __clang_patchlevel__
+      constexpr fn::u16f PATCH{__clang_patchlevel__};
+#else
+      constexpr fn::u16f PATCH{};
+#endif
+
+      return {
+        std::to_string(MAJOR) + '.' + std::to_string(MINOR) + '.'
+        + std::to_string(PATCH)
+      };
+    }
+    case Compiler::GCC:
+    {
+#ifdef __GNUC__
+      constexpr fn::u16f MAJOR{__GNUC__};
+#else
+      constexpr fn::u16f MAJOR{};
+#endif
+
+#ifdef __GNUC_MINOR__
+      constexpr fn::u16f MINOR{__GNUC_MINOR__};
+#else
+      constexpr fn::u16f MINOR{};
+#endif
+
+#ifdef __GNUC_PATCHLEVEL__
+      constexpr fn::u16f PATCH{__GNUC_PATCHLEVEL__};
+#else
+      constexpr fn::u16f PATCH{};
+#endif
+
+      return {
+        std::to_string(MAJOR) + '.' + std::to_string(MINOR) + '.'
+        + std::to_string(PATCH)
+      };
+    }
+    }
+
+    // Should never reach here
+    throw std::logic_error{"Invalid compiler!"};
+  }
+
+  [[nodiscard]]
+  constexpr auto GET_LANGUAGE_STD_STR() -> std::string
+  {
+    constexpr fn::i32l CPPRE_CODE{199'711L};
+    constexpr fn::i32l CPP11_CODE{201'103L};
+    constexpr fn::i32l CPP14_CODE{201'402L};
+    constexpr fn::i32l CPP17_CODE{201'703L};
+    constexpr fn::i32l CPP20_CODE{202'002L};
+    constexpr fn::i32l CPP23_CODE{202'302L};
+    constexpr fn::i32l CPP26_CODE{202'612L};
+
+    switch (__cplusplus)
+    {
+    case CPPRE_CODE: return {"Pre-C++11"};
+    case CPP11_CODE: return {"C++11"};
+    case CPP14_CODE: return {"C++14"};
+    case CPP17_CODE: return {"C++17"};
+    case CPP20_CODE: return {"C++20"};
+    case CPP23_CODE: return {"C++23"};
+    case CPP26_CODE: return {"C++26"};
+    default        : return {"Unknown C++ standard"};
+    }
+  }
+
+  [[nodiscard]]
+  constexpr auto GET_ARCHITECTURE() -> Architecture
+  {
+    // NOLINTBEGIN(bugprone-branch-clone)
+    switch (GET_COMPILER())
+    {
+    case Compiler::UNKNOWN: return Architecture::UNKNOWN;
+    case Compiler::MSVC:
+    {
+#if defined(_M_IX86)
+      return Architecture::X86;
+#elif defined(_M_X64)
+      return Architecture::X64;
+#elif defined(_M_ARM)
+      return Architecture::ARM32;
+#elif defined(_M_ARM64)
+      return Architecture::ARM64;
+#else
+      return Architecture::UNKNOWN;
+#endif
+    }
+    case Compiler::CLANG:
+    case Compiler::GCC:
+    {
+#if defined(__i386__)
+      return Architecture::X86;
+#elif defined(__x86_64__)
+      return Architecture::X64;
+#elif defined(__arm__)
+      return Architecture::ARM32;
+#elif defined(__aarch64__)
+      return Architecture::ARM64;
+#else
+      return Architecture::UNKNOWN;
+#endif
+    }
+    }
+    // NOLINTEND(bugprone-branch-clone)
+
+    // Should never reach here
+    throw std::logic_error{"Invalid compiler!"};
+  }
+
+  [[nodiscard]]
+  constexpr auto GET_ARCHITECTURE_STR(Architecture architecture) -> fn::cstr
+  {
+    switch (architecture)
+    {
+    case Architecture::UNKNOWN: return "Unknown";
+    case Architecture::X86    : return "x86";
+    case Architecture::X64    : return "x64";
+    case Architecture::ARM32  : return "ARM32";
+    case Architecture::ARM64  : return "ARM64";
+    }
+
+    // Should never reach here
+    throw std::logic_error{"Invalid compiler!"};
+  }
+
+  [[nodiscard]]
+  constexpr auto GET_OPERATING_SYSTEM() -> OperatingSystem
+  {
+    switch (GET_COMPILER())
+    {
+    case Compiler::UNKNOWN: return OperatingSystem::UNKNOWN;
+    case Compiler::MSVC:
+    case Compiler::CLANG:
+    case Compiler::GCC:
+    {
+#if defined(_WIN32)
+      return OperatingSystem::WINDOWS;
+#elif defined(__APPLE__)
+      return OperatingSystem::MACOS;
+#elif defined(__linux__)
+      return OperatingSystem::LINUX;
+#else
+      return OperatingSystem::UNKNOWN;
+#endif
+    }
+    }
+
+    // Should never reach here
+    throw std::logic_error{"Invalid compiler!"};
+  }
+
+  [[nodiscard]]
+  constexpr auto GET_OPERATING_SYSTEM_STR(OperatingSystem operatingSystem
+  ) -> fn::cstr
+  {
+    switch (operatingSystem)
+    {
+    case OperatingSystem::UNKNOWN: return "Unknown";
+    case OperatingSystem::WINDOWS: return "Windows";
+    case OperatingSystem::MACOS  : return "macOS";
+    case OperatingSystem::LINUX  : return "Linux";
+    }
+
+    // Should never reach here
+    throw std::logic_error{"Invalid compiler!"};
+  }
+
+} // namespace IO::_internal

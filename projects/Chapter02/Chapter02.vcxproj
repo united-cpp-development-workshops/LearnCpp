@@ -26,11 +26,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Foundation\constants.hpp" />
-    <ClInclude Include="source\Foundation\Support\Internal\concepts.hpp" />
     <ClInclude Include="source\Foundation\Support\narrowing.ipp" />
     <ClInclude Include="source\Foundation\Support\NarrowingError.ipp" />
+    <ClInclude Include="source\Foundation\Support\_internal\concepts.hpp" />
     <ClInclude Include="source\Foundation\types.hpp" />
-    <ClInclude Include="source\Math\Internal\base.hpp" />
+    <ClInclude Include="source\Math\_internal\base.hpp" />
     <ClInclude Include="source\Math\math.ipp" />
     <ClInclude Include="source\pch.hpp" />
     <ClInclude Include="source\Random\random.hpp" />

@@ -55,7 +55,7 @@ namespace
 
     // Print padding lambda
     auto printPadding{
-      [&paddingSymbol, &padding]() -> void
+      [&paddingSymbol, &padding]() -> fn::none
       {
         for (fn::u16f position{}; position < padding; position++)
         {
@@ -94,7 +94,7 @@ namespace
     fn::u32f                            y,
     fn::u32f                            yAxisInterval,
     fn::u16f                            yAxisLabelWidth
-  ) -> void
+  ) -> fn::none
   {
     // Print y-axis label and prefix
     printAligned(
@@ -224,7 +224,7 @@ namespace
     return {};
   }
 
-  auto resetInputBuffer() -> void
+  auto resetInputBuffer() -> fn::none
   {
     // Clear input buffer and error flags
     std::cin.clear();
@@ -235,7 +235,7 @@ namespace
   }
 } // namespace
 
-auto IO::printWelcome() -> void
+auto IO::printWelcome() -> fn::none
 {
   std::cout << " -------------------------< RANDOM CHARTS "
                ">--------------------------\n";
@@ -245,7 +245,7 @@ auto IO::printWelcome() -> void
   std::cout << " - Get the resulting distribution's statistics in detail.\n";
 }
 
-auto IO::printInformative() -> void
+auto IO::printInformative() -> fn::none
 {
   std::cout << '\n';
   std::cout << " --------------------------------------------------------------"
@@ -341,7 +341,7 @@ auto IO::getPreferredChartSizeInput() -> std::pair<fn::u16f, fn::u16f>
   return {width, height};
 }
 
-auto IO::printResultsHeader() -> void
+auto IO::printResultsHeader() -> fn::none
 {
   std::cout << '\n';
   std::cout << " --------------------------------------------------------------"
@@ -350,7 +350,7 @@ auto IO::printResultsHeader() -> void
   std::cout << " RESULTS\n";
 }
 
-auto IO::printChart(const Math::ChartFeed& chartFeed) -> void
+auto IO::printChart(const Math::ChartFeed& chartFeed) -> fn::none
 {
   std::cout << '\n';
   std::cout << " - Chart:\n";
@@ -432,7 +432,7 @@ auto IO::printChart(const Math::ChartFeed& chartFeed) -> void
   }
 }
 
-auto IO::printStatistics(const std::vector<fn::i32f>& values) -> void
+auto IO::printStatistics(const std::vector<fn::i32f>& values) -> fn::none
 {
   std::cout << '\n';
   std::cout << " - Statistics:\n";
@@ -474,7 +474,7 @@ auto IO::printStatistics(const std::vector<fn::i32f>& values) -> void
   std::cout << "   - Maximum: " << *max << '\n';
 }
 
-auto IO::printOptionsHeader() -> void
+auto IO::printOptionsHeader() -> fn::none
 {
   std::cout << '\n';
   std::cout << " --------------------------------------------------------------"
@@ -538,7 +538,7 @@ auto IO::getOptionInput() -> Option
   }
 }
 
-auto IO::printNoFurtherZoom(Utility::Direction direction) -> void
+auto IO::printNoFurtherZoom(Utility::Direction direction) -> fn::none
 {
   std::cout << " [X]: No further zoom ";
   switch (direction)

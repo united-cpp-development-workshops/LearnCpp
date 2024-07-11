@@ -2,7 +2,7 @@
 
 #include <type_traits>
 
-namespace fn::inline Support::Internal
+namespace fn::inline Support::_internal
 {
   /**
    * @brief Concept that checks if a type is arithmetic.
@@ -15,4 +15,4 @@ namespace fn::inline Support::Internal
    */
   template <typename T>
   concept NonArithmetic = not Arithmetic<T>;
-} // namespace fn::inline Support::Internal
+} // namespace fn::inline Support::_internal

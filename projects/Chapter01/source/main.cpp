@@ -24,7 +24,7 @@ auto main() noexcept -> fn::idef
 try
 {
   // Print title
-  std::cout << "Aspect Ratio Calculator\n";
+  std::cout << "---------------< Aspect Ratio Calculator >---------------\n\n";
 
   // Get the width from the user
   std::cout << "Enter the width: ";

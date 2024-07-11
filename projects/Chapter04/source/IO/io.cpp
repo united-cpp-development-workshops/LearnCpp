@@ -2,49 +2,40 @@
 
 #include "IO/io.hpp"
 
-#include "IO/_internal/messages.hpp"
-#include "IO/_internal/parsers.hpp"
+#include "Foundation/types.hpp"
+
+#include "IO/_internal/messages.ipp"
+#include "IO/_internal/parsers.ipp"
 #include "IO/_internal/prints.hpp"
+#include "IO/_internal/responses.hpp"
 #include "IO/_internal/utilities.hpp"
+#include "IO/_internal/validator.hpp"
 
 #include <algorithm>
 #include <iostream>
 #include <optional>
 #include <set>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <utility>
 
-namespace
-{
-  auto getUnknownOptionWarning(const std::string& option) -> std::string
-  {
-    return "Unknown option '" + option + "' was found and discarded!";
-  }
-} // namespace
-
 namespace IO
 {
-  auto printIntroduction() -> void
+  auto printIntroduction() -> fn::none
   {
-    std::cout << "---------------------------> Types Explorer "
-                 "<---------------------------\n\n";
+    std::cout << "---------------------------< Types Explorer "
+                 ">---------------------------\n\n";
 
-    std::cout << " - Explore fundamental types of C++.\n";
-    std::cout << " - Learn about the sizes, ranges, and properties of "
-                 "fundamental types.\n";
-    std::cout << " - Observe the behavior of fundamental types in various "
-                 "contexts.\n";
-    std::cout
-      << " - Discover fundamental type aliases in Foundation header.\n\n";
+    _internal::printBriefInfo();
 
     std::cout << "   :::::::::::::::::::::::::: How It Works "
-                 "::::::::::::::::::::::::::\n\n";
+                 "::::::::::::::::::::::::::\n";
 
     _internal::printBriefHelp();
   }
 
-  auto printPrompt() -> void
+  auto printPrompt() -> fn::none
   {
     std::cout << "\n-----------------------------------------------------------"
                  "-------------\n\n";
@@ -79,9 +70,7 @@ namespace IO
     }
 
     // Replace not allowed characters
-    std::replace_if(
-      input.begin(), input.end(), _internal::isNotAllowedCharacter, ' '
-    );
+    std::ranges::replace_if(input, _internal::isNotAllowedCharacter, ' ');
 
     // Create input stream
     std::istringstream inputStream{input};
@@ -105,9 +94,53 @@ namespace IO
     const auto command{commandOptional.value()};
 
     // Parse options
-    const auto options{_internal::parseOptions(inputStream)};
+    auto options{_internal::parseOptions(inputStream)};
 
-    // TEST:
-    return std::nullopt;
+    // Return if valid request
+    return _internal::validateRequest(command, options)
+           ? std::make_optional(
+               std::pair<Command, std::set<Option>>(command, options)
+             )
+           : std::nullopt;
+  }
+
+  auto printResponse(Command command, const std::set<Option>& options)
+    -> fn::none
+  {
+    // Print one empty line
+    std::cout << '\n';
+
+    // Respond based on command
+    switch (command)
+    {
+    case Command::HELP:
+    {
+      _internal::helpResponse(options);
+      return;
+    }
+    case Command::PLATFORM:
+    {
+      _internal::platformResponse(options);
+      return;
+    }
+    case Command::EXPLORE:
+    {
+      _internal::exploreResponse(options);
+      return;
+    }
+    case Command::COMPARE:
+    {
+      _internal::compareResponse(options);
+      return;
+    }
+    case Command::EXIT:
+    {
+      _internal::exitResponse(options);
+      return;
+    }
+    }
+
+    // Should never reach here
+    throw std::logic_error{"Invalid command!"};
   }
 } // namespace IO

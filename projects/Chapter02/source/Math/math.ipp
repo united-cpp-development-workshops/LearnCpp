@@ -2,7 +2,7 @@
 
 #include "Foundation/types.hpp"
 
-#include "Math/Internal/base.hpp"
+#include "Math/_internal/base.hpp"
 
 #include <map>
 #include <utility>
@@ -15,13 +15,13 @@ namespace Math
     // Check if the number is 0
     if (number == 0) { return 1; }
 
-    // Initialize the count (If negative, add 1
+    // Initialize the count (If negative, add 1)
     fn::u16f count{number < 0 ? fn::u16f{1} : fn::u16f{0}};
 
     // Count the digits
     while (number != 0)
     {
-      number /= Internal::BASE;
+      number /= _internal::BASE;
       count++;
     }
 
