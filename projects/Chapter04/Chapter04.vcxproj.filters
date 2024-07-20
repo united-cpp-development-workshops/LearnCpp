@@ -89,13 +89,13 @@
     <ClInclude Include="source\Foundation\_internal\Exception\Exception.ipp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\_internal\Exception\Name.ipp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\Foundation\concepts.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\Foundation\_internal\Exception\_internal\concepts.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Foundation\_internal\Exception\Name.ipp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

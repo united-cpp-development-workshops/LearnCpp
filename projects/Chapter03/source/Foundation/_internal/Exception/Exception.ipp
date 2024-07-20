@@ -205,7 +205,12 @@ namespace fn::_internal::Exception
   template <Name name, _internal::IsContext Context>
   auto Exception<name, Context>::what() const noexcept -> cstr
   {
+#pragma warning(push)
+#pragma warning(disable : 26'485)
+
     return name.value;
+
+#pragma warning(pop)
   }
 
   /*--------------------------------------------------------------------------*\

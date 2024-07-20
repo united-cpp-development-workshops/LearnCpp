@@ -2,12 +2,11 @@
 
 #include "Foundation/types.hpp"
 
-#include "Game/game.hpp"
+#include "Game/game.ipp"
 
 #include <vector>
 
 namespace Math
 {
-  auto calculateHandTotal(const std::vector<Game::Card>& hand
-  ) noexcept -> fn::u16f;
+  auto calculateScore(const std::vector<Game::Card>& hand) noexcept -> fn::u16f;
 } // namespace Math

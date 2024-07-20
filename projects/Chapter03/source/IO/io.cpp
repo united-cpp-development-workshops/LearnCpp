@@ -4,7 +4,7 @@
 
 #include "Foundation/types.hpp"
 
-#include "Game/game.hpp"
+#include "Game/game.ipp"
 #include "Math/math.hpp"
 
 #include <cctype>
@@ -91,7 +91,7 @@ auto IO::printHand(
   {
     if (adjustedHandTotal == 0)
     {
-      adjustedHandTotal = {Math::calculateHandTotal(hand)};
+      adjustedHandTotal = {Math::calculateScore(hand)};
     }
     std::cout << " > " << adjustedHandTotal << '\n';
   }

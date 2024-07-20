@@ -30,7 +30,7 @@
     <ClInclude Include="source\Foundation\_internal\Exception\Exception.ipp" />
     <ClInclude Include="source\Foundation\_internal\Exception\Name.ipp" />
     <ClInclude Include="source\Foundation\_internal\Exception\_internal\concepts.hpp" />
-    <ClInclude Include="source\Game\game.hpp" />
+    <ClInclude Include="source\Game\game.ipp" />
     <ClInclude Include="source\IO\io.hpp" />
     <ClInclude Include="source\Math\math.hpp" />
     <ClInclude Include="source\pch.hpp" />

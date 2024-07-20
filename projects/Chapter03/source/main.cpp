@@ -3,7 +3,7 @@
 #include "Foundation/constants.hpp"
 #include "Foundation/types.hpp"
 
-#include "Game/game.hpp"
+#include "Game/game.ipp"
 
 #include <consoleapi2.h>
 #include <WinNls.h>

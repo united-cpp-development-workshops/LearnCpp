@@ -2,7 +2,7 @@
 
 #include "Foundation/types.hpp"
 
-#include "Game/game.hpp"
+#include "Game/game.ipp"
 
 #include <string>
 #include <vector>
