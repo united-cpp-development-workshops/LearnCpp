@@ -227,11 +227,6 @@ namespace IO::_internal
 
       std::cout << "     '--help'     - Display this help message.\n";
     }
-    else
-    {
-      throw std::logic_error{
-        "Exit command wihtout options must have been handled earlier!"
-      };
-    }
+    else { std::cerr << "   ERROR: In 'exit' command!\n"; }
   }
 } // namespace IO::_internal

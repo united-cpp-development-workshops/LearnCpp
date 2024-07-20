@@ -31,19 +31,19 @@ namespace
     RIGHT
   };
 
-  template <typename T>
-  requires std::same_as<T, fn::i32f> or std::same_as<T, fn::cdef>
-          or std::same_as<T, fn::cstr>
+  template <typename Id>
+  requires std::same_as<Id, fn::i32f> or std::same_as<Id, fn::cdef>
+          or std::same_as<Id, fn::cstr>
   auto printAligned(
-    const T& input, fn::cdef paddingSymbol, fn::u16f width, Alignment alignment
+    const Id& input, fn::cdef paddingSymbol, fn::u16f width, Alignment alignment
   ) -> std::ostream&
   {
     // Find the length of the input
     fn::u16f inputLength{};
 
     // Check if the input is a character
-    if constexpr (std::same_as<T, fn::cdef>) { inputLength = {1}; }
-    else if constexpr (std::same_as<T, fn::cstr>)
+    if constexpr (std::same_as<Id, fn::cdef>) { inputLength = {1}; }
+    else if constexpr (std::same_as<Id, fn::cstr>)
     {
       // Get the length of input
       inputLength = {fn::narrow_cast<fn::u16f>(std::strlen(input))};

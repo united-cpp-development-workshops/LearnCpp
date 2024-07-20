@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Foundation/errors.hpp"
 #include "Foundation/types.hpp"
 
+#include <format>
 #include <stdexcept>
 #include <string>
 
@@ -60,39 +62,48 @@ namespace IO::_internal
   [[nodiscard]]
   constexpr auto GET_COMPILER() noexcept -> Compiler
   {
+    // Using declarations
+    using enum Compiler;
+
 #if defined(_MSC_VER) && !defined(__clang__) // Clang-cl also defines _MSC_VER
-    return Compiler::MSVC;
+    return MSVC;
 #elif defined(__clang__)
-    return Compiler::CLANG;
+    return CLANG;
 #elif defined(__GNUC__)
-    return Compiler::GCC
+    return GCC
 #else
-    return Compiler::UNKNOWN;
+    return UNKNOWN;
 #endif
   }
 
   [[nodiscard]]
   constexpr auto GET_COMPILER_STR(Compiler compiler) -> fn::cstr
   {
+    // Using declarations
+    using enum Compiler;
+
     switch (compiler)
     {
-    case Compiler::UNKNOWN: return "Unknown";
-    case Compiler::MSVC   : return "Microsoft Visual C++";
-    case Compiler::CLANG  : return "Clang";
-    case Compiler::GCC    : return "GNU Compiler Collection";
+    case UNKNOWN: return "Unknown";
+    case MSVC   : return "Microsoft Visual C++";
+    case CLANG  : return "Clang";
+    case GCC    : return "GNU Compiler Collection";
     }
 
     // Should never reach here
-    throw std::logic_error{"Invalid compiler!"};
+    throw fn::EnumValueError{};
   }
 
   [[nodiscard]]
   constexpr auto GET_COMPILER_VER_STR(Compiler compiler) -> std::string
   {
+    // Using declarations
+    using enum Compiler;
+
     switch (compiler)
     {
-    case Compiler::UNKNOWN: return {""};
-    case Compiler::MSVC:
+    case UNKNOWN: return {""};
+    case MSVC:
     {
       constexpr fn::u16l MSVC_VER_FIRST_DOT{2};
       constexpr fn::u16l MSVC_VER_SECOND_DOT{5};
@@ -106,9 +117,10 @@ namespace IO::_internal
       version.insert(version.begin() + MSVC_VER_FIRST_DOT, '.');
       version.insert(version.begin() + MSVC_VER_SECOND_DOT, '.');
 
+      // Return version string
       return version;
     }
-    case Compiler::CLANG:
+    case CLANG:
     {
 #ifdef __clang_major__
       constexpr fn::u16f MAJOR{__clang_major__};
@@ -128,12 +140,10 @@ namespace IO::_internal
       constexpr fn::u16f PATCH{};
 #endif
 
-      return {
-        std::to_string(MAJOR) + '.' + std::to_string(MINOR) + '.'
-        + std::to_string(PATCH)
-      };
+      // Return version string
+      return {std::format("{}.{}.{}", MAJOR, MINOR, PATCH)};
     }
-    case Compiler::GCC:
+    case GCC:
     {
 #ifdef __GNUC__
       constexpr fn::u16f MAJOR{__GNUC__};
@@ -153,15 +163,13 @@ namespace IO::_internal
       constexpr fn::u16f PATCH{};
 #endif
 
-      return {
-        std::to_string(MAJOR) + '.' + std::to_string(MINOR) + '.'
-        + std::to_string(PATCH)
-      };
+      // Return version string
+      return {std::format("{}{}.{}", MAJOR, MINOR, PATCH)};
     }
     }
 
     // Should never reach here
-    throw std::logic_error{"Invalid compiler!"};
+    throw fn::EnumValueError{};
   }
 
   [[nodiscard]]
@@ -191,11 +199,14 @@ namespace IO::_internal
   [[nodiscard]]
   constexpr auto GET_ARCHITECTURE() -> Architecture
   {
+    // Using declarations
+    using enum Compiler;
+
     // NOLINTBEGIN(bugprone-branch-clone)
     switch (GET_COMPILER())
     {
-    case Compiler::UNKNOWN: return Architecture::UNKNOWN;
-    case Compiler::MSVC:
+    case UNKNOWN: return Architecture::UNKNOWN;
+    case MSVC:
     {
 #if defined(_M_IX86)
       return Architecture::X86;
@@ -209,8 +220,8 @@ namespace IO::_internal
       return Architecture::UNKNOWN;
 #endif
     }
-    case Compiler::CLANG:
-    case Compiler::GCC:
+    case CLANG:
+    case GCC:
     {
 #if defined(__i386__)
       return Architecture::X86;
@@ -228,34 +239,40 @@ namespace IO::_internal
     // NOLINTEND(bugprone-branch-clone)
 
     // Should never reach here
-    throw std::logic_error{"Invalid compiler!"};
+    throw fn::EnumValueError{};
   }
 
   [[nodiscard]]
   constexpr auto GET_ARCHITECTURE_STR(Architecture architecture) -> fn::cstr
   {
+    // Using declarations
+    using enum Architecture;
+
     switch (architecture)
     {
-    case Architecture::UNKNOWN: return "Unknown";
-    case Architecture::X86    : return "x86";
-    case Architecture::X64    : return "x64";
-    case Architecture::ARM32  : return "ARM32";
-    case Architecture::ARM64  : return "ARM64";
+    case UNKNOWN: return "Unknown";
+    case X86    : return "x86";
+    case X64    : return "x64";
+    case ARM32  : return "ARM32";
+    case ARM64  : return "ARM64";
     }
 
     // Should never reach here
-    throw std::logic_error{"Invalid compiler!"};
+    throw fn::EnumValueError{};
   }
 
   [[nodiscard]]
   constexpr auto GET_OPERATING_SYSTEM() -> OperatingSystem
   {
+    // Using declarations
+    using enum Compiler;
+
     switch (GET_COMPILER())
     {
-    case Compiler::UNKNOWN: return OperatingSystem::UNKNOWN;
-    case Compiler::MSVC:
-    case Compiler::CLANG:
-    case Compiler::GCC:
+    case UNKNOWN: return OperatingSystem::UNKNOWN;
+    case MSVC:
+    case CLANG:
+    case GCC:
     {
 #if defined(_WIN32)
       return OperatingSystem::WINDOWS;
@@ -270,23 +287,26 @@ namespace IO::_internal
     }
 
     // Should never reach here
-    throw std::logic_error{"Invalid compiler!"};
+    throw fn::EnumValueError{};
   }
 
   [[nodiscard]]
   constexpr auto GET_OPERATING_SYSTEM_STR(OperatingSystem operatingSystem
   ) -> fn::cstr
   {
+    // Using declarations
+    using enum OperatingSystem;
+
     switch (operatingSystem)
     {
-    case OperatingSystem::UNKNOWN: return "Unknown";
-    case OperatingSystem::WINDOWS: return "Windows";
-    case OperatingSystem::MACOS  : return "macOS";
-    case OperatingSystem::LINUX  : return "Linux";
+    case UNKNOWN: return "Unknown";
+    case WINDOWS: return "Windows";
+    case MACOS  : return "macOS";
+    case LINUX  : return "Linux";
     }
 
     // Should never reach here
-    throw std::logic_error{"Invalid compiler!"};
+    throw fn::EnumValueError{};
   }
 
 } // namespace IO::_internal

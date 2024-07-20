@@ -67,10 +67,10 @@ try
   }
 
   // Return success
-  return fn::TERMINATE_SUCCESS;
+  return fn::EXIT_SUCCESS_CODE;
 }
 catch (...)
 {
   // Return failure
-  return fn::TERMINATE_FAILURE;
+  return fn::EXIT_FAILURE_CODE;
 }

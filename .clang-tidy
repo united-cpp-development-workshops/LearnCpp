@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
 # |                        C++ Clang-Tidy Configuration                        |
-# |                              Version 24.07.11                              |
+# |                              Version 24.07.20                              |
 # +----------------------------------------------------------------------------+
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Tidy, a static analysis tool from the |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-07-11                                                  |
+# | Date         : 2024-07-20                                                  |
 # +----------------------------------------------------------------------------+
 ---
 # ExcludeHeaderFilterRegex: // v19
@@ -637,7 +637,7 @@ CheckOptions:
   - key: readability-identifier-naming.ConceptCase
     value: "CamelCase"
   - key: readability-identifier-naming.ConceptPrefix
-    value: ""
+    value: "Is"
 # - key: readability-identifier-naming.ConceptIgnoredRegexp // None
   - key: readability-identifier-naming.ConceptSuffix
     value: ""
@@ -654,11 +654,15 @@ CheckOptions:
     value: "Off"
 # -
 # Constant Member Naming
-# - key: readability-identifier-naming.ConstantMemberCase            // Unused
-# - key: readability-identifier-naming.ConstantMemberPrefix          // Unused
+  - key: readability-identifier-naming.ConstantMemberCase
+    value: "camelBack"
+  - key: readability-identifier-naming.ConstantMemberPrefix
+    value: "m_"
 # - key: readability-identifier-naming.ConstantMemberIgnoredRegexp   // None
-# - key: readability-identifier-naming.ConstantMemberSuffix          // Unused
-# - key: readability-identifier-naming.ConstantMemberHungarianPrefix // Unused
+  - key: readability-identifier-naming.ConstantMemberSuffix
+    value: ""
+  - key: readability-identifier-naming.ConstantMemberHungarianPrefix
+    value: "Off"
 # -
 # Constant Parameter Naming
   - key: readability-identifier-naming.ConstantParameterCase

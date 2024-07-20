@@ -11,8 +11,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(SolutionDir).build.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <!-- Targets -->
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <!-- Items -->
   <ItemGroup>
     <ClCompile Include="source\IO\_internal\parsers.cpp" />
@@ -28,13 +26,16 @@
     <ClCompile Include="source\IO\io.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Foundation\Support\_internal\concepts.hpp" />
-    <ClInclude Include="source\Foundation\Support\narrowing.ipp" />
-    <ClInclude Include="source\Foundation\Support\NarrowingError.ipp" />
+    <ClInclude Include="source\Foundation\concepts.hpp" />
+    <ClInclude Include="source\Foundation\errors.hpp" />
+    <ClInclude Include="source\Foundation\_internal\Exception\Name.ipp" />
+    <ClInclude Include="source\Foundation\_internal\Exception\Exception.ipp" />
+    <ClInclude Include="source\Foundation\Support\narrow.ipp" />
     <ClInclude Include="source\Foundation\types.hpp" />
+    <ClInclude Include="source\Foundation\_internal\Exception\_internal\concepts.hpp" />
     <ClInclude Include="source\IO\io.hpp" />
     <ClInclude Include="source\IO\_internal\messages.ipp" />
-    <ClInclude Include="source\IO\_internal\parsers.ipp" />
+    <ClInclude Include="source\IO\_internal\parsers.hpp" />
     <ClInclude Include="source\IO\_internal\platform.ipp" />
     <ClInclude Include="source\IO\_internal\prints.hpp" />
     <ClInclude Include="source\IO\_internal\responses.hpp" />
@@ -44,4 +45,6 @@
     <ClInclude Include="source\pch.hpp" />
     <ClInclude Include="source\Foundation\constants.hpp" />
   </ItemGroup>
+  <!-- Targets -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

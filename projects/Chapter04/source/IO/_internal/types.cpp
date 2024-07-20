@@ -13,12 +13,15 @@ namespace IO::_internal
   // NOLINTNEXTLINE(readability-function-size)
   auto printBriefTypeInfo(Option type) -> fn::none
   {
+    // Using declarations
+    using enum Option;
+
     std::cout << "   EXPLORE: '";
 
     // NOLINTBEGIN(clang-diagnostic-switch-enum)
     switch (type)
     {
-    case Option::T_NONE:
+    case T_NONE:
     {
       std::cout << "void'\n\n";
 
@@ -28,7 +31,7 @@ namespace IO::_internal
       std::cout << "     - An incomplete type that cannot be completed.\n";
       return;
     }
-    case Option::T_IPTR:
+    case T_IPTR:
     {
       std::cout << "std::intptr_t' (optional)\n\n";
 
@@ -39,7 +42,7 @@ namespace IO::_internal
                    "to 'void'.\n";
       return;
     }
-    case Option::T_UPTR:
+    case T_UPTR:
     {
       std::cout << "std::uintptr_t' (optional)\n\n";
 
@@ -50,7 +53,7 @@ namespace IO::_internal
                    "'void'.\n";
       return;
     }
-    case Option::T_NPTR:
+    case T_NPTR:
     {
       std::cout << "std::nullptr_t'\n\n";
 
@@ -62,7 +65,7 @@ namespace IO::_internal
                    "member type.\n";
       return;
     }
-    case Option::T_BLN:
+    case T_BLN:
     {
       std::cout << "bool'\n\n";
 
@@ -73,7 +76,7 @@ namespace IO::_internal
       std::cout << "     - The size of 'bool' is implementation defined.\n";
       return;
     }
-    case Option::T_I8:
+    case T_I8:
     {
       std::cout << "std::int8_t' (optional)\n\n";
 
@@ -85,7 +88,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I16:
+    case T_I16:
     {
       std::cout << "std::int16_t' (optional)\n\n";
 
@@ -97,7 +100,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I32:
+    case T_I32:
     {
       std::cout << "std::int32_t' (optional)\n\n";
 
@@ -109,7 +112,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I64:
+    case T_I64:
     {
       std::cout << "std::int64_t' (optional)\n\n";
 
@@ -121,7 +124,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_U8:
+    case T_U8:
     {
       std::cout << "std::uint8_t' (optional)\n\n";
 
@@ -132,7 +135,7 @@ namespace IO::_internal
         << "     - Unsigned integer type with the width of exactly '8' bits.\n";
       return;
     }
-    case Option::T_U16:
+    case T_U16:
     {
       std::cout << "std::uint16_t' (optional)\n\n";
 
@@ -143,7 +146,7 @@ namespace IO::_internal
                    "'16' bits.\n";
       return;
     }
-    case Option::T_U32:
+    case T_U32:
     {
       std::cout << "std::uint32_t' (optional)\n\n";
 
@@ -154,7 +157,7 @@ namespace IO::_internal
                    "'32' bits.\n";
       return;
     }
-    case Option::T_U64:
+    case T_U64:
     {
       std::cout << "std::uint64_t' (optional)\n\n";
 
@@ -165,7 +168,7 @@ namespace IO::_internal
                    "'64' bits.\n";
       return;
     }
-    case Option::T_I8L:
+    case T_I8L:
     {
       std::cout << "std::int_least8_t'\n\n";
 
@@ -177,7 +180,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I16L:
+    case T_I16L:
     {
       std::cout << "std::int_least16_t'\n\n";
 
@@ -189,7 +192,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I32L:
+    case T_I32L:
     {
       std::cout << "std::int_least32_t'\n\n";
 
@@ -201,7 +204,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I64L:
+    case T_I64L:
     {
       std::cout << "std::int_least64_t'\n\n";
 
@@ -213,7 +216,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_U8L:
+    case T_U8L:
     {
       std::cout << "std::uint_least8_t'\n\n";
 
@@ -224,7 +227,7 @@ namespace IO::_internal
                    "least '8' bits.\n";
       return;
     }
-    case Option::T_U16L:
+    case T_U16L:
     {
       std::cout << "std::uint_least16_t'\n\n";
 
@@ -235,7 +238,7 @@ namespace IO::_internal
                    "least '16' bits.\n";
       return;
     }
-    case Option::T_U32L:
+    case T_U32L:
     {
       std::cout << "std::uint_least32_t'\n\n";
 
@@ -246,7 +249,7 @@ namespace IO::_internal
                    "least '32' bits.\n";
       return;
     }
-    case Option::T_U64L:
+    case T_U64L:
     {
       std::cout << "std::uint_least64_t'\n\n";
 
@@ -257,7 +260,7 @@ namespace IO::_internal
                    "least '64' bits.\n";
       return;
     }
-    case Option::T_I8F:
+    case T_I8F:
     {
       std::cout << "std::int_fast8_t'\n\n";
 
@@ -269,7 +272,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I16F:
+    case T_I16F:
     {
       std::cout << "std::int_fast16_t'\n\n";
 
@@ -281,7 +284,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I32F:
+    case T_I32F:
     {
       std::cout << "std::int_fast32_t'\n\n";
 
@@ -293,7 +296,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_I64F:
+    case T_I64F:
     {
       std::cout << "std::int_fast64_t'\n\n";
 
@@ -305,7 +308,7 @@ namespace IO::_internal
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
-    case Option::T_U8F:
+    case T_U8F:
     {
       std::cout << "std::uint_fast8_t'\n\n";
 
@@ -316,7 +319,7 @@ namespace IO::_internal
                    "least '8' bits.\n";
       return;
     }
-    case Option::T_U16F:
+    case T_U16F:
     {
       std::cout << "std::uint_fast16_t'\n\n";
 
@@ -327,7 +330,7 @@ namespace IO::_internal
                    "least '16' bits.\n";
       return;
     }
-    case Option::T_U32F:
+    case T_U32F:
     {
       std::cout << "std::uint_fast32_t'\n\n";
 
@@ -338,7 +341,7 @@ namespace IO::_internal
                    "least '64' bits.\n";
       return;
     }
-    case Option::T_U64F:
+    case T_U64F:
     {
       std::cout << "std::uint_fast64_t'\n\n";
 
@@ -349,7 +352,7 @@ namespace IO::_internal
                    "least '64' bits.\n";
       return;
     }
-    case Option::T_IDEF:
+    case T_IDEF:
     {
       std::cout << "int'\n\n";
 
@@ -359,7 +362,7 @@ namespace IO::_internal
       std::cout << "     - The size of 'int' is implementation defined.\n";
       return;
     }
-    case Option::T_UDEF:
+    case T_UDEF:
     {
       std::cout << "unsigned int'\n\n";
 
@@ -370,7 +373,7 @@ namespace IO::_internal
         << "     - The size of 'unsigned int' is implementation defined.\n";
       return;
     }
-    case Option::T_IMAX:
+    case T_IMAX:
     {
       std::cout << "std::intmax_t'\n\n";
 
@@ -380,7 +383,7 @@ namespace IO::_internal
       std::cout << "     - Maximum-width signed integer.\n\n";
       return;
     }
-    case Option::T_UMAX:
+    case T_UMAX:
     {
       std::cout << "std::uintmax_t'\n\n";
 
@@ -390,7 +393,7 @@ namespace IO::_internal
       std::cout << "     - Maximum-width unsigned integer.\n\n";
       return;
     }
-    case Option::T_SIZE:
+    case T_SIZE:
     {
       std::cout << "std::size_t'\n\n";
 
@@ -401,7 +404,7 @@ namespace IO::_internal
         << "     - Unsigned integer returned by the 'sizeof' operator.\n";
       return;
     }
-    case Option::T_F32:
+    case T_F32:
     {
       std::cout << "float'\n\n";
 
@@ -411,7 +414,7 @@ namespace IO::_internal
       std::cout << "     - Usually IEEE-754 binary32 format.\n";
       return;
     }
-    case Option::T_F64:
+    case T_F64:
     {
       std::cout << "double'\n\n";
 
@@ -421,7 +424,7 @@ namespace IO::_internal
       std::cout << "     - Usually IEEE-754 binary64 format.\n";
       return;
     }
-    case Option::T_FMAX:
+    case T_FMAX:
     {
       std::cout << "long double'\n\n";
 
@@ -432,7 +435,7 @@ namespace IO::_internal
         << "     - Does not necessarily map to types mandated by IEEE-754.\n";
       return;
     }
-    case Option::T_C8:
+    case T_C8:
     {
       std::cout << "char8_t'\n\n";
 
@@ -443,7 +446,7 @@ namespace IO::_internal
                    "'unsigned char'.\n";
       return;
     }
-    case Option::T_C16:
+    case T_C16:
     {
       std::cout << "char16_t'\n\n";
 
@@ -454,7 +457,7 @@ namespace IO::_internal
                    "'std::uint_least16_t'.\n";
       return;
     }
-    case Option::T_C32:
+    case T_C32:
     {
       std::cout << "char32_t'\n\n";
 
@@ -465,7 +468,7 @@ namespace IO::_internal
                    "'std::uint_least32_t'.\n";
       return;
     }
-    case Option::T_CDEF:
+    case T_CDEF:
     {
       std::cout << "char'\n\n";
 
@@ -477,7 +480,7 @@ namespace IO::_internal
         << "     - The signedness of 'char' is implementation defined.\n";
       return;
     }
-    case Option::T_WDEF:
+    case T_WDEF:
     {
       std::cout << "wchar_t'\n\n";
 
@@ -490,7 +493,7 @@ namespace IO::_internal
     default:
     {
       // Should never reach here
-      throw std::logic_error{"Invalid option!"};
+      std::cout << "   ERROR: In 'explore' command!\n";
     }
     }
     // NOLINTEND(clang-diagnostic-switch-enum)

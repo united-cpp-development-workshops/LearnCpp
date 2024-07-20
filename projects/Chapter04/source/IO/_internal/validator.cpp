@@ -2,10 +2,11 @@
 
 #include "IO/_internal/validator.hpp"
 
+#include "Foundation/errors.hpp"
 #include "Foundation/types.hpp"
 
 #include "IO/_internal/messages.ipp"
-#include "IO/_internal/parsers.ipp"
+#include "IO/_internal/parsers.hpp"
 #include "IO/_internal/prints.hpp"
 #include "IO/io.hpp"
 
@@ -19,26 +20,32 @@ namespace
   [[nodiscard]]
   auto getCommandPriorityOptions(IO::Command command) -> std::set<IO::Option>
   {
+    // Using declarations
+    using enum IO::Command;
+
     switch (command)
     {
-    case IO::Command::HELP:
-    case IO::Command::PLATFORM:
-    case IO::Command::EXPLORE:
-    case IO::Command::COMPARE:
-    case IO::Command::EXIT:
+    case HELP:
+    case PLATFORM:
+    case EXPLORE:
+    case COMPARE:
+    case EXIT:
     {
       return {IO::Option::HELP};
     }
     }
 
     // Should never reach here
-    throw std::logic_error{"Invalid command!"};
+    throw fn::EnumValueError{};
   }
 
   [[nodiscard]]
   auto getCommandRules(IO::Command command
   ) -> std::pair<std::set<IO::Option>, std::pair<fn::u16f, fn::u16f>>
   {
+    // Using declarations
+    using enum IO::Option;
+
     switch (command)
     {
     case IO::Command::HELP:
@@ -51,50 +58,29 @@ namespace
     case IO::Command::PLATFORM:
     {
       return {
-        {IO::Option::COMPILER,
-         IO::Option::LANGUAGE,
-         IO::Option::ARCH,
-         IO::Option::OS},
+        {COMPILER, LANGUAGE, ARCH, OS},
         {{0}, std::numeric_limits<fn::u16f>::max()}
       };
     }
     case IO::Command::EXPLORE:
     {
       return {
-        {IO::Option::T_NONE, IO::Option::T_IPTR, IO::Option::T_UPTR,
-         IO::Option::T_NPTR, IO::Option::T_BLN,  IO::Option::T_I8,
-         IO::Option::T_I16,  IO::Option::T_I32,  IO::Option::T_I64,
-         IO::Option::T_U8,   IO::Option::T_U16,  IO::Option::T_U32,
-         IO::Option::T_U64,  IO::Option::T_I8L,  IO::Option::T_I16L,
-         IO::Option::T_I32L, IO::Option::T_I64L, IO::Option::T_U8L,
-         IO::Option::T_U16L, IO::Option::T_U32L, IO::Option::T_U64L,
-         IO::Option::T_I8F,  IO::Option::T_I16F, IO::Option::T_I32F,
-         IO::Option::T_I64F, IO::Option::T_U8F,  IO::Option::T_U16F,
-         IO::Option::T_U32F, IO::Option::T_U64F, IO::Option::T_IDEF,
-         IO::Option::T_UDEF, IO::Option::T_IMAX, IO::Option::T_UMAX,
-         IO::Option::T_SIZE, IO::Option::T_F32,  IO::Option::T_F64,
-         IO::Option::T_FMAX, IO::Option::T_C8,   IO::Option::T_C16,
-         IO::Option::T_C32,  IO::Option::T_CDEF, IO::Option::T_WDEF},
+        {T_NONE, T_IPTR, T_UPTR, T_NPTR, T_BLN,  T_I8,   T_I16,  T_I32,  T_I64,
+         T_U8,   T_U16,  T_U32,  T_U64,  T_I8L,  T_I16L, T_I32L, T_I64L, T_U8L,
+         T_U16L, T_U32L, T_U64L, T_I8F,  T_I16F, T_I32F, T_I64F, T_U8F,  T_U16F,
+         T_U32F, T_U64F, T_IDEF, T_UDEF, T_IMAX, T_UMAX, T_SIZE, T_F32,  T_F64,
+         T_FMAX, T_C8,   T_C16,  T_C32,  T_CDEF, T_WDEF},
         {{1}, {1}}
       };
     }
     case IO::Command::COMPARE:
     {
       return {
-        {IO::Option::T_NONE, IO::Option::T_IPTR, IO::Option::T_UPTR,
-         IO::Option::T_NPTR, IO::Option::T_BLN,  IO::Option::T_I8,
-         IO::Option::T_I16,  IO::Option::T_I32,  IO::Option::T_I64,
-         IO::Option::T_U8,   IO::Option::T_U16,  IO::Option::T_U32,
-         IO::Option::T_U64,  IO::Option::T_I8L,  IO::Option::T_I16L,
-         IO::Option::T_I32L, IO::Option::T_I64L, IO::Option::T_U8L,
-         IO::Option::T_U16L, IO::Option::T_U32L, IO::Option::T_U64L,
-         IO::Option::T_I8F,  IO::Option::T_I16F, IO::Option::T_I32F,
-         IO::Option::T_I64F, IO::Option::T_U8F,  IO::Option::T_U16F,
-         IO::Option::T_U32F, IO::Option::T_U64F, IO::Option::T_IDEF,
-         IO::Option::T_UDEF, IO::Option::T_IMAX, IO::Option::T_UMAX,
-         IO::Option::T_SIZE, IO::Option::T_F32,  IO::Option::T_F64,
-         IO::Option::T_FMAX, IO::Option::T_C8,   IO::Option::T_C16,
-         IO::Option::T_C32,  IO::Option::T_CDEF, IO::Option::T_WDEF},
+        {T_NONE, T_IPTR, T_UPTR, T_NPTR, T_BLN,  T_I8,   T_I16,  T_I32,  T_I64,
+         T_U8,   T_U16,  T_U32,  T_U64,  T_I8L,  T_I16L, T_I32L, T_I64L, T_U8L,
+         T_U16L, T_U32L, T_U64L, T_I8F,  T_I16F, T_I32F, T_I64F, T_U8F,  T_U16F,
+         T_U32F, T_U64F, T_IDEF, T_UDEF, T_IMAX, T_UMAX, T_SIZE, T_F32,  T_F64,
+         T_FMAX, T_C8,   T_C16,  T_C32,  T_CDEF, T_WDEF},
         {{2}, std::numeric_limits<fn::u16f>::max()}
       };
     }
@@ -108,7 +94,7 @@ namespace
     }
 
     // Should never reach here
-    throw std::logic_error{"Invalid command!"};
+    throw fn::EnumValueError{};
   }
 } // namespace
 
@@ -164,9 +150,9 @@ namespace IO::_internal
         else if (commandOptionFound)
         {
           // Print warning message
-          printInputWarning(
-            GET_DISCARDED_OPTION_BY_LIMIT_MSG(GET_OPTION_STR(commandOption))
-          );
+          printInputWarning(GET_DISCARDED_OPTION_BY_LIMIT_MSG(
+            getOptionMap().find(commandOption)->second
+          ));
 
           // Remove command option from options
           options.erase(commandOption);
@@ -177,7 +163,9 @@ namespace IO::_internal
       if (sanitizedOptions.size() < countLimits.first)
       {
         // Print warning message
-        printInputError(GET_INSUFFICIENT_OPTIONS_MSG(GET_COMMAND_STR(command)));
+        printInputError(
+          GET_INSUFFICIENT_OPTIONS_MSG(getCommandMap().find(command)->second)
+        );
 
         // Return false
         return false;
@@ -188,7 +176,9 @@ namespace IO::_internal
     for (const auto& option : options)
     {
       // Print warning message
-      printInputWarning(GET_DISCARDED_OPTION_MSG(GET_OPTION_STR(option)));
+      printInputWarning(
+        GET_DISCARDED_OPTION_MSG(getOptionMap().find(option)->second)
+      );
     }
 
     // Move sanitized options to options and return true

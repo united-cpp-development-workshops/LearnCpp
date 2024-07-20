@@ -83,6 +83,7 @@ AllowShortIfStatementsOnASingleLine: WithoutElse
 AllowShortLambdasOnASingleLine: Empty
 AllowShortLoopsOnASingleLine: true
 AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: true
 # AttributeMacros: // Unused
 BinPackArguments: false
 BinPackParameters: false

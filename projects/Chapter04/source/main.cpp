@@ -27,7 +27,7 @@ try
     if (not optional.has_value()) { continue; }
 
     // Destructure input
-    const auto [command, options]{optional.value()};
+    const auto& [command, options]{optional.value()};
 
     // Exit if command is 'exit' and has no options
     if (command == IO::Command::EXIT and options.empty()) { break; }
@@ -37,10 +37,10 @@ try
   }
 
   // Return success
-  return fn::TERMINATE_SUCCESS;
+  return fn::EXIT_SUCCESS_CODE;
 }
 catch (...)
 {
   // Return failure
-  return fn::TERMINATE_FAILURE;
+  return fn::EXIT_FAILURE_CODE;
 }

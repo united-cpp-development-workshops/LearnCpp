@@ -11,8 +11,6 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(SolutionDir).build.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
-  <!-- Targets -->
-  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <!-- Items -->
   <ItemGroup>
     <ClCompile Include="source\main.cpp" />
@@ -34,4 +32,6 @@
     <ClInclude Include="source\Math\math.hpp" />
     <ClInclude Include="source\pch.hpp" />
   </ItemGroup>
+  <!-- Targets -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
 </Project>

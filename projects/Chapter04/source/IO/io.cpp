@@ -5,7 +5,7 @@
 #include "Foundation/types.hpp"
 
 #include "IO/_internal/messages.ipp"
-#include "IO/_internal/parsers.ipp"
+#include "IO/_internal/parsers.hpp"
 #include "IO/_internal/prints.hpp"
 #include "IO/_internal/responses.hpp"
 #include "IO/_internal/utilities.hpp"
@@ -107,40 +107,40 @@ namespace IO
   auto printResponse(Command command, const std::set<Option>& options)
     -> fn::none
   {
+    // Using declarations
+    using enum Command;
+
     // Print one empty line
     std::cout << '\n';
 
     // Respond based on command
     switch (command)
     {
-    case Command::HELP:
+    case HELP:
     {
       _internal::helpResponse(options);
       return;
     }
-    case Command::PLATFORM:
+    case PLATFORM:
     {
       _internal::platformResponse(options);
       return;
     }
-    case Command::EXPLORE:
+    case EXPLORE:
     {
       _internal::exploreResponse(options);
       return;
     }
-    case Command::COMPARE:
+    case COMPARE:
     {
       _internal::compareResponse(options);
       return;
     }
-    case Command::EXIT:
+    case EXIT:
     {
       _internal::exitResponse(options);
       return;
     }
     }
-
-    // Should never reach here
-    throw std::logic_error{"Invalid command!"};
   }
 } // namespace IO

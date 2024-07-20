@@ -53,13 +53,7 @@
     <ClInclude Include="source\Foundation\constants.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\Support\NarrowingError.ipp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\Support\_internal\concepts.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\Support\narrowing.ipp">
+    <ClInclude Include="source\Foundation\Support\narrow.ipp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\IO\io.hpp">
@@ -71,7 +65,7 @@
     <ClInclude Include="source\IO\_internal\prints.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\IO\_internal\parsers.ipp">
+    <ClInclude Include="source\IO\_internal\parsers.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\IO\_internal\messages.ipp">
@@ -87,6 +81,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\IO\_internal\types.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Foundation\errors.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Foundation\_internal\Exception\Exception.ipp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Foundation\_internal\Exception\Name.ipp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Foundation\concepts.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Foundation\_internal\Exception\_internal\concepts.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
