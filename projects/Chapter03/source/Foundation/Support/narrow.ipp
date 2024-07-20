@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Foundation/Support/NarrowingError.ipp"
-#include "Foundation/Support/_internal/concepts.hpp"
+#include "Foundation/concepts.hpp"
+#include "Foundation/errors.hpp"
 #include "Foundation/types.hpp"
 
-namespace fn::inline Support
+namespace fn::Support
 {
   /**
    * @brief Implementation of Guidelines Support Library's @b narrow function
@@ -14,9 +14,9 @@ namespace fn::inline Support
    * @tparam From The type to cast from.
    * @returns The casted value.
    * @throws NarrowingError If the value or sign changed during the cast.
-   * @warning Must be preferred over static_cast for narrowing conversions.
+   * @attention Must be preferred over static_cast for narrowing conversions.
    */
-  template <_internal::Arithmetic To, _internal::Arithmetic From>
+  template <IsArithmetic To, IsArithmetic From>
   constexpr auto narrow_cast(From value) -> To;
 
   /**
@@ -27,21 +27,22 @@ namespace fn::inline Support
    * @tparam From The type to cast from.
    * @returns The casted value.
    * @throws NarrowingError If the value changed during the cast.
-   * @warning Must be preferred over static_cast for narrowing conversions.
+   * @attention Must be preferred over static_cast for narrowing conversions.
    */
-  template <_internal::NonArithmetic To, _internal::NonArithmetic From>
+  template <IsNonArithmetic To, IsNonArithmetic From>
   constexpr auto narrow_cast(From value) -> To;
-} // namespace fn::inline Support
+} // namespace fn::Support
 
 /*----------------------------------------------------------------------------*\
-*| >>>>>>>>>>>>>>>>>>>>>>>>>>>>> Implementation <<<<<<<<<<<<<<<<<<<<<<<<<<<<< |*
+*| <<<<<<<<<<<<<<<<<<<<<<<<<<<<< Implementation >>>>>>>>>>>>>>>>>>>>>>>>>>>>> |*
 \*----------------------------------------------------------------------------*/
 
-namespace fn::inline Support
+namespace fn::Support
 {
+#pragma warning(push)
 #pragma warning(disable : 26'467 26'472)
 
-  template <_internal::Arithmetic To, _internal::Arithmetic From>
+  template <IsArithmetic To, IsArithmetic From>
   constexpr auto narrow_cast(From value) -> To
   {
     // Check if signedness is different
@@ -62,7 +63,7 @@ namespace fn::inline Support
     return castedValue;
   }
 
-  template <_internal::NonArithmetic To, _internal::NonArithmetic From>
+  template <IsNonArithmetic To, IsNonArithmetic From>
   constexpr auto narrow_cast(From value) -> To
   {
     // Static cast the value
@@ -75,5 +76,18 @@ namespace fn::inline Support
     return castedValue;
   }
 
-#pragma warning(default : 26'467 26'472)
-} // namespace fn::inline Support
+#pragma warning(pop)
+} // namespace fn::Support
+
+/*----------------------------------------------------------------------------*\
+*| <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Promotes >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> |*
+\*----------------------------------------------------------------------------*/
+
+// NOLINTBEGIN(misc-unused-using-decls)
+
+namespace fn
+{
+  using Support::narrow_cast;
+} // namespace fn
+
+// NOLINTEND(misc-unused-using-decls)
