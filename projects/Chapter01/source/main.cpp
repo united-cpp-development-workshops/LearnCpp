@@ -1,9 +1,11 @@
 #include "pch.hpp"
 
-#include "Foundation/constants.hpp"
-#include "Foundation/types.hpp"
+#include <Foundation/constants.hpp>
+#include <Foundation/types.hpp>
+#include <Foundation/Utility/log.ipp>
+#include <Foundation/Utility/what.ipp>
 
-#include <cassert>
+#include <exception>
 #include <iostream>
 
 namespace
@@ -36,11 +38,15 @@ try
   fn::i32l height{};
   std::cin >> height;
 
+  // If width or height is 0 then error out
+  if (width == 0 or height == 0)
+  {
+    std::cout << "Witdh or height can't be zero!\n";
+    return fn::EXIT_FAILURE_CODE;
+  }
+
   // Calculate greatest common divisor
   const auto gcd{GCD(width, height)};
-
-  // Assert that the greatest common divisor is not zero
-  assert(gcd != 0);
 
   // Calculate and print the aspect ratio
   std::cout << "Aspect Ratio of " << width << "x" << height << " is "
@@ -49,8 +55,19 @@ try
   // Return success
   return fn::EXIT_SUCCESS_CODE;
 }
+catch (const std::exception& exception)
+{
+  // Log exception
+  fn::elog(fn::WHAT(exception));
+
+  // Return failure
+  return fn::EXIT_FAILURE_CODE;
+}
 catch (...)
 {
+  // Log unknown exception
+  fn::elog(fn::UNKNOWN_EXCEPTION);
+
   // Return failure
   return fn::EXIT_FAILURE_CODE;
 }

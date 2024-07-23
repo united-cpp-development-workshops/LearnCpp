@@ -1,8 +1,11 @@
 #include "pch.hpp"
 
-#include "Foundation/constants.hpp"
-#include "Foundation/types.hpp"
+#include <Foundation/constants.hpp>
+#include <Foundation/types.hpp>
+#include <Foundation/Utility/log.ipp>
+#include <Foundation/Utility/what.ipp>
 
+#include <exception>
 #include <iostream>
 #include <string>
 
@@ -16,9 +19,17 @@ namespace
   constexpr fn::i32l CPP23_CODE{202'302L};
   constexpr fn::i32l CPP26_CODE{202'612L};
 
-  constexpr auto GET_VERSION_STRING(const fn::i32l versionCode) -> std::string
+  constexpr auto GET_VERSION_STRING() -> std::string
   {
-    switch (versionCode)
+    /*--< Note >---------------------------------------------------------------*
+    |   The __cplusplus macro (defined by the compiler) indicates the version  |
+    | of the C++ standard that is being used.                                  |
+    |   In MSVC, by default, the __cpluslplus macro is not set to the correct  |
+    | value. To fix this issue, you need to add the following flag as argument |
+    | to the compiler's command-line: /Zc:__cplusplus.                         |
+    *-------------------------------------------------------------------------*/
+
+    switch (__cplusplus)
     {
     case CPPRE_CODE: return "Pre-C++11";
     case CPP11_CODE: return "C++11";
@@ -35,17 +46,25 @@ namespace
 auto main() noexcept -> fn::idef
 try
 {
-  // Get cpp standard version
-  constexpr fn::i32l CPP_STANDARD{__cplusplus};
-
   // Print the cpp standard version
-  std::cout << "C++ Standard: " << GET_VERSION_STRING(CPP_STANDARD) << '\n';
+  std::cout << "C++ Standard: " << GET_VERSION_STRING() << '\n';
 
   // Return success
   return fn::EXIT_SUCCESS_CODE;
 }
+catch (const std::exception& exception)
+{
+  // Log exception
+  fn::elog(fn::WHAT(exception));
+
+  // Return failure
+  return fn::EXIT_FAILURE_CODE;
+}
 catch (...)
 {
+  // Log unknown exception
+  fn::elog(fn::UNKNOWN_EXCEPTION);
+
   // Return failure
   return fn::EXIT_FAILURE_CODE;
 }

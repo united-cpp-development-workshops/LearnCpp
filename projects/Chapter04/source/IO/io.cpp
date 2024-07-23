@@ -2,14 +2,14 @@
 
 #include "IO/io.hpp"
 
-#include "Foundation/types.hpp"
-
 #include "IO/_internal/messages.ipp"
 #include "IO/_internal/parsers.hpp"
 #include "IO/_internal/prints.hpp"
 #include "IO/_internal/responses.hpp"
 #include "IO/_internal/utilities.hpp"
 #include "IO/_internal/validator.hpp"
+
+#include <Foundation/types.hpp>
 
 #include <algorithm>
 #include <iostream>
@@ -43,8 +43,7 @@ namespace IO
     std::cout << " [>]: ";
   }
 
-  [[nodiscard]]
-  auto readInput() -> std::string
+  [[nodiscard]] auto readInput() -> std::string
   {
     // Reset input buffer
     _internal::resetInputBuffer();
@@ -57,8 +56,7 @@ namespace IO
     return input;
   }
 
-  [[nodiscard]]
-  auto parseInput(std::string& input
+  [[nodiscard]] auto parseInput(std::string& input
   ) -> std::optional<std::pair<Command, std::set<Option>>>
   {
     // Check if input is empty

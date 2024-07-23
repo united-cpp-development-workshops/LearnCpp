@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Foundation/types.hpp"
+#include <Foundation/types.hpp>
 
 #include <ostream>
 #include <string>
@@ -26,14 +26,10 @@ namespace Game
     Card(std::string&& suit, fn::cdef rank, fn::u8f value) noexcept;
 
     // Accessors
-    [[nodiscard]]
-    auto getSuit() const noexcept -> const std::string&;
-    [[nodiscard]]
-    auto getRank() const noexcept -> fn::cdef;
-    [[nodiscard]]
-    auto getValue() const noexcept -> fn::u16f;
-    [[nodiscard]]
-    auto isAce() const noexcept -> fn::bln;
+    [[nodiscard]] auto getSuit() const noexcept -> const std::string&;
+    [[nodiscard]] auto getRank() const noexcept -> fn::cdef;
+    [[nodiscard]] auto getValue() const noexcept -> fn::u16f;
+    [[nodiscard]] auto isAce() const noexcept -> fn::bln;
 
     // Mutators
     auto setValue(fn::u8f value) noexcept -> fn::none;

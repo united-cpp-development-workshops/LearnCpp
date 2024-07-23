@@ -2,8 +2,8 @@
 
 #include "Math/math.ipp"
 
-#include "Foundation/Support/narrowing.ipp"
-#include "Foundation/types.hpp"
+#include <Foundation/Support/narrow.ipp>
+#include <Foundation/types.hpp>
 
 #include <algorithm>
 #include <cmath>
@@ -41,7 +41,7 @@ auto Math::generateChartFeed(
   // Count the frequency of each interval
   std::ranges::for_each(
     values,
-    [&](fn::i32f value) -> fn::none
+    [&](fn::i32f value) noexcept -> fn::none
     {
       // Find the key in the frequency map that is closest to the value
       const auto key{*std::ranges::min_element(

@@ -1,9 +1,9 @@
 #include "pch.hpp"
 
-#include "Foundation/constants.hpp"
-#include "Foundation/types.hpp"
-
 #include "IO/io.hpp"
+
+#include <Foundation/constants.hpp>
+#include <Foundation/types.hpp>
 
 auto main() noexcept -> fn::idef
 try

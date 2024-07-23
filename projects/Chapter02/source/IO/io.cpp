@@ -2,11 +2,11 @@
 
 #include "IO/io.hpp"
 
-#include "Foundation/Support/narrowing.ipp"
-#include "Foundation/types.hpp"
-
 #include "Math/math.ipp"
 #include "Utility/utility.hpp"
+
+#include <Foundation/Support/narrow.ipp>
+#include <Foundation/types.hpp>
 
 #include <algorithm>
 #include <cmath>
@@ -19,6 +19,7 @@
 #include <optional>
 #include <ranges>
 #include <string>
+#include <string_view>
 #include <tuple>
 #include <utility>
 #include <vector>
@@ -152,7 +153,7 @@ namespace
       const auto& iteratorToNextColumnNeedingGrid{std::ranges::find_if(
         frequencyMap.find(x),
         frequencyMap.end(),
-        [&](const auto& pair) -> fn::bln
+        [&](const auto& pair) noexcept -> fn::bln
         {
           return pair.second >= y and pair.second < y + yAxisInterval;
         }

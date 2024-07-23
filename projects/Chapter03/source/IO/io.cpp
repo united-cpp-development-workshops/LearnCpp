@@ -2,10 +2,10 @@
 
 #include "IO/io.hpp"
 
-#include "Foundation/types.hpp"
-
 #include "Game/game.ipp"
 #include "Math/math.hpp"
+
+#include <Foundation/types.hpp>
 
 #include <cctype>
 #include <iostream>

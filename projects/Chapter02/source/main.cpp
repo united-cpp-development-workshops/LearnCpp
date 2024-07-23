@@ -1,13 +1,16 @@
 #include "pch.hpp"
 
-#include "Foundation/constants.hpp"
-#include "Foundation/types.hpp"
-
 #include "IO/io.hpp"
 #include "Math/math.ipp"
 #include "Random/random.hpp"
 #include "Utility/utility.hpp"
 
+#include <Foundation/constants.hpp>
+#include <Foundation/types.hpp>
+#include <Foundation/Utility/log.ipp>
+#include <Foundation/Utility/what.ipp>
+
+#include <exception>
 #include <map>
 #include <tuple>
 #include <utility>
@@ -69,8 +72,19 @@ try
   // Return success
   return fn::EXIT_SUCCESS_CODE;
 }
+catch (const std::exception& exception)
+{
+  // Log exception
+  fn::elog(fn::WHAT(exception));
+
+  // Return failure
+  return fn::EXIT_FAILURE_CODE;
+}
 catch (...)
 {
+  // Log unknown exception
+  fn::elog(fn::UNKNOWN_EXCEPTION);
+
   // Return failure
   return fn::EXIT_FAILURE_CODE;
 }

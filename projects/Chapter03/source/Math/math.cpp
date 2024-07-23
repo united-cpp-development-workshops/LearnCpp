@@ -2,9 +2,9 @@
 
 #include "Math/math.hpp"
 
-#include "Foundation/types.hpp"
-
 #include "Game/game.ipp"
+
+#include <Foundation/types.hpp>
 
 #include <numeric>
 #include <vector>

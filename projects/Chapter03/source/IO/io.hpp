@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Foundation/types.hpp"
-
 #include "Game/game.ipp"
+
+#include <Foundation/types.hpp>
 
 #include <string>
 #include <vector>

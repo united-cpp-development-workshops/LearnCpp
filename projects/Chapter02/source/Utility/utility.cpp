@@ -2,10 +2,10 @@
 
 #include "Utility/utility.hpp"
 
-#include "Foundation/types.hpp"
-
 #include "IO/io.hpp"
 #include "Math/math.ipp"
+
+#include <Foundation/types.hpp>
 
 #include <algorithm>
 #include <map>

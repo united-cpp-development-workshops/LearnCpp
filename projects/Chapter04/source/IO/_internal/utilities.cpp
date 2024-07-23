@@ -2,7 +2,7 @@
 
 #include "IO/_internal/utilities.hpp"
 
-#include "Foundation/types.hpp"
+#include <Foundation/types.hpp>
 
 #include <cctype>
 #include <iostream>
@@ -10,8 +10,8 @@
 
 namespace IO::_internal
 {
-  [[nodiscard]]
-  auto isNotAllowedCharacter(fn::cdef character) noexcept -> fn::bln
+  [[nodiscard]] auto isNotAllowedCharacter(fn::cdef character
+  ) noexcept -> fn::bln
   {
     // Check if character is allowed
     return std::isalnum(character) == 0 and character != '-'

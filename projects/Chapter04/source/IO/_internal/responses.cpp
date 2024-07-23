@@ -2,12 +2,12 @@
 
 #include "IO/_internal/responses.hpp"
 
-#include "Foundation/types.hpp"
-
 #include "IO/_internal/platform.ipp"
 #include "IO/_internal/prints.hpp"
 #include "IO/_internal/types.hpp"
 #include "IO/io.hpp"
+
+#include <Foundation/types.hpp>
 
 #include <iostream>
 #include <set>

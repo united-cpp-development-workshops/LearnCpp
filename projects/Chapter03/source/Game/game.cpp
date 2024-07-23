@@ -2,11 +2,11 @@
 
 #include "Game/game.ipp"
 
-#include "Foundation/Support/narrow.ipp"
-#include "Foundation/types.hpp"
-
 #include "IO/io.hpp"
 #include "Math/math.hpp"
+
+#include <Foundation/Support/narrow.ipp>
+#include <Foundation/types.hpp>
 
 #include <algorithm>
 #include <chrono>
@@ -83,8 +83,7 @@ namespace
     }
   }
 
-  [[nodiscard]]
-  auto playPlayerRound(
+  [[nodiscard]] auto playPlayerRound(
     std::vector<Game::Card>& deck, std::vector<Game::Card>& hand
   ) -> std::pair<fn::u16f, fn::bln>
   {
@@ -143,8 +142,7 @@ namespace
     }
   }
 
-  [[nodiscard]]
-  auto playDealerRound(
+  [[nodiscard]] auto playDealerRound(
     std::vector<Game::Card>& deck, std::vector<Game::Card>& hand
   ) -> std::pair<fn::u16f, fn::bln>
   {
@@ -301,29 +299,22 @@ namespace Game
   {}
 
   // Accessors
-  [[nodiscard]]
-  auto Card::getSuit() const noexcept -> const std::string&
+  [[nodiscard]] auto Card::getSuit() const noexcept -> const std::string&
   {
     return m_suit;
   }
 
-  [[nodiscard]]
-  auto Card::getRank() const noexcept -> fn::cdef
+  [[nodiscard]] auto Card::getRank() const noexcept -> fn::cdef
   {
     return m_rank;
   }
 
-  [[nodiscard]]
-  auto Card::getValue() const noexcept -> fn::u16f
+  [[nodiscard]] auto Card::getValue() const noexcept -> fn::u16f
   {
     return m_value;
   }
 
-  [[nodiscard]]
-  auto Card::isAce() const noexcept -> fn::bln
-  {
-    return m_isAce;
-  }
+  [[nodiscard]] auto Card::isAce() const noexcept -> fn::bln { return m_isAce; }
 
   // Mutators
   auto Card::setValue(fn::u8f value) noexcept -> fn::none { m_value = value; }

@@ -47,10 +47,10 @@
     <ClInclude Include="source\Utility\utility.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\pch.hpp">
+    <ClInclude Include="source\Math\_internal\base.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Math\_internal\base.hpp">
+    <ClInclude Include="source\pch.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

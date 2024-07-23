@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Foundation/types.hpp"
+#include <Foundation/types.hpp>
 
 #include <optional>
 #include <set>
@@ -69,12 +69,10 @@ namespace IO
     T_WDEF
   };
 
-  auto printIntroduction() -> fn::none;
-  auto printPrompt() -> fn::none;
-  [[nodiscard]]
-  auto readInput() -> std::string;
-  [[nodiscard]]
-  auto parseInput(std::string& input
+  auto               printIntroduction() -> fn::none;
+  auto               printPrompt() -> fn::none;
+  [[nodiscard]] auto readInput() -> std::string;
+  [[nodiscard]] auto parseInput(std::string& input
   ) -> std::optional<std::pair<Command, std::set<Option>>>;
   auto printResponse(Command command, const std::set<Option>& options)
     -> fn::none;

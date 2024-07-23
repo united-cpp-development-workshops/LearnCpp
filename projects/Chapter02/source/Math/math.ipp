@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Foundation/types.hpp"
-
 #include "Math/_internal/base.hpp"
+
+#include <Foundation/types.hpp>
 
 #include <map>
 #include <utility>
@@ -10,7 +10,7 @@
 
 namespace Math
 {
-  constexpr auto NUMBER_LENGTH(fn::i32f number) -> fn::u16f
+  constexpr auto NUMBER_LENGTH(fn::i32f number) noexcept -> fn::u16f
   {
     // Check if the number is 0
     if (number == 0) { return 1; }

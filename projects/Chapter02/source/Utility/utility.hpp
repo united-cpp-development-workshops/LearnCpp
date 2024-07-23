@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Foundation/types.hpp"
-
 #include "Math/math.ipp"
+
+#include <Foundation/types.hpp>
 
 #include <map>
 #include <optional>

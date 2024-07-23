@@ -1,11 +1,10 @@
 #include "pch.hpp"
 
-#include "Foundation/constants.hpp"
-#include "Foundation/types.hpp"
-
 #include "Game/game.ipp"
 
 #include <consoleapi2.h>
+#include <Foundation/constants.hpp>
+#include <Foundation/types.hpp>
 #include <WinNls.h>
 
 #include <iostream>

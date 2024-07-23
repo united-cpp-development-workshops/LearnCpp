@@ -2,13 +2,13 @@
 
 #include "IO/_internal/validator.hpp"
 
-#include "Foundation/errors.hpp"
-#include "Foundation/types.hpp"
-
 #include "IO/_internal/messages.ipp"
 #include "IO/_internal/parsers.hpp"
 #include "IO/_internal/prints.hpp"
 #include "IO/io.hpp"
+
+#include <Foundation/errors.hpp>
+#include <Foundation/types.hpp>
 
 #include <algorithm>
 #include <limits>
@@ -17,8 +17,8 @@
 
 namespace
 {
-  [[nodiscard]]
-  auto getCommandPriorityOptions(IO::Command command) -> std::set<IO::Option>
+  [[nodiscard]] auto getCommandPriorityOptions(IO::Command command
+  ) -> std::set<IO::Option>
   {
     // Using declarations
     using enum IO::Command;
@@ -39,8 +39,7 @@ namespace
     throw fn::EnumValueError{};
   }
 
-  [[nodiscard]]
-  auto getCommandRules(IO::Command command
+  [[nodiscard]] auto getCommandRules(IO::Command command
   ) -> std::pair<std::set<IO::Option>, std::pair<fn::u16f, fn::u16f>>
   {
     // Using declarations
@@ -100,8 +99,8 @@ namespace
 
 namespace IO::_internal
 {
-  [[nodiscard]]
-  auto validateRequest(Command command, std::set<Option>& options) -> fn::bln
+  [[nodiscard]] auto validateRequest(Command command, std::set<Option>& options)
+    -> fn::bln
   {
     // Create options set for sanitization
     std::set<Option> sanitizedOptions;

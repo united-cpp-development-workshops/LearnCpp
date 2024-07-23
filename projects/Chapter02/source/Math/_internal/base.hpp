@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Foundation/types.hpp"
+#include <Foundation/types.hpp>
 
 namespace Math::_internal
 {
