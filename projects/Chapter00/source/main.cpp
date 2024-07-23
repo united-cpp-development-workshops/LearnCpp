@@ -16,7 +16,7 @@ namespace
   constexpr fn::i32l CPP23_CODE{202'302L};
   constexpr fn::i32l CPP26_CODE{202'612L};
 
-  constexpr auto GET_VERSION_STRING(fn::i32l versionCode) -> std::string
+  constexpr auto GET_VERSION_STRING(const fn::i32l versionCode) -> std::string
   {
     switch (versionCode)
     {

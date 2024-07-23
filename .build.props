@@ -39,8 +39,8 @@
     <ConfigurationType>Application</ConfigurationType>
     <LLVMInstallDir>C:\Program Files\LLVM</LLVMInstallDir>
     <LLVMToolsVersion>18.1.8</LLVMToolsVersion>
-    <OutDir>$(SolutionDir)out\$(MSBuildProjectName)\bin\$(Configuration) - $(Platform)\</OutDir>
-    <IntDir>$(SolutionDir)out\$(MSBuildProjectName)\int\$(Configuration) - $(Platform)\</IntDir>
+    <OutDir>$(MSBuildThisFileDirectory)out\$(MSBuildProjectName)\bin\$(Configuration) - $(Platform)\</OutDir>
+    <IntDir>$(MSBuildThisFileDirectory)out\$(MSBuildProjectName)\int\$(Configuration) - $(Platform)\</IntDir>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <EnableMicrosoftCodeAnalysis>true</EnableMicrosoftCodeAnalysis>
@@ -98,7 +98,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>source;include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>source;include;$(MSBuildThisFileDirectory)modules\Foundation++\projects\Foundation++\source</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>

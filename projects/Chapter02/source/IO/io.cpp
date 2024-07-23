@@ -31,19 +31,22 @@ namespace
     RIGHT
   };
 
-  template <typename Id>
-  requires std::same_as<Id, fn::i32f> or std::same_as<Id, fn::cdef>
-          or std::same_as<Id, fn::cstr>
+  template <typename Type>
+  requires std::same_as<Type, fn::i32f> or std::same_as<Type, fn::cdef>
+          or std::same_as<Type, fn::cstr>
   auto printAligned(
-    const Id& input, fn::cdef paddingSymbol, fn::u16f width, Alignment alignment
+    const Type& input,
+    fn::cdef    paddingSymbol,
+    fn::u16f    width,
+    Alignment   alignment
   ) -> std::ostream&
   {
     // Find the length of the input
     fn::u16f inputLength{};
 
     // Check if the input is a character
-    if constexpr (std::same_as<Id, fn::cdef>) { inputLength = {1}; }
-    else if constexpr (std::same_as<Id, fn::cstr>)
+    if constexpr (std::same_as<Type, fn::cdef>) { inputLength = {1}; }
+    else if constexpr (std::same_as<Type, fn::cstr>)
     {
       // Get the length of input
       inputLength = {fn::narrow_cast<fn::u16f>(std::strlen(input))};
@@ -180,9 +183,12 @@ namespace
     }
   }
 
-  auto zoomOptionHandler(const std::string& option, fn::bln zoomIn)
+  auto zoomOptionHandler(const std::string_view& option, fn::bln zoomIn)
     -> std::optional<IO::Option>
   {
+    // Using declarations
+    using enum IO::Option;
+
     // If directional zoom is requested, the length must be 2
     if (option.length() == 2)
     {
@@ -190,16 +196,14 @@ namespace
       if (option.find('h') != std::string::npos
           or option.find('H') != std::string::npos)
       {
-        return zoomIn ? IO::Option::ZOOM_IN_HORIZONTAL
-                      : IO::Option::ZOOM_OUT_HORIZONTAL;
+        return zoomIn ? ZOOM_IN_HORIZONTAL : ZOOM_OUT_HORIZONTAL;
       }
 
       // Check direction of the zoom
       if (option.find('v') != std::string::npos
           or option.find('V') != std::string::npos)
       {
-        return zoomIn ? IO::Option::ZOOM_IN_VERTICAL
-                      : IO::Option::ZOOM_OUT_VERTICAL;
+        return zoomIn ? ZOOM_IN_VERTICAL : ZOOM_OUT_VERTICAL;
       }
 
       // Wrong input
@@ -211,10 +215,7 @@ namespace
     }
 
     // If non-directional zoom is requested, the length must be 1
-    if (option.length() == 1)
-    {
-      return zoomIn ? IO::Option::ZOOM_IN : IO::Option::ZOOM_OUT;
-    }
+    if (option.length() == 1) { return zoomIn ? ZOOM_IN : ZOOM_OUT; }
 
     // Wrong input
     std::cout
@@ -510,20 +511,24 @@ auto IO::getOptionInput() -> Option
     // Check option input
     if (option.find('+') != std::string::npos)
     {
-      const std::optional<Option> zoomInOpt{zoomOptionHandler(option, true)};
-
       // Check if zoom in option is valid
-      if (zoomInOpt.has_value()) { return zoomInOpt.value(); }
+      if (const auto zoomOutOpt{zoomOptionHandler(option, true)};
+          zoomOutOpt.has_value())
+      {
+        return zoomOutOpt.value();
+      }
       continue;
     }
 
     // Check option input
     if (option.find('-') != std::string::npos)
     {
-      const std::optional<Option> zoomOutOpt{zoomOptionHandler(option, false)};
-
       // Check if zoom in option is valid
-      if (zoomOutOpt.has_value()) { return zoomOutOpt.value(); }
+      if (const auto zoomOutOpt{zoomOptionHandler(option, false)};
+          zoomOutOpt.has_value())
+      {
+        return zoomOutOpt.value();
+      }
       continue;
     }
 
@@ -540,20 +545,23 @@ auto IO::getOptionInput() -> Option
 
 auto IO::printNoFurtherZoom(Utility::Direction direction) -> fn::none
 {
+  // Using declarations
+  using enum Utility::Direction;
+
   std::cout << " [X]: No further zoom ";
   switch (direction)
   {
-  case Utility::Direction::BOTH:
+  case BOTH:
   {
     std::cout << "in any direction is possible.\n";
     break;
   }
-  case Utility::Direction::HORIZONTAL:
+  case HORIZONTAL:
   {
     std::cout << "in horizontal direction is possible.\n";
     break;
   }
-  case Utility::Direction::VERTICAL:
+  case VERTICAL:
   {
     std::cout << "in vertical direction is possible.\n";
     break;

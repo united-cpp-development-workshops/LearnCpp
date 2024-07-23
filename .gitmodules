@@ -1,0 +1,3 @@
+[submodule "modules/Foundation++"]
+  path = modules/Foundation++
+  url = https://github.com/EmrecanKaracayir/FoundationCpp.git
