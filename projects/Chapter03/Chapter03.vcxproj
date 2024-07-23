@@ -9,7 +9,7 @@
   </PropertyGroup>
   <!-- Props -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <Import Project="$(SolutionDir).build.props" />
+  <Import Project="$(ProjectDir)..\..\.build.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <!-- Items -->
   <ItemGroup>
@@ -22,18 +22,16 @@
     <ClCompile Include="source\Math\math.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Foundation\concepts.hpp" />
-    <ClInclude Include="source\Foundation\constants.hpp" />
-    <ClInclude Include="source\Foundation\errors.hpp" />
-    <ClInclude Include="source\Foundation\Support\narrow.ipp" />
-    <ClInclude Include="source\Foundation\types.hpp" />
-    <ClInclude Include="source\Foundation\_internal\Exception\Exception.ipp" />
-    <ClInclude Include="source\Foundation\_internal\Exception\Name.ipp" />
-    <ClInclude Include="source\Foundation\_internal\Exception\_internal\concepts.hpp" />
     <ClInclude Include="source\Game\game.ipp" />
     <ClInclude Include="source\IO\io.hpp" />
     <ClInclude Include="source\Math\math.hpp" />
     <ClInclude Include="source\pch.hpp" />
+  </ItemGroup>
+  <!-- References -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\modules\Foundation++\projects\Foundation++\Foundation++.vcxproj">
+      <Project>{9462e205-b23d-4aa8-9d57-447e2d1f274b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <!-- Targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

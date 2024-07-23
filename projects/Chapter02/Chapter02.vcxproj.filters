@@ -53,20 +53,5 @@
     <ClInclude Include="source\Math\_internal\base.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\Support\_internal\concepts.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\Support\narrowing.ipp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\Support\NarrowingError.ipp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\constants.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\types.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>

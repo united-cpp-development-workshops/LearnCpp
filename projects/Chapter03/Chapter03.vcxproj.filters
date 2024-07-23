@@ -41,30 +41,6 @@
     <ClInclude Include="source\Math\math.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\_internal\Exception\_internal\concepts.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\_internal\Exception\Exception.ipp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\_internal\Exception\Name.ipp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\Support\narrow.ipp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\concepts.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\constants.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\errors.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Foundation\types.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="source\pch.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
