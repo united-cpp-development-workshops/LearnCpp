@@ -155,7 +155,7 @@ namespace IO::_internal
           ));
 
           // Remove command option from options
-          std::ignore = options.erase(commandOption);
+          options.erase(commandOption);
         }
       }
 

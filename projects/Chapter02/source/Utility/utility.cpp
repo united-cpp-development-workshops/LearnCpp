@@ -22,8 +22,8 @@ auto Utility::optionsHandler(
   fn::u32f&                      yAxisInterval,
   std::map<fn::i32f, fn::u32f>&  frequencyMap,
   const std::vector<fn::i32f>&   values,
-  fn::i32f                       lowerBound,
-  fn::i32f                       upperBound
+  const fn::i32f                 lowerBound,
+  const fn::i32f                 upperBound
 ) -> fn::bln
 {
   // Options loop

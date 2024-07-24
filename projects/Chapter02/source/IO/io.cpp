@@ -36,10 +36,10 @@ namespace
   requires std::same_as<Type, fn::i32f> or std::same_as<Type, fn::cdef>
           or std::same_as<Type, fn::cstr>
   auto printAligned(
-    const Type& input,
-    fn::cdef    paddingSymbol,
-    fn::u16f    width,
-    Alignment   alignment
+    const Type&     input,
+    const fn::cdef  paddingSymbol,
+    const fn::u16f  width,
+    const Alignment alignment
   ) -> std::ostream&
   {
     // Find the length of the input
@@ -61,7 +61,7 @@ namespace
     auto printPadding{
       [&paddingSymbol, &padding]() -> fn::none
       {
-        for (fn::u16f position{}; position < padding; position++)
+        for (fn::u16f position{}; position < padding; ++position)
         {
           std::cout << paddingSymbol;
         }
@@ -91,13 +91,13 @@ namespace
 
   auto printChartRow(
     const std::map<fn::i32f, fn::u32f>& frequencyMap,
-    fn::i32f                            lowerBound,
-    fn::u32f                            xAxisInterval,
-    fn::u16f                            xAxisLabelWidth,
-    fn::bln                             lastRow,
-    fn::u32f                            y,
-    fn::u32f                            yAxisInterval,
-    fn::u16f                            yAxisLabelWidth
+    const fn::i32f                      lowerBound,
+    const fn::u32f                      xAxisInterval,
+    const fn::u16f                      xAxisLabelWidth,
+    const fn::bln                       lastRow,
+    const fn::u32f                      y,
+    const fn::u32f                      yAxisInterval,
+    const fn::u16f                      yAxisLabelWidth
   ) -> fn::none
   {
     // Print y-axis label and prefix
@@ -153,9 +153,9 @@ namespace
       const auto& iteratorToNextColumnNeedingGrid{std::ranges::find_if(
         frequencyMap.find(x),
         frequencyMap.end(),
-        [&](const auto& pair) noexcept -> fn::bln
+        [&y, &yAxisInterval](const auto& pair) noexcept -> fn::bln
         {
-          return pair.second >= y and pair.second < y + yAxisInterval;
+          return (pair.second >= y) and (pair.second < (y + yAxisInterval));
         }
       )};
 
@@ -184,7 +184,7 @@ namespace
     }
   }
 
-  auto zoomOptionHandler(const std::string_view& option, fn::bln zoomIn)
+  auto zoomOptionHandler(const std::string_view& option, const fn::bln zoomIn)
     -> std::optional<IO::Option>
   {
     // Using declarations
@@ -333,7 +333,7 @@ auto IO::getPreferredChartSizeInput() -> std::pair<fn::u16f, fn::u16f>
     std::cin >> width >> height;
 
     // Check if inputs are larger than 0
-    if (width > fn::u16f{0} and height > fn::u16f{0}) { break; }
+    if ((width > fn::u16f{0}) and (height > fn::u16f{0})) { break; }
 
     // Wrong input
     std::cout
@@ -371,10 +371,11 @@ auto IO::printChart(const Math::ChartFeed& chartFeed) -> fn::none
   fn::u16f yAxisLabelWidth{};
 
   // Determine if lower bound or max frequency is longer in length
-  if (Math::NUMBER_LENGTH(
-        chartFeed.lowerBound
-        - fn::narrow_cast<fn::i32f>(chartFeed.xAxisInterval)
-      ) - fn::u16f{2}
+  if ((Math::NUMBER_LENGTH(
+         chartFeed.lowerBound
+         - fn::narrow_cast<fn::i32f>(chartFeed.xAxisInterval)
+       )
+       - fn::u16f{2})
       > Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency)))
   {
     yAxisLabelWidth = {Math::NUMBER_LENGTH(chartFeed.lowerBound) - fn::u16f{1}};
@@ -544,7 +545,7 @@ auto IO::getOptionInput() -> Option
   }
 }
 
-auto IO::printNoFurtherZoom(Utility::Direction direction) -> fn::none
+auto IO::printNoFurtherZoom(const Utility::Direction direction) -> fn::none
 {
   // Using declarations
   using enum Utility::Direction;
