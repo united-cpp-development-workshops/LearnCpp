@@ -40,7 +40,7 @@ try
   std::cin >> height;
 
   // If width or height is 0 then error out
-  if ((width == 0) or (height == 0))
+  if (width == 0 or height == 0)
   {
     throw fn::IllegalArgumentError{"Witdh/Height can't be zero!"};
   }
