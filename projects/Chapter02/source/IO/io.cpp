@@ -473,9 +473,7 @@ namespace IO
     const fn::f64 standardDeviation{std::sqrt(variance)};
 
     // Calculate the minimum and maximum values
-    const auto [min, max]{
-      std::ranges::minmax_element(values.begin(), values.end())
-    };
+    const auto [min, max]{std::ranges::minmax_element(values)};
 
     // Print the statistics
     std::cout << "   - Sum: " << sum << '\n';
