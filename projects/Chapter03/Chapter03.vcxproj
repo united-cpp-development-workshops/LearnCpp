@@ -13,6 +13,10 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <!-- Items -->
   <ItemGroup>
+    <ClCompile Include="source\Game\Card.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
@@ -22,6 +26,10 @@
     <ClCompile Include="source\Math\math.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Game\Card.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="source\Game\game.ipp" />
     <ClInclude Include="source\IO\io.hpp" />
     <ClInclude Include="source\Math\math.hpp" />

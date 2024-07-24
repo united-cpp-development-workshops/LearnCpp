@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Game/game.ipp"
+#include "Game/Card.hpp"
 
 #include <Foundation/types.hpp>
 

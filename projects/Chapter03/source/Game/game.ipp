@@ -2,12 +2,10 @@
 
 #include <Foundation/types.hpp>
 
-#include <ostream>
-#include <string>
-
 namespace Game
 {
   // Constants
+  inline constexpr fn::u16f PLAYER_COUNT{2};
   inline constexpr fn::u32f PLAYER_STARTING_BANK{1'000};
   inline constexpr fn::u16f COURT_CARD_VALUE{10};
   inline constexpr fn::u16f ACE_HIGH_VALUE{11};
@@ -18,36 +16,6 @@ namespace Game
   inline constexpr fn::u16f DEALER_STAND{17};
   inline constexpr fn::u16f MIN_BET{10};
   inline constexpr fn::u16f WIN_MULTIPLIER{2};
-
-  class Card
-  {
-  public:
-    // Constructors
-    Card(std::string&& suit, fn::cdef rank, fn::u8f value) noexcept;
-
-    // Accessors
-    [[nodiscard]] auto getSuit() const noexcept -> const std::string&;
-    [[nodiscard]] auto getRank() const noexcept -> fn::cdef;
-    [[nodiscard]] auto getValue() const noexcept -> fn::u16f;
-    [[nodiscard]] auto isAce() const noexcept -> fn::bln;
-
-    // Mutators
-    auto setValue(fn::u8f value) noexcept -> fn::none;
-
-  private:
-    // Fields
-    std::string m_suit;
-    fn::cdef    m_rank;
-    fn::u16f    m_value;
-    fn::bln     m_isAce;
-
-    // Friends
-    friend auto operator<<(std::ostream& os, const Card& card) -> std::ostream&
-    {
-      os << '[' << card.getSuit() << card.getRank() << ']';
-      return os;
-    }
-  };
 
   auto play() -> fn::none;
 } // namespace Game

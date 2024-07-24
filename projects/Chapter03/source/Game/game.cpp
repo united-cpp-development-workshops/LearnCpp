@@ -2,6 +2,7 @@
 
 #include "Game/game.ipp"
 
+#include "Game/Card.hpp"
 #include "IO/io.hpp"
 #include "Math/math.hpp"
 
@@ -66,7 +67,7 @@ namespace
       // Check for aces and adjust value
       if (std::ranges::any_of(
             hand,
-            [](Game::Card& card) noexcept
+            [](Game::Card& card) noexcept -> fn::bln
             {
               if (card.isAce() and card.getValue() == Game::ACE_HIGH_VALUE)
               {
@@ -213,10 +214,10 @@ namespace
     std::vector<Game::Card> playerHand{};
 
     // Initial deals
-    for (fn::size index{}; index < 2; ++index)
+    for (fn::u16f index{}; index < Game::PLAYER_COUNT; ++index)
     {
       // Announce card deal
-      std::cout << "\nPlayer: Dealer deals " << index + 1 << ". cards.\n";
+      std::cout << "\nPlayer: Dealer deals " << (index + 1) << ". cards.\n";
 
       // Deal cards
       dealerHand.push_back(deck.back());
@@ -290,81 +291,52 @@ namespace
 
 namespace Game
 {
-  // Constructors
-  Card::Card(std::string&& suit, fn::cdef rank, fn::u8f value) noexcept
-    : m_suit{std::move(suit)}
-    , m_rank{rank}
-    , m_value{value}
-    , m_isAce{rank == 'A'}
-  {}
-
-  // Accessors
-  [[nodiscard]] auto Card::getSuit() const noexcept -> const std::string&
+  auto play() -> fn::none
   {
-    return m_suit;
-  }
+    // Reset player bank
+    fn::u32f playerBank{PLAYER_STARTING_BANK};
 
-  [[nodiscard]] auto Card::getRank() const noexcept -> fn::cdef
-  {
-    return m_rank;
-  }
+    // Welcome message
+    std::cout << "\nDealer: Welcome sir!\n";
 
-  [[nodiscard]] auto Card::getValue() const noexcept -> fn::u16f
-  {
-    return m_value;
-  }
+    // Initialize deck
+    std::vector<Card> deck{createDecks()};
 
-  [[nodiscard]] auto Card::isAce() const noexcept -> fn::bln { return m_isAce; }
+    // Initial deck size
+    const fn::size initialDeckSize{deck.size()};
 
-  // Mutators
-  auto Card::setValue(fn::u8f value) noexcept -> fn::none { m_value = value; }
-}; // namespace Game
+    // Prepare random number generator
+    std::default_random_engine eng{std::random_device{}()};
 
-// NOLINTNEXTLINE
-auto Game::play() -> fn::none
-{
-  // Reset player bank
-  fn::u32f playerBank{PLAYER_STARTING_BANK};
+    // Shuffle deck
+    std::shuffle(deck.begin(), deck.end(), eng);
 
-  // Welcome message
-  std::cout << "\nDealer: Welcome sir!\n";
-
-  // Initialize deck
-  std::vector<Card> deck{createDecks()};
-
-  // Initial deck size
-  const fn::size initialDeckSize{deck.size()};
-
-  // Prepare random number generator
-  std::default_random_engine eng{std::random_device{}()};
-
-  // Shuffle deck
-  std::shuffle(deck.begin(), deck.end(), eng);
-
-  // Game loop
-  while (true)
-  {
-    // Check if player is out of chips
-    if (playerBank < Game::MIN_BET)
+    // Game loop
+    while (true)
     {
-      std::cout << "\nDealer: Sorry sir, you are out of chips!\n";
-      break;
+      // Check if player is out of chips
+      if (playerBank < Game::MIN_BET)
+      {
+        std::cout << "\nDealer: Sorry sir, you are out of chips!\n";
+        break;
+      }
+
+      // Check if deck needs shuffling
+      if (fn::narrow_cast<fn::f64>(deck.size())
+          < (fn::narrow_cast<fn::f64>(initialDeckSize) * SHUFFLE_THRESHOLD))
+      {
+        // Recreate deck
+        deck = {createDecks()};
+        std::cout << "\nPlayer: Game played with " << DECK_COUNT
+                  << " deck(s).\n";
+
+        // Shuffle deck
+        std::shuffle(deck.begin(), deck.end(), eng);
+        std::cout << "Player: Deck(s) shuffled!\n";
+      }
+
+      // Play round
+      playRound(deck, playerBank);
     }
-
-    // Check if deck needs shuffling
-    if (fn::narrow_cast<fn::f64>(deck.size())
-        < fn::narrow_cast<fn::f64>(initialDeckSize) * SHUFFLE_THRESHOLD)
-    {
-      // Recreate deck
-      deck = {createDecks()};
-      std::cout << "\nPlayer: Game played with " << DECK_COUNT << " deck(s).\n";
-
-      // Shuffle deck
-      std::shuffle(deck.begin(), deck.end(), eng);
-      std::cout << "Player: Deck(s) shuffled!\n";
-    }
-
-    // Play round
-    playRound(deck, playerBank);
   }
-}
+} // namespace Game
