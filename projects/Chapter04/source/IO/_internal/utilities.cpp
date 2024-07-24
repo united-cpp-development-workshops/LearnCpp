@@ -4,17 +4,16 @@
 
 #include <Foundation/types.hpp>
 
-#include <cctype>
 #include <iostream>
 #include <limits>
+#include <locale>
 
 namespace IO::_internal
 {
-  [[nodiscard]] auto isNotAllowedCharacter(fn::cdef character
-  ) noexcept -> fn::bln
+  [[nodiscard]] auto isNotAllowedCharacter(const fn::cdef character) -> fn::bln
   {
     // Check if character is allowed
-    return std::isalnum(character) == 0 and character != '-'
+    return std::isalnum(character, std::locale()) == 0 and character != '-'
        and character != ' ';
   }
 

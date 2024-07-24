@@ -121,16 +121,16 @@ namespace IO::_internal
     }
     else if (options.empty())
     {
-      std::cout << "   COMPILER: '" << GET_COMPILER_STR(GET_COMPILER()) << " v"
-                << GET_COMPILER_VER_STR(GET_COMPILER()) << "'\n\n";
+      std::cout << "   COMPILER: '" << COMPILER_STR(COMPILER()) << " v"
+                << COMPILER_VER_STR(COMPILER()) << "'\n\n";
 
-      std::cout << "   LANGUAGE: '" << GET_LANGUAGE_STD_STR() << "'\n\n";
+      std::cout << "   LANGUAGE: '" << LANGUAGE_STD_STR() << "'\n\n";
 
-      std::cout << "   ARCHITECTURE: '"
-                << GET_ARCHITECTURE_STR(GET_ARCHITECTURE()) << "'\n\n";
+      std::cout << "   ARCHITECTURE: '" << ARCHITECTURE_STR(ARCHITECTURE())
+                << "'\n\n";
 
       std::cout << "   OPERATING SYSTEM: '"
-                << GET_OPERATING_SYSTEM_STR(GET_OPERATING_SYSTEM()) << "'\n";
+                << OPERATING_SYSTEM_STR(OPERATING_SYSTEM()) << "'\n";
     }
     else
     {
@@ -138,8 +138,8 @@ namespace IO::_internal
       auto needsNewLine{false};
       if (options.contains(Option::COMPILER))
       {
-        std::cout << "   COMPILER: '" << GET_COMPILER_STR(GET_COMPILER())
-                  << " v" << GET_COMPILER_VER_STR(GET_COMPILER()) << "'\n";
+        std::cout << "   COMPILER: '" << COMPILER_STR(COMPILER()) << " v"
+                  << COMPILER_VER_STR(COMPILER()) << "'\n";
 
         needsNewLine = {true};
       }
@@ -147,7 +147,7 @@ namespace IO::_internal
       {
         if (needsNewLine) { std::cout << '\n'; }
 
-        std::cout << "   LANGUAGE: '" << GET_LANGUAGE_STD_STR() << "'\n";
+        std::cout << "   LANGUAGE: '" << LANGUAGE_STD_STR() << "'\n";
 
         needsNewLine = {true};
       }
@@ -155,8 +155,8 @@ namespace IO::_internal
       {
         if (needsNewLine) { std::cout << '\n'; }
 
-        std::cout << "   ARCHITECTURE: '"
-                  << GET_ARCHITECTURE_STR(GET_ARCHITECTURE()) << "'\n";
+        std::cout << "   ARCHITECTURE: '" << ARCHITECTURE_STR(ARCHITECTURE())
+                  << "'\n";
 
         needsNewLine = {true};
       }
@@ -165,7 +165,7 @@ namespace IO::_internal
         if (needsNewLine) { std::cout << '\n'; }
 
         std::cout << "   OPERATING SYSTEM: '"
-                  << GET_OPERATING_SYSTEM_STR(GET_OPERATING_SYSTEM()) << "'\n";
+                  << OPERATING_SYSTEM_STR(OPERATING_SYSTEM()) << "'\n";
       }
     }
   }

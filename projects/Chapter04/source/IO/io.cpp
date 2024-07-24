@@ -62,7 +62,7 @@ namespace IO
     if (input.empty())
     {
       // Print error message
-      _internal::printInputError(_internal::GET_NO_INPUT_MSG());
+      _internal::printInputError(_internal::NO_INPUT_MSG());
       return std::nullopt;
     }
 
@@ -77,7 +77,7 @@ namespace IO
     if (not(inputStream >> commandInput))
     {
       // Print error message
-      _internal::printInputError(_internal::GET_NO_COMMAND_MSG());
+      _internal::printInputError(_internal::NO_COMMAND_MSG());
       return std::nullopt;
     }
 
@@ -95,13 +95,13 @@ namespace IO
 
     // Return if valid request
     return _internal::validateRequest(command, options)
-           ? std::make_optional(
-               std::pair<Command, std::set<Option>>(command, options)
-             )
+           ? std::optional{std::pair<Command, std::set<Option>>(
+               command, options
+             )}
            : std::nullopt;
   }
 
-  auto printResponse(Command command, const std::set<Option>& options)
+  auto printResponse(const Command command, const std::set<Option>& options)
     -> fn::none
   {
     // Using declarations

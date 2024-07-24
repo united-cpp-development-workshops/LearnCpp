@@ -7,12 +7,11 @@
 #include <Foundation/types.hpp>
 
 #include <iostream>
-#include <stdexcept>
 
 namespace IO::_internal
 {
   // NOLINTNEXTLINE(readability-function-size)
-  auto printBriefTypeInfo(Option type) -> fn::none
+  auto printBriefTypeInfo(const Option type) -> fn::none
   {
     // Using declarations
     using enum Option;
@@ -85,7 +84,7 @@ namespace IO::_internal
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
       std::cout
-        << "     - Signed integer type with the width of exactly '8' bits.\n";
+        << "     - Signed integer type with the size of exactly '8' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -97,7 +96,7 @@ namespace IO::_internal
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
       std::cout
-        << "     - Signed integer type with the width of exactly '16' bits.\n";
+        << "     - Signed integer type with the size of exactly '16' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -109,7 +108,7 @@ namespace IO::_internal
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
       std::cout
-        << "     - Signed integer type with the width of exactly '32' bits.\n";
+        << "     - Signed integer type with the size of exactly '32' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -121,7 +120,7 @@ namespace IO::_internal
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
       std::cout
-        << "     - Signed integer type with the width of exactly '64' bits.\n";
+        << "     - Signed integer type with the size of exactly '64' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -133,7 +132,7 @@ namespace IO::_internal
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
       std::cout
-        << "     - Unsigned integer type with the width of exactly '8' bits.\n";
+        << "     - Unsigned integer type with the size of exactly '8' bits.\n";
       return;
     }
     case T_U16:
@@ -143,7 +142,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Unsigned integer type with the width of exactly "
+      std::cout << "     - Unsigned integer type with the size of exactly "
                    "'16' bits.\n";
       return;
     }
@@ -154,7 +153,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Unsigned integer type with the width of exactly "
+      std::cout << "     - Unsigned integer type with the size of exactly "
                    "'32' bits.\n";
       return;
     }
@@ -165,7 +164,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Unsigned integer type with the width of exactly "
+      std::cout << "     - Unsigned integer type with the size of exactly "
                    "'64' bits.\n";
       return;
     }
@@ -176,8 +175,8 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest signed integer type with width of at least "
-                   "'8' bits.\n";
+      std::cout << "     - Smallest signed integer type with the size of at "
+                   "least '8' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -188,8 +187,8 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest signed integer type with width of at least "
-                   "'16' bits.\n";
+      std::cout << "     - Smallest signed integer type with the size of at "
+                   "least '16' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -200,8 +199,8 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest signed integer type with width of at least "
-                   "'32' bits.\n";
+      std::cout << "     - Smallest signed integer type with the size of at "
+                   "least '32' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -212,8 +211,8 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest signed integer type with width of at least "
-                   "'64' bits.\n";
+      std::cout << "     - Smallest signed integer type with the size of at "
+                   "least '64' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -224,7 +223,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest unsigned integer type with width of at "
+      std::cout << "     - Smallest unsigned integer type with the size of at "
                    "least '8' bits.\n";
       return;
     }
@@ -235,7 +234,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest unsigned integer type with width of at "
+      std::cout << "     - Smallest unsigned integer type with the size of at "
                    "least '16' bits.\n";
       return;
     }
@@ -246,7 +245,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest unsigned integer type with width of at "
+      std::cout << "     - Smallest unsigned integer type with the size of at "
                    "least '32' bits.\n";
       return;
     }
@@ -257,7 +256,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest unsigned integer type with width of at "
+      std::cout << "     - Smallest unsigned integer type with the size of at "
                    "least '64' bits.\n";
       return;
     }
@@ -268,8 +267,8 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest signed integer type with width of at least "
-                   "'8' bits.\n";
+      std::cout << "     - Fastest signed integer type with the size of at "
+                   "least '8' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -280,8 +279,8 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest signed integer type with width of at least "
-                   "'16' bits.\n";
+      std::cout << "     - Fastest signed integer type with the size of at "
+                   "least '16' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -292,8 +291,8 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest signed integer type with width of at least "
-                   "'32' bits.\n";
+      std::cout << "     - Fastest signed integer type with the size of at "
+                   "least '32' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -304,8 +303,8 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest signed integer type with width of at least "
-                   "'64' bits.\n";
+      std::cout << "     - Fastest signed integer type with the size of at "
+                   "least '64' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -316,7 +315,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest unsigned integer type with width of at "
+      std::cout << "     - Fastest unsigned integer type with the size of at "
                    "least '8' bits.\n";
       return;
     }
@@ -327,7 +326,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest unsigned integer type with width of at "
+      std::cout << "     - Fastest unsigned integer type with the size of at "
                    "least '16' bits.\n";
       return;
     }
@@ -338,7 +337,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest unsigned integer type with width of at "
+      std::cout << "     - Fastest unsigned integer type with the size of at "
                    "least '64' bits.\n";
       return;
     }
@@ -349,7 +348,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest unsigned integer type with width of at "
+      std::cout << "     - Fastest unsigned integer type with the size of at "
                    "least '64' bits.\n";
       return;
     }
@@ -381,7 +380,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Maximum-width signed integer.\n\n";
+      std::cout << "     - Maximum-size signed integer.\n\n";
       return;
     }
     case T_UMAX:
@@ -391,7 +390,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Maximum-width unsigned integer.\n\n";
+      std::cout << "     - Maximum-size unsigned integer.\n\n";
       return;
     }
     case T_SIZE:

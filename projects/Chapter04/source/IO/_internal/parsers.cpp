@@ -122,7 +122,7 @@ namespace IO::_internal
     }
 
     // Print error and return nullopt
-    printInputError(GET_INVALID_COMMAND_MSG(input));
+    printInputError(INVALID_COMMAND_MSG(input));
     return std::nullopt;
   }
 
@@ -145,7 +145,7 @@ namespace IO::_internal
       // Must start with '--'
       if (not optionInput.starts_with("--"))
       {
-        printInputWarning(GET_MISSING_OPTION_PREFIX_MSG());
+        printInputWarning(MISSING_OPTION_PREFIX_MSG());
         continue;
       }
 
@@ -164,7 +164,7 @@ namespace IO::_internal
         if (options.contains(it->first))
         {
           IO::_internal::printInputWarning(
-            IO::_internal::GET_DUPLICATE_OPTION_MSG(it->second)
+            IO::_internal::DUPLICATE_OPTION_MSG(it->second)
           );
           continue;
         }
@@ -175,7 +175,7 @@ namespace IO::_internal
       }
 
       // Print warning
-      printInputWarning(GET_INVALID_OPTION_MSG(optionInput));
+      printInputWarning(INVALID_OPTION_MSG(optionInput));
     }
 
     // Return all options

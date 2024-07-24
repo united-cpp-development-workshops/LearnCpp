@@ -4,7 +4,6 @@
 #include <Foundation/types.hpp>
 
 #include <format>
-#include <stdexcept>
 #include <string>
 
 namespace IO::_internal
@@ -34,16 +33,16 @@ namespace IO::_internal
     LINUX
   };
 
-  [[nodiscard]] constexpr auto GET_COMPILER() noexcept -> Compiler;
-  [[nodiscard]] constexpr auto GET_COMPILER_STR(Compiler compiler) -> fn::cstr;
-  [[nodiscard]] constexpr auto GET_COMPILER_VER_STR(Compiler compiler
+  [[nodiscard]] constexpr auto COMPILER() noexcept -> Compiler;
+  [[nodiscard]] constexpr auto COMPILER_STR(Compiler compiler) -> fn::cstr;
+  [[nodiscard]] constexpr auto COMPILER_VER_STR(Compiler compiler
   ) -> std::string;
-  [[nodiscard]] constexpr auto GET_LANGUAGE_STD_STR() -> std::string;
-  [[nodiscard]] constexpr auto GET_ARCHITECTURE() -> Architecture;
-  [[nodiscard]] constexpr auto GET_ARCHITECTURE_STR(Architecture architecture
+  [[nodiscard]] constexpr auto LANGUAGE_STD_STR() -> std::string;
+  [[nodiscard]] constexpr auto ARCHITECTURE() -> Architecture;
+  [[nodiscard]] constexpr auto ARCHITECTURE_STR(Architecture architecture
   ) -> fn::cstr;
-  [[nodiscard]] constexpr auto GET_OPERATING_SYSTEM() -> OperatingSystem;
-  [[nodiscard]] constexpr auto GET_OPERATING_SYSTEM_STR(
+  [[nodiscard]] constexpr auto OPERATING_SYSTEM() -> OperatingSystem;
+  [[nodiscard]] constexpr auto OPERATING_SYSTEM_STR(
     OperatingSystem operatingSystem
   ) -> fn::cstr;
 } // namespace IO::_internal
@@ -54,7 +53,7 @@ namespace IO::_internal
 
 namespace IO::_internal
 {
-  [[nodiscard]] constexpr auto GET_COMPILER() noexcept -> Compiler
+  [[nodiscard]] constexpr auto COMPILER() noexcept -> Compiler
   {
     // Using declarations
     using enum Compiler;
@@ -70,7 +69,7 @@ namespace IO::_internal
 #endif
   }
 
-  [[nodiscard]] constexpr auto GET_COMPILER_STR(Compiler compiler) -> fn::cstr
+  [[nodiscard]] constexpr auto COMPILER_STR(const Compiler compiler) -> fn::cstr
   {
     // Using declarations
     using enum Compiler;
@@ -84,10 +83,10 @@ namespace IO::_internal
     }
 
     // Should never reach here
-    throw fn::EnumValueError{};
+    throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto GET_COMPILER_VER_STR(Compiler compiler
+  [[nodiscard]] constexpr auto COMPILER_VER_STR(const Compiler compiler
   ) -> std::string
   {
     // Using declarations
@@ -162,10 +161,10 @@ namespace IO::_internal
     }
 
     // Should never reach here
-    throw fn::EnumValueError{};
+    throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto GET_LANGUAGE_STD_STR() -> std::string
+  [[nodiscard]] constexpr auto LANGUAGE_STD_STR() -> std::string
   {
     constexpr fn::i32l CPPRE_CODE{199'711L};
     constexpr fn::i32l CPP11_CODE{201'103L};
@@ -188,13 +187,13 @@ namespace IO::_internal
     }
   }
 
-  [[nodiscard]] constexpr auto GET_ARCHITECTURE() -> Architecture
+  [[nodiscard]] constexpr auto ARCHITECTURE() -> Architecture
   {
     // Using declarations
     using enum Compiler;
 
     // NOLINTBEGIN(bugprone-branch-clone)
-    switch (GET_COMPILER())
+    switch (COMPILER())
     {
     case UNKNOWN: return Architecture::UNKNOWN;
     case MSVC:
@@ -230,10 +229,10 @@ namespace IO::_internal
     // NOLINTEND(bugprone-branch-clone)
 
     // Should never reach here
-    throw fn::EnumValueError{};
+    throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto GET_ARCHITECTURE_STR(Architecture architecture
+  [[nodiscard]] constexpr auto ARCHITECTURE_STR(const Architecture architecture
   ) -> fn::cstr
   {
     // Using declarations
@@ -249,15 +248,15 @@ namespace IO::_internal
     }
 
     // Should never reach here
-    throw fn::EnumValueError{};
+    throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto GET_OPERATING_SYSTEM() -> OperatingSystem
+  [[nodiscard]] constexpr auto OPERATING_SYSTEM() -> OperatingSystem
   {
     // Using declarations
     using enum Compiler;
 
-    switch (GET_COMPILER())
+    switch (COMPILER())
     {
     case UNKNOWN: return OperatingSystem::UNKNOWN;
     case MSVC:
@@ -277,11 +276,11 @@ namespace IO::_internal
     }
 
     // Should never reach here
-    throw fn::EnumValueError{};
+    throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto GET_OPERATING_SYSTEM_STR(
-    OperatingSystem operatingSystem
+  [[nodiscard]] constexpr auto OPERATING_SYSTEM_STR(
+    const OperatingSystem operatingSystem
   ) -> fn::cstr
   {
     // Using declarations
@@ -296,7 +295,7 @@ namespace IO::_internal
     }
 
     // Should never reach here
-    throw fn::EnumValueError{};
+    throw fn::EnumeratorError{};
   }
 
 } // namespace IO::_internal

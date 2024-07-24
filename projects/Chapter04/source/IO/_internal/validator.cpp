@@ -18,7 +18,7 @@
 
 namespace
 {
-  [[nodiscard]] auto getCommandPriorityOptions(IO::Command command
+  [[nodiscard]] auto getCommandPriorityOptions(const IO::Command command
   ) -> std::set<IO::Option>
   {
     // Using declarations
@@ -37,10 +37,10 @@ namespace
     }
 
     // Should never reach here
-    throw fn::EnumValueError{};
+    throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] auto getCommandRules(IO::Command command
+  [[nodiscard]] auto getCommandRules(const IO::Command command
   ) -> std::pair<std::set<IO::Option>, std::pair<fn::u16f, fn::u16f>>
   {
     // Using declarations
@@ -81,7 +81,8 @@ namespace
          T_U16L, T_U32L, T_U64L, T_I8F,  T_I16F, T_I32F, T_I64F, T_U8F,  T_U16F,
          T_U32F, T_U64F, T_IDEF, T_UDEF, T_IMAX, T_UMAX, T_SIZE, T_F32,  T_F64,
          T_FMAX, T_C8,   T_C16,  T_C32,  T_CDEF, T_WDEF},
-        {{2}, std::numeric_limits<fn::u16f>::max()}
+        {IO::_internal::COMPARE_MIN_OPTIONS,
+         std::numeric_limits<fn::u16f>::max()}
       };
     }
     case IO::Command::EXIT:
@@ -94,14 +95,15 @@ namespace
     }
 
     // Should never reach here
-    throw fn::EnumValueError{};
+    throw fn::EnumeratorError{};
   }
 } // namespace
 
 namespace IO::_internal
 {
-  [[nodiscard]] auto validateRequest(Command command, std::set<Option>& options)
-    -> fn::bln
+  [[nodiscard]] auto validateRequest(
+    const Command command, std::set<Option>& options
+  ) -> fn::bln
   {
     // Create options set for sanitization
     std::set<Option> sanitizedOptions;
@@ -135,22 +137,22 @@ namespace IO::_internal
       for (const auto& commandOption : commandOptions)
       {
         // Check if command option is present
-        const fn::bln commandOptionFound{
-          std::ranges::find(options, commandOption) != options.end()
-        };
+        if (std::ranges::find(options, commandOption) == options.end())
+        {
+          continue;
+        }
 
         // Check limits
-        if (sanitizedOptions.size() + 1 <= countLimits.second
-            and commandOptionFound)
+        if ((sanitizedOptions.size() + 1) <= countLimits.second)
         {
           // Remove command option from options and add to sanitized options
           options.erase(commandOption);
           sanitizedOptions.insert(commandOption);
         }
-        else if (commandOptionFound)
+        else
         {
           // Print warning message
-          printInputWarning(GET_DISCARDED_OPTION_BY_LIMIT_MSG(
+          printInputWarning(DISCARDED_OPTION_BY_LIMIT_MSG(
             getOptionMap().find(commandOption)->second
           ));
 
@@ -164,7 +166,7 @@ namespace IO::_internal
       {
         // Print warning message
         printInputError(
-          GET_INSUFFICIENT_OPTIONS_MSG(getCommandMap().find(command)->second)
+          INSUFFICIENT_OPTIONS_MSG(getCommandMap().find(command)->second)
         );
 
         // Return false
@@ -176,9 +178,8 @@ namespace IO::_internal
     for (const auto& option : options)
     {
       // Print warning message
-      printInputWarning(
-        GET_DISCARDED_OPTION_MSG(getOptionMap().find(option)->second)
-      );
+      printInputWarning(DISCARDED_OPTION_MSG(getOptionMap().find(option)->second
+      ));
     }
 
     // Move sanitized options to options and return true
