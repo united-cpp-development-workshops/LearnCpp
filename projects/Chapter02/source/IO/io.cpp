@@ -90,32 +90,28 @@ namespace
   }
 
   auto printChartRow(
-    const std::map<fn::i32f, fn::u32f>& frequencyMap,
-    const fn::i32f                      lowerBound,
-    const fn::u32f                      xAxisInterval,
-    const fn::u16f                      xAxisLabelWidth,
-    const fn::bln                       lastRow,
-    const fn::u32f                      y,
-    const fn::u32f                      yAxisInterval,
-    const fn::u16f                      yAxisLabelWidth
+    const std::map<fn::i32f, fn::u32f>&  frequencyMap,
+    const fn::i32f                       lowerBound,
+    const std::pair<fn::u32f, fn::u16f>& xAxisValues,
+    const fn::bln                        lastRow,
+    const fn::u32f                       y,
+    const std::pair<fn::u32f, fn::u16f>& yAxisValues
   ) -> fn::none
   {
     // Print y-axis label and prefix
     printAligned(
-      fn::narrow_cast<fn::i32f>(y), ' ', yAxisLabelWidth, Alignment::RIGHT
+      fn::narrow_cast<fn::i32f>(y), ' ', yAxisValues.second, Alignment::RIGHT
     ) << "-|";
 
     // If y-axis is zero, print the x-axis line
     if (lastRow)
     {
       // Traverse through x-axis with respect to interval
-      for (const auto& ignored : frequencyMap)
+      for ([[maybe_unused]] const auto index :
+           std::views::iota(fn::size{0}, frequencyMap.size()))
       {
-        // Pair is not used
-        std::ignore = ignored;
-
-        // print the line
-        printAligned('|', '-', xAxisLabelWidth, Alignment::RIGHT);
+        // Print the line
+        printAligned('|', '-', xAxisValues.second, Alignment::RIGHT);
       }
 
       // Print x-axis name
@@ -126,9 +122,9 @@ namespace
 
       // Print y-axis label and prefix
       printAligned(
-        lowerBound - fn::narrow_cast<fn::i32f>(xAxisInterval),
+        lowerBound - fn::narrow_cast<fn::i32f>(xAxisValues.first),
         ' ',
-        yAxisLabelWidth + fn::u16f{2},
+        yAxisValues.second + IO::LEFT_MARGIN,
         Alignment::RIGHT
       );
 
@@ -139,7 +135,7 @@ namespace
         std::ignore = ignored;
 
         // print the line
-        printAligned(x, ' ', xAxisLabelWidth, Alignment::RIGHT);
+        printAligned(x, ' ', xAxisValues.second, Alignment::RIGHT);
       }
 
       // Exit the function as we've handled the zero y-axis case
@@ -153,9 +149,9 @@ namespace
       const auto& iteratorToNextColumnNeedingGrid{std::ranges::find_if(
         frequencyMap.find(x),
         frequencyMap.end(),
-        [&y, &yAxisInterval](const auto& pair) noexcept -> fn::bln
+        [&y, &yAxisValues](const auto& pair) noexcept -> fn::bln
         {
-          return (pair.second >= y) and (pair.second < (y + yAxisInterval));
+          return (pair.second >= y) and (pair.second < (y + yAxisValues.first));
         }
       )};
 
@@ -172,13 +168,13 @@ namespace
       if (frequency >= y)
       {
         printAligned(
-          '#', symbolBetweenColumns, xAxisLabelWidth, Alignment::RIGHT
+          '#', symbolBetweenColumns, xAxisValues.second, Alignment::RIGHT
         );
       }
       else
       {
         printAligned(
-          '.', symbolBetweenColumns, xAxisLabelWidth, Alignment::RIGHT
+          '.', symbolBetweenColumns, xAxisValues.second, Alignment::RIGHT
         );
       }
     }
@@ -190,8 +186,8 @@ namespace
     // Using declarations
     using enum IO::Option;
 
-    // If directional zoom is requested, the length must be 2
-    if (option.length() == 2)
+    // If directional zoom is requested
+    if (option.length() == IO::DIRECTIONAL_ZOOM_INPUT_LENGTH)
     {
       // Check direction of the zoom
       if (option.find('h') != std::string::npos
@@ -237,336 +233,351 @@ namespace
   }
 } // namespace
 
-auto IO::printWelcome() -> fn::none
+namespace IO
 {
-  std::cout << " -------------------------< RANDOM CHARTS "
-               ">--------------------------\n";
-  std::cout << '\n';
-  std::cout
-    << " - Visualize your custom configured random distributions in a chart.\n";
-  std::cout << " - Get the resulting distribution's statistics in detail.\n";
-}
+  auto printWelcome() -> fn::none
+  {
+    std::cout << " -------------------------< RANDOM CHARTS "
+                 ">--------------------------\n";
+    std::cout << '\n';
+    std::cout << " - Visualize your custom configured random distributions in "
+                 "a chart.\n";
+    std::cout << " - Get the resulting distribution's statistics in detail.\n";
+  }
 
-auto IO::printInformative() -> fn::none
-{
-  std::cout << '\n';
-  std::cout << " --------------------------------------------------------------"
-               "------\n";
-  std::cout << '\n';
-  std::cout << " CONFIGURATIONS\n";
-  std::cout << '\n';
-  std::cout << " - You will be asked to input:\n";
-  std::cout << "   - Sample size: The number of random values to be sampled,\n";
-  std::cout << "   - Lower bound: Minimum random value a sample can have,\n";
-  std::cout << "   - Upper bound: Maximum random value a sample can have,\n";
-  std::cout << "   - Chart sizes: Chart's preferred dimensions.\n";
-  std::cout << '\n';
-}
+  auto printInformative() -> fn::none
+  {
+    std::cout << '\n';
+    std::cout
+      << " --------------------------------------------------------------"
+         "------\n";
+    std::cout << '\n';
+    std::cout << " CONFIGURATIONS\n";
+    std::cout << '\n';
+    std::cout << " - You will be asked to input:\n";
+    std::cout
+      << "   - Sample size: The number of random values to be sampled,\n";
+    std::cout << "   - Lower bound: Minimum random value a sample can have,\n";
+    std::cout << "   - Upper bound: Maximum random value a sample can have,\n";
+    std::cout << "   - Chart sizes: Chart's preferred dimensions.\n";
+    std::cout << '\n';
+  }
 
-auto IO::getSamplesCountInput() -> fn::i32f
-{
-  resetInputBuffer();
-
-  std::cout << " [i]: Please input the 'Sample size' parameter: ";
-
-  fn::i32f sampleSize{};
-
-  // Loop until valid input
-  while (true)
+  auto getSamplesCountInput() -> fn::i32f
   {
     resetInputBuffer();
 
-    // Assign inputs
-    std::cin >> sampleSize;
+    std::cout << " [i]: Please input the 'Sample size' parameter: ";
 
-    // Check if inputs are larger than 0
-    if (sampleSize > 0) { break; }
+    fn::i32f sampleSize{};
 
-    // Wrong input
-    std::cout
-      << " [X]: 'Sample size' must be larger than 0, please try again: ";
-  }
-
-  return sampleSize;
-}
-
-auto IO::getLowerBoundInput() -> fn::i32f
-{
-  resetInputBuffer();
-
-  std::cout << " [i]: Please input the 'Lower bound' parameter: ";
-
-  fn::i32f lowerBound{};
-  std::cin >> lowerBound;
-
-  return lowerBound;
-}
-
-auto IO::getUpperBoundInput() -> fn::i32f
-{
-  resetInputBuffer();
-
-  std::cout << " [i]: Please input the 'Upper bound' parameter: ";
-
-  fn::i32f upperBound{};
-  std::cin >> upperBound;
-
-  return upperBound;
-}
-
-auto IO::getPreferredChartSizeInput() -> std::pair<fn::u16f, fn::u16f>
-{
-  resetInputBuffer();
-
-  std::cout
-    << " [i]: Please input the 'Chart sizes' parameter (width height): ";
-
-  fn::u16f width{};
-  fn::u16f height{};
-
-  // Loop until valid input
-  while (true)
-  {
-    resetInputBuffer();
-
-    // Assign inputs
-    std::cin >> width >> height;
-
-    // Check if inputs are larger than 0
-    if ((width > fn::u16f{0}) and (height > fn::u16f{0})) { break; }
-
-    // Wrong input
-    std::cout
-      << " [X]: Width and Height must be larger than 0, please try again: ";
-  }
-
-  return {width, height};
-}
-
-auto IO::printResultsHeader() -> fn::none
-{
-  std::cout << '\n';
-  std::cout << " --------------------------------------------------------------"
-               "------\n";
-  std::cout << '\n';
-  std::cout << " RESULTS\n";
-}
-
-auto IO::printChart(const Math::ChartFeed& chartFeed) -> fn::none
-{
-  std::cout << '\n';
-  std::cout << " - Chart:\n";
-  std::cout << '\n';
-
-  // Find label width for x-axis
-  const fn::u16f xAxisLabelWidth{
-    std::ranges::max(
-      chartFeed.frequencyMap | std::views::keys
-      | std::views::transform(Math::NUMBER_LENGTH)
-    )
-    + fn::u16f{1}
-  };
-
-  // Find label width for y-axis
-  fn::u16f yAxisLabelWidth{};
-
-  // Determine if lower bound or max frequency is longer in length
-  if ((Math::NUMBER_LENGTH(
-         chartFeed.lowerBound
-         - fn::narrow_cast<fn::i32f>(chartFeed.xAxisInterval)
-       )
-       - fn::u16f{2})
-      > Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency)))
-  {
-    yAxisLabelWidth = {Math::NUMBER_LENGTH(chartFeed.lowerBound) - fn::u16f{1}};
-  }
-  else
-  {
-    yAxisLabelWidth = {
-      Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency))
-      + fn::u16f{1}
-    };
-  }
-
-  // Print y-axis name
-  printAligned(
-    Y_AXIS_NAME,
-    ' ',
-    yAxisLabelWidth + fn::narrow_cast<fn::u16f>(std::strlen(Y_AXIS_NAME))
-      + fn::u16f{1},
-    Alignment::RIGHT
-  );
-  std::cout << '\n';
-
-  // Print y-axis end
-  printAligned('^', ' ', yAxisLabelWidth + fn::u16f{2}, Alignment::RIGHT);
-  std::cout << '\n';
-
-  // Print row by row
-  fn::bln  lastRow{false};
-  fn::u32f y{chartFeed.maxFrequency};
-  while (not lastRow)
-  {
-    // Check if we are in last row
-    if (fn::narrow_cast<fn::i32f>(y)
-          - fn::narrow_cast<fn::i32f>(chartFeed.yAxisInterval)
-        < 0)
+    // Loop until valid input
+    while (true)
     {
-      lastRow = {true};
+      resetInputBuffer();
+
+      // Assign inputs
+      std::cin >> sampleSize;
+
+      // Check if inputs are larger than 0
+      if (sampleSize > 0) { break; }
+
+      // Wrong input
+      std::cout
+        << " [X]: 'Sample size' must be larger than 0, please try again: ";
     }
 
-    // Print row
-    printChartRow(
-      chartFeed.frequencyMap,
-      chartFeed.lowerBound,
-      chartFeed.xAxisInterval,
-      xAxisLabelWidth,
-      lastRow,
-      y,
-      chartFeed.yAxisInterval,
-      yAxisLabelWidth
-    );
+    return sampleSize;
+  }
 
-    // End the row
+  auto getLowerBoundInput() -> fn::i32f
+  {
+    resetInputBuffer();
+
+    std::cout << " [i]: Please input the 'Lower bound' parameter: ";
+
+    fn::i32f lowerBound{};
+    std::cin >> lowerBound;
+
+    return lowerBound;
+  }
+
+  auto getUpperBoundInput() -> fn::i32f
+  {
+    resetInputBuffer();
+
+    std::cout << " [i]: Please input the 'Upper bound' parameter: ";
+
+    fn::i32f upperBound{};
+    std::cin >> upperBound;
+
+    return upperBound;
+  }
+
+  auto getPreferredChartSizeInput() -> std::pair<fn::u16f, fn::u16f>
+  {
+    resetInputBuffer();
+
+    std::cout
+      << " [i]: Please input the 'Chart sizes' parameter (width height): ";
+
+    fn::u16f width{};
+    fn::u16f height{};
+
+    // Loop until valid input
+    while (true)
+    {
+      resetInputBuffer();
+
+      // Assign inputs
+      std::cin >> width >> height;
+
+      // Check if inputs are larger than 0
+      if (width > fn::u16f{0} and height > fn::u16f{0}) { break; }
+
+      // Wrong input
+      std::cout
+        << " [X]: Width and Height must be larger than 0, please try again: ";
+    }
+
+    return {width, height};
+  }
+
+  auto printResultsHeader() -> fn::none
+  {
+    std::cout << '\n';
+    std::cout
+      << " --------------------------------------------------------------"
+         "------\n";
+    std::cout << '\n';
+    std::cout << " RESULTS\n";
+  }
+
+  auto printChart(const Math::ChartFeed& chartFeed) -> fn::none
+  {
+    std::cout << '\n';
+    std::cout << " - Chart:\n";
     std::cout << '\n';
 
-    // Decrement y
-    y -= chartFeed.yAxisInterval;
-  }
-}
+    // Find label width for x-axis
+    const fn::u16f xAxisLabelWidth{
+      std::ranges::max(
+        chartFeed.frequencyMap | std::views::keys
+        | std::views::transform(Math::NUMBER_LENGTH)
+      )
+      + fn::u16f{1}
+    };
 
-auto IO::printStatistics(const std::vector<fn::i32f>& values) -> fn::none
-{
-  std::cout << '\n';
-  std::cout << " - Statistics:\n";
+    // Find the length of first x label
+    const auto xFirstLabelLength{Math::NUMBER_LENGTH(
+      chartFeed.lowerBound - fn::narrow_cast<fn::i32f>(chartFeed.xAxisInterval)
+    )};
 
-  // Calculate the sum of the values
-  const fn::i32f sum{std::accumulate(values.begin(), values.end(), 0)};
+    // Find the length of last y label
+    const auto yLastLabelLength{
+      Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency))
+    };
 
-  // Calculate the mean of the values
-  const fn::f64 mean{sum / fn::narrow_cast<fn::f64>(values.size())};
+    // Find label width for y-axis
+    fn::u16f yAxisLabelWidth{};
 
-  // Calculate the variance of the values
-  const fn::f64 variance{
-    std::accumulate(
-      values.begin(),
-      values.end(),
-      0.0,
-      [&mean](fn::f64 accumulator, fn::i32f value) noexcept -> fn::f64
+    // Compare effective width of x and y label widths
+    if ((xFirstLabelLength - fn::u16f{LEFT_MARGIN}) > yLastLabelLength)
+    {
+      yAxisLabelWidth = {
+        Math::NUMBER_LENGTH(chartFeed.lowerBound) - fn::u16f{1}
+      };
+    }
+    else
+    {
+      yAxisLabelWidth = {
+        Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency))
+        + fn::u16f{1}
+      };
+    }
+
+    // Print y-axis name
+    printAligned(
+      Y_AXIS_NAME,
+      ' ',
+      yAxisLabelWidth + fn::narrow_cast<fn::u16f>(std::strlen(Y_AXIS_NAME))
+        + fn::u16f{1},
+      Alignment::RIGHT
+    );
+    std::cout << '\n';
+
+    // Print y-axis end
+    printAligned(
+      '^', ' ', yAxisLabelWidth + fn::u16f{LEFT_MARGIN}, Alignment::RIGHT
+    );
+    std::cout << '\n';
+
+    // Print row by row
+    fn::bln  lastRow{false};
+    fn::u32f y{chartFeed.maxFrequency};
+    while (not lastRow)
+    {
+      // Check if we are in last row
+      if ((fn::narrow_cast<fn::i32f>(y)
+           - fn::narrow_cast<fn::i32f>(chartFeed.yAxisInterval))
+          < 0)
       {
-        return accumulator + std::pow(value - mean, 2);
+        lastRow = {true};
       }
-    )
-    / fn::narrow_cast<fn::f64>(values.size())
-  };
 
-  // Calculate the standard deviation of the values
-  const fn::f64 standardDeviation{std::sqrt(variance)};
+      // Print row
+      printChartRow(
+        chartFeed.frequencyMap,
+        chartFeed.lowerBound,
+        {chartFeed.xAxisInterval, xAxisLabelWidth},
+        lastRow,
+        y,
+        {chartFeed.yAxisInterval, yAxisLabelWidth}
+      );
 
-  // Calculate the minimum and maximum values
-  const auto [min, max]{
-    std::ranges::minmax_element(values.begin(), values.end())
-  };
+      // End the row
+      std::cout << '\n';
 
-  // Print the statistics
-  std::cout << "   - Sum: " << sum << '\n';
-  std::cout << "   - Mean: " << mean << '\n';
-  std::cout << "   - Variance: " << variance << '\n';
-  std::cout << "   - Standard deviation: " << standardDeviation << '\n';
-  std::cout << "   - Minimum: " << *min << '\n';
-  std::cout << "   - Maximum: " << *max << '\n';
-}
+      // Decrement y
+      y -= chartFeed.yAxisInterval;
+    }
+  }
 
-auto IO::printOptionsHeader() -> fn::none
-{
-  std::cout << '\n';
-  std::cout << " --------------------------------------------------------------"
-               "------\n";
-  std::cout << '\n';
-  std::cout << " OPTIONS\n";
-  std::cout << '\n';
-  std::cout << " - You may choose from the following options:\n";
-  std::cout << "   - Zoom in   (+): Zoom in to chart,\n";
-  std::cout << "     - Add 'h' or 'v' for directional zoom, Ex: '+h'\n";
-  std::cout << "   - Zoom out  (-): Zoom out from chart,\n";
-  std::cout << "     - Add 'h' or 'v' for directional zoom, Ex: '-v'\n";
-  std::cout << "   - New chart (n): Generate a new distribution,\n";
-  std::cout << "   - Quit app  (q): Quit the application.\n";
-  std::cout << '\n';
-}
+  auto printStatistics(const std::vector<fn::i32f>& values) -> fn::none
+  {
+    std::cout << '\n';
+    std::cout << " - Statistics:\n";
 
-auto IO::getOptionInput() -> Option
-{
-  resetInputBuffer();
+    // Calculate the sum of the values
+    const fn::i32f sum{std::accumulate(values.begin(), values.end(), 0)};
 
-  std::cout << " [i]: Please input your option: ";
+    // Calculate the mean of the values
+    const fn::f64 mean{sum / fn::narrow_cast<fn::f64>(values.size())};
 
-  // Loop until valid input
-  while (true)
+    // Calculate the variance of the values
+    const fn::f64 variance{
+      std::accumulate(
+        values.begin(),
+        values.end(),
+        0.0,
+        [&mean](const fn::f64 accumulator, const fn::i32f value) noexcept
+        -> fn::f64
+        {
+          return accumulator + std::pow(value - mean, SQUARE);
+        }
+      )
+      / fn::narrow_cast<fn::f64>(values.size())
+    };
+
+    // Calculate the standard deviation of the values
+    const fn::f64 standardDeviation{std::sqrt(variance)};
+
+    // Calculate the minimum and maximum values
+    const auto [min, max]{
+      std::ranges::minmax_element(values.begin(), values.end())
+    };
+
+    // Print the statistics
+    std::cout << "   - Sum: " << sum << '\n';
+    std::cout << "   - Mean: " << mean << '\n';
+    std::cout << "   - Variance: " << variance << '\n';
+    std::cout << "   - Standard deviation: " << standardDeviation << '\n';
+    std::cout << "   - Minimum: " << *min << '\n';
+    std::cout << "   - Maximum: " << *max << '\n';
+  }
+
+  auto printOptionsHeader() -> fn::none
+  {
+    std::cout << '\n';
+    std::cout
+      << " --------------------------------------------------------------"
+         "------\n";
+    std::cout << '\n';
+    std::cout << " OPTIONS\n";
+    std::cout << '\n';
+    std::cout << " - You may choose from the following options:\n";
+    std::cout << "   - Zoom in   (+): Zoom in to chart,\n";
+    std::cout << "     - Add 'h' or 'v' for directional zoom, Ex: '+h'\n";
+    std::cout << "   - Zoom out  (-): Zoom out from chart,\n";
+    std::cout << "     - Add 'h' or 'v' for directional zoom, Ex: '-v'\n";
+    std::cout << "   - New chart (n): Generate a new distribution,\n";
+    std::cout << "   - Quit app  (q): Quit the application.\n";
+    std::cout << '\n';
+  }
+
+  auto getOptionInput() -> Option
   {
     resetInputBuffer();
 
-    // Get the option input
-    std::string option{};
-    std::cin >> option;
+    std::cout << " [i]: Please input your option: ";
 
-    // Check option input
-    if (option.find('+') != std::string::npos)
+    // Loop until valid input
+    while (true)
     {
-      // Check if zoom in option is valid
-      if (const auto zoomOutOpt{zoomOptionHandler(option, true)};
-          zoomOutOpt.has_value())
-      {
-        return zoomOutOpt.value();
-      }
-      continue;
-    }
+      resetInputBuffer();
 
-    // Check option input
-    if (option.find('-') != std::string::npos)
+      // Get the option input
+      std::string option{};
+      std::cin >> option;
+
+      // Check option input
+      if (option.find('+') != std::string::npos)
+      {
+        // Check if zoom in option is valid
+        if (const auto zoomOutOpt{zoomOptionHandler(option, true)};
+            zoomOutOpt.has_value())
+        {
+          return zoomOutOpt.value();
+        }
+        continue;
+      }
+
+      // Check option input
+      if (option.find('-') != std::string::npos)
+      {
+        // Check if zoom in option is valid
+        if (const auto zoomOutOpt{zoomOptionHandler(option, false)};
+            zoomOutOpt.has_value())
+        {
+          return zoomOutOpt.value();
+        }
+        continue;
+      }
+
+      // Check option input
+      if (option == "n" or option == "N") { return Option::NEW_CHART; }
+
+      // Check option input
+      if (option == "q" or option == "Q") { return Option::QUIT; }
+
+      // Wrong input
+      std::cout << " [X]: Invalid option input, please try again: ";
+    }
+  }
+
+  auto printNoFurtherZoom(const Utility::Direction direction) -> fn::none
+  {
+    // Using declarations
+    using enum Utility::Direction;
+
+    std::cout << " [X]: No further zoom ";
+    switch (direction)
     {
-      // Check if zoom in option is valid
-      if (const auto zoomOutOpt{zoomOptionHandler(option, false)};
-          zoomOutOpt.has_value())
-      {
-        return zoomOutOpt.value();
-      }
-      continue;
+    case BOTH:
+    {
+      std::cout << "in any direction is possible.\n";
+      break;
     }
-
-    // Check option input
-    if (option == "n" or option == "N") { return Option::NEW_CHART; }
-
-    // Check option input
-    if (option == "q" or option == "Q") { return Option::QUIT; }
-
-    // Wrong input
-    std::cout << " [X]: Invalid option input, please try again: ";
+    case HORIZONTAL:
+    {
+      std::cout << "in horizontal direction is possible.\n";
+      break;
+    }
+    case VERTICAL:
+    {
+      std::cout << "in vertical direction is possible.\n";
+      break;
+    }
+    }
   }
-}
-
-auto IO::printNoFurtherZoom(const Utility::Direction direction) -> fn::none
-{
-  // Using declarations
-  using enum Utility::Direction;
-
-  std::cout << " [X]: No further zoom ";
-  switch (direction)
-  {
-  case BOTH:
-  {
-    std::cout << "in any direction is possible.\n";
-    break;
-  }
-  case HORIZONTAL:
-  {
-    std::cout << "in horizontal direction is possible.\n";
-    break;
-  }
-  case VERTICAL:
-  {
-    std::cout << "in vertical direction is possible.\n";
-    break;
-  }
-  }
-}
+} // namespace IO

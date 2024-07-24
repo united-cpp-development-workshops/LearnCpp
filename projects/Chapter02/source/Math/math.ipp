@@ -10,7 +10,8 @@
 
 namespace Math
 {
-  constexpr auto NUMBER_LENGTH(fn::i32f number) noexcept -> fn::u16f
+  [[nodiscard]] constexpr auto NUMBER_LENGTH(fn::i32f number
+  ) noexcept -> fn::u16f
   {
     // Check if the number is 0
     if (number == 0) { return 1; }
@@ -22,7 +23,7 @@ namespace Math
     while (number != 0)
     {
       number /= _internal::BASE;
-      count++;
+      ++count;
     }
 
     // Return the count
@@ -38,10 +39,9 @@ namespace Math
     fn::i32f                     lowerBound{};
   };
 
-  auto generateChartFeed(
-    const std::vector<fn::i32f>&  values,
-    fn::i32f                      lowerBound,
-    fn::i32f                      upperBound,
-    std::pair<fn::u16f, fn::u16f> chartSize
+  [[nodiscard]] auto generateChartFeed(
+    const std::vector<fn::i32f>&         values,
+    const std::pair<fn::i32f, fn::i32f>& bounds,
+    const std::pair<fn::u16f, fn::u16f>& chartSize
   ) -> std::pair<ChartFeed, std::pair<fn::u16f, fn::u16f>>;
 } // namespace Math

@@ -37,12 +37,12 @@ try
     };
 
     // Distribute randomly
-    auto values{Random::distribute(samplesCount, lowerBound, upperBound)};
+    auto values{Random::distribute(samplesCount, {lowerBound, upperBound})};
 
     // Print results
     IO::printResultsHeader();
     auto [chartFeed, resultingChartSize]{Math::generateChartFeed(
-      values, lowerBound, upperBound, preferredChartSize
+      values, {lowerBound, upperBound}, preferredChartSize
     )};
 
     // Remember intervals and frequencyMap to determine if we can zoom further
@@ -60,12 +60,10 @@ try
     running = {Utility::optionsHandler(
       preferredChartSize,
       resultingChartSize,
-      xAxisInterval,
-      yAxisInterval,
       frequencyMap,
+      {xAxisInterval, yAxisInterval},
       values,
-      lowerBound,
-      upperBound
+      {lowerBound, upperBound}
     )};
   }
 

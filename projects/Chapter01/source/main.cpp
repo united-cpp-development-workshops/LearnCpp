@@ -42,7 +42,7 @@ try
   // If width or height is 0 then error out
   if (width == 0 or height == 0)
   {
-    throw fn::IllegalArgumentError{"Witdh/Height can't be zero!"};
+    throw fn::InputError{"Witdh/Height must'not be zero!"};
   }
 
   // Calculate greatest common divisor
@@ -55,7 +55,7 @@ try
   // Return success
   return fn::EXIT_SUCCESS_CODE;
 }
-catch (const fn::IllegalArgumentError& error)
+catch (const fn::InputError& error)
 {
   // Log error
   fn::elog(error);

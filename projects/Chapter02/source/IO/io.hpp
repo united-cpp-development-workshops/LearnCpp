@@ -10,6 +10,9 @@
 
 namespace IO
 {
+  inline constexpr fn::i16f LEFT_MARGIN{2};
+  inline constexpr fn::size DIRECTIONAL_ZOOM_INPUT_LENGTH{2};
+  inline constexpr fn::f64  SQUARE{2};
   inline constexpr fn::cstr X_AXIS_NAME{"Value"};
   inline constexpr fn::cstr Y_AXIS_NAME{"Frequency"};
 

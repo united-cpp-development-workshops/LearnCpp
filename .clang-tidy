@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
 # |                        C++ Clang-Tidy Configuration                        |
-# |                              Version 24.07.20                              |
+# |                              Version 24.07.24                              |
 # +----------------------------------------------------------------------------+
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Tidy, a static analysis tool from the |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-07-20                                                  |
+# | Date         : 2024-07-24                                                  |
 # +----------------------------------------------------------------------------+
 ---
 # ExcludeHeaderFilterRegex: // v19
@@ -551,7 +551,7 @@ CheckOptions:
   - key: readability-function-size.BranchThreshold
     value: 20
   - key: readability-function-size.ParameterThreshold
-    value: 8
+    value: 10
   - key: readability-function-size.NestingThreshold
     value: 5
   - key: readability-function-size.VariableThreshold
@@ -560,15 +560,15 @@ CheckOptions:
   - key: readability-identifier-length.MinimumVariableNameLength
     value: 2
   - key: readability-identifier-length.IgnoredVariableNames
-    value: "[xyzabc]"
+    value: "[abcxyz]"
   - key: readability-identifier-length.MinimumParameterNameLength
     value: 2
   - key: readability-identifier-length.IgnoredParameterNames
-    value: "[xyzabc]"
+    value: "[abcxyz]"
   - key: readability-identifier-length.MinimumLoopCounterNameLength
     value: 2
   - key: readability-identifier-length.IgnoredLoopCounterNames
-    value: "[xyzabc]"
+    value: "[xyz]"
   - key: readability-identifier-length.MinimumExceptionNameLength
     value: 2
   - key: readability-identifier-length.IgnoredExceptionVariableNames
@@ -1151,11 +1151,11 @@ CheckOptions:
     value: true
 
   - key: readability-magic-numbers.IgnoredIntegerValues
-    value: "1;2;100"
+    value: "-1;0;1"
   - key: readability-magic-numbers.IgnorePowersOf2IntegerValues
     value: false
   - key: readability-magic-numbers.IgnoredFloatingPointValues
-    value: "1.0;2.0;100.0"
+    value: "-1.0;0.0;1.0"
   - key: readability-magic-numbers.IgnoreAllFloatingPointValues
     value: false
   - key: readability-magic-numbers.IgnoreBitFieldsWidths

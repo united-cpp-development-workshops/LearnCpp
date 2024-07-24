@@ -2,11 +2,12 @@
 
 #include <Foundation/types.hpp>
 
+#include <utility>
 #include <vector>
 
 namespace Random
 {
-  auto distribute(
-    fn::i32f numberOfElements, fn::i32f lowerBound, fn::i32f upperBound
+  [[nodiscard]] auto distribute(
+    fn::i32f numberOfElements, const std::pair<fn::i32f, fn::i32f>& bounds
   ) -> std::vector<fn::i32f>;
 } // namespace Random
