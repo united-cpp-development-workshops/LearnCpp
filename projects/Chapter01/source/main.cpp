@@ -40,10 +40,9 @@ try
   std::cin >> height;
 
   // If width or height is 0 then error out
-  if (width == 0 or height == 0)
+  if ((width == 0) or (height == 0))
   {
-    std::cout << "Witdh or height can't be zero!\n";
-    return fn::EXIT_FAILURE_CODE;
+    throw fn::IllegalArgumentError{"Witdh/Height can't be zero!"};
   }
 
   // Calculate greatest common divisor
@@ -51,10 +50,18 @@ try
 
   // Calculate and print the aspect ratio
   std::cout << "Aspect Ratio of " << width << "x" << height << " is "
-            << width / gcd << ":" << height / gcd << '\n';
+            << (width / gcd) << ":" << (height / gcd) << '\n';
 
   // Return success
   return fn::EXIT_SUCCESS_CODE;
+}
+catch (const fn::IllegalArgumentError& error)
+{
+  // Log error
+  fn::elog(error);
+
+  // Return failure
+  return fn::EXIT_FAILURE_CODE;
 }
 catch (const std::exception& exception)
 {
