@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <limits>
 #include <set>
+#include <tuple>
 #include <utility>
 
 namespace
@@ -154,7 +155,7 @@ namespace IO::_internal
           ));
 
           // Remove command option from options
-          options.erase(commandOption);
+          std::ignore = options.erase(commandOption);
         }
       }
 

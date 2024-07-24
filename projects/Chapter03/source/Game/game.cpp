@@ -45,7 +45,7 @@ namespace
     }
   }
 
-  auto createDecks() -> std::vector<Game::Card>
+  [[nodiscard]] auto createDecks() -> std::vector<Game::Card>
   {
     // Initialize deck
     std::vector<Game::Card> deck{};
@@ -242,7 +242,7 @@ namespace
       std::this_thread::sleep_for(std::chrono::seconds(1));
 
       IO::printHand("\nDealer", dealerHand, false, 0);
-      std::cout << "Player: You lost!\n";
+      std::cout << "Player: I lost!\n";
       return;
     }
 

@@ -4,6 +4,10 @@
 
 #include <Foundation/constants.hpp>
 #include <Foundation/types.hpp>
+#include <Foundation/Utility/log.ipp>
+#include <Foundation/Utility/what.ipp>
+
+#include <exception>
 
 auto main() noexcept -> fn::idef
 try
@@ -39,8 +43,19 @@ try
   // Return success
   return fn::EXIT_SUCCESS_CODE;
 }
+catch (const std::exception& exception)
+{
+  // Log exception
+  fn::elog(fn::WHAT(exception));
+
+  // Return failure
+  return fn::EXIT_FAILURE_CODE;
+}
 catch (...)
 {
+  // Log unknown exception
+  fn::elog(fn::UNKNOWN_EXCEPTION);
+
   // Return failure
   return fn::EXIT_FAILURE_CODE;
 }

@@ -10,10 +10,51 @@
 #include <cctype>
 #include <iostream>
 #include <limits>
+#include <locale>
 #include <string>
 #include <vector>
 
-auto IO::getPlayerBet(fn::u32f& playerBank) -> fn::u32f
+auto IO::printHand(
+  const std::string&             holder,
+  const std::vector<Game::Card>& hand,
+  fn::bln                        hideFirstCard,
+  fn::u16f                       adjustedHandTotal
+) -> fn::none
+{
+  // Print holder
+  std::cout << holder << ": ";
+
+  // Hand size
+  const fn::size handSize{hand.size()};
+
+  // Print hand
+  for (fn::size index{}; index < handSize; ++index)
+  {
+    if (index == 0 and hideFirstCard)
+    {
+      // Hide first card if flag is set
+      std::cout << "[??]";
+    }
+    else
+    {
+      // Print card
+      std::cout << hand.at(index);
+    }
+  }
+
+  // Print hand
+  if (not hideFirstCard)
+  {
+    if (adjustedHandTotal == 0)
+    {
+      adjustedHandTotal = {Math::calculateScore(hand)};
+    }
+    std::cout << " > " << adjustedHandTotal << '\n';
+  }
+  else { std::cout << " > ?\n"; }
+}
+
+[[nodiscard]] auto IO::getPlayerBet(fn::u32f& playerBank) -> fn::u32f
 {
   // Bet input
   fn::u32f bet{};
@@ -61,44 +102,7 @@ auto IO::getPlayerBet(fn::u32f& playerBank) -> fn::u32f
   return bet;
 }
 
-auto IO::printHand(
-  const std::string&             holder,
-  const std::vector<Game::Card>& hand,
-  fn::bln                        hideFirstCard,
-  fn::u16f                       adjustedHandTotal
-) -> fn::none
-{
-  // Print holder
-  std::cout << holder << ": ";
-
-  // Print hand
-  for (fn::size index{}; index < hand.size(); ++index)
-  {
-    if (index == 0 and hideFirstCard)
-    {
-      // Hide first card if flag is set
-      std::cout << "[??]";
-    }
-    else
-    {
-      // Print card
-      std::cout << hand.at(index);
-    }
-  }
-
-  // Print hand
-  if (not hideFirstCard)
-  {
-    if (adjustedHandTotal == 0)
-    {
-      adjustedHandTotal = {Math::calculateScore(hand)};
-    }
-    std::cout << " > " << adjustedHandTotal << '\n';
-  }
-  else { std::cout << " > ?\n"; }
-}
-
-auto IO::getPlayerChoice() -> PlayerChoice
+[[nodiscard]] auto IO::getPlayerChoice() -> PlayerChoice
 {
   // Player choice input
   std::string choice{};
@@ -118,8 +122,14 @@ auto IO::getPlayerChoice() -> PlayerChoice
     std::cin >> choice;
 
     // Validate choice
-    if (std::tolower(choice.at(0)) == 'h') { return PlayerChoice::HIT; }
-    if (std::tolower(choice.at(0)) == 's') { return PlayerChoice::STAND; }
+    if (std::tolower(choice.at(0), std::locale()) == 'h')
+    {
+      return PlayerChoice::HIT;
+    }
+    if (std::tolower(choice.at(0), std::locale()) == 's')
+    {
+      return PlayerChoice::STAND;
+    }
 
     // Invalid choice
     std::cout << "Dealer: Place say hit or stand sir!\n";

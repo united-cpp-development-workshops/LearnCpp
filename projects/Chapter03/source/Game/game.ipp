@@ -19,7 +19,7 @@ namespace Game
   inline constexpr fn::u16f MIN_BET{10};
   inline constexpr fn::u16f WIN_MULTIPLIER{2};
 
-  struct Card
+  class Card
   {
   public:
     // Constructors

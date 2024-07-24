@@ -16,8 +16,8 @@
 
 namespace IO::_internal
 {
-  [[nodiscard]]
-  auto getCommandMap() -> const std::unordered_map<Command, std::string>&
+  [[nodiscard]] auto getCommandMap()
+    -> const std::unordered_map<Command, std::string>&
   {
     // Using declarations
     using enum Command;
@@ -36,8 +36,8 @@ namespace IO::_internal
     return s_commandMap;
   }
 
-  [[nodiscard]]
-  auto getOptionMap() -> const std::unordered_map<Option, std::string>&
+  [[nodiscard]] auto getOptionMap()
+    -> const std::unordered_map<Option, std::string>&
   {
     // Using declarations
     using enum Option;
@@ -98,14 +98,13 @@ namespace IO::_internal
     return s_optionMap;
   }
 
-  [[nodiscard]]
-  auto parseCommand(std::string& input) -> std::optional<Command>
+  [[nodiscard]] auto parseCommand(std::string& input) -> std::optional<Command>
   {
     // Reduce verbosity with "using enum" directives.
     using enum Command;
 
     // All lowercase for case-insensitivity
-    std::ranges::transform(input, input.begin(), tolower);
+    std::ranges::transform(input, input.begin(), std::tolower);
 
     // Get command map
     const auto& commandMap{getCommandMap()};
@@ -127,8 +126,8 @@ namespace IO::_internal
     return std::nullopt;
   }
 
-  [[nodiscard]]
-  auto parseOptions(std::istringstream& inputStream) -> std::set<Option>
+  [[nodiscard]] auto parseOptions(std::istringstream& inputStream
+  ) -> std::set<Option>
   {
     // Reduce verbosity with "using enum" directives.
     using enum Option;
@@ -141,7 +140,7 @@ namespace IO::_internal
     while (inputStream >> optionInput)
     {
       // All lowercase for case-insensitivity
-      std::ranges::transform(optionInput, optionInput.begin(), tolower);
+      std::ranges::transform(optionInput, optionInput.begin(), std::tolower);
 
       // Must start with '--'
       if (not optionInput.starts_with("--"))

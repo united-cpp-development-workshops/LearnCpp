@@ -8,5 +8,6 @@
 
 namespace Math
 {
-  auto calculateScore(const std::vector<Game::Card>& hand) noexcept -> fn::u16f;
+  [[nodiscard]] auto calculateScore(const std::vector<Game::Card>& hand
+  ) noexcept -> fn::u16f;
 } // namespace Math

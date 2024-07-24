@@ -17,9 +17,8 @@ auto Random::distribute(
   std::vector<fn::i32f> values(fn::narrow_cast<fn::size>(numberOfElements));
 
   // Generate random tooling
-  std::random_device            randomDevice;
-  std::default_random_engine    randomEngine{randomDevice()};
-  std::uniform_int_distribution distribution{lowerBound, upperBound};
+  std::default_random_engine              randomEngine{std::random_device{}()};
+  std::uniform_int_distribution<fn::i32f> distribution{lowerBound, upperBound};
 
   // Fill the vector with random numbers
   std::ranges::generate(
