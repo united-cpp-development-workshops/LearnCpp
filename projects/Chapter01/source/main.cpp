@@ -10,7 +10,8 @@
 
 namespace
 {
-  constexpr auto GCD(fn::i32l number1, fn::i32l number2) -> fn::i32l
+  [[nodiscard]] constexpr auto GCD(fn::i32l number1, fn::i32l number2)
+    -> fn::i32l
   {
     while (number2 != 0)
     {
