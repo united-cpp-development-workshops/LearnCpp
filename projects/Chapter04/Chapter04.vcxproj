@@ -40,6 +40,10 @@
     <ClCompile Include="source\IO\_internal\parsers.cpp" />
     <ClCompile Include="source\IO\_internal\prints.cpp" />
     <ClCompile Include="source\IO\_internal\responses.cpp" />
+    <ClCompile Include="source\IO\_internal\suggest.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="source\IO\_internal\types.cpp" />
     <ClCompile Include="source\IO\_internal\utilities.cpp" />
     <ClCompile Include="source\IO\_internal\validator.cpp" />
@@ -56,6 +60,10 @@
     <ClInclude Include="source\IO\_internal\platform.ipp" />
     <ClInclude Include="source\IO\_internal\prints.hpp" />
     <ClInclude Include="source\IO\_internal\responses.hpp" />
+    <ClInclude Include="source\IO\_internal\suggest.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="source\IO\_internal\types.hpp" />
     <ClInclude Include="source\IO\_internal\utilities.hpp" />
     <ClInclude Include="source\IO\_internal\validator.hpp" />

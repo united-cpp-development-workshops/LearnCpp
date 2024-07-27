@@ -135,7 +135,7 @@ namespace IO
       }
 
       // Invalid choice
-      std::cout << "Dealer: Place say hit or stand sir!\n";
+      std::cout << "Dealer: Please say hit or stand sir!\n";
     }
   }
 } // namespace IO

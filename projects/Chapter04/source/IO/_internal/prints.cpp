@@ -20,7 +20,7 @@ namespace IO::_internal
   auto printBriefHelp() -> fn::none
   {
     std::cout << "\n   USAGE: <command> [options]\n";
-    std::cout << "   LEARN: Use 'help' command or '--help' option for more "
+    std::cout << "   LEARN: Use 'help' command or '-help' option for more "
                  "information.\n";
   }
 

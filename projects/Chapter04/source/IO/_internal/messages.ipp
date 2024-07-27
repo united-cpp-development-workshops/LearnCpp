@@ -11,14 +11,26 @@ namespace IO::_internal
   [[nodiscard]] constexpr auto NO_COMMAND_MSG() noexcept -> fn::cstr;
   [[nodiscard]] constexpr auto INVALID_COMMAND_MSG(const std::string& token
   ) -> std::string;
+  [[nodiscard]] constexpr auto INVALID_COMMAND_SUGGEST_MSG(
+    const std::string& token, const std::string& suggestion
+  ) -> std::string;
   [[nodiscard]] constexpr auto INSUFFICIENT_OPTIONS_MSG(const std::string& token
   ) -> std::string;
 
   // --------------------------< Warning Messages >-------------------------- //
+  [[nodiscard]] constexpr auto AUTOFIX_COMMAND_MSG(
+    const std::string& token, const std::string& suggestion
+  ) -> std::string;
   [[nodiscard]] constexpr auto MISSING_OPTION_PREFIX_MSG() noexcept -> fn::cstr;
+  [[nodiscard]] constexpr auto AUTOFIX_OPTION_MSG(
+    const std::string& token, const std::string& suggestion
+  ) -> std::string;
   [[nodiscard]] constexpr auto DUPLICATE_OPTION_MSG(const std::string& token
   ) -> std::string;
   [[nodiscard]] constexpr auto INVALID_OPTION_MSG(const std::string& token
+  ) -> std::string;
+  [[nodiscard]] constexpr auto INVALID_OPTION_SUGGEST_MSG(
+    const std::string& token, const std::string& suggestion
   ) -> std::string;
   [[nodiscard]] constexpr auto MISSING_OPTION_MSG(const std::string& token
   ) -> std::string;
@@ -50,7 +62,16 @@ namespace IO::_internal
   [[nodiscard]] constexpr auto INVALID_COMMAND_MSG(const std::string& token
   ) -> std ::string
   {
-    return {"Invalid command: '" + token + "'."};
+    return {"Invalid command '" + token + "'."};
+  }
+
+  [[nodiscard]] constexpr auto INVALID_COMMAND_SUGGEST_MSG(
+    const std::string& token, const std::string& suggestion
+  ) -> std::string
+  {
+    return {
+      "Invalid command '" + token + "'. Did you mean '" + suggestion + "'?"
+    };
   }
 
   [[nodiscard]] constexpr auto INSUFFICIENT_OPTIONS_MSG(const std::string& token
@@ -61,21 +82,51 @@ namespace IO::_internal
 
   // --------------------------< Warning Messages >-------------------------- //
 
+  [[nodiscard]] constexpr auto AUTOFIX_COMMAND_MSG(
+    const std::string& token, const std::string& suggestion
+  ) -> std::string
+  {
+    return {
+      "Invalid command '" + token + "'. Closest match '" + suggestion
+      + "' was used."
+    };
+  }
+
   [[nodiscard]] constexpr auto MISSING_OPTION_PREFIX_MSG() noexcept -> fn::cstr
   {
-    return "Option with the missing prefix '--' was found and discarded.";
+    return "Option with the missing prefix '-' was discarded.";
+  }
+
+  [[nodiscard]] constexpr auto AUTOFIX_OPTION_MSG(
+    const std::string& token, const std::string& suggestion
+  ) -> std::string
+  {
+    return {
+      "Invalid option '" + token + "'. Closest match '" + suggestion
+      + "' was used."
+    };
   }
 
   [[nodiscard]] constexpr auto DUPLICATE_OPTION_MSG(const std::string& token
   ) -> std::string
   {
-    return {"Duplicate option '" + token + "' was found and discarded."};
+    return {"Duplicate option '" + token + "' was discarded."};
   }
 
   [[nodiscard]] constexpr auto INVALID_OPTION_MSG(const std::string& token
   ) -> std::string
   {
-    return {"Invalid option '" + token + "' was found and dicarded."};
+    return {"Invalid option '" + token + "' was dicarded."};
+  }
+
+  [[nodiscard]] constexpr auto INVALID_OPTION_SUGGEST_MSG(
+    const std::string& token, const std::string& suggestion
+  ) -> std::string
+  {
+    return {
+      "Invalid option '" + token + "' was discarded. Did you mean '"
+      + suggestion + "'?"
+    };
   }
 
   [[nodiscard]] constexpr auto MISSING_OPTION_MSG(const std::string& token
