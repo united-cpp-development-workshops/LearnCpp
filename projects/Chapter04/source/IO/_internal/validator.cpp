@@ -16,7 +16,7 @@
 #include <tuple>
 #include <utility>
 
-namespace
+namespace IO::_internal
 {
   [[nodiscard]] auto getCommandPriorityOptions(const IO::Command command
   ) -> std::set<IO::Option>
@@ -29,7 +29,15 @@ namespace
     case HELP:
     case PLATFORM:
     case EXPLORE:
+    case TIPS:
+    case METRICS:
+    {
+      return {IO::Option::HELP};
+    }
     case COMPARE:
+    {
+      return {IO::Option::HELP, IO::Option::T_ALL};
+    }
     case EXIT:
     {
       return {IO::Option::HELP};
@@ -63,6 +71,8 @@ namespace
       };
     }
     case IO::Command::EXPLORE:
+    case IO::Command::TIPS:
+    case IO::Command::METRICS:
     {
       return {
         {T_NONE, T_IPTR, T_UPTR, T_NPTR, T_BLN,  T_I8,   T_I16,  T_I32,  T_I64,
@@ -97,10 +107,7 @@ namespace
     // Should never reach here
     throw fn::EnumeratorError{};
   }
-} // namespace
 
-namespace IO::_internal
-{
   [[nodiscard]] auto validateRequest(
     const Command command, std::set<Option>& options
   ) -> fn::bln

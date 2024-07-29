@@ -128,6 +128,16 @@ namespace IO
       _internal::exploreResponse(options);
       return;
     }
+    case TIPS:
+    {
+      _internal::tipsResponse(options);
+      return;
+    }
+    case METRICS:
+    {
+      _internal::metricsResponse(options);
+      return;
+    }
     case COMPARE:
     {
       _internal::compareResponse(options);

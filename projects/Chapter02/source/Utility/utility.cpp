@@ -138,6 +138,11 @@ namespace Utility
         );
         break;
       }
+      case STATISTICS:
+      {
+        IO::printStatistics(values);
+        break;
+      }
       case NEW_CHART:
       {
         return true;

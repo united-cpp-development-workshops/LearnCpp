@@ -4,6 +4,7 @@
 
 #include <Foundation/types.hpp>
 
+#include <format>
 #include <iostream>
 #include <string>
 
@@ -33,5 +34,11 @@ namespace IO::_internal
   auto printInputWarning(const std::string& message) -> fn::none
   {
     std::cerr << " [!]: " << message << '\n';
+  }
+
+  auto printLeftAligned(const std::string& text, const fn::size width)
+    -> fn::none
+  {
+    std::cout << std::format("{:<{}}", text, width);
   }
 } // namespace IO::_internal

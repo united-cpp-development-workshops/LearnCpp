@@ -4,7 +4,9 @@
 
 #include "IO/_internal/platform.ipp"
 #include "IO/_internal/prints.hpp"
+#include "IO/_internal/table.hpp"
 #include "IO/_internal/types.hpp"
+#include "IO/_internal/validator.hpp"
 #include "IO/io.hpp"
 
 #include <Foundation/types.hpp>
@@ -91,6 +93,8 @@ namespace IO::_internal
       std::cout << "     'help'         - Display available commands.\n";
       std::cout << "     'platform'     - Display platform information.\n";
       std::cout << "     'explore'      - Explore a fundamental C++ type.\n";
+      std::cout << "     'tips'         - Learn tips about a fundamental C++ "
+                   "type.\n";
       std::cout << "     'compare'      - Compare fundamental C++ types.\n";
       std::cout << "     'exit'         - Exit the program.\n";
     }
@@ -188,7 +192,56 @@ namespace IO::_internal
       std::cout << "     '-help'     - Display this help message.\n";
       printCppTypeOptions();
     }
-    else { printBriefTypeInfo(*options.begin()); }
+    else
+    {
+      printBriefTypeInfo(*options.begin());
+      std::cout << '\n';
+      printTypeTips(*options.begin());
+      std::cout << '\n';
+      printTypeTable(*options.begin());
+    }
+  }
+
+  auto tipsResponse(const std::set<Option>& options) -> fn::none
+  {
+    if (options.contains(Option::HELP))
+    {
+      std::cout << "   :::::::::::::::::::::::::: How It Works "
+                   "::::::::::::::::::::::::::\n\n";
+
+      std::cout << "   COMMAND: 'tips'\n\n";
+
+      std::cout << "     - Learn tips about fundamental types of C++.\n";
+      std::cout << "     - Explore use cases of fundamental types of C++.\n\n";
+
+      std::cout << "   OPTIONS:\n\n";
+
+      std::cout << "     '-help'     - Display this help message.\n";
+      printCppTypeOptions();
+    }
+    else { printTypeTips(*options.begin()); }
+  }
+
+  auto metricsResponse(const std::set<Option>& options) -> fn::none
+  {
+    if (options.contains(Option::HELP))
+    {
+      std::cout << "   :::::::::::::::::::::::::: How It Works "
+                   "::::::::::::::::::::::::::\n\n";
+
+      std::cout << "   COMMAND: 'metrics'\n\n";
+
+      std::cout << "     - Learn metrics of C++ fundamental types.\n";
+      std::cout
+        << "     - Ranges, sizes and properties of fundamental types.\n";
+      std::cout << "     - Examine platform specific details.\n\n";
+
+      std::cout << "   OPTIONS:\n\n";
+
+      std::cout << "     '-help'     - Display this help message.\n";
+      printCppTypeOptions();
+    }
+    else { printTypeTable(*options.begin()); }
   }
 
   auto compareResponse(const std::set<Option>& options) -> fn::none
@@ -207,9 +260,14 @@ namespace IO::_internal
       std::cout << "   OPTIONS:\n\n";
 
       std::cout << "     '-help'     - Display this help message.\n";
+      std::cout << "     '-all'      - Compare all fundamental types.\n";
       printCppTypeOptions();
     }
-    else { std::cout << "NOT YET IMPLEMENTED"; }
+    else if (options.contains(Option::T_ALL))
+    {
+      printTypeTable(getCommandRules(Command::COMPARE).first);
+    }
+    else { printTypeTable(options); }
   }
 
   auto exitResponse(const std::set<Option>& options) -> fn::none

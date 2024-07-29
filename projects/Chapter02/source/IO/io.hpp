@@ -24,6 +24,7 @@ namespace IO
     ZOOM_OUT,
     ZOOM_OUT_HORIZONTAL,
     ZOOM_OUT_VERTICAL,
+    STATISTICS,
     NEW_CHART,
     QUIT
   };

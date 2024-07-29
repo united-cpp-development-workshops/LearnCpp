@@ -45,6 +45,9 @@
     <ClCompile Include="source\IO\_internal\suggest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\IO\_internal\table.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\pch.hpp">
@@ -78,6 +81,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\IO\_internal\suggest.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\_internal\table.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

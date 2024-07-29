@@ -29,6 +29,8 @@ namespace IO::_internal
       {HELP,     "help"    },
       {PLATFORM, "platform"},
       {EXPLORE,  "explore" },
+      {TIPS,     "tips"    },
+      {METRICS,  "metrics" },
       {COMPARE,  "compare" },
       {EXIT,     "exit"    }
     };
@@ -51,6 +53,7 @@ namespace IO::_internal
       {LANGUAGE, "language"},
       {ARCH,     "arch"    },
       {OS,       "os"      },
+      {T_ALL,    "all"     },
       {T_NONE,   "none"    },
       {T_IPTR,   "iptr"    },
       {T_UPTR,   "uptr"    },
@@ -196,8 +199,17 @@ namespace IO::_internal
         continue;
       }
 
-      // Remove '-'
-      token.erase(0, 1);
+      // Remove leading '-'
+      token.erase(
+        token.begin(),
+        std::ranges::find_if_not(
+          token,
+          [](const fn::cdef c) -> fn::bln
+          {
+            return c == '-';
+          }
+        )
+      );
 
       // Get option map
       const auto& optionMap{getOptionMap()};

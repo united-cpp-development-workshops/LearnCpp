@@ -14,6 +14,8 @@ namespace IO
     HELP,
     PLATFORM,
     EXPLORE,
+    TIPS,
+    METRICS,
     COMPARE,
     EXIT
   };
@@ -25,6 +27,7 @@ namespace IO
     LANGUAGE,
     ARCH,
     OS,
+    T_ALL,
     T_NONE,
     T_IPTR,
     T_UPTR,

@@ -494,12 +494,14 @@ namespace IO
     std::cout << " OPTIONS\n";
     std::cout << '\n';
     std::cout << " - You may choose from the following options:\n";
-    std::cout << "   - Zoom in   (+): Zoom in to chart,\n";
+    std::cout << "   - Zoom in    (+): Zoom in to chart,\n";
     std::cout << "     - Add 'h' or 'v' for directional zoom, Ex: '+h'\n";
-    std::cout << "   - Zoom out  (-): Zoom out from chart,\n";
+    std::cout << "   - Zoom out   (-): Zoom out from chart,\n";
     std::cout << "     - Add 'h' or 'v' for directional zoom, Ex: '-v'\n";
-    std::cout << "   - New chart (n): Generate a new distribution,\n";
-    std::cout << "   - Quit app  (q): Quit the application.\n";
+    std::cout
+      << "   - Statistics (s): Get the statistics of the distribution,\n";
+    std::cout << "   - New chart  (n): Generate a new distribution,\n";
+    std::cout << "   - Quit app   (q): Quit the application.\n";
     std::cout << '\n';
   }
 
@@ -541,6 +543,9 @@ namespace IO
         }
         continue;
       }
+
+      // Check option input
+      if (option == "s" or option == "S") { return Option::STATISTICS; }
 
       // Check option input
       if (option == "n" or option == "N") { return Option::NEW_CHART; }
