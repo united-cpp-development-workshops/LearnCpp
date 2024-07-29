@@ -1165,9 +1165,6 @@ namespace IO::_internal
     {
     case T_NONE:
     {
-      // Using declarations
-      using Type = fn::none;
-
       return TypeRow{
         .typeName{"void"},
         .isOptional{"no"},
