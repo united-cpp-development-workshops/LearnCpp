@@ -1175,7 +1175,7 @@ namespace IO::_internal
         .minValue{"-"},
         .maxValue{"-"},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_IPTR:
@@ -1186,14 +1186,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::intptr_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
-        .standardSize{">= <pointer> bits"},
+        .header{"cstdint"},
+        .standardSize{">= {ptr} bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_UPTR:
@@ -1204,14 +1204,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uintptr_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
-        .standardSize{">= <pointer> bits"},
+        .header{"cstdint"},
+        .standardSize{">= {ptr} bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_NPTR:
@@ -1222,14 +1222,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::nullptr_t"},
         .isOptional{"no"},
-        .header{"<cstddef>"},
-        .standardSize{">= <pointer> bits"},
+        .header{"cstddef"},
+        .standardSize{">= {ptr} bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<fn::uptr>::min())},
         .maxValue{std::to_string(std::numeric_limits<fn::uptr>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_BLN:
@@ -1247,7 +1247,7 @@ namespace IO::_internal
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I8:
@@ -1258,14 +1258,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int8_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{"= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I16:
@@ -1276,14 +1276,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int16_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{"= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I32:
@@ -1294,14 +1294,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int32_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{"= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I64:
@@ -1312,14 +1312,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int64_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{"= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_U8:
@@ -1330,14 +1330,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint8_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{"= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U16:
@@ -1348,14 +1348,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint16_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{"= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U32:
@@ -1366,14 +1366,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint32_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{"= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U64:
@@ -1384,14 +1384,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint64_t"},
         .isOptional{"yes"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{"= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_I8L:
@@ -1402,14 +1402,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int_least8_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I16L:
@@ -1420,14 +1420,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int_least16_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I32L:
@@ -1438,14 +1438,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int_least32_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I64L:
@@ -1456,14 +1456,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int_least64_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_U8L:
@@ -1474,14 +1474,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint_least8_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U16L:
@@ -1492,14 +1492,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint_least16_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U32L:
@@ -1510,14 +1510,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint_least32_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U64L:
@@ -1528,14 +1528,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint_least64_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_I8F:
@@ -1546,14 +1546,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int_fast8_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I16F:
@@ -1564,14 +1564,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int_fast16_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I32F:
@@ -1582,14 +1582,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int_fast32_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_I64F:
@@ -1600,14 +1600,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::int_fast64_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_U8F:
@@ -1618,14 +1618,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint_fast8_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U16F:
@@ -1636,14 +1636,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint_fast16_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U32F:
@@ -1654,14 +1654,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint_fast32_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_U64F:
@@ -1672,14 +1672,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uint_fast64_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_IDEF:
@@ -1697,7 +1697,7 @@ namespace IO::_internal
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_UDEF:
@@ -1715,7 +1715,7 @@ namespace IO::_internal
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_IMAX:
@@ -1726,14 +1726,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::intmax_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_UMAX:
@@ -1744,14 +1744,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::uintmax_t"},
         .isOptional{"no"},
-        .header{"<cstdint>"},
+        .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"U or u"},
+        .literalSuffix{"u"},
       };
     }
     case T_SIZE:
@@ -1762,14 +1762,14 @@ namespace IO::_internal
       return TypeRow{
         .typeName{"std::size_t"},
         .isOptional{"no"},
-        .header{"<cstddef>"},
-        .standardSize{">= <pointer> bits"},
+        .header{"cstddef"},
+        .standardSize{">= {ptr} bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
         .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
-        .literalSuffixes{"ZU or Zu or zU or zu"},
+        .literalSuffix{"zu"},
       };
     }
     case T_F32:
@@ -1788,7 +1788,7 @@ namespace IO::_internal
         .maxValue{std::format("~{:.4e}", std::numeric_limits<Type>::max())},
         .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)
         },
-        .literalSuffixes{"F or f"},
+        .literalSuffix{"f"},
       };
     }
     case T_F64:
@@ -1807,7 +1807,7 @@ namespace IO::_internal
         .maxValue{std::format("~{:.4e}", std::numeric_limits<Type>::max())},
         .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)
         },
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_FMAX:
@@ -1826,7 +1826,7 @@ namespace IO::_internal
         .maxValue{std::format("~{:.4e}", std::numeric_limits<Type>::max())},
         .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)
         },
-        .literalSuffixes{"L or l"},
+        .literalSuffix{"l"},
       };
     }
     case T_C8:
@@ -1844,7 +1844,7 @@ namespace IO::_internal
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
-        .literalSuffixes{"u8"},
+        .literalSuffix{"u8"},
       };
     }
     case T_C16:
@@ -1862,7 +1862,7 @@ namespace IO::_internal
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
-        .literalSuffixes{"u"},
+        .literalSuffix{"u"},
       };
     }
     case T_C32:
@@ -1880,7 +1880,7 @@ namespace IO::_internal
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
-        .literalSuffixes{"U"},
+        .literalSuffix{"U"},
       };
     }
     case T_CDEF:
@@ -1898,7 +1898,7 @@ namespace IO::_internal
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
-        .literalSuffixes{"-"},
+        .literalSuffix{"-"},
       };
     }
     case T_WDEF:
@@ -1916,7 +1916,7 @@ namespace IO::_internal
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
-        .literalSuffixes{"L"},
+        .literalSuffix{"L"},
       };
     }
     default:
@@ -1932,7 +1932,7 @@ namespace IO::_internal
         .minValue{"ERROR"},
         .maxValue{"ERROR"},
         .precision{"ERROR"},
-        .literalSuffixes{"ERROR"},
+        .literalSuffix{"ERROR"},
       };
     }
     }

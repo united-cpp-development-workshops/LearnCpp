@@ -19,7 +19,7 @@ namespace IO::_internal
     std::string minValue;
     std::string maxValue;
     std::string precision;
-    std::string literalSuffixes;
+    std::string literalSuffix;
   };
 
   auto               printBriefTypeInfo(Option typeName) -> fn::none;

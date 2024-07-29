@@ -95,6 +95,8 @@ namespace IO::_internal
       std::cout << "     'explore'      - Explore a fundamental C++ type.\n";
       std::cout << "     'tips'         - Learn tips about a fundamental C++ "
                    "type.\n";
+      std::cout << "     'metrics'      - Learn metrics of a fundamental C++ "
+                   "type.\n";
       std::cout << "     'compare'      - Compare fundamental C++ types.\n";
       std::cout << "     'exit'         - Exit the program.\n";
     }

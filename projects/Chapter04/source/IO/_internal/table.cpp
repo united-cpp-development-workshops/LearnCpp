@@ -28,7 +28,7 @@ namespace IO::_internal
        std::string{MIN_VALUE}.length(),
        std::string{MAX_VALUE}.length(),
        std::string{PRECISION}.length(),
-       std::string{SUFFIXES}.length()}
+       std::string{SUFFIX}.length()}
     )};
     const auto secondColumnWidth{std::max(
       {typeRow.typeName.length(),
@@ -40,7 +40,7 @@ namespace IO::_internal
        typeRow.minValue.length(),
        typeRow.maxValue.length(),
        typeRow.precision.length(),
-       typeRow.literalSuffixes.length()}
+       typeRow.literalSuffix.length()}
     )};
 
     // Print title
@@ -132,9 +132,9 @@ namespace IO::_internal
               << std::string(secondColumnWidth, '-') << "-+\n";
 
     std::cout << "     | ";
-    printLeftAligned(SUFFIXES, firstColumnWidth);
+    printLeftAligned(SUFFIX, firstColumnWidth);
     std::cout << " | ";
-    printLeftAligned(typeRow.literalSuffixes, secondColumnWidth);
+    printLeftAligned(typeRow.literalSuffix, secondColumnWidth);
     std::cout << " |\n";
 
     std::cout << "     +-" << std::string(firstColumnWidth, '-') << "-+-"
@@ -153,7 +153,7 @@ namespace IO::_internal
     auto maxMinValueColumnLength{std::string{MIN_VALUE}.length()};
     auto maxMaxValueColumnLength{std::string{MAX_VALUE}.length()};
     auto maxPrecisionColumnLength{std::string{PRECISION}.length()};
-    auto maxLiteralSuffixesColumnLength{std::string{SUFFIXES}.length()};
+    auto maxLiteralSuffixesColumnLength{std::string{SUFFIX}.length()};
 
     for (auto& option : options)
     {
@@ -189,7 +189,7 @@ namespace IO::_internal
         std::max(maxPrecisionColumnLength, typeRow.precision.length())
       };
       maxLiteralSuffixesColumnLength = {std::max(
-        maxLiteralSuffixesColumnLength, typeRow.literalSuffixes.length()
+        maxLiteralSuffixesColumnLength, typeRow.literalSuffix.length()
       )};
     }
 
@@ -239,7 +239,7 @@ namespace IO::_internal
     std::cout << " | ";
     printLeftAligned(PRECISION, maxPrecisionColumnLength);
     std::cout << " | ";
-    printLeftAligned(SUFFIXES, maxLiteralSuffixesColumnLength);
+    printLeftAligned(SUFFIX, maxLiteralSuffixesColumnLength);
     std::cout << " |\n";
 
     std::cout
@@ -279,7 +279,7 @@ namespace IO::_internal
       std::cout << " | ";
       printLeftAligned(typeRow.precision, maxPrecisionColumnLength);
       std::cout << " | ";
-      printLeftAligned(typeRow.literalSuffixes, maxLiteralSuffixesColumnLength);
+      printLeftAligned(typeRow.literalSuffix, maxLiteralSuffixesColumnLength);
       std::cout << " |\n";
 
       std::cout
