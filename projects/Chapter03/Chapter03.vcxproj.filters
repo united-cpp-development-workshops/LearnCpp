@@ -35,7 +35,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Game\game.ipp">
+    <ClInclude Include="source\Game\game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="source\IO\io.hpp">

@@ -11,6 +11,7 @@
 #include <Foundation/types.hpp>
 
 // fn::Support headers
+#include <Foundation/Support/consteval.ipp>
 #include <Foundation/Support/narrow.ipp>
 
 // fn::Utility headers

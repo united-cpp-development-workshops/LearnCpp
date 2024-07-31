@@ -7,7 +7,6 @@
 
 #include <exception>
 #include <iostream>
-#include <string>
 
 namespace
 {
@@ -19,7 +18,7 @@ namespace
   constexpr fn::i32l CPP23_CODE{202'302L};
   constexpr fn::i32l CPP26_CODE{202'612L};
 
-  constexpr auto GET_VERSION_STRING() -> std::string
+  [[nodiscard]] consteval auto GET_VERSION_STRING() noexcept -> fn::cstr
   {
     /*--< Note >---------------------------------------------------------------*
     |   The __cplusplus macro (defined by the compiler) indicates the version  |
@@ -28,6 +27,9 @@ namespace
     | value. To fix this issue, you need to add the following flag as argument |
     | to the compiler's command-line: /Zc:__cplusplus.                         |
     *-------------------------------------------------------------------------*/
+
+#pragma warning(push)
+#pragma warning(disable : 6'326)
 
     switch (__cplusplus)
     {
@@ -40,6 +42,8 @@ namespace
     case CPP26_CODE: return "C++26";
     default        : return "Unknown C++ standard";
     }
+
+#pragma warning(pop)
   }
 } // namespace
 
@@ -55,7 +59,7 @@ try
 catch (const std::exception& exception)
 {
   // Log exception
-  fn::elog(fn::WHAT(exception));
+  fn::elog(fn::what(exception));
 
   // Return failure
   return fn::EXIT_FAILURE_CODE;

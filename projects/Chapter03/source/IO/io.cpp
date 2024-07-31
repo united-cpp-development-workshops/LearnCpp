@@ -3,7 +3,7 @@
 #include "IO/io.hpp"
 
 #include "Game/Card.hpp"
-#include "Game/game.ipp"
+#include "Game/game.hpp"
 #include "Math/math.hpp"
 
 #include <Foundation/types.hpp>

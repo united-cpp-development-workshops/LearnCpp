@@ -30,7 +30,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="source\Game\game.ipp" />
+    <ClInclude Include="source\Game\game.hpp" />
     <ClInclude Include="source\IO\io.hpp" />
     <ClInclude Include="source\Math\math.hpp" />
     <ClInclude Include="source\pch.hpp" />

@@ -128,7 +128,7 @@ namespace IO::_internal
     else if (options.empty())
     {
       std::cout << "   COMPILER: '" << COMPILER_STR(COMPILER()) << " v"
-                << COMPILER_VER_STR(COMPILER()) << "'\n\n";
+                << compilerVersionString(COMPILER()) << "'\n\n";
 
       std::cout << "   LANGUAGE: '" << LANGUAGE_STD_STR() << "'\n\n";
 
@@ -145,7 +145,7 @@ namespace IO::_internal
       if (options.contains(Option::COMPILER))
       {
         std::cout << "   COMPILER: '" << COMPILER_STR(COMPILER()) << " v"
-                  << COMPILER_VER_STR(COMPILER()) << "'\n";
+                  << compilerVersionString(COMPILER()) << "'\n";
 
         needsNewLine = {true};
       }

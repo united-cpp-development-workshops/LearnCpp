@@ -159,7 +159,7 @@ namespace IO::_internal
         else
         {
           // Print warning message
-          printInputWarning(DISCARDED_OPTION_BY_LIMIT_MSG(
+          printInputWarning(discardedOptionByLimitMsg(
             getOptionMap().find(commandOption)->second
           ));
 
@@ -173,7 +173,7 @@ namespace IO::_internal
       {
         // Print warning message
         printInputError(
-          INSUFFICIENT_OPTIONS_MSG(getCommandMap().find(command)->second)
+          insufficientOptionsMsg(getCommandMap().find(command)->second)
         );
 
         // Return false
@@ -185,8 +185,8 @@ namespace IO::_internal
     for (const auto& option : options)
     {
       // Print warning message
-      printInputWarning(DISCARDED_OPTION_MSG(getOptionMap().find(option)->second
-      ));
+      printInputWarning(discardedOptionMsg(getOptionMap().find(option)->second)
+      );
     }
 
     // Move sanitized options to options and return true

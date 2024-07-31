@@ -33,16 +33,18 @@ namespace IO::_internal
     LINUX
   };
 
-  [[nodiscard]] constexpr auto COMPILER() noexcept -> Compiler;
-  [[nodiscard]] constexpr auto COMPILER_STR(Compiler compiler) -> fn::cstr;
-  [[nodiscard]] constexpr auto COMPILER_VER_STR(Compiler compiler
+  [[nodiscard]] consteval auto COMPILER() noexcept -> Compiler;
+  [[nodiscard]] consteval auto COMPILER_STR(Compiler compiler) -> fn::cstr;
+
+  [[nodiscard]] inline auto compilerVersionString(Compiler compiler
   ) -> std::string;
-  [[nodiscard]] constexpr auto LANGUAGE_STD_STR() -> std::string;
-  [[nodiscard]] constexpr auto ARCHITECTURE() -> Architecture;
-  [[nodiscard]] constexpr auto ARCHITECTURE_STR(Architecture architecture
+
+  [[nodiscard]] consteval auto LANGUAGE_STD_STR() noexcept -> fn::cstr;
+  [[nodiscard]] consteval auto ARCHITECTURE() -> Architecture;
+  [[nodiscard]] consteval auto ARCHITECTURE_STR(Architecture architecture
   ) -> fn::cstr;
-  [[nodiscard]] constexpr auto OPERATING_SYSTEM() -> OperatingSystem;
-  [[nodiscard]] constexpr auto OPERATING_SYSTEM_STR(
+  [[nodiscard]] consteval auto OPERATING_SYSTEM() -> OperatingSystem;
+  [[nodiscard]] consteval auto OPERATING_SYSTEM_STR(
     OperatingSystem operatingSystem
   ) -> fn::cstr;
 } // namespace IO::_internal
@@ -53,7 +55,7 @@ namespace IO::_internal
 
 namespace IO::_internal
 {
-  [[nodiscard]] constexpr auto COMPILER() noexcept -> Compiler
+  [[nodiscard]] consteval auto COMPILER() noexcept -> Compiler
   {
     // Using declarations
     using enum Compiler;
@@ -69,7 +71,7 @@ namespace IO::_internal
 #endif
   }
 
-  [[nodiscard]] constexpr auto COMPILER_STR(const Compiler compiler) -> fn::cstr
+  [[nodiscard]] consteval auto COMPILER_STR(const Compiler compiler) -> fn::cstr
   {
     // Using declarations
     using enum Compiler;
@@ -86,7 +88,7 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto COMPILER_VER_STR(const Compiler compiler
+  [[nodiscard]] inline auto compilerVersionString(const Compiler compiler
   ) -> std::string
   {
     // Using declarations
@@ -164,7 +166,7 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto LANGUAGE_STD_STR() -> std::string
+  [[nodiscard]] consteval auto LANGUAGE_STD_STR() noexcept -> fn::cstr
   {
     constexpr fn::i32l CPPRE_CODE{199'711L};
     constexpr fn::i32l CPP11_CODE{201'103L};
@@ -174,20 +176,25 @@ namespace IO::_internal
     constexpr fn::i32l CPP23_CODE{202'302L};
     constexpr fn::i32l CPP26_CODE{202'612L};
 
+#pragma warning(push)
+#pragma warning(disable : 6'326)
+
     switch (__cplusplus)
     {
-    case CPPRE_CODE: return {"Pre-C++11"};
-    case CPP11_CODE: return {"C++11"};
-    case CPP14_CODE: return {"C++14"};
-    case CPP17_CODE: return {"C++17"};
-    case CPP20_CODE: return {"C++20"};
-    case CPP23_CODE: return {"C++23"};
-    case CPP26_CODE: return {"C++26"};
-    default        : return {"Unknown C++ standard"};
+    case CPPRE_CODE: return "Pre-C++11";
+    case CPP11_CODE: return "C++11";
+    case CPP14_CODE: return "C++14";
+    case CPP17_CODE: return "C++17";
+    case CPP20_CODE: return "C++20";
+    case CPP23_CODE: return "C++23";
+    case CPP26_CODE: return "C++26";
+    default        : return "Unknown C++ standard";
     }
+
+#pragma warning(pop)
   }
 
-  [[nodiscard]] constexpr auto ARCHITECTURE() -> Architecture
+  [[nodiscard]] consteval auto ARCHITECTURE() -> Architecture
   {
     // Using declarations
     using enum Compiler;
@@ -232,7 +239,7 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto ARCHITECTURE_STR(const Architecture architecture
+  [[nodiscard]] consteval auto ARCHITECTURE_STR(const Architecture architecture
   ) -> fn::cstr
   {
     // Using declarations
@@ -251,7 +258,7 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto OPERATING_SYSTEM() -> OperatingSystem
+  [[nodiscard]] consteval auto OPERATING_SYSTEM() -> OperatingSystem
   {
     // Using declarations
     using enum Compiler;
@@ -279,7 +286,7 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] constexpr auto OPERATING_SYSTEM_STR(
+  [[nodiscard]] consteval auto OPERATING_SYSTEM_STR(
     const OperatingSystem operatingSystem
   ) -> fn::cstr
   {

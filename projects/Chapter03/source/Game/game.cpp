@@ -1,6 +1,6 @@
 #include "pch.hpp"
 
-#include "Game/game.ipp"
+#include "Game/game.hpp"
 
 #include "Game/Card.hpp"
 #include "IO/io.hpp"

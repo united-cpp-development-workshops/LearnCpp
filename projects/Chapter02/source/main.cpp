@@ -73,7 +73,7 @@ try
 catch (const std::exception& exception)
 {
   // Log exception
-  fn::elog(fn::WHAT(exception));
+  fn::elog(fn::what(exception));
 
   // Return failure
   return fn::EXIT_FAILURE_CODE;

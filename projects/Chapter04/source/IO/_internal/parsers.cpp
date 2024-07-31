@@ -154,17 +154,17 @@ namespace IO::_internal
 
       if (distance < AUTO_FIX_THRESHOLD)
       {
-        printInputWarning(AUTOFIX_COMMAND_MSG(token, closest->second));
+        printInputWarning(autofixCommandMsg(token, closest->second));
         return closest->first;
       }
 
       if (distance < SUGGEST_THRESHOLD)
       {
-        printInputError(INVALID_COMMAND_SUGGEST_MSG(token, closest->second));
+        printInputError(invalidCommandSuggesetMsg(token, closest->second));
       }
-      else { printInputError(INVALID_COMMAND_MSG(token)); }
+      else { printInputError(invalidCommandMsg(token)); }
     }
-    else { printInputError(INVALID_COMMAND_MSG(token)); }
+    else { printInputError(invalidCommandMsg(token)); }
 
     return std::nullopt;
   }
@@ -226,7 +226,7 @@ namespace IO::_internal
         if (options.contains(it->first))
         {
           IO::_internal::printInputWarning(
-            IO::_internal::DUPLICATE_OPTION_MSG(it->second)
+            IO::_internal::duplicateOptionMsg(it->second)
           );
           continue;
         }
@@ -267,12 +267,12 @@ namespace IO::_internal
         if (options.contains(closest->first))
         {
           // Suggest but discard
-          printInputWarning(INVALID_OPTION_SUGGEST_MSG(token, closest->second));
+          printInputWarning(invalidOptionSuggestMsg(token, closest->second));
         }
         else
         {
           // Warn and use closest option
-          printInputWarning(AUTOFIX_OPTION_MSG(token, closest->second));
+          printInputWarning(autofixOptionMsg(token, closest->second));
 
           // Insert closest option
           options.insert(closest->first);
@@ -280,10 +280,10 @@ namespace IO::_internal
       }
       else if (distance < SUGGEST_THRESHOLD)
       {
-        printInputWarning(INVALID_OPTION_SUGGEST_MSG(token, closest->second));
+        printInputWarning(invalidOptionSuggestMsg(token, closest->second));
       }
-      else { printInputWarning(INVALID_OPTION_MSG(token)); }
+      else { printInputWarning(invalidOptionMsg(token)); }
     }
-    else { printInputWarning(INVALID_OPTION_MSG(token)); }
+    else { printInputWarning(invalidOptionMsg(token)); }
   }
 } // namespace IO::_internal
