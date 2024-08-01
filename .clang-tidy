@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
 # |                        C++ Clang-Tidy Configuration                        |
-# |                              Version 24.07.31                              |
+# |                              Version 24.08.01                              |
 # +----------------------------------------------------------------------------+
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Tidy, a static analysis tool from the |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-07-31                                                  |
+# | Date         : 2024-08-01                                                  |
 # +----------------------------------------------------------------------------+
 ---
 # ExcludeHeaderFilterRegex: // v19
@@ -1062,15 +1062,19 @@ CheckOptions:
     value: ""
   - key: readability-identifier-naming.TypeAliasIgnoredRegexp
     value: "\
+      ^byte$|\
       ^none$|\
-      ^[iun]ptr$|\
+      ^[iudn]ptr$|\
       ^bln$|\
       ^[iu](8|16|32|64)([lf]?)$|\
-      ^[iu](def|max|ptr)$|\
+      ^[iu](def|max)$|\
       ^size$|\
-      ^c(8|16|32)$|\
-      ^[cw](def|str)$|\
       ^f(32|64|max)$|\
+      ^c(8|16|32)$|\
+      ^[cw]def$|\
+      ^(u8|u16|u32|w|)str$|\
+      ^(c8|c16|c32|w|)cstr$|\
+      ^unit$\
       "
   - key: readability-identifier-naming.TypeAliasSuffix
     value: ""
