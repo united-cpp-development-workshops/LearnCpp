@@ -22,4 +22,4 @@ a Visual Studio solution.
 - **[Chapter 04:](./projects/Chapter04/) Fundamental Data Types**
   - Types Explorer
 - **[Chapter 05:](./projects/Chapter05/) Constants and Strings**
-  - String Manipulator
+  - Word Game

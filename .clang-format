@@ -1,6 +1,6 @@
 # *----------------------------------------------------------------------------*
 # |                       C++ Clang-Format Configuration                       |
-# |                              Version 24.07.22                              |
+# |                              Version 24.08.02                              |
 # *----------------------------------------------------------------------------*
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Format, a formatting tool for C, C++, |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-07-22                                                  |
+# | Date         : 2024-08-02                                                  |
 # *----------------------------------------------------------------------------*
 ---
 BasedOnStyle: LLVM
@@ -73,15 +73,15 @@ AlignTrailingComments:
 AllowAllArgumentsOnNextLine: true
 AllowAllParametersOfDeclarationOnNextLine: true
 AllowBreakBeforeNoexceptSpecifier: OnlyWithParen
-AllowShortBlocksOnASingleLine: Always
+AllowShortBlocksOnASingleLine: Empty
 # AllowShortCaseExpressionOnASingleLine: // v19
-AllowShortCaseLabelsOnASingleLine: true
+AllowShortCaseLabelsOnASingleLine: false
 AllowShortCompoundRequirementOnASingleLine: true
 AllowShortEnumsOnASingleLine: false
-AllowShortFunctionsOnASingleLine: All
-AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
 AllowShortLambdasOnASingleLine: Empty
-AllowShortLoopsOnASingleLine: true
+AllowShortLoopsOnASingleLine: false
 AlwaysBreakBeforeMultilineStrings: false
 AlwaysBreakTemplateDeclarations: true
 # AttributeMacros: // Unused
@@ -123,7 +123,7 @@ BreakConstructorInitializers: BeforeComma
 BreakInheritanceList: BeforeComma
 BreakStringLiterals: true
 # BreakTemplateDeclarations // v19
-ColumnLimit: 80
+ColumnLimit: 100
 # CommentPragmas: // Unused
 CompactNamespaces: false
 ConstructorInitializerIndentWidth: 2

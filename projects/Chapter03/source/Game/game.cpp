@@ -6,28 +6,26 @@
 #include "IO/io.hpp"
 #include "Math/math.hpp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/Support/narrow.ipp>
 #include <Foundation/types.hpp>
+#include <Foundation/utilities.hpp>
 
 #include <algorithm>
 #include <chrono>
 #include <iostream>
 #include <random>
-#include <string>
 #include <thread>
-#include <utility>
-#include <vector>
 
 namespace
 {
-  auto createDeck(std::vector<Game::Card>& deck) -> fn::none
+  auto createDeck(fn::vec<Game::Card>& deck) -> fn::none
   {
     // Loop through suits
-    for (const fn::cstr suit : {"♥", "♦", "♣", "♠"})
+    for (const fn::strv suit : {"♥", "♦", "♣", "♠"})
     {
       // Loop through ranks
-      for (const fn::cdef rank :
-           {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'})
+      for (const fn::cdef rank : {'2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A'})
       {
         // Initialize value
         fn::u16f value{};
@@ -37,19 +35,25 @@ namespace
         {
           value = {Game::COURT_CARD_VALUE};
         }
-        else if (rank == 'A') { value = {Game::ACE_HIGH_VALUE}; }
-        else { value = fn::narrow_cast<fn::u16f>(rank - '0'); }
+        else if (rank == 'A')
+        {
+          value = {Game::ACE_HIGH_VALUE};
+        }
+        else
+        {
+          value = fn::narrow_cast<fn::u16f>(rank - '0');
+        }
 
         // Add card to deck
-        deck.emplace_back(std::string{suit}, rank, value);
+        deck.emplace_back(fn::str{suit}, rank, value);
       }
     }
   }
 
-  [[nodiscard]] auto createDecks() -> std::vector<Game::Card>
+  [[nodiscard]] auto createDecks() -> fn::vec<Game::Card>
   {
     // Initialize deck
-    std::vector<Game::Card> deck{};
+    fn::vec<Game::Card> deck{};
 
     // Create deck(s)
     for (fn::size index{}; index < Game::DECK_COUNT; ++index)
@@ -59,8 +63,7 @@ namespace
     return deck;
   }
 
-  auto adjustAces(std::vector<Game::Card>& hand, fn::u16f& handTotal) noexcept
-    -> fn::none
+  auto adjustAces(fn::vec<Game::Card>& hand, fn::u16f& handTotal) noexcept -> fn::none
   {
     while (handTotal > Game::BLACKJACK)
     {
@@ -80,13 +83,15 @@ namespace
       {
         handTotal -= (Game::ACE_HIGH_VALUE - Game::ACE_LOW_VALUE);
       }
-      else { break; }
+      else
+      {
+        break;
+      }
     }
   }
 
-  [[nodiscard]] auto playPlayerRound(
-    std::vector<Game::Card>& deck, std::vector<Game::Card>& hand
-  ) -> std::pair<fn::u16f, fn::bln>
+  [[nodiscard]] auto playPlayerRound(fn::vec<Game::Card>& deck, fn::vec<Game::Card>& hand)
+    -> fn::pair<fn::u16f, fn::bln>
   {
     fn::u16f score{};
     while (true)
@@ -143,9 +148,8 @@ namespace
     }
   }
 
-  [[nodiscard]] auto playDealerRound(
-    std::vector<Game::Card>& deck, std::vector<Game::Card>& hand
-  ) -> std::pair<fn::u16f, fn::bln>
+  [[nodiscard]] auto playDealerRound(fn::vec<Game::Card>& deck, fn::vec<Game::Card>& hand)
+    -> fn::pair<fn::u16f, fn::bln>
   {
     fn::u16f score{};
     while (true)
@@ -193,8 +197,7 @@ namespace
     }
   }
 
-  auto playRound(std::vector<Game::Card>& deck, fn::u32f& playerBank)
-    -> fn::none
+  auto playRound(fn::vec<Game::Card>& deck, fn::u32f& playerBank) -> fn::none
   {
     // Start round
     std::cout << "\nDealer: Round is starting!\n";
@@ -210,8 +213,8 @@ namespace
     const fn::u32f playerBet{IO::getPlayerBet(playerBank)};
 
     // Initialize hands
-    std::vector<Game::Card> dealerHand{};
-    std::vector<Game::Card> playerHand{};
+    fn::vec<Game::Card> dealerHand{};
+    fn::vec<Game::Card> playerHand{};
 
     // Initial deals
     for (fn::u16f index{}; index < Game::PLAYER_COUNT; ++index)
@@ -300,7 +303,7 @@ namespace Game
     std::cout << "\nDealer: Welcome sir!\n";
 
     // Initialize deck
-    std::vector<Card> deck{createDecks()};
+    fn::vec<Card> deck{createDecks()};
 
     // Initial deck size
     const fn::size initialDeckSize{deck.size()};
@@ -327,8 +330,7 @@ namespace Game
       {
         // Recreate deck
         deck = {createDecks()};
-        std::cout << "\nPlayer: Game played with " << DECK_COUNT
-                  << " deck(s).\n";
+        std::cout << "\nPlayer: Game played with " << DECK_COUNT << " deck(s).\n";
 
         // Shuffle deck
         std::shuffle(deck.begin(), deck.end(), eng);

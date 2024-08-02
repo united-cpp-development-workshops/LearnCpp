@@ -5,24 +5,21 @@
 #include "Math/math.ipp"
 #include "Utility/utility.hpp"
 
+#include <Foundation/concepts.hpp>
+#include <Foundation/constants.hpp>
+#include <Foundation/containers.hpp>
 #include <Foundation/Support/narrow.ipp>
 #include <Foundation/types.hpp>
+#include <Foundation/utilities.hpp>
 
 #include <algorithm>
 #include <cmath>
-#include <concepts>
-#include <cstring>
 #include <iostream>
 #include <limits>
-#include <map>
 #include <numeric>
 #include <optional>
 #include <ranges>
-#include <string>
-#include <string_view>
 #include <tuple>
-#include <utility>
-#include <vector>
 
 namespace
 {
@@ -33,37 +30,39 @@ namespace
   };
 
   template <typename Type>
-  requires std::same_as<Type, fn::i32f> or std::same_as<Type, fn::cdef>
-          or std::same_as<Type, fn::cstr>
+  requires fn::IsSame<Type, fn::i32f> or fn::IsSame<Type, fn::cdef> or fn::IsSame<Type, fn::strv>
   auto printAligned(
-    const Type&     input,
-    const fn::cdef  paddingSymbol,
-    const fn::u16f  width,
-    const Alignment alignment
+    const Type& input, const fn::cdef padSymbol, const fn::u16f width, const Alignment alignment
   ) -> std::ostream&
   {
     // Find the length of the input
     fn::u16f inputLength{};
 
     // Check if the input is a character
-    if constexpr (std::same_as<Type, fn::cdef>) { inputLength = {1}; }
-    else if constexpr (std::same_as<Type, fn::cstr>)
+    if constexpr (fn::IsSame<Type, fn::cdef>)
+    {
+      inputLength = {1};
+    }
+    else if constexpr (fn::IsSame<Type, fn::strv>)
     {
       // Get the length of input
-      inputLength = {fn::narrow_cast<fn::u16f>(std::strlen(input))};
+      inputLength = {fn::narrow_cast<fn::u16f>(input.length())};
     }
-    else { inputLength = {Math::NUMBER_LENGTH(input)}; }
+    else
+    {
+      inputLength = {Math::NUMBER_LENGTH(input)};
+    }
 
     // Calculate the padding
     const fn::u16f padding{width - inputLength};
 
     // Print padding lambda
     auto printPadding{
-      [&paddingSymbol, &padding]() -> fn::none
+      [&padSymbol, &padding]() -> fn::none
       {
         for (fn::u16f position{}; position < padding; ++position)
         {
-          std::cout << paddingSymbol;
+          std::cout << padSymbol;
         }
       }
     };
@@ -90,25 +89,22 @@ namespace
   }
 
   auto printChartRow(
-    const std::map<fn::i32f, fn::u32f>&  frequencyMap,
-    const fn::i32f                       lowerBound,
-    const std::pair<fn::u32f, fn::u16f>& xAxisValues,
-    const fn::bln                        lastRow,
-    const fn::u32f                       y,
-    const std::pair<fn::u32f, fn::u16f>& yAxisValues
+    const fn::map<fn::i32f, fn::u32f>&  frequencyMap,
+    const fn::i32f                      lowerBound,
+    const fn::pair<fn::u32f, fn::u16f>& xAxisValues,
+    const fn::bln                       lastRow,
+    const fn::u32f                      y,
+    const fn::pair<fn::u32f, fn::u16f>& yAxisValues
   ) -> fn::none
   {
     // Print y-axis label and prefix
-    printAligned(
-      fn::narrow_cast<fn::i32f>(y), ' ', yAxisValues.second, Alignment::RIGHT
-    ) << "-|";
+    printAligned(fn::narrow_cast<fn::i32f>(y), ' ', yAxisValues.second, Alignment::RIGHT) << "-|";
 
     // If y-axis is zero, print the x-axis line
     if (lastRow)
     {
       // Traverse through x-axis with respect to interval
-      for ([[maybe_unused]] const auto index :
-           std::views::iota(fn::size{0}, frequencyMap.size()))
+      for ([[maybe_unused]] const auto index : std::views::iota(fn::size{0}, frequencyMap.size()))
       {
         // Print the line
         printAligned('|', '-', xAxisValues.second, Alignment::RIGHT);
@@ -167,21 +163,16 @@ namespace
       // Fill or leave empty current cell based on y value
       if (frequency >= y)
       {
-        printAligned(
-          '#', symbolBetweenColumns, xAxisValues.second, Alignment::RIGHT
-        );
+        printAligned('#', symbolBetweenColumns, xAxisValues.second, Alignment::RIGHT);
       }
       else
       {
-        printAligned(
-          '.', symbolBetweenColumns, xAxisValues.second, Alignment::RIGHT
-        );
+        printAligned('.', symbolBetweenColumns, xAxisValues.second, Alignment::RIGHT);
       }
     }
   }
 
-  auto zoomOptionHandler(const std::string_view& option, const fn::bln zoomIn)
-    -> std::optional<IO::Option>
+  auto zoomOptionHandler(const fn::strv option, const fn::bln zoomIn) -> fn::opt<IO::Option>
   {
     // Using declarations
     using enum IO::Option;
@@ -190,36 +181,35 @@ namespace
     if (option.length() == IO::DIRECTIONAL_ZOOM_INPUT_LENGTH)
     {
       // Check direction of the zoom
-      if (option.find('h') != std::string::npos
-          or option.find('H') != std::string::npos)
+      if (option.find('h') != fn::str::npos or option.find('H') != fn::str::npos)
       {
         return zoomIn ? ZOOM_IN_HORIZONTAL : ZOOM_OUT_HORIZONTAL;
       }
 
       // Check direction of the zoom
-      if (option.find('v') != std::string::npos
-          or option.find('V') != std::string::npos)
+      if (option.find('v') != fn::str::npos or option.find('V') != fn::str::npos)
       {
         return zoomIn ? ZOOM_IN_VERTICAL : ZOOM_OUT_VERTICAL;
       }
 
       // Wrong input
-      std::cout
-        << " [X]: Enter 'h' or 'v' for directional zoom, please try again: ";
+      std::cout << " [X]: Enter 'h' or 'v' for directional zoom, please try again: ";
 
       // Return empty optional
-      return {};
+      return fn::nopt;
     }
 
     // If non-directional zoom is requested, the length must be 1
-    if (option.length() == 1) { return zoomIn ? ZOOM_IN : ZOOM_OUT; }
+    if (option.length() == 1)
+    {
+      return zoomIn ? ZOOM_IN : ZOOM_OUT;
+    }
 
     // Wrong input
-    std::cout
-      << " [X]: Invalid length input for zoom option, please try again: ";
+    std::cout << " [X]: Invalid length input for zoom option, please try again: ";
 
     // Return empty optional
-    return {};
+    return fn::nopt;
   }
 
   auto resetInputBuffer() -> fn::none
@@ -237,30 +227,23 @@ namespace IO
 {
   auto printWelcome() -> fn::none
   {
-    std::cout << " -------------------------< RANDOM CHARTS "
-                 ">--------------------------\n";
-    std::cout << '\n';
-    std::cout << " - Visualize your custom configured random distributions in "
-                 "a chart.\n";
+    std::cout << " -------------------------< RANDOM CHARTS >--------------------------\n\n";
+
+    std::cout << " - Visualize your custom configured random distributions in a chart.\n";
     std::cout << " - Get the resulting distribution's statistics in detail.\n";
   }
 
   auto printInformative() -> fn::none
   {
-    std::cout << '\n';
-    std::cout
-      << " --------------------------------------------------------------"
-         "------\n";
-    std::cout << '\n';
-    std::cout << " CONFIGURATIONS\n";
-    std::cout << '\n';
+    std::cout << "\n --------------------------------------------------------------------\n\n";
+
+    std::cout << " CONFIGURATIONS\n\n";
+
     std::cout << " - You will be asked to input:\n";
-    std::cout
-      << "   - Sample size: The number of random values to be sampled,\n";
+    std::cout << "   - Sample size: The number of random values to be sampled,\n";
     std::cout << "   - Lower bound: Minimum random value a sample can have,\n";
     std::cout << "   - Upper bound: Maximum random value a sample can have,\n";
-    std::cout << "   - Chart sizes: Chart's preferred dimensions.\n";
-    std::cout << '\n';
+    std::cout << "   - Chart sizes: Chart's preferred dimensions.\n\n";
   }
 
   auto getSamplesCountInput() -> fn::i32f
@@ -280,11 +263,13 @@ namespace IO
       std::cin >> sampleSize;
 
       // Check if inputs are larger than 0
-      if (sampleSize > 0) { break; }
+      if (sampleSize > 0)
+      {
+        break;
+      }
 
       // Wrong input
-      std::cout
-        << " [X]: 'Sample size' must be larger than 0, please try again: ";
+      std::cout << " [X]: 'Sample size' must be larger than 0, please try again: ";
     }
 
     return sampleSize;
@@ -314,12 +299,11 @@ namespace IO
     return upperBound;
   }
 
-  auto getPreferredChartSizeInput() -> std::pair<fn::u16f, fn::u16f>
+  auto getPreferredChartSizeInput() -> fn::pair<fn::u16f, fn::u16f>
   {
     resetInputBuffer();
 
-    std::cout
-      << " [i]: Please input the 'Chart sizes' parameter (width height): ";
+    std::cout << " [i]: Please input the 'Chart sizes' parameter (width height): ";
 
     fn::u16f width{};
     fn::u16f height{};
@@ -333,11 +317,13 @@ namespace IO
       std::cin >> width >> height;
 
       // Check if inputs are larger than 0
-      if (width > fn::u16f{0} and height > fn::u16f{0}) { break; }
+      if (width > fn::u16f{0} and height > fn::u16f{0})
+      {
+        break;
+      }
 
       // Wrong input
-      std::cout
-        << " [X]: Width and Height must be larger than 0, please try again: ";
+      std::cout << " [X]: Width and Height must be larger than 0, please try again: ";
     }
 
     return {width, height};
@@ -345,38 +331,31 @@ namespace IO
 
   auto printResultsHeader() -> fn::none
   {
-    std::cout << '\n';
-    std::cout
-      << " --------------------------------------------------------------"
-         "------\n";
-    std::cout << '\n';
+    std::cout << "\n --------------------------------------------------------------------\n\n";
+
     std::cout << " RESULTS\n";
   }
 
   auto printChart(const Math::ChartFeed& chartFeed) -> fn::none
   {
-    std::cout << '\n';
-    std::cout << " - Chart:\n";
-    std::cout << '\n';
+    std::cout << "\n - Chart:\n\n";
 
     // Find label width for x-axis
     const fn::u16f xAxisLabelWidth{
       std::ranges::max(
-        chartFeed.frequencyMap | std::views::keys
-        | std::views::transform(Math::NUMBER_LENGTH)
+        chartFeed.frequencyMap | std::views::keys | std::views::transform(Math::NUMBER_LENGTH)
       )
       + fn::u16f{1}
     };
 
     // Find the length of first x label
-    const auto xFirstLabelLength{Math::NUMBER_LENGTH(
-      chartFeed.lowerBound - fn::narrow_cast<fn::i32f>(chartFeed.xAxisInterval)
-    )};
+    const auto xFirstLabelLength{
+      Math::NUMBER_LENGTH(chartFeed.lowerBound - fn::narrow_cast<fn::i32f>(chartFeed.xAxisInterval))
+    };
 
     // Find the length of last y label
-    const auto yLastLabelLength{
-      Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency))
-    };
+    const auto yLastLabelLength{Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency
+    ))};
 
     // Find label width for y-axis
     fn::u16f yAxisLabelWidth{};
@@ -384,15 +363,12 @@ namespace IO
     // Compare effective width of x and y label widths
     if ((xFirstLabelLength - fn::u16f{LEFT_MARGIN}) > yLastLabelLength)
     {
-      yAxisLabelWidth = {
-        Math::NUMBER_LENGTH(chartFeed.lowerBound) - fn::u16f{1}
-      };
+      yAxisLabelWidth = {Math::NUMBER_LENGTH(chartFeed.lowerBound) - fn::u16f{1}};
     }
     else
     {
       yAxisLabelWidth = {
-        Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency))
-        + fn::u16f{1}
+        Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency)) + fn::u16f{1}
       };
     }
 
@@ -400,16 +376,13 @@ namespace IO
     printAligned(
       Y_AXIS_NAME,
       ' ',
-      yAxisLabelWidth + fn::narrow_cast<fn::u16f>(std::strlen(Y_AXIS_NAME))
-        + fn::u16f{1},
+      yAxisLabelWidth + fn::narrow_cast<fn::u16f>(Y_AXIS_NAME.length()) + fn::u16f{1},
       Alignment::RIGHT
     );
     std::cout << '\n';
 
     // Print y-axis end
-    printAligned(
-      '^', ' ', yAxisLabelWidth + fn::u16f{LEFT_MARGIN}, Alignment::RIGHT
-    );
+    printAligned('^', ' ', yAxisLabelWidth + fn::u16f{LEFT_MARGIN}, Alignment::RIGHT);
     std::cout << '\n';
 
     // Print row by row
@@ -418,9 +391,7 @@ namespace IO
     while (not lastRow)
     {
       // Check if we are in last row
-      if ((fn::narrow_cast<fn::i32f>(y)
-           - fn::narrow_cast<fn::i32f>(chartFeed.yAxisInterval))
-          < 0)
+      if ((fn::narrow_cast<fn::i32f>(y) - fn::narrow_cast<fn::i32f>(chartFeed.yAxisInterval)) < 0)
       {
         lastRow = {true};
       }
@@ -443,10 +414,9 @@ namespace IO
     }
   }
 
-  auto printStatistics(const std::vector<fn::i32f>& values) -> fn::none
+  auto printStatistics(const fn::vec<fn::i32f>& values) -> fn::none
   {
-    std::cout << '\n';
-    std::cout << " - Statistics:\n";
+    std::cout << "\n - Statistics:\n";
 
     // Calculate the sum of the values
     const fn::i32f sum{std::accumulate(values.begin(), values.end(), 0)};
@@ -460,8 +430,7 @@ namespace IO
         values.begin(),
         values.end(),
         0.0,
-        [&mean](const fn::f64 accumulator, const fn::i32f value) noexcept
-        -> fn::f64
+        [&mean](const fn::f64 accumulator, const fn::i32f value) noexcept -> fn::f64
         {
           return accumulator + std::pow(value - mean, SQUARE);
         }
@@ -486,23 +455,18 @@ namespace IO
 
   auto printOptionsHeader() -> fn::none
   {
-    std::cout << '\n';
-    std::cout
-      << " --------------------------------------------------------------"
-         "------\n";
-    std::cout << '\n';
-    std::cout << " OPTIONS\n";
-    std::cout << '\n';
+    std::cout << "\n --------------------------------------------------------------------\n\n";
+
+    std::cout << " OPTIONS\n\n";
+
     std::cout << " - You may choose from the following options:\n";
     std::cout << "   - Zoom in    (+): Zoom in to chart,\n";
     std::cout << "     - Add 'h' or 'v' for directional zoom, Ex: '+h'\n";
     std::cout << "   - Zoom out   (-): Zoom out from chart,\n";
     std::cout << "     - Add 'h' or 'v' for directional zoom, Ex: '-v'\n";
-    std::cout
-      << "   - Statistics (s): Get the statistics of the distribution,\n";
+    std::cout << "   - Statistics (s): Get the statistics of the distribution,\n";
     std::cout << "   - New chart  (n): Generate a new distribution,\n";
-    std::cout << "   - Quit app   (q): Quit the application.\n";
-    std::cout << '\n';
+    std::cout << "   - Quit app   (q): Quit the application.\n\n";
   }
 
   auto getOptionInput() -> Option
@@ -517,15 +481,14 @@ namespace IO
       resetInputBuffer();
 
       // Get the option input
-      std::string option{};
+      fn::str option{};
       std::cin >> option;
 
       // Check option input
-      if (option.find('+') != std::string::npos)
+      if (option.find('+') != fn::str::npos)
       {
         // Check if zoom in option is valid
-        if (const auto zoomOutOpt{zoomOptionHandler(option, true)};
-            zoomOutOpt.has_value())
+        if (const auto zoomOutOpt{zoomOptionHandler(option, true)}; zoomOutOpt.has_value())
         {
           return zoomOutOpt.value();
         }
@@ -533,11 +496,10 @@ namespace IO
       }
 
       // Check option input
-      if (option.find('-') != std::string::npos)
+      if (option.find('-') != fn::str::npos)
       {
         // Check if zoom in option is valid
-        if (const auto zoomOutOpt{zoomOptionHandler(option, false)};
-            zoomOutOpt.has_value())
+        if (const auto zoomOutOpt{zoomOptionHandler(option, false)}; zoomOutOpt.has_value())
         {
           return zoomOutOpt.value();
         }
@@ -545,13 +507,22 @@ namespace IO
       }
 
       // Check option input
-      if (option == "s" or option == "S") { return Option::STATISTICS; }
+      if (option == "s" or option == "S")
+      {
+        return Option::STATISTICS;
+      }
 
       // Check option input
-      if (option == "n" or option == "N") { return Option::NEW_CHART; }
+      if (option == "n" or option == "N")
+      {
+        return Option::NEW_CHART;
+      }
 
       // Check option input
-      if (option == "q" or option == "Q") { return Option::QUIT; }
+      if (option == "q" or option == "Q")
+      {
+        return Option::QUIT;
+      }
 
       // Wrong input
       std::cout << " [X]: Invalid option input, please try again: ";

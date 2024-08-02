@@ -10,40 +10,37 @@
 
 namespace
 {
-  constexpr fn::i32l CPPRE_CODE{199'711L};
-  constexpr fn::i32l CPP11_CODE{201'103L};
-  constexpr fn::i32l CPP14_CODE{201'402L};
-  constexpr fn::i32l CPP17_CODE{201'703L};
-  constexpr fn::i32l CPP20_CODE{202'002L};
-  constexpr fn::i32l CPP23_CODE{202'302L};
-  constexpr fn::i32l CPP26_CODE{202'612L};
-
-  [[nodiscard]] consteval auto GET_VERSION_STRING() noexcept -> fn::cstr
+  [[nodiscard]] consteval auto GET_VERSION_STRING() noexcept -> fn::strv
   {
-    /*--< Note >---------------------------------------------------------------*
-    |   The __cplusplus macro (defined by the compiler) indicates the version  |
-    | of the C++ standard that is being used.                                  |
-    |   In MSVC, by default, the __cpluslplus macro is not set to the correct  |
-    | value. To fix this issue, you need to add the following flag as argument |
-    | to the compiler's command-line: /Zc:__cplusplus.                         |
-    *-------------------------------------------------------------------------*/
+    /*--< Note >-----------------------------------------------------------------------------------*
+    |   The __cplusplus macro (defined by the compiler) indicates the version of the C++ standard  |
+    | that is being used.                                                                          |
+    |   In MSVC, by default, the __cpluslplus macro is not set to the correct value. To fix this   |
+    | issue, you need to add the following flag as argument to the compiler's command-line:        |
+    | /Zc:__cplusplus.                                                                             |
+    *---------------------------------------------------------------------------------------------*/
 
-#pragma warning(push)
-#pragma warning(disable : 6'326)
-
-    switch (__cplusplus)
-    {
-    case CPPRE_CODE: return "Pre-C++11";
-    case CPP11_CODE: return "C++11";
-    case CPP14_CODE: return "C++14";
-    case CPP17_CODE: return "C++17";
-    case CPP20_CODE: return "C++20";
-    case CPP23_CODE: return "C++23";
-    case CPP26_CODE: return "C++26";
-    default        : return "Unknown C++ standard";
-    }
-
-#pragma warning(pop)
+#ifdef __cplusplus
+  #if __cplusplus >= 202'612L
+    return "C++26";
+  #elif __cplusplus >= 202'302L
+    return "C++23";
+  #elif __cplusplus >= 202'002L
+    return "C++20";
+  #elif __cplusplus >= 201'703L
+    return "C++17";
+  #elif __cplusplus >= 201'402L
+    return "C++14";
+  #elif __cplusplus >= 201'103L
+    return "C++11";
+  #elif __cplusplus >= 199'711L
+    return "Pre-C++11";
+  #else
+    return "Unknown C++ standard";
+  #endif
+#else
+    return "__cplusplus macro not defined";
+#endif
   }
 } // namespace
 

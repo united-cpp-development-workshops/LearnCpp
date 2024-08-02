@@ -301,7 +301,7 @@ CheckOptions:
     value: true
 
   - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
-    value: false
+    value: true
   - key: misc-non-private-member-variables-in-classes.IgnorePublicMemberVariables
     value: false
 
@@ -714,7 +714,10 @@ CheckOptions:
     value: "UPPER_CASE"
   - key: readability-identifier-naming.ConstexprVariablePrefix
     value: ""
-# - key: readability-identifier-naming.ConstexprVariableIgnoredRegexp // None
+  - key: readability-identifier-naming.ConstexprVariableIgnoredRegexp
+    value: "\
+      ^nopt$\
+      "
   - key: readability-identifier-naming.ConstexprVariableSuffix
     value: ""
   - key: readability-identifier-naming.ConstexprVariableHungarianPrefix
@@ -1075,7 +1078,16 @@ CheckOptions:
       ^[cw]def$|\
       ^((u8|u16|u32|w)?)str([v]?)$|\
       ^((c8|c16|c32|w)?)cstr$|\
-      ^unit$\
+      ^unit$|\
+      ^opt$|\
+      ^pair$|\
+      ^arr$|\
+      ^vec$|\
+      ^([bp]?)que$|\
+      ^[sd]ll$|\
+      ^((u|m|um)?)map$|\
+      ^((u|m|um)?)set$|\
+      ^stk$\
       "
   - key: readability-identifier-naming.TypeAliasSuffix
     value: ""

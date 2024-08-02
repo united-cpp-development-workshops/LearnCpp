@@ -2,149 +2,106 @@
 
 #include <Foundation/types.hpp>
 
-#include <string>
+#include <format>
 
 namespace IO::_internal
 {
-  // ---------------------------< Error Messages >--------------------------- //
-  [[nodiscard]] consteval auto NO_INPUT_MSG() noexcept -> fn::cstr;
-  [[nodiscard]] consteval auto NO_COMMAND_MSG() noexcept -> fn::cstr;
+  // -------------------------------------< Error Messages >------------------------------------- //
+  [[nodiscard]] consteval auto NO_INPUT_MSG() noexcept -> fn::strv;
+  [[nodiscard]] consteval auto NO_CMD_MSG() noexcept -> fn::strv;
+  [[nodiscard]] inline auto    invalidCmdMsg(fn::strv token) -> fn::str;
+  [[nodiscard]] inline auto    invalidCmdSuggestMsg(fn::strv token, fn::strv suggestion) -> fn::str;
+  [[nodiscard]] inline auto    insufficientOptMsg(fn::strv token) -> fn::str;
 
-  [[nodiscard]] inline auto invalidCommandMsg(const std::string& token
-  ) -> std::string;
-  [[nodiscard]] inline auto invalidCommandSuggesetMsg(
-    const std::string& token, const std::string& suggestion
-  ) -> std::string;
-  [[nodiscard]] inline auto insufficientOptionsMsg(const std::string& token
-  ) -> std::string;
-
-  // --------------------------< Warning Messages >-------------------------- //
-  [[nodiscard]] consteval auto MISSING_OPTION_PREFIX_MSG() noexcept -> fn::cstr;
-
-  [[nodiscard]] inline auto autofixCommandMsg(
-    const std::string& token, const std::string& suggestion
-  ) -> std::string;
-  [[nodiscard]] inline auto autofixOptionMsg(
-    const std::string& token, const std::string& suggestion
-  ) -> std::string;
-  [[nodiscard]] inline auto duplicateOptionMsg(const std::string& token
-  ) -> std::string;
-  [[nodiscard]] inline auto invalidOptionMsg(const std::string& token
-  ) -> std::string;
-  [[nodiscard]] inline auto invalidOptionSuggestMsg(
-    const std::string& token, const std::string& suggestion
-  ) -> std::string;
-  [[nodiscard]] inline auto missingOptionMsg(const std::string& token
-  ) -> std::string;
-  [[nodiscard]] inline auto discardedOptionByLimitMsg(const std::string& token
-  ) -> std::string;
-  [[nodiscard]] inline auto discardedOptionMsg(const std::string& token
-  ) -> std::string;
+  // ------------------------------------< Warning Messages >------------------------------------ //
+  [[nodiscard]] consteval auto MISSING_OPT_PREFIX_MSG() noexcept -> fn::strv;
+  [[nodiscard]] inline auto    autofixCmdMsg(fn::strv token, fn::strv suggestion) -> fn::str;
+  [[nodiscard]] inline auto    autofixOptMsg(fn::strv token, fn::strv suggestion) -> fn::str;
+  [[nodiscard]] inline auto    duplicateOptMsg(fn::strv token) -> fn::str;
+  [[nodiscard]] inline auto    invalidOptMsg(fn::strv token) -> fn::str;
+  [[nodiscard]] inline auto    invalidOptSuggestMsg(fn::strv token, fn::strv suggestion) -> fn::str;
+  [[nodiscard]] inline auto    missingOptMsg(fn::strv token) -> fn::str;
+  [[nodiscard]] inline auto    discardedOptByLimitMsg(fn::strv token) -> fn::str;
+  [[nodiscard]] inline auto    discardedOptMsg(fn::strv token) -> fn::str;
 } // namespace IO::_internal
 
-/*----------------------------------------------------------------------------*\
-*| >>>>>>>>>>>>>>>>>>>>>>>>>>>>> Implementation <<<<<<<<<<<<<<<<<<<<<<<<<<<<< |*
-\*----------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------*\
+*| >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Implementation <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< |*
+\*------------------------------------------------------------------------------------------------*/
 
 namespace IO::_internal
 {
-  // ---------------------------< Error Messages >--------------------------- //
+  // -------------------------------------< Error Messages >------------------------------------- //
 
-  [[nodiscard]] consteval auto NO_INPUT_MSG() noexcept -> fn::cstr
+  [[nodiscard]] consteval auto NO_INPUT_MSG() noexcept -> fn::strv
   {
     return "No input was provided.";
   }
 
-  [[nodiscard]] consteval auto NO_COMMAND_MSG() noexcept -> fn::cstr
+  [[nodiscard]] consteval auto NO_CMD_MSG() noexcept -> fn::strv
   {
     return "No command was provided.";
   }
 
-  [[nodiscard]] inline auto invalidCommandMsg(const std::string& token
-  ) -> std ::string
+  [[nodiscard]] inline auto invalidCmdMsg(fn::strv token) -> std ::string
   {
-    return {"Invalid command '" + token + "'."};
+    return std::format("Invalid command '{}'.", token);
   }
 
-  [[nodiscard]] inline auto invalidCommandSuggesetMsg(
-    const std::string& token, const std::string& suggestion
-  ) -> std::string
+  [[nodiscard]] inline auto invalidCmdSuggestMsg(fn::strv token, fn::strv suggestion) -> fn::str
   {
-    return {
-      "Invalid command '" + token + "'. Did you mean '" + suggestion + "'?"
-    };
+    return std::format("Invalid command '{}'. Did you mean '{}'?", token, suggestion);
   }
 
-  [[nodiscard]] inline auto insufficientOptionsMsg(const std::string& token
-  ) -> std::string
+  [[nodiscard]] inline auto insufficientOptMsg(fn::strv token) -> fn::str
   {
-    return {"Insufficient options for command '" + token + "'."};
+    return std::format("Insufficient options for command '{}'.", token);
   }
 
-  // --------------------------< Warning Messages >-------------------------- //
+  // ------------------------------------< Warning Messages >------------------------------------ //
 
-  [[nodiscard]] consteval auto MISSING_OPTION_PREFIX_MSG() noexcept -> fn::cstr
+  [[nodiscard]] consteval auto MISSING_OPT_PREFIX_MSG() noexcept -> fn::strv
   {
     return "Option with the missing prefix '-' was discarded.";
   }
 
-  [[nodiscard]] inline auto autofixCommandMsg(
-    const std::string& token, const std::string& suggestion
-  ) -> std::string
+  [[nodiscard]] inline auto autofixCmdMsg(fn::strv token, fn::strv suggestion) -> fn::str
   {
-    return {
-      "Invalid command '" + token + "'. Closest match '" + suggestion
-      + "' was used."
-    };
+    return std::format("Invalid command '{}'. Closest natcg '{}' was used.", token, suggestion);
   }
 
-  [[nodiscard]] inline auto autofixOptionMsg(
-    const std::string& token, const std::string& suggestion
-  ) -> std::string
+  [[nodiscard]] inline auto autofixOptMsg(fn::strv token, fn::strv suggestion) -> fn::str
   {
-    return {
-      "Invalid option '" + token + "'. Closest match '" + suggestion
-      + "' was used."
-    };
+    return std::format("Invalid option '{}'. Closest match '{}' was used.", token, suggestion);
   }
 
-  [[nodiscard]] inline auto duplicateOptionMsg(const std::string& token
-  ) -> std::string
+  [[nodiscard]] inline auto duplicateOptMsg(fn::strv token) -> fn::str
   {
-    return {"Duplicate option '" + token + "' was discarded."};
+    return std::format("Duplicate option '{}' was discarded.", token);
   }
 
-  [[nodiscard]] inline auto invalidOptionMsg(const std::string& token
-  ) -> std::string
+  [[nodiscard]] inline auto invalidOptMsg(fn::strv token) -> fn::str
   {
-    return {"Invalid option '" + token + "' was dicarded."};
+    return std::format("Invalid option '{}' was dicarded.", token);
   }
 
-  [[nodiscard]] inline auto invalidOptionSuggestMsg(
-    const std::string& token, const std::string& suggestion
-  ) -> std::string
+  [[nodiscard]] inline auto invalidOptSuggestMsg(fn::strv token, fn::strv suggestion) -> fn::str
   {
-    return {
-      "Invalid option '" + token + "' was discarded. Did you mean '"
-      + suggestion + "'?"
-    };
+    return std::format("Invalid option '{}' was discarded. Did you mean '{}'?", token, suggestion);
   }
 
-  [[nodiscard]] inline auto missingOptionMsg(const std::string& token
-  ) -> std::string
+  [[nodiscard]] inline auto missingOptMsg(fn::strv token) -> fn::str
   {
-    return {"Required option '" + token + "' was not found."};
+    return std::format("Required option '{}' was not found.", token);
   }
 
-  [[nodiscard]] inline auto discardedOptionByLimitMsg(const std::string& token
-  ) -> std::string
+  [[nodiscard]] inline auto discardedOptByLimitMsg(fn::strv token) -> fn::str
   {
-    return {"Option '" + token + "' was discarded due to limit."};
+    return std::format("Option '{}' was discarded due to limit.", token);
   }
 
-  [[nodiscard]] inline auto discardedOptionMsg(const std::string& token
-  ) -> std::string
+  [[nodiscard]] inline auto discardedOptMsg(fn::strv token) -> fn::str
   {
-    return {"Unnecessary option '" + token + "' was discarded."};
+    return std::format("Unnecessary option '{}' was discarded.", token);
   }
 } // namespace IO::_internal

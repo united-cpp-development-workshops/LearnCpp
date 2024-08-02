@@ -13,8 +13,7 @@ namespace IO::_internal
   [[nodiscard]] auto isNotAllowedCharacter(const fn::cdef character) -> fn::bln
   {
     // Check if character is allowed
-    return std::isalnum(character, std::locale()) == 0 and character != '-'
-       and character != ' ';
+    return std::isalnum(character, std::locale()) == 0 and character != '-' and character != ' ';
   }
 
   auto resetInputBuffer() -> fn::none

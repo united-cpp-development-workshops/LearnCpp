@@ -6,38 +6,34 @@
 
 #include <format>
 #include <iostream>
-#include <string>
 
 namespace IO::_internal
 {
   auto printBriefInfo() -> fn::none
   {
     std::cout << " - Explore fundamental types of C++.\n";
-    std::cout << " - Learn about the sizes, ranges and properties of "
-                 "fundamental types.\n";
+    std::cout << " - Learn about the sizes, ranges and properties of fundamental types.\n";
     std::cout << " - Compare fundamental types of C++.\n\n";
   }
 
   auto printBriefHelp() -> fn::none
   {
     std::cout << "\n   USAGE: <command> [options]\n";
-    std::cout << "   LEARN: Use 'help' command or '-help' option for more "
-                 "information.\n";
+    std::cout << "   LEARN: Use 'help' command or '-help' option for more information.\n";
   }
 
-  auto printInputError(const std::string& message) -> fn::none
+  auto printInputError(const fn::strv message) -> fn::none
   {
     std::cerr << " [X]: " << message << '\n';
     printBriefHelp();
   }
 
-  auto printInputWarning(const std::string& message) -> fn::none
+  auto printInputWarning(const fn::strv message) -> fn::none
   {
     std::cerr << " [!]: " << message << '\n';
   }
 
-  auto printLeftAligned(const std::string& text, const fn::size width)
-    -> fn::none
+  auto printLeftAligned(const fn::strv text, const fn::size width) -> fn::none
   {
     std::cout << std::format("{:<{}}", text, width);
   }

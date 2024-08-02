@@ -9,10 +9,10 @@
 #include "IO/_internal/validator.hpp"
 #include "IO/io.hpp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
 
 #include <iostream>
-#include <set>
 
 namespace
 {
@@ -65,12 +65,11 @@ namespace
 
 namespace IO::_internal
 {
-  auto helpResponse(const std::set<Option>& options) -> fn::none
+  auto helpResponse(const fn::set<Option>& options) -> fn::none
   {
     if (options.contains(Option::HELP))
     {
-      std::cout << "   :::::::::::::::::::::::::: How It Works "
-                   "::::::::::::::::::::::::::\n\n";
+      std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n\n";
 
       std::cout << "   COMMAND: 'help'\n\n";
 
@@ -85,29 +84,25 @@ namespace IO::_internal
     {
       printBriefInfo();
 
-      std::cout << "   :::::::::::::::::::::::::: How It Works "
-                   "::::::::::::::::::::::::::\n\n";
+      std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n\n";
 
       std::cout << "   COMMANDS:\n\n";
 
       std::cout << "     'help'         - Display available commands.\n";
       std::cout << "     'platform'     - Display platform information.\n";
       std::cout << "     'explore'      - Explore a fundamental C++ type.\n";
-      std::cout << "     'tips'         - Learn tips about a fundamental C++ "
-                   "type.\n";
-      std::cout << "     'metrics'      - Learn metrics of a fundamental C++ "
-                   "type.\n";
+      std::cout << "     'tips'         - Learn tips about a fundamental C++ type.\n";
+      std::cout << "     'metrics'      - Learn metrics of a fundamental C++ type.\n";
       std::cout << "     'compare'      - Compare fundamental C++ types.\n";
       std::cout << "     'exit'         - Exit the program.\n";
     }
   }
 
-  auto platformResponse(const std::set<Option>& options) -> fn::none
+  auto platformResponse(const fn::set<Option>& options) -> fn::none
   {
     if (options.contains(Option::HELP))
     {
-      std::cout << "   :::::::::::::::::::::::::: How It Works "
-                   "::::::::::::::::::::::::::\n\n";
+      std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n\n";
 
       std::cout << "   COMMAND: 'platform'\n\n";
 
@@ -116,27 +111,21 @@ namespace IO::_internal
       std::cout << "   OPTIONS:\n\n";
 
       std::cout << "     '-help'         - Display this help message.\n";
-      std::cout
-        << "     '-compiler'     - Display only the compiler information.\n";
-      std::cout
-        << "     '-language'     - Display only the language standard.\n";
-      std::cout << "     '-arch'         - Display only the architecture "
-                   "information.\n";
-      std::cout << "     '-os'           - Display only the operating system "
-                   "information.\n";
+      std::cout << "     '-compiler'     - Display only the compiler information.\n";
+      std::cout << "     '-language'     - Display only the language standard.\n";
+      std::cout << "     '-arch'         - Display only the architecture information.\n";
+      std::cout << "     '-os'           - Display only the operating system information.\n";
     }
     else if (options.empty())
     {
-      std::cout << "   COMPILER: '" << COMPILER_STR(COMPILER()) << " v"
-                << compilerVersionString(COMPILER()) << "'\n\n";
+      std::cout << "   COMPILER: '" << COMPILER_STR(COMPILER()) << " v" << compilerVer(COMPILER())
+                << "'\n\n";
 
       std::cout << "   LANGUAGE: '" << LANGUAGE_STD_STR() << "'\n\n";
 
-      std::cout << "   ARCHITECTURE: '" << ARCHITECTURE_STR(ARCHITECTURE())
-                << "'\n\n";
+      std::cout << "   ARCHITECTURE: '" << ARCHITECTURE_STR(ARCHITECTURE()) << "'\n\n";
 
-      std::cout << "   OPERATING SYSTEM: '"
-                << OPERATING_SYSTEM_STR(OPERATING_SYSTEM()) << "'\n";
+      std::cout << "   OPERATING SYSTEM: '" << OPERATING_SYSTEM_STR(OPERATING_SYSTEM()) << "'\n";
     }
     else
     {
@@ -144,14 +133,17 @@ namespace IO::_internal
       auto needsNewLine{false};
       if (options.contains(Option::COMPILER))
       {
-        std::cout << "   COMPILER: '" << COMPILER_STR(COMPILER()) << " v"
-                  << compilerVersionString(COMPILER()) << "'\n";
+        std::cout << "   COMPILER: '" << COMPILER_STR(COMPILER()) << " v" << compilerVer(COMPILER())
+                  << "'\n";
 
         needsNewLine = {true};
       }
       if (options.contains(Option::LANGUAGE))
       {
-        if (needsNewLine) { std::cout << '\n'; }
+        if (needsNewLine)
+        {
+          std::cout << '\n';
+        }
 
         std::cout << "   LANGUAGE: '" << LANGUAGE_STD_STR() << "'\n";
 
@@ -159,35 +151,37 @@ namespace IO::_internal
       }
       if (options.contains(Option::ARCH))
       {
-        if (needsNewLine) { std::cout << '\n'; }
+        if (needsNewLine)
+        {
+          std::cout << '\n';
+        }
 
-        std::cout << "   ARCHITECTURE: '" << ARCHITECTURE_STR(ARCHITECTURE())
-                  << "'\n";
+        std::cout << "   ARCHITECTURE: '" << ARCHITECTURE_STR(ARCHITECTURE()) << "'\n";
 
         needsNewLine = {true};
       }
       if (options.contains(Option::OS))
       {
-        if (needsNewLine) { std::cout << '\n'; }
+        if (needsNewLine)
+        {
+          std::cout << '\n';
+        }
 
-        std::cout << "   OPERATING SYSTEM: '"
-                  << OPERATING_SYSTEM_STR(OPERATING_SYSTEM()) << "'\n";
+        std::cout << "   OPERATING SYSTEM: '" << OPERATING_SYSTEM_STR(OPERATING_SYSTEM()) << "'\n";
       }
     }
   }
 
-  auto exploreResponse(const std::set<Option>& options) -> fn::none
+  auto exploreResponse(const fn::set<Option>& options) -> fn::none
   {
     if (options.contains(Option::HELP))
     {
-      std::cout << "   :::::::::::::::::::::::::: How It Works "
-                   "::::::::::::::::::::::::::\n\n";
+      std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n\n";
 
       std::cout << "   COMMAND: 'explore'\n\n";
 
       std::cout << "     - Explore fundamental types of C++.\n";
-      std::cout << "     - Learn about the sizes, ranges and properties of "
-                   "fundamental types.\n\n";
+      std::cout << "     - Learn about the sizes, ranges and properties of fundamental types.\n\n";
 
       std::cout << "   OPTIONS:\n\n";
 
@@ -204,12 +198,11 @@ namespace IO::_internal
     }
   }
 
-  auto tipsResponse(const std::set<Option>& options) -> fn::none
+  auto tipsResponse(const fn::set<Option>& options) -> fn::none
   {
     if (options.contains(Option::HELP))
     {
-      std::cout << "   :::::::::::::::::::::::::: How It Works "
-                   "::::::::::::::::::::::::::\n\n";
+      std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n\n";
 
       std::cout << "   COMMAND: 'tips'\n\n";
 
@@ -221,21 +214,22 @@ namespace IO::_internal
       std::cout << "     '-help'     - Display this help message.\n";
       printCppTypeOptions();
     }
-    else { printTypeTips(*options.begin()); }
+    else
+    {
+      printTypeTips(*options.begin());
+    }
   }
 
-  auto metricsResponse(const std::set<Option>& options) -> fn::none
+  auto metricsResponse(const fn::set<Option>& options) -> fn::none
   {
     if (options.contains(Option::HELP))
     {
-      std::cout << "   :::::::::::::::::::::::::: How It Works "
-                   "::::::::::::::::::::::::::\n\n";
+      std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n\n";
 
       std::cout << "   COMMAND: 'metrics'\n\n";
 
       std::cout << "     - Learn metrics of C++ fundamental types.\n";
-      std::cout
-        << "     - Ranges, sizes and properties of fundamental types.\n";
+      std::cout << "     - Ranges, sizes and properties of fundamental types.\n";
       std::cout << "     - Examine platform specific details.\n\n";
 
       std::cout << "   OPTIONS:\n\n";
@@ -243,21 +237,22 @@ namespace IO::_internal
       std::cout << "     '-help'     - Display this help message.\n";
       printCppTypeOptions();
     }
-    else { printTypeTable(*options.begin()); }
+    else
+    {
+      printTypeTable(*options.begin());
+    }
   }
 
-  auto compareResponse(const std::set<Option>& options) -> fn::none
+  auto compareResponse(const fn::set<Option>& options) -> fn::none
   {
     if (options.contains(Option::HELP))
     {
-      std::cout << "   :::::::::::::::::::::::::: How It Works "
-                   "::::::::::::::::::::::::::\n\n";
+      std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n\n";
 
       std::cout << "   COMMAND: 'compare'\n\n";
 
       std::cout << "     - Compare two or more fundamental C++ types.\n";
-      std::cout << "     - Learn about their differences in size, range and "
-                   "property.\n\n";
+      std::cout << "     - Learn about their differences in size, range and property.\n\n";
 
       std::cout << "   OPTIONS:\n\n";
 
@@ -269,15 +264,17 @@ namespace IO::_internal
     {
       printTypeTable(getCommandRules(Command::COMPARE).first);
     }
-    else { printTypeTable(options); }
+    else
+    {
+      printTypeTable(options);
+    }
   }
 
-  auto exitResponse(const std::set<Option>& options) -> fn::none
+  auto exitResponse(const fn::set<Option>& options) -> fn::none
   {
     if (options.contains(Option::HELP))
     {
-      std::cout << "   :::::::::::::::::::::::::: How It Works "
-                   "::::::::::::::::::::::::::\n\n";
+      std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n\n";
 
       std::cout << "   COMMAND: 'exit'\n\n";
 
@@ -287,6 +284,9 @@ namespace IO::_internal
 
       std::cout << "     '-help'     - Display this help message.\n";
     }
-    else { std::cerr << "   ERROR: In 'exit' command!\n"; }
+    else
+    {
+      std::cerr << "   ERROR: In 'exit' command!\n";
+    }
   }
 } // namespace IO::_internal

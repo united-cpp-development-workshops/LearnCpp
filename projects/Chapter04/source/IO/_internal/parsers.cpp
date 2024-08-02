@@ -7,25 +7,23 @@
 #include "IO/_internal/suggest.hpp"
 #include "IO/io.hpp"
 
+#include <Foundation/containers.hpp>
+#include <Foundation/utilities.hpp>
+
 #include <algorithm>
 #include <locale>
-#include <optional>
-#include <set>
 #include <sstream>
-#include <string>
-#include <unordered_map>
 
 namespace IO::_internal
 {
-  [[nodiscard]] auto getCommandMap()
-    -> const std::unordered_map<Command, std::string>&
+  [[nodiscard]] auto getCommandMap() -> const fn::umap<Command, fn::str>&
   {
     // Using declarations
     using enum Command;
 
     // Command map
     // NOLINTNEXTLINE(clang-diagnostic-exit-time-destructors)
-    static const std::unordered_map<Command, std::string> s_commandMap{
+    static const fn::umap<Command, fn::str> s_commandMap{
       {HELP,     "help"    },
       {PLATFORM, "platform"},
       {EXPLORE,  "explore" },
@@ -39,15 +37,14 @@ namespace IO::_internal
     return s_commandMap;
   }
 
-  [[nodiscard]] auto getOptionMap()
-    -> const std::unordered_map<Option, std::string>&
+  [[nodiscard]] auto getOptionMap() -> const fn::umap<Option, fn::str>&
   {
     // Using declarations
     using enum Option;
 
     // Option map
     // NOLINTNEXTLINE(clang-diagnostic-exit-time-destructors)
-    static const std::unordered_map<Option, std::string> s_optionMap{
+    static const fn::umap<Option, fn::str> s_optionMap{
       {HELP,     "help"    },
       {COMPILER, "compiler"},
       {LANGUAGE, "language"},
@@ -102,7 +99,7 @@ namespace IO::_internal
     return s_optionMap;
   }
 
-  [[nodiscard]] auto parseCommand(std::string& token) -> std::optional<Command>
+  [[nodiscard]] auto parseCommand(fn::str& token) -> fn::opt<Command>
   {
     // All lowercase for case-insensitivity
     std::ranges::transform(
@@ -118,22 +115,19 @@ namespace IO::_internal
     const auto& commandMap{getCommandMap()};
 
     // Check if command was found
-    if (const auto& it{std::ranges::find(
-          commandMap,
-          token,
-          &std::unordered_map<Command, std::string>::value_type::second
-        )};
+    if (const auto& it{
+          std::ranges::find(commandMap, token, &fn::umap<Command, fn::str>::value_type::second)
+        };
         it != commandMap.end())
     {
       // Return command
       return it->first;
     }
 
-    return invalidCommandHandler(token);
+    return invalidCmdHandler(token);
   }
 
-  [[nodiscard]] auto invalidCommandHandler(const std::string& token
-  ) -> std::optional<Command>
+  [[nodiscard]] auto invalidCmdHandler(fn::strv token) -> fn::opt<Command>
   {
     // Get command map
     const auto& commandMap{getCommandMap()};
@@ -143,8 +137,7 @@ namespace IO::_internal
           commandMap,
           [&token](const auto& a, const auto& b) -> fn::f32
           {
-            return editDistance(a.second, token)
-                 < editDistance(b.second, token);
+            return editDistance(a.second, token) < editDistance(b.second, token);
           }
         )};
         closest != commandMap.end())
@@ -154,32 +147,37 @@ namespace IO::_internal
 
       if (distance < AUTO_FIX_THRESHOLD)
       {
-        printInputWarning(autofixCommandMsg(token, closest->second));
+        printInputWarning(autofixCmdMsg(token, closest->second));
         return closest->first;
       }
 
       if (distance < SUGGEST_THRESHOLD)
       {
-        printInputError(invalidCommandSuggesetMsg(token, closest->second));
+        printInputError(invalidCmdSuggestMsg(token, closest->second));
       }
-      else { printInputError(invalidCommandMsg(token)); }
+      else
+      {
+        printInputError(invalidCmdMsg(token));
+      }
     }
-    else { printInputError(invalidCommandMsg(token)); }
+    else
+    {
+      printInputError(invalidCmdMsg(token));
+    }
 
     return std::nullopt;
   }
 
-  [[nodiscard]] auto parseOptions(std::istringstream& inputStream
-  ) -> std::set<Option>
+  [[nodiscard]] auto parseOptions(std::istringstream& inputStream) -> fn::set<Option>
   {
     // Reduce verbosity with "using enum" directives.
     using enum Option;
 
     // Create vector of options
-    std::set<Option> options;
+    fn::set<Option> options;
 
     // Loop through tokens
-    std::string token;
+    fn::str token;
     while (inputStream >> token)
     {
       // All lowercase for case-insensitivity
@@ -195,7 +193,7 @@ namespace IO::_internal
       // Must start with '-'
       if (not token.starts_with("-"))
       {
-        printInputWarning(MISSING_OPTION_PREFIX_MSG());
+        printInputWarning(MISSING_OPT_PREFIX_MSG().data());
         continue;
       }
 
@@ -215,34 +213,32 @@ namespace IO::_internal
       const auto& optionMap{getOptionMap()};
 
       // Check if option was found
-      if (const auto& it{std::ranges::find(
-            optionMap,
-            token,
-            &std::unordered_map<Option, std::string>::value_type::second
-          )};
+      if (const auto& it{
+            std::ranges::find(optionMap, token, &fn::umap<Option, fn::str>::value_type::second)
+          };
           it != optionMap.end())
       {
         // Ensure option is not already present
         if (options.contains(it->first))
         {
-          IO::_internal::printInputWarning(
-            IO::_internal::duplicateOptionMsg(it->second)
-          );
+          IO::_internal::printInputWarning(IO::_internal::duplicateOptMsg(it->second));
           continue;
         }
 
         // Insert option
         options.insert(it->first);
       }
-      else { invalidOptionHandler(token, options); }
+      else
+      {
+        invalidOptHandler(token, options);
+      }
     }
 
     // Return all options
     return options;
   }
 
-  auto invalidOptionHandler(const std::string& token, std::set<Option>& options)
-    -> fn::none
+  auto invalidOptHandler(const fn::strv token, fn::set<Option>& options) -> fn::none
   {
     // Get option map
     const auto& optionMap{getOptionMap()};
@@ -252,8 +248,7 @@ namespace IO::_internal
           optionMap,
           [&token](const auto& a, const auto& b) -> fn::f32
           {
-            return editDistance(a.second, token)
-                 < editDistance(b.second, token);
+            return editDistance(a.second, token) < editDistance(b.second, token);
           }
         )};
         closest != optionMap.end())
@@ -267,12 +262,12 @@ namespace IO::_internal
         if (options.contains(closest->first))
         {
           // Suggest but discard
-          printInputWarning(invalidOptionSuggestMsg(token, closest->second));
+          printInputWarning(invalidOptSuggestMsg(token, closest->second));
         }
         else
         {
           // Warn and use closest option
-          printInputWarning(autofixOptionMsg(token, closest->second));
+          printInputWarning(autofixOptMsg(token, closest->second));
 
           // Insert closest option
           options.insert(closest->first);
@@ -280,10 +275,16 @@ namespace IO::_internal
       }
       else if (distance < SUGGEST_THRESHOLD)
       {
-        printInputWarning(invalidOptionSuggestMsg(token, closest->second));
+        printInputWarning(invalidOptSuggestMsg(token, closest->second));
       }
-      else { printInputWarning(invalidOptionMsg(token)); }
+      else
+      {
+        printInputWarning(invalidOptMsg(token));
+      }
     }
-    else { printInputWarning(invalidOptionMsg(token)); }
+    else
+    {
+      printInputWarning(invalidOptMsg(token));
+    }
   }
 } // namespace IO::_internal

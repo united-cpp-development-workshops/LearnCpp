@@ -1,11 +1,8 @@
 #pragma once
 
+#include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
-
-#include <optional>
-#include <set>
-#include <string>
-#include <utility>
+#include <Foundation/utilities.hpp>
 
 namespace IO
 {
@@ -74,9 +71,7 @@ namespace IO
 
   auto               printIntroduction() -> fn::none;
   auto               printPrompt() -> fn::none;
-  [[nodiscard]] auto readInput() -> std::string;
-  [[nodiscard]] auto parseInput(std::string& input
-  ) -> std::optional<std::pair<Command, std::set<Option>>>;
-  auto printResponse(Command command, const std::set<Option>& options)
-    -> fn::none;
+  [[nodiscard]] auto readInput() -> fn::str;
+  [[nodiscard]] auto parseInput(fn::str& input) -> fn::opt<fn::pair<Command, fn::set<Option>>>;
+  auto               printResponse(Command command, const fn::set<Option>& options) -> fn::none;
 } // namespace IO

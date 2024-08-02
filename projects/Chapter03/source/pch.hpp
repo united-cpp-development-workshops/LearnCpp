@@ -2,13 +2,15 @@
 
 // NOLINTBEGIN(misc-include-cleaner)
 
-// ------------------------------< Foundation >------------------------------ //
+// ----------------------------------------< Foundation >---------------------------------------- //
 
 // fn headers
 #include <Foundation/concepts.hpp>
 #include <Foundation/constants.hpp>
+#include <Foundation/containers.hpp>
 #include <Foundation/errors.hpp>
 #include <Foundation/types.hpp>
+#include <Foundation/utilities.hpp>
 
 // fn::Support headers
 #include <Foundation/Support/consteval.ipp>
@@ -18,7 +20,7 @@
 #include <Foundation/Utility/log.ipp>
 #include <Foundation/Utility/what.ipp>
 
-// -------------------------------< Platform >------------------------------- //
+// -----------------------------------------< Platform >----------------------------------------- //
 
 // Disable min/max implementations
 #ifndef NOMINMAX

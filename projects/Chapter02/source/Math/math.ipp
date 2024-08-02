@@ -2,19 +2,18 @@
 
 #include "Math/_internal/base.hpp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
-
-#include <map>
-#include <utility>
-#include <vector>
 
 namespace Math
 {
-  [[nodiscard]] constexpr auto NUMBER_LENGTH(fn::i32f number
-  ) noexcept -> fn::u16f
+  [[nodiscard]] constexpr auto NUMBER_LENGTH(fn::i32f number) noexcept -> fn::u16f
   {
     // Check if the number is 0
-    if (number == 0) { return 1; }
+    if (number == 0)
+    {
+      return 1;
+    }
 
     // Initialize the count (If negative, add 1)
     fn::u16f count{number < 0 ? fn::u16f{1} : fn::u16f{0}};
@@ -32,16 +31,16 @@ namespace Math
 
   struct ChartFeed
   {
-    std::map<fn::i32f, fn::u32f> frequencyMap;
-    fn::u32f                     maxFrequency{};
-    fn::u32f                     xAxisInterval{};
-    fn::u32f                     yAxisInterval{};
-    fn::i32f                     lowerBound{};
+    fn::map<fn::i32f, fn::u32f> frequencyMap;
+    fn::u32f                    maxFrequency{};
+    fn::u32f                    xAxisInterval{};
+    fn::u32f                    yAxisInterval{};
+    fn::i32f                    lowerBound{};
   };
 
   [[nodiscard]] auto generateChartFeed(
-    const std::vector<fn::i32f>&         values,
-    const std::pair<fn::i32f, fn::i32f>& bounds,
-    const std::pair<fn::u16f, fn::u16f>& chartSize
-  ) -> std::pair<ChartFeed, std::pair<fn::u16f, fn::u16f>>;
+    const fn::vec<fn::i32f>&            values,
+    const fn::pair<fn::i32f, fn::i32f>& bounds,
+    const fn::pair<fn::u16f, fn::u16f>& chartSize
+  ) -> fn::pair<ChartFeed, fn::pair<fn::u16f, fn::u16f>>;
 } // namespace Math

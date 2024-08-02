@@ -4,15 +4,14 @@
 
 #include "Game/Card.hpp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
 
 #include <numeric>
-#include <vector>
 
 namespace Math
 {
-  [[nodiscard]] auto calculateScore(const std::vector<Game::Card>& hand
-  ) noexcept -> fn::u16f
+  [[nodiscard]] auto calculateScore(const fn::vec<Game::Card>& hand) noexcept -> fn::u16f
   {
     return std::accumulate(
       hand.begin(),

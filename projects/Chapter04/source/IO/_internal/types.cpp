@@ -4,6 +4,7 @@
 
 #include "IO/io.hpp"
 
+#include <Foundation/concepts.hpp>
 #include <Foundation/types.hpp>
 
 #include <format>
@@ -40,8 +41,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Unsigned integer type capable of holding a pointer "
-                   "to 'void'.\n";
+      std::cout << "     - Unsigned integer type capable of holding a pointer to 'void'.\n";
       return;
     }
     case T_UPTR:
@@ -51,8 +51,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Signed integer type capable of holding a pointer to "
-                   "'void'.\n";
+      std::cout << "     - Signed integer type capable of holding a pointer to 'void'.\n";
       return;
     }
     case T_NPTR:
@@ -63,8 +62,7 @@ namespace IO::_internal
       std::cout << "     - A type declaration.\n";
       std::cout << "     - Defined in 'cstddef'.\n";
       std::cout << "     - It's the type of the 'nullptr' literal.\n";
-      std::cout << "     - It's not itself a pointer type or a pointer to "
-                   "member type.\n";
+      std::cout << "     - It's not itself a pointer type or a pointer to member type.\n";
       return;
     }
     case T_BLN:
@@ -73,8 +71,7 @@ namespace IO::_internal
 
       std::cout << "     - An integral type.\n";
       std::cout << "     - A C++ keyword.\n";
-      std::cout << "     - Capable of holding one of the two values: 'true' or "
-                   "'false'.\n";
+      std::cout << "     - Capable of holding one of the two values: 'true' or 'false'.\n";
       std::cout << "     - The size of 'bool' is implementation defined.\n";
       return;
     }
@@ -85,8 +82,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout
-        << "     - Signed integer type with the size of exactly '8' bits.\n";
+      std::cout << "     - Signed integer type with the size of exactly '8' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -97,8 +93,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout
-        << "     - Signed integer type with the size of exactly '16' bits.\n";
+      std::cout << "     - Signed integer type with the size of exactly '16' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -109,8 +104,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout
-        << "     - Signed integer type with the size of exactly '32' bits.\n";
+      std::cout << "     - Signed integer type with the size of exactly '32' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -121,8 +115,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout
-        << "     - Signed integer type with the size of exactly '64' bits.\n";
+      std::cout << "     - Signed integer type with the size of exactly '64' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -133,8 +126,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout
-        << "     - Unsigned integer type with the size of exactly '8' bits.\n";
+      std::cout << "     - Unsigned integer type with the size of exactly '8' bits.\n";
       return;
     }
     case T_U16:
@@ -144,8 +136,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Unsigned integer type with the size of exactly "
-                   "'16' bits.\n";
+      std::cout << "     - Unsigned integer type with the size of exactly '16' bits.\n";
       return;
     }
     case T_U32:
@@ -155,8 +146,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Unsigned integer type with the size of exactly "
-                   "'32' bits.\n";
+      std::cout << "     - Unsigned integer type with the size of exactly '32' bits.\n";
       return;
     }
     case T_U64:
@@ -166,8 +156,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Unsigned integer type with the size of exactly "
-                   "'64' bits.\n";
+      std::cout << "     - Unsigned integer type with the size of exactly '64' bits.\n";
       return;
     }
     case T_I8L:
@@ -177,8 +166,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest signed integer type with the size of at "
-                   "least '8' bits.\n";
+      std::cout << "     - Smallest signed integer type with the size of at least '8' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -189,8 +177,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest signed integer type with the size of at "
-                   "least '16' bits.\n";
+      std::cout << "     - Smallest signed integer type with the size of at least '16' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -201,8 +188,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest signed integer type with the size of at "
-                   "least '32' bits.\n";
+      std::cout << "     - Smallest signed integer type with the size of at least '32' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -213,8 +199,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest signed integer type with the size of at "
-                   "least '64' bits.\n";
+      std::cout << "     - Smallest signed integer type with the size of at least '64' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -225,8 +210,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest unsigned integer type with the size of at "
-                   "least '8' bits.\n";
+      std::cout << "     - Smallest unsigned integer type with the size of at least '8' bits.\n";
       return;
     }
     case T_U16L:
@@ -236,8 +220,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest unsigned integer type with the size of at "
-                   "least '16' bits.\n";
+      std::cout << "     - Smallest unsigned integer type with the size of at least '16' bits.\n";
       return;
     }
     case T_U32L:
@@ -247,8 +230,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest unsigned integer type with the size of at "
-                   "least '32' bits.\n";
+      std::cout << "     - Smallest unsigned integer type with the size of at least '32' bits.\n";
       return;
     }
     case T_U64L:
@@ -258,8 +240,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Smallest unsigned integer type with the size of at "
-                   "least '64' bits.\n";
+      std::cout << "     - Smallest unsigned integer type with the size of at least '64' bits.\n";
       return;
     }
     case T_I8F:
@@ -269,8 +250,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest signed integer type with the size of at "
-                   "least '8' bits.\n";
+      std::cout << "     - Fastest signed integer type with the size of at least '8' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -281,8 +261,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest signed integer type with the size of at "
-                   "least '16' bits.\n";
+      std::cout << "     - Fastest signed integer type with the size of at least '16' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -293,8 +272,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest signed integer type with the size of at "
-                   "least '32' bits.\n";
+      std::cout << "     - Fastest signed integer type with the size of at least '32' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -305,8 +283,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest signed integer type with the size of at "
-                   "least '64' bits.\n";
+      std::cout << "     - Fastest signed integer type with the size of at least '64' bits.\n";
       std::cout << "     - Uses 2's complement for negative values.\n";
       return;
     }
@@ -317,8 +294,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest unsigned integer type with the size of at "
-                   "least '8' bits.\n";
+      std::cout << "     - Fastest unsigned integer type with the size of at least '8' bits.\n";
       return;
     }
     case T_U16F:
@@ -328,8 +304,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest unsigned integer type with the size of at "
-                   "least '16' bits.\n";
+      std::cout << "     - Fastest unsigned integer type with the size of at least '16' bits.\n";
       return;
     }
     case T_U32F:
@@ -339,8 +314,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest unsigned integer type with the size of at "
-                   "least '64' bits.\n";
+      std::cout << "     - Fastest unsigned integer type with the size of at least '64' bits.\n";
       return;
     }
     case T_U64F:
@@ -350,8 +324,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstdint'.\n";
-      std::cout << "     - Fastest unsigned integer type with the size of at "
-                   "least '64' bits.\n";
+      std::cout << "     - Fastest unsigned integer type with the size of at least '64' bits.\n";
       return;
     }
     case T_IDEF:
@@ -371,8 +344,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A C++ keyword.\n";
       std::cout << "     - Basic unsigned integer type.\n";
-      std::cout
-        << "     - The size of 'unsigned int' is implementation defined.\n";
+      std::cout << "     - The size of 'unsigned int' is implementation defined.\n";
       return;
     }
     case T_IMAX:
@@ -402,8 +374,7 @@ namespace IO::_internal
       std::cout << "     - An integral type.\n";
       std::cout << "     - A typedef.\n";
       std::cout << "     - Defined in header 'cstddef'.\n";
-      std::cout
-        << "     - Unsigned integer returned by the 'sizeof' operator.\n";
+      std::cout << "     - Unsigned integer returned by the 'sizeof' operator.\n";
       return;
     }
     case T_F32:
@@ -433,8 +404,7 @@ namespace IO::_internal
       std::cout << "     - A floating-point type.\n";
       std::cout << "     - A C++ keyword.\n";
       std::cout << "     - Extended precision floating-point type.\n";
-      std::cout
-        << "     - Does not necessarily map to types mandated by IEEE-754.\n";
+      std::cout << "     - Does not necessarily map to types mandated by IEEE-754.\n";
       return;
     }
     case T_C8:
@@ -444,8 +414,7 @@ namespace IO::_internal
       std::cout << "     - A character type.\n";
       std::cout << "     - A C++ keyword.\n";
       std::cout << "     - Type for UTF-8 character representation.\n";
-      std::cout << "     - It has the same size, signedness, and alignment as "
-                   "'unsigned char'.\n";
+      std::cout << "     - It has the same size, signedness, and alignment as 'unsigned char'.\n";
       return;
     }
     case T_C16:
@@ -455,8 +424,8 @@ namespace IO::_internal
       std::cout << "     - A character type.\n";
       std::cout << "     - A C++ keyword.\n";
       std::cout << "     - Type for UTF-16 character representation.\n";
-      std::cout << "     - It has the same size, signedness, and alignment as "
-                   "'std::uint_least16_t'.\n";
+      std::cout
+        << "     - It has the same size, signedness, and alignment as 'std::uint_least16_t'.\n";
       return;
     }
     case T_C32:
@@ -466,8 +435,8 @@ namespace IO::_internal
       std::cout << "     - A character type.\n";
       std::cout << "     - A C++ keyword.\n";
       std::cout << "     - Type for UTF-32 character representation.\n";
-      std::cout << "     - It has the same size, signedness, and alignment as "
-                   "'std::uint_least32_t'.\n";
+      std::cout
+        << "     - It has the same size, signedness, and alignment as 'std::uint_least32_t'.\n";
       return;
     }
     case T_CDEF:
@@ -476,10 +445,8 @@ namespace IO::_internal
 
       std::cout << "     - A character type.\n";
       std::cout << "     - A C++ keyword.\n";
-      std::cout << "     - Type that can be most efficiently processed on the "
-                   "target system.\n";
-      std::cout
-        << "     - The signedness of 'char' is implementation defined.\n";
+      std::cout << "     - Type that can be most efficiently processed on the target system.\n";
+      std::cout << "     - The signedness of 'char' is implementation defined.\n";
       return;
     }
     case T_WDEF:
@@ -516,12 +483,9 @@ namespace IO::_internal
     {
       std::cout << "void'\n\n";
 
-      std::cout
-        << "     - In modern C++, void has only one concrete use case.\n";
-      std::cout << "     - It's used as the return type for functions that "
-                   "don't return.\n";
-      std::cout << "     - Not advised but it can be used as 'void*' for "
-                   "generic pointers.\n";
+      std::cout << "     - In modern C++, void has only one concrete use case.\n";
+      std::cout << "     - It's used as the return type for functions that don't return.\n";
+      std::cout << "     - Not advised but it can be used as 'void*' for generic pointers.\n";
       return;
     }
     case T_IPTR:
@@ -529,12 +493,9 @@ namespace IO::_internal
       std::cout << "std::intptr_t' (optional)\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Useful for performing pointer arithmetic or pointer "
-                   "manipulation.\n";
-      std::cout
-        << "     - Use when you need to cast a pointer to an integer type.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout << "     - Useful for performing pointer arithmetic or pointer manipulation.\n";
+      std::cout << "     - Use when you need to cast a pointer to an integer type.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_UPTR:
@@ -542,12 +503,9 @@ namespace IO::_internal
       std::cout << "std::uintptr_t' (optional)\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Useful when you need an unsigned integer portrayal "
-                   "of a pointer.\n";
-      std::cout << "     - Use when you need to cast a pointer to an unsigned "
-                   "integer type.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout << "     - Useful when you need an unsigned integer portrayal of a pointer.\n";
+      std::cout << "     - Use when you need to cast a pointer to an unsigned integer type.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_NPTR:
@@ -556,27 +514,20 @@ namespace IO::_internal
 
       std::cout << "     - Include 'cstddef' header to use.\n";
       std::cout << "     - Mostly used when overloading functions.\n";
-      std::cout << "     - It can be used as parameter to functions that "
-                   "handle 'nullptr'.\n";
-      std::cout
-        << "     - Helps to avoid the accidental misuse of '0' as 'nullptr'.\n";
-      std::cout
-        << "     - Helps to avoid implicit pointer casts from integer types.\n";
+      std::cout << "     - It can be used as parameter to functions that handle 'nullptr'.\n";
+      std::cout << "     - Helps to avoid the accidental misuse of '0' as 'nullptr'.\n";
+      std::cout << "     - Helps to avoid implicit pointer casts from integer types.\n";
       return;
     }
     case T_BLN:
     {
       std::cout << "bool'\n\n";
 
-      std::cout
-        << "     - Use for logical operations and conditional statements.\n";
+      std::cout << "     - Use for logical operations and conditional statements.\n";
       std::cout << "     - You can use 'bool' as flags or binary states.\n";
-      std::cout << "     - Initialize 'bool' variables, they wont be "
-                   "initialized implicitly.\n";
-      std::cout << "     - Use boolean expressions directly in conditional "
-                   "statements.\n";
-      std::cout << "     - Avoid implicit conversions, use boolean arithmetics "
-                   "when assigning.\n";
+      std::cout << "     - Initialize 'bool' variables, they wont be initialized implicitly.\n";
+      std::cout << "     - Use boolean expressions directly in conditional statements.\n";
+      std::cout << "     - Avoid implicit conversions, use boolean arithmetics when assigning.\n";
       return;
     }
     case T_I8:
@@ -585,12 +536,10 @@ namespace IO::_internal
 
       std::cout << "     - Include 'cstdint' header to use.\n";
       std::cout << "     - Use when memory constraints at maximum.\n";
-      std::cout << "     - Don't use it for arithmetic operations, usually it "
-                   "is a character type.\n";
-      std::cout << "     - It ensures platform independence, because it's "
-                   "fixed in size.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout
+        << "     - Don't use it for arithmetic operations, usually it is a character type.\n";
+      std::cout << "     - It ensures platform independence, because it's fixed in size.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_I16:
@@ -599,12 +548,9 @@ namespace IO::_internal
 
       std::cout << "     - Include 'cstdint' header to use.\n";
       std::cout << "     - Use when memory efficiency is a concern.\n";
-      std::cout << "     - Beware for implicit conversions, use explicit cast "
-                   "when needed.\n";
-      std::cout << "     - It ensures platform independence, because it's "
-                   "fixed in size.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout << "     - Beware for implicit conversions, use explicit cast when needed.\n";
+      std::cout << "     - It ensures platform independence, because it's fixed in size.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_I32:
@@ -613,12 +559,9 @@ namespace IO::_internal
 
       std::cout << "     - Include 'cstdint' header to use.\n";
       std::cout << "     - Use when portability concerns is at maximum.\n";
-      std::cout << "     - Beware for implicit conversions, use explicit cast "
-                   "when needed.\n";
-      std::cout << "     - It ensures platform independence, because it's "
-                   "fixed in size.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout << "     - Beware for implicit conversions, use explicit cast when needed.\n";
+      std::cout << "     - It ensures platform independence, because it's fixed in size.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_I64:
@@ -626,14 +569,10 @@ namespace IO::_internal
       std::cout << "std::int64_t' (optional)\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout
-        << "     - Use for large numbers and with portability concerns.\n";
-      std::cout << "     - Beware for implicit conversions, use explicit cast "
-                   "when needed.\n";
-      std::cout << "     - It ensures platform independence, because it's "
-                   "fixed in size.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout << "     - Use for large numbers and with portability concerns.\n";
+      std::cout << "     - Beware for implicit conversions, use explicit cast when needed.\n";
+      std::cout << "     - It ensures platform independence, because it's fixed in size.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_U8:
@@ -642,16 +581,12 @@ namespace IO::_internal
 
       std::cout << "     - Include 'cstdint' header to use.\n";
       std::cout << "     - Use when memory constraints at maximum.\n";
-      std::cout << "     - Don't use it for arithmetic operations, usually it "
-                   "is a character type.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
       std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - It ensures platform independence, because it's "
-                   "fixed in size.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+        << "     - Don't use it for arithmetic operations, usually it is a character type.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - It ensures platform independence, because it's fixed in size.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_U16:
@@ -660,16 +595,11 @@ namespace IO::_internal
 
       std::cout << "     - Include 'cstdint' header to use.\n";
       std::cout << "     - Use when memory efficiency is a concern.\n";
-      std::cout << "     - Beware for implicit conversions, use explicit cast "
-                   "when needed.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - It ensures platform independence, because it's "
-                   "fixed in size.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout << "     - Beware for implicit conversions, use explicit cast when needed.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - It ensures platform independence, because it's fixed in size.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_U32:
@@ -678,16 +608,11 @@ namespace IO::_internal
 
       std::cout << "     - Include 'cstdint' header to use.\n";
       std::cout << "     - Use when portability concerns is at maximum.\n";
-      std::cout << "     - Beware for implicit conversions, use explicit cast "
-                   "when needed.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - It ensures platform independence, because it's "
-                   "fixed in size.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout << "     - Beware for implicit conversions, use explicit cast when needed.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - It ensures platform independence, because it's fixed in size.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_U64:
@@ -695,18 +620,12 @@ namespace IO::_internal
       std::cout << "std::uint64_t' (optional)\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout
-        << "     - Use for large numbers and with portability concerns.\n";
-      std::cout << "     - Beware for implicit conversions, use explicit cast "
-                   "when needed.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - It ensures platform independence, because it's "
-                   "fixed in size.\n";
-      std::cout << "     - This is an optional type, may not be available on "
-                   "all platforms.\n";
+      std::cout << "     - Use for large numbers and with portability concerns.\n";
+      std::cout << "     - Beware for implicit conversions, use explicit cast when needed.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - It ensures platform independence, because it's fixed in size.\n";
+      std::cout << "     - This is an optional type, may not be available on all platforms.\n";
       return;
     }
     case T_I8L:
@@ -714,12 +633,10 @@ namespace IO::_internal
       std::cout << "std::int_least8_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when memory constraints at maximum, but exact "
-                   "size doesn't matter.\n";
-      std::cout << "     - Don't use it for arithmetic operations, it may be a "
-                   "character type.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout
+        << "     - Use when memory constraints at maximum, but exact size doesn't matter.\n";
+      std::cout << "     - Don't use it for arithmetic operations, it may be a character type.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -728,10 +645,9 @@ namespace IO::_internal
       std::cout << "std::int_least16_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when memory efficiency is a concern, but exact "
-                   "size doesn't matter.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout
+        << "     - Use when memory efficiency is a concern, but exact size doesn't matter.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -740,10 +656,8 @@ namespace IO::_internal
       std::cout << "std::int_least32_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when portability is important, but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when portability is important, but exact size doesn't matter.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -752,13 +666,10 @@ namespace IO::_internal
       std::cout << "std::int_least64_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use for large numbers and portability, but exact "
-                   "size doesn't matter.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use for large numbers and portability, but exact size doesn't matter.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -767,16 +678,12 @@ namespace IO::_internal
       std::cout << "std::uint_least8_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when memory constraints at maximum, but exact "
-                   "size doesn't matter.\n";
-      std::cout << "     - Don't use it for arithmetic operations, it may be a "
-                   "character type.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
       std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+        << "     - Use when memory constraints at maximum, but exact size doesn't matter.\n";
+      std::cout << "     - Don't use it for arithmetic operations, it may be a character type.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -785,14 +692,10 @@ namespace IO::_internal
       std::cout << "std::uint_least16_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when memory efficiency do but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when memory efficiency do but exact size doesn't matter.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -801,14 +704,10 @@ namespace IO::_internal
       std::cout << "std::uint_least32_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when portability is important, but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when portability is important, but exact size doesn't matter.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -817,14 +716,10 @@ namespace IO::_internal
       std::cout << "std::uint_least64_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use for large numbers and portability, but exact "
-                   "size doesn't matter.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use for large numbers and portability, but exact size doesn't matter.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -833,14 +728,10 @@ namespace IO::_internal
       std::cout << "std::int_fast8_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when memory concerns at maximum, but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - It is optimized for speed, use for arithmetic "
-                   "performance.\n";
-      std::cout << "     - Don't use it for arithmetic operations, it may be a "
-                   "character type.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when memory concerns at maximum, but exact size doesn't matter.\n";
+      std::cout << "     - It is optimized for speed, use for arithmetic performance.\n";
+      std::cout << "     - Don't use it for arithmetic operations, it may be a character type.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -849,12 +740,9 @@ namespace IO::_internal
       std::cout << "std::int_fast16_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when memory efficiency do but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - It is optimized for speed, use for arithmetic "
-                   "performance.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when memory efficiency do but exact size doesn't matter.\n";
+      std::cout << "     - It is optimized for speed, use for arithmetic performance.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -863,12 +751,9 @@ namespace IO::_internal
       std::cout << "std::int_fast32_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when portability is important, but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - It is optimized for speed, use for arithmetic "
-                   "performance.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when portability is important, but exact size doesn't matter.\n";
+      std::cout << "     - It is optimized for speed, use for arithmetic performance.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -877,12 +762,9 @@ namespace IO::_internal
       std::cout << "std::int_fast64_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use for large numbers and portability, but exact "
-                   "size doesn't matter.\n";
-      std::cout << "     - It is optimized for speed, use for arithmetic "
-                   "performance.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use for large numbers and portability, but exact size doesn't matter.\n";
+      std::cout << "     - It is optimized for speed, use for arithmetic performance.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -891,18 +773,12 @@ namespace IO::_internal
       std::cout << "std::uint_fast8_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when memory concerns at maximum, but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - It is optimized for speed, use for arithmetic "
-                   "performance.\n";
-      std::cout << "     - Don't use it for arithmetic operations, it may be a "
-                   "character type.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when memory concerns at maximum, but exact size doesn't matter.\n";
+      std::cout << "     - It is optimized for speed, use for arithmetic performance.\n";
+      std::cout << "     - Don't use it for arithmetic operations, it may be a character type.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -911,16 +787,11 @@ namespace IO::_internal
       std::cout << "std::uint_fast16_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when memory efficiency do but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - It is optimized for speed, use for arithmetic "
-                   "performance.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when memory efficiency do but exact size doesn't matter.\n";
+      std::cout << "     - It is optimized for speed, use for arithmetic performance.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -929,16 +800,11 @@ namespace IO::_internal
       std::cout << "std::uint_fast32_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use when portability is important, but exact size "
-                   "doesn't matter.\n";
-      std::cout << "     - It is optimized for speed, use for arithmetic "
-                   "performance.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use when portability is important, but exact size doesn't matter.\n";
+      std::cout << "     - It is optimized for speed, use for arithmetic performance.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -947,16 +813,11 @@ namespace IO::_internal
       std::cout << "std::uint_fast64_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - Use for large numbers and portability, but exact "
-                   "size doesn't matter.\n";
-      std::cout << "     - It is optimized for speed, use for arithmetic "
-                   "performance.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - Use for large numbers and portability, but exact size doesn't matter.\n";
+      std::cout << "     - It is optimized for speed, use for arithmetic performance.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       std::cout << "     - It can be useful for cross-platform code.\n";
       return;
     }
@@ -965,10 +826,9 @@ namespace IO::_internal
       std::cout << "int'\n\n";
 
       std::cout << "     - It's the natural integer type of the platform.\n";
-      std::cout << "     - When better alternatives exist, there's no "
-                   "concreate reason to use it.\n";
-      std::cout << "     - Beware of portability because its size may differ "
-                   "by platform\n";
+      std::cout
+        << "     - When better alternatives exist, there's no concreate reason to use it.\n";
+      std::cout << "     - Beware of portability because its size may differ by platform\n";
       std::cout << "     - Commonly 32 bits but it is not guaranteed.\n";
       return;
     }
@@ -976,16 +836,12 @@ namespace IO::_internal
     {
       std::cout << "unsigned int'\n\n";
 
+      std::cout << "     - It's the natural unsigned integer type of the platform.\n";
       std::cout
-        << "     - It's the natural unsigned integer type of the platform.\n";
-      std::cout << "     - When better alternatives exist, there's no "
-                   "concreate reason to use it.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of portability because its size may differ "
-                   "by platform\n";
+        << "     - When better alternatives exist, there's no concreate reason to use it.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of portability because its size may differ by platform\n";
       std::cout << "     - Commonly 32 bits but it is not guaranteed.\n";
       return;
     }
@@ -994,10 +850,8 @@ namespace IO::_internal
       std::cout << "std::intmax_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout
-        << "     - It's simple, use it when you need the largest integer.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - It's simple, use it when you need the largest integer.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       return;
     }
     case T_UMAX:
@@ -1005,14 +859,10 @@ namespace IO::_internal
       std::cout << "std::uintmax_t'\n\n";
 
       std::cout << "     - Include 'cstdint' header to use.\n";
-      std::cout << "     - It's simple, use it when you need the largest "
-                   "unsigned integer.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - It's simple, use it when you need the largest unsigned integer.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       return;
     }
     case T_SIZE:
@@ -1020,14 +870,10 @@ namespace IO::_internal
       std::cout << "std::size_t'\n\n";
 
       std::cout << "     - Include 'cstddef' header to use.\n";
-      std::cout << "     - As the name suggests, use it to represent sizes and "
-                   "indexes.\n";
-      std::cout << "     - Don't use unsigned types for arithmetic operations, "
-                   "use signed types.\n";
-      std::cout
-        << "     - Beware of the overflows, unsigned types act differently.\n";
-      std::cout << "     - Beware of implicit conversions, it may not produce "
-                   "desired results.\n";
+      std::cout << "     - As the name suggests, use it to represent sizes and indexes.\n";
+      std::cout << "     - Don't use unsigned types for arithmetic operations, use signed types.\n";
+      std::cout << "     - Beware of the overflows, unsigned types act differently.\n";
+      std::cout << "     - Beware of implicit conversions, it may not produce desired results.\n";
       return;
     }
     case T_F32:
@@ -1035,8 +881,7 @@ namespace IO::_internal
       std::cout << "float'\n\n";
 
       std::cout << "     - Use for floating-point arithmetic operations.\n";
-      std::cout << "     - Use when performance concerns are higher than "
-                   "precision concerns.\n";
+      std::cout << "     - Use when performance concerns are higher than precision concerns.\n";
       std::cout << "     - It's a single precision floating-point type.\n";
       std::cout << "     - Beware floating-point arithmetic is not precise.\n";
       std::cout << "     - Compare floating-point numbers with a tolerance.\n";
@@ -1046,10 +891,8 @@ namespace IO::_internal
     {
       std::cout << "double'\n\n";
 
-      std::cout
-        << "     - Use for precise floating-point arithmetic operations.\n";
-      std::cout << "     - Use when precision concerns are higher than "
-                   "performance concerns.\n";
+      std::cout << "     - Use for precise floating-point arithmetic operations.\n";
+      std::cout << "     - Use when precision concerns are higher than performance concerns.\n";
       std::cout << "     - It's a double precision floating-point type.\n";
       std::cout << "     - Beware floating-point arithmetic is not precise.\n";
       std::cout << "     - Compare floating-point numbers with a tolerance.\n";
@@ -1059,9 +902,7 @@ namespace IO::_internal
     {
       std::cout << "long double'\n\n";
 
-      std::cout
-        << "     - Use for extended precision floating-point arithmetic "
-           "operations.\n";
+      std::cout << "     - Use for extended precision floating-point arithmetic operations.\n";
       std::cout << "     - Use it when performance is not a concern.\n";
       std::cout << "     - It's an extended precision floating-point type.\n";
       std::cout << "     - Beware floating-point arithmetic is not precise.\n";
@@ -1073,16 +914,11 @@ namespace IO::_internal
       std::cout << "char8_t'\n\n";
 
       std::cout << "     - Use it to represent UTF-8 characters.\n";
-      std::cout
-        << "     - Don't use double quotes for literals, use single quotes.\n";
-      std::cout << "     - Beware of conversions, the may involve encoding "
-                   "conversions.\n";
-      std::cout
-        << "     - It may not be compatible with other character types.\n";
-      std::cout << "     - Just because it can represent UTF-8, doesn't mean "
-                   "it can handle it.\n";
-      std::cout << "     - Don't do arithmetic on fixed size char types, cast "
-                   "them first.\n";
+      std::cout << "     - Don't use double quotes for literals, use single quotes.\n";
+      std::cout << "     - Beware of conversions, the may involve encoding conversions.\n";
+      std::cout << "     - It may not be compatible with other character types.\n";
+      std::cout << "     - Just because it can represent UTF-8, doesn't mean it can handle it.\n";
+      std::cout << "     - Don't do arithmetic on fixed size char types, cast them first.\n";
       return;
     }
     case T_C16:
@@ -1090,16 +926,11 @@ namespace IO::_internal
       std::cout << "char16_t'\n\n";
 
       std::cout << "     - Use it to represent UTF-16 characters.\n";
-      std::cout
-        << "     - Don't use double quotes for literals, use single quotes.\n";
-      std::cout << "     - Beware of conversions, the may involve encoding "
-                   "conversions.\n";
-      std::cout
-        << "     - It may not be compatible with other character types.\n";
-      std::cout << "     - Just because it can represent UTF-16, doesn't mean "
-                   "it can handle it.\n";
-      std::cout << "     - Don't do arithmetic on fixed size char types, cast "
-                   "them first.\n";
+      std::cout << "     - Don't use double quotes for literals, use single quotes.\n";
+      std::cout << "     - Beware of conversions, the may involve encoding conversions.\n";
+      std::cout << "     - It may not be compatible with other character types.\n";
+      std::cout << "     - Just because it can represent UTF-16, doesn't mean it can handle it.\n";
+      std::cout << "     - Don't do arithmetic on fixed size char types, cast them first.\n";
       return;
     }
     case T_C32:
@@ -1107,16 +938,11 @@ namespace IO::_internal
       std::cout << "char32_t'\n\n";
 
       std::cout << "     - Use it to represent UTF-32 characters.\n";
-      std::cout
-        << "     - Don't use double quotes for literals, use single quotes.\n";
-      std::cout << "     - Beware of conversions, the may involve encoding "
-                   "conversions.\n";
-      std::cout
-        << "     - It may not be compatible with other character types.\n";
-      std::cout << "     - Just because it can represent UTF-32, doesn't mean "
-                   "it can handle it.\n";
-      std::cout << "     - Don't do arithmetic on fixed size char types, cast "
-                   "them first.\n";
+      std::cout << "     - Don't use double quotes for literals, use single quotes.\n";
+      std::cout << "     - Beware of conversions, the may involve encoding conversions.\n";
+      std::cout << "     - It may not be compatible with other character types.\n";
+      std::cout << "     - Just because it can represent UTF-32, doesn't mean it can handle it.\n";
+      std::cout << "     - Don't do arithmetic on fixed size char types, cast them first.\n";
       return;
     }
     case T_CDEF:
@@ -1124,25 +950,18 @@ namespace IO::_internal
       std::cout << "char'\n\n";
 
       std::cout << "     - Use it to represent ASCII characters.\n";
-      std::cout
-        << "     - Don't use double quotes for literals, use single quotes.\n";
-      std::cout
-        << "     - Don't do arithmetic on it, it may or may not be signed.\n";
+      std::cout << "     - Don't use double quotes for literals, use single quotes.\n";
+      std::cout << "     - Don't do arithmetic on it, it may or may not be signed.\n";
       return;
     }
     case T_WDEF:
     {
       std::cout << "wchar_t'\n\n";
 
-      std::cout << "     - Don't use it, it's considered as a defect, use "
-                   "fixed chars.\n";
-      std::cout
-        << "     - It was designed to hold wide characters, but it's not "
-           "portable.\n";
-      std::cout
-        << "     - Don't use double quotes for literals, use single quotes.\n";
-      std::cout
-        << "     - Don't do arithmetic on it, it may or may not be signed.\n";
+      std::cout << "     - Don't use it, it's considered as a defect, use fixed chars.\n";
+      std::cout << "     - It was designed to hold wide characters, but it's not portable.\n";
+      std::cout << "     - Don't use double quotes for literals, use single quotes.\n";
+      std::cout << "     - Don't do arithmetic on it, it may or may not be signed.\n";
       return;
     }
     default:
@@ -1189,7 +1008,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= {ptr} bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1207,7 +1026,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= {ptr} bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1225,7 +1044,7 @@ namespace IO::_internal
         .header{"cstddef"},
         .standardSize{">= {ptr} bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<fn::uptr>::min())},
         .maxValue{std::to_string(std::numeric_limits<fn::uptr>::max())},
         .precision{"-"},
@@ -1243,7 +1062,7 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{std::format(">= {} bits", CHAR_BIT)},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1261,7 +1080,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{"= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1279,7 +1098,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{"= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1297,7 +1116,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{"= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1315,7 +1134,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{"= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1333,7 +1152,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{"= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1351,7 +1170,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{"= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1369,7 +1188,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{"= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1387,7 +1206,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{"= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1405,7 +1224,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1423,7 +1242,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1441,7 +1260,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1459,7 +1278,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1477,7 +1296,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1495,7 +1314,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1513,7 +1332,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1531,7 +1350,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1549,7 +1368,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1567,7 +1386,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1585,7 +1404,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1603,7 +1422,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1621,7 +1440,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1639,7 +1458,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1657,7 +1476,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1675,7 +1494,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1693,7 +1512,7 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1711,7 +1530,7 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{">= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1729,7 +1548,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1747,7 +1566,7 @@ namespace IO::_internal
         .header{"cstdint"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1765,7 +1584,7 @@ namespace IO::_internal
         .header{"cstddef"},
         .standardSize{">= {ptr} bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{"-"},
@@ -1783,11 +1602,10 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::format("~{:.4e}", std::numeric_limits<Type>::min())},
         .maxValue{std::format("~{:.4e}", std::numeric_limits<Type>::max())},
-        .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)
-        },
+        .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)},
         .literalSuffix{"f"},
       };
     }
@@ -1802,11 +1620,10 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::format("~{:.4e}", std::numeric_limits<Type>::min())},
         .maxValue{std::format("~{:.4e}", std::numeric_limits<Type>::max())},
-        .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)
-        },
+        .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)},
         .literalSuffix{"-"},
       };
     }
@@ -1821,11 +1638,10 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{">= 64 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::format("~{:.4e}", std::numeric_limits<Type>::min())},
         .maxValue{std::format("~{:.4e}", std::numeric_limits<Type>::max())},
-        .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)
-        },
+        .precision{std::format("{} digits", std::numeric_limits<Type>::digits10)},
         .literalSuffix{"l"},
       };
     }
@@ -1840,7 +1656,7 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{"= 8 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
@@ -1858,7 +1674,7 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{"= 16 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
@@ -1876,7 +1692,7 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{"= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
@@ -1894,7 +1710,7 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{std::format(">= {} bits", CHAR_BIT)},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},
@@ -1912,7 +1728,7 @@ namespace IO::_internal
         .header{"-"},
         .standardSize{">= 32 bits"},
         .platformSize{std::format("{} bits", (sizeof(Type) * CHAR_BIT))},
-        .signedness{std::is_signed_v<Type> ? "signed" : "unsigned"},
+        .signedness{fn::IsSigned<Type> ? "signed" : "unsigned"},
         .minValue{std::to_string(std::numeric_limits<Type>::min())},
         .maxValue{std::to_string(std::numeric_limits<Type>::max())},
         .precision{std::to_string(std::numeric_limits<Type>::digits10)},

@@ -9,61 +9,55 @@
 #include "IO/_internal/utilities.hpp"
 #include "IO/_internal/validator.hpp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
+#include <Foundation/utilities.hpp>
 
 #include <algorithm>
 #include <iostream>
-#include <optional>
-#include <set>
 #include <sstream>
-#include <string>
-#include <utility>
 
 namespace IO
 {
   auto printIntroduction() -> fn::none
   {
-    std::cout << "---------------------------< Types Explorer "
-                 ">---------------------------\n\n";
+    std::cout << "---------------------------< Types Explorer >---------------------------\n\n";
 
     _internal::printBriefInfo();
 
-    std::cout << "   :::::::::::::::::::::::::: How It Works "
-                 "::::::::::::::::::::::::::\n";
+    std::cout << "   :::::::::::::::::::::::::: How It Works ::::::::::::::::::::::::::\n";
 
     _internal::printBriefHelp();
   }
 
   auto printPrompt() -> fn::none
   {
-    std::cout << "\n-----------------------------------------------------------"
-                 "-------------\n\n";
+    std::cout << "\n------------------------------------------------------------------------\n\n";
 
     std::cout << " [>]: ";
   }
 
-  [[nodiscard]] auto readInput() -> std::string
+  [[nodiscard]] auto readInput() -> fn::str
   {
     // Reset input buffer
     _internal::resetInputBuffer();
 
     // Read input as string
-    std::string input;
+    fn::str input;
     std::getline(std::cin, input);
 
     // Return input
     return input;
   }
 
-  [[nodiscard]] auto parseInput(std::string& input
-  ) -> std::optional<std::pair<Command, std::set<Option>>>
+  [[nodiscard]] auto parseInput(fn::str& input) -> fn::opt<fn::pair<Command, fn::set<Option>>>
   {
     // Check if input is empty
     if (input.empty())
     {
       // Print error message
       _internal::printInputError(_internal::NO_INPUT_MSG());
-      return std::nullopt;
+      return fn::nopt;
     }
 
     // Replace not allowed characters
@@ -73,19 +67,22 @@ namespace IO
     std::istringstream inputStream{input};
 
     // Parse command
-    std::string commandInput;
+    fn::str commandInput;
     if (not(inputStream >> commandInput))
     {
       // Print error message
-      _internal::printInputError(_internal::NO_COMMAND_MSG());
-      return std::nullopt;
+      _internal::printInputError(_internal::NO_CMD_MSG());
+      return fn::nopt;
     }
 
     // Get command optional
     const auto commandOptional{_internal::parseCommand(commandInput)};
 
     // Return if error. (error message printed in parser)
-    if (not commandOptional.has_value()) { return std::nullopt; }
+    if (not commandOptional.has_value())
+    {
+      return fn::nopt;
+    }
 
     // Get command
     const auto command{commandOptional.value()};
@@ -95,14 +92,11 @@ namespace IO
 
     // Return if valid request
     return _internal::validateRequest(command, options)
-           ? std::optional{std::pair<Command, std::set<Option>>(
-               command, options
-             )}
-           : std::nullopt;
+           ? fn::opt{fn::pair<Command, fn::set<Option>>(command, options)}
+           : fn::nopt;
   }
 
-  auto printResponse(const Command command, const std::set<Option>& options)
-    -> fn::none
+  auto printResponse(const Command command, const fn::set<Option>& options) -> fn::none
   {
     // Using declarations
     using enum Command;

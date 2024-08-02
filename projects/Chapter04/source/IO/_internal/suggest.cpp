@@ -2,62 +2,59 @@
 
 #include "suggest.hpp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/Support/narrow.ipp>
 #include <Foundation/types.hpp>
 
 #include <algorithm>
 #include <numeric>
-#include <string_view>
-#include <unordered_map>
-#include <vector>
 
 namespace
 {
-  [[nodiscard]] auto keyDistance(const fn::cdef key1, const fn::cdef key2)
-    -> fn::f32
+  [[nodiscard]] auto keyDistance(const fn::cdef key1, const fn::cdef key2) -> fn::f32
   {
-    static const std::unordered_map keyMap{
+    static const fn::umap keyMap{
       // Row 0
-      std::pair{'1', std::pair{0, 0} },
-      std::pair{'2', std::pair{1, 0} },
-      std::pair{'3', std::pair{2, 0} },
-      std::pair{'4', std::pair{3, 0} },
-      std::pair{'5', std::pair{4, 0} },
-      std::pair{'6', std::pair{5, 0} },
-      std::pair{'7', std::pair{6, 0} },
-      std::pair{'8', std::pair{7, 0} },
-      std::pair{'9', std::pair{8, 0} },
-      std::pair{'0', std::pair{9, 0} },
-      std::pair{'-', std::pair{10, 0}},
+      fn::pair{'1', fn::pair{0, 0} },
+      fn::pair{'2', fn::pair{1, 0} },
+      fn::pair{'3', fn::pair{2, 0} },
+      fn::pair{'4', fn::pair{3, 0} },
+      fn::pair{'5', fn::pair{4, 0} },
+      fn::pair{'6', fn::pair{5, 0} },
+      fn::pair{'7', fn::pair{6, 0} },
+      fn::pair{'8', fn::pair{7, 0} },
+      fn::pair{'9', fn::pair{8, 0} },
+      fn::pair{'0', fn::pair{9, 0} },
+      fn::pair{'-', fn::pair{10, 0}},
       // Row 1
-      std::pair{'q', std::pair{0, 1} },
-      std::pair{'w', std::pair{1, 1} },
-      std::pair{'e', std::pair{2, 1} },
-      std::pair{'r', std::pair{3, 1} },
-      std::pair{'t', std::pair{4, 1} },
-      std::pair{'y', std::pair{5, 1} },
-      std::pair{'u', std::pair{6, 1} },
-      std::pair{'i', std::pair{7, 1} },
-      std::pair{'o', std::pair{8, 1} },
-      std::pair{'p', std::pair{9, 1} },
+      fn::pair{'q', fn::pair{0, 1} },
+      fn::pair{'w', fn::pair{1, 1} },
+      fn::pair{'e', fn::pair{2, 1} },
+      fn::pair{'r', fn::pair{3, 1} },
+      fn::pair{'t', fn::pair{4, 1} },
+      fn::pair{'y', fn::pair{5, 1} },
+      fn::pair{'u', fn::pair{6, 1} },
+      fn::pair{'i', fn::pair{7, 1} },
+      fn::pair{'o', fn::pair{8, 1} },
+      fn::pair{'p', fn::pair{9, 1} },
       // Row 2
-      std::pair{'a', std::pair{0, 2} },
-      std::pair{'s', std::pair{1, 2} },
-      std::pair{'d', std::pair{2, 2} },
-      std::pair{'f', std::pair{3, 2} },
-      std::pair{'g', std::pair{4, 2} },
-      std::pair{'h', std::pair{5, 2} },
-      std::pair{'j', std::pair{6, 2} },
-      std::pair{'k', std::pair{7, 2} },
-      std::pair{'l', std::pair{8, 2} },
+      fn::pair{'a', fn::pair{0, 2} },
+      fn::pair{'s', fn::pair{1, 2} },
+      fn::pair{'d', fn::pair{2, 2} },
+      fn::pair{'f', fn::pair{3, 2} },
+      fn::pair{'g', fn::pair{4, 2} },
+      fn::pair{'h', fn::pair{5, 2} },
+      fn::pair{'j', fn::pair{6, 2} },
+      fn::pair{'k', fn::pair{7, 2} },
+      fn::pair{'l', fn::pair{8, 2} },
       // Row 3
-      std::pair{'z', std::pair{0, 3} },
-      std::pair{'x', std::pair{1, 3} },
-      std::pair{'c', std::pair{2, 3} },
-      std::pair{'v', std::pair{3, 3} },
-      std::pair{'b', std::pair{4, 3} },
-      std::pair{'n', std::pair{5, 3} },
-      std::pair{'m', std::pair{6, 3} }
+      fn::pair{'z', fn::pair{0, 3} },
+      fn::pair{'x', fn::pair{1, 3} },
+      fn::pair{'c', fn::pair{2, 3} },
+      fn::pair{'v', fn::pair{3, 3} },
+      fn::pair{'b', fn::pair{4, 3} },
+      fn::pair{'n', fn::pair{5, 3} },
+      fn::pair{'m', fn::pair{6, 3} }
     };
 
     // Get the coordinates of the keys
@@ -69,9 +66,9 @@ namespace
     const auto yDistance{std::abs(y1 - y2)};
 
     // Calculate distance using eucledian distance
-    const auto distance{std::sqrt(fn::narrow_cast<fn::f32>(
-      (xDistance * xDistance) + (yDistance * yDistance)
-    ))};
+    const auto distance{
+      std::sqrt(fn::narrow_cast<fn::f32>((xDistance * xDistance) + (yDistance * yDistance)))
+    };
 
     // Normalize and return the distance
     return std::clamp(((distance / std::sqrt(109.0f)) + 0.5f), 0.05f, 1.0f);
@@ -80,16 +77,12 @@ namespace
 
 namespace IO::_internal
 {
-  [[nodiscard]] auto editDistance(
-    std::string_view subject, std::string_view candidate
-  ) -> fn::f32
+  [[nodiscard]] auto editDistance(fn::strv subject, fn::strv candidate) -> fn::f32
   {
     // Find the common prefix of the strings
     fn::size commonPrefixLength{};
-    while (
-      commonPrefixLength < std::min(subject.length(), candidate.length())
-      and subject.at(commonPrefixLength) == candidate.at(commonPrefixLength)
-    )
+    while (commonPrefixLength < std::min(subject.length(), candidate.length())
+           and subject.at(commonPrefixLength) == candidate.at(commonPrefixLength))
     {
       ++commonPrefixLength;
     }
@@ -116,9 +109,7 @@ namespace IO::_internal
     const auto candidateLength{candidate.length()};
 
     // Initialize the matrix
-    std::vector matrix{
-      subjectLength + 1, std::vector<fn::f32>(candidateLength + 1)
-    };
+    fn::vec matrix{subjectLength + 1, fn::vec<fn::f32>(candidateLength + 1)};
 
     // Initialize the first row with iota
     for (fn::size i{}; i <= subjectLength; ++i)

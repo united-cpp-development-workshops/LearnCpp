@@ -10,8 +10,7 @@
 
 namespace
 {
-  [[nodiscard]] constexpr auto GCD(fn::i32l number1, fn::i32l number2) noexcept
-    -> fn::i32l
+  [[nodiscard]] constexpr auto GCD(fn::i32l number1, fn::i32l number2) noexcept -> fn::i32l
   {
     while (number2 != 0)
     {
@@ -46,11 +45,11 @@ try
   }
 
   // Calculate greatest common divisor
-  const auto gcd{::GCD(width, height)};
+  const auto gcd{GCD(width, height)};
 
   // Calculate and print the aspect ratio
-  std::cout << "Aspect Ratio of " << width << "x" << height << " is "
-            << (width / gcd) << ":" << (height / gcd) << '\n';
+  std::cout << "Aspect Ratio of " << width << "x" << height << " is " << (width / gcd) << ":"
+            << (height / gcd) << '\n';
 
   // Return success
   return fn::EXIT_SUCCESS_CODE;

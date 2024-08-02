@@ -7,19 +7,17 @@
 #include "IO/_internal/prints.hpp"
 #include "IO/io.hpp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/errors.hpp>
 #include <Foundation/types.hpp>
+#include <Foundation/utilities.hpp>
 
 #include <algorithm>
 #include <limits>
-#include <set>
-#include <tuple>
-#include <utility>
 
 namespace IO::_internal
 {
-  [[nodiscard]] auto getCommandPriorityOptions(const IO::Command command
-  ) -> std::set<IO::Option>
+  [[nodiscard]] auto getCommandPriorityOptions(const IO::Command command) -> fn::set<IO::Option>
   {
     // Using declarations
     using enum IO::Command;
@@ -49,7 +47,7 @@ namespace IO::_internal
   }
 
   [[nodiscard]] auto getCommandRules(const IO::Command command
-  ) -> std::pair<std::set<IO::Option>, std::pair<fn::u16f, fn::u16f>>
+  ) -> fn::pair<fn::set<IO::Option>, fn::pair<fn::u16f, fn::u16f>>
   {
     // Using declarations
     using enum IO::Option;
@@ -75,24 +73,21 @@ namespace IO::_internal
     case IO::Command::METRICS:
     {
       return {
-        {T_NONE, T_IPTR, T_UPTR, T_NPTR, T_BLN,  T_I8,   T_I16,  T_I32,  T_I64,
-         T_U8,   T_U16,  T_U32,  T_U64,  T_I8L,  T_I16L, T_I32L, T_I64L, T_U8L,
-         T_U16L, T_U32L, T_U64L, T_I8F,  T_I16F, T_I32F, T_I64F, T_U8F,  T_U16F,
-         T_U32F, T_U64F, T_IDEF, T_UDEF, T_IMAX, T_UMAX, T_SIZE, T_F32,  T_F64,
-         T_FMAX, T_C8,   T_C16,  T_C32,  T_CDEF, T_WDEF},
+        {T_NONE, T_IPTR, T_UPTR, T_NPTR, T_BLN,  T_I8,   T_I16,  T_I32,  T_I64,  T_U8,   T_U16,
+         T_U32,  T_U64,  T_I8L,  T_I16L, T_I32L, T_I64L, T_U8L,  T_U16L, T_U32L, T_U64L, T_I8F,
+         T_I16F, T_I32F, T_I64F, T_U8F,  T_U16F, T_U32F, T_U64F, T_IDEF, T_UDEF, T_IMAX, T_UMAX,
+         T_SIZE, T_F32,  T_F64,  T_FMAX, T_C8,   T_C16,  T_C32,  T_CDEF, T_WDEF},
         {{1}, {1}}
       };
     }
     case IO::Command::COMPARE:
     {
       return {
-        {T_NONE, T_IPTR, T_UPTR, T_NPTR, T_BLN,  T_I8,   T_I16,  T_I32,  T_I64,
-         T_U8,   T_U16,  T_U32,  T_U64,  T_I8L,  T_I16L, T_I32L, T_I64L, T_U8L,
-         T_U16L, T_U32L, T_U64L, T_I8F,  T_I16F, T_I32F, T_I64F, T_U8F,  T_U16F,
-         T_U32F, T_U64F, T_IDEF, T_UDEF, T_IMAX, T_UMAX, T_SIZE, T_F32,  T_F64,
-         T_FMAX, T_C8,   T_C16,  T_C32,  T_CDEF, T_WDEF},
-        {IO::_internal::COMPARE_MIN_OPTIONS,
-         std::numeric_limits<fn::u16f>::max()}
+        {T_NONE, T_IPTR, T_UPTR, T_NPTR, T_BLN,  T_I8,   T_I16,  T_I32,  T_I64,  T_U8,   T_U16,
+         T_U32,  T_U64,  T_I8L,  T_I16L, T_I32L, T_I64L, T_U8L,  T_U16L, T_U32L, T_U64L, T_I8F,
+         T_I16F, T_I32F, T_I64F, T_U8F,  T_U16F, T_U32F, T_U64F, T_IDEF, T_UDEF, T_IMAX, T_UMAX,
+         T_SIZE, T_F32,  T_F64,  T_FMAX, T_C8,   T_C16,  T_C32,  T_CDEF, T_WDEF},
+        {IO::_internal::COMPARE_MIN_OPTIONS, std::numeric_limits<fn::u16f>::max()}
       };
     }
     case IO::Command::EXIT:
@@ -108,12 +103,10 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] auto validateRequest(
-    const Command command, std::set<Option>& options
-  ) -> fn::bln
+  [[nodiscard]] auto validateRequest(const Command command, fn::set<Option>& options) -> fn::bln
   {
     // Create options set for sanitization
-    std::set<Option> sanitizedOptions;
+    fn::set<Option> sanitizedOptions;
 
     // Get priority options
     const auto priorityOptions{getCommandPriorityOptions(command)};
@@ -159,9 +152,7 @@ namespace IO::_internal
         else
         {
           // Print warning message
-          printInputWarning(discardedOptionByLimitMsg(
-            getOptionMap().find(commandOption)->second
-          ));
+          printInputWarning(discardedOptByLimitMsg(getOptionMap().find(commandOption)->second));
 
           // Remove command option from options
           options.erase(commandOption);
@@ -172,9 +163,7 @@ namespace IO::_internal
       if (sanitizedOptions.size() < countLimits.first)
       {
         // Print warning message
-        printInputError(
-          insufficientOptionsMsg(getCommandMap().find(command)->second)
-        );
+        printInputError(insufficientOptMsg(getCommandMap().find(command)->second));
 
         // Return false
         return false;
@@ -185,8 +174,7 @@ namespace IO::_internal
     for (const auto& option : options)
     {
       // Print warning message
-      printInputWarning(discardedOptionMsg(getOptionMap().find(option)->second)
-      );
+      printInputWarning(discardedOptMsg(getOptionMap().find(option)->second));
     }
 
     // Move sanitized options to options and return true

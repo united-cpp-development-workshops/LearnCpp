@@ -1,13 +1,13 @@
 #include "pch.hpp"
 
 #include <Foundation/constants.hpp>
+#include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
 #include <Foundation/Utility/log.ipp>
 #include <Foundation/Utility/what.ipp>
 
 #include <exception>
 #include <iostream>
-#include <string>
 
 auto main() noexcept -> fn::idef
 try
@@ -15,7 +15,7 @@ try
   // Print Hello World!
   std::cout << "Please enter your full name: ";
 
-  std::string name;
+  fn::str name;
   std::getline(std::cin, name);
 
   std::cout << "Please enter your age: ";
@@ -23,8 +23,7 @@ try
   fn::i16f age{};
   std::cin >> age;
 
-  std::cout << "Your age + length of name is: " << (std::ssize(name) + age)
-            << '\n';
+  std::cout << "Your age + length of name is: " << (std::ssize(name) + age) << '\n';
 
   // Return success
   return fn::EXIT_SUCCESS_CODE;

@@ -4,15 +4,12 @@
 
 #include <Foundation/types.hpp>
 
-#include <string>
 #include <utility>
 
 namespace Game
 {
   // Constructors
-  Card::Card(
-    std::string&& suit, const fn::cdef rank, const fn::u8f value
-  ) noexcept
+  Card::Card(fn::str&& suit, const fn::cdef rank, const fn::u8f value) noexcept
     : m_suit{std::move(suit)}
     , m_rank{rank}
     , m_value{value}
@@ -20,7 +17,7 @@ namespace Game
   {}
 
   // Accessors
-  [[nodiscard]] auto Card::getSuit() const noexcept -> const std::string&
+  [[nodiscard]] auto Card::getSuit() const noexcept -> const fn::str&
   {
     return m_suit;
   }
@@ -35,11 +32,14 @@ namespace Game
     return m_value;
   }
 
-  [[nodiscard]] auto Card::isAce() const noexcept -> fn::bln { return m_isAce; }
+  [[nodiscard]] auto Card::isAce() const noexcept -> fn::bln
+  {
+    return m_isAce;
+  }
 
   // Mutators
   auto Card::setValue(const fn::u8f value) noexcept -> fn::none
   {
-    m_value = value;
+    m_value = {value};
   }
 } // namespace Game

@@ -4,22 +4,20 @@
 
 #include <Foundation/types.hpp>
 
-#include <string>
-
 namespace IO::_internal
 {
   struct TypeRow
   {
-    std::string typeName;
-    std::string isOptional;
-    std::string header;
-    std::string standardSize;
-    std::string platformSize;
-    std::string signedness;
-    std::string minValue;
-    std::string maxValue;
-    std::string precision;
-    std::string literalSuffix;
+    fn::str typeName;
+    fn::str isOptional;
+    fn::str header;
+    fn::str standardSize;
+    fn::str platformSize;
+    fn::str signedness;
+    fn::str minValue;
+    fn::str maxValue;
+    fn::str precision;
+    fn::str literalSuffix;
   };
 
   auto               printBriefTypeInfo(Option typeName) -> fn::none;

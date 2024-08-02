@@ -2,12 +2,9 @@
 
 #include "Math/math.ipp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
-
-#include <map>
-#include <optional>
-#include <utility>
-#include <vector>
+#include <Foundation/utilities.hpp>
 
 namespace Utility
 {
@@ -19,25 +16,25 @@ namespace Utility
   };
 
   [[nodiscard]] auto optionsHandler(
-    std::pair<fn::u16f, fn::u16f>&       preferredChartSize,
-    std::pair<fn::u16f, fn::u16f>&       currentChartSize,
-    std::map<fn::i32f, fn::u32f>&        frequencyMap,
-    std::pair<fn::u32f&, fn::u32f&>      intervals,
-    const std::vector<fn::i32f>&         values,
-    const std::pair<fn::i32f, fn::i32f>& bounds
+    fn::pair<fn::u16f, fn::u16f>&       preferredChartSize,
+    fn::pair<fn::u16f, fn::u16f>&       currentChartSize,
+    fn::map<fn::i32f, fn::u32f>&        frequencyMap,
+    fn::pair<fn::u32f&, fn::u32f&>      intervals,
+    const fn::vec<fn::i32f>&            values,
+    const fn::pair<fn::i32f, fn::i32f>& bounds
   ) -> fn::bln;
   [[nodiscard]] auto noFurtherZoomHandler(
-    fn::bln                              zoomIn,
-    Direction                            direction,
-    const std::pair<fn::u32f, fn::u32f>& intervals,
-    const std::map<fn::i32f, fn::u32f>&  frequencyMap
+    fn::bln                             zoomIn,
+    Direction                           direction,
+    const fn::pair<fn::u32f, fn::u32f>& intervals,
+    const fn::map<fn::i32f, fn::u32f>&  frequencyMap
   ) -> fn::bln;
   [[nodiscard]] auto chartZoom(
-    fn::bln                              zoomIn,
-    Direction                            zoomDirection,
-    std::pair<fn::u16f, fn::u16f>&       preferredChartSize,
-    std::pair<fn::u16f, fn::u16f>&       currentChartSize,
-    const std::vector<fn::i32f>&         values,
-    const std::pair<fn::i32f, fn::i32f>& bounds
-  ) -> std::optional<Math::ChartFeed>;
+    fn::bln                             zoomIn,
+    Direction                           zoomDirection,
+    fn::pair<fn::u16f, fn::u16f>&       preferredChartSize,
+    fn::pair<fn::u16f, fn::u16f>&       currentChartSize,
+    const fn::vec<fn::i32f>&            values,
+    const fn::pair<fn::i32f, fn::i32f>& bounds
+  ) -> fn::opt<Math::ChartFeed>;
 } // namespace Utility

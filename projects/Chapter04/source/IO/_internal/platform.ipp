@@ -34,19 +34,13 @@ namespace IO::_internal
   };
 
   [[nodiscard]] consteval auto COMPILER() noexcept -> Compiler;
-  [[nodiscard]] consteval auto COMPILER_STR(Compiler compiler) -> fn::cstr;
-
-  [[nodiscard]] inline auto compilerVersionString(Compiler compiler
-  ) -> std::string;
-
-  [[nodiscard]] consteval auto LANGUAGE_STD_STR() noexcept -> fn::cstr;
+  [[nodiscard]] consteval auto COMPILER_STR(Compiler compiler) -> fn::strv;
+  [[nodiscard]] inline auto    compilerVer(Compiler compiler) -> std::string;
+  [[nodiscard]] consteval auto LANGUAGE_STD_STR() noexcept -> fn::strv;
   [[nodiscard]] consteval auto ARCHITECTURE() -> Architecture;
-  [[nodiscard]] consteval auto ARCHITECTURE_STR(Architecture architecture
-  ) -> fn::cstr;
+  [[nodiscard]] consteval auto ARCHITECTURE_STR(Architecture arch) -> fn::strv;
   [[nodiscard]] consteval auto OPERATING_SYSTEM() -> OperatingSystem;
-  [[nodiscard]] consteval auto OPERATING_SYSTEM_STR(
-    OperatingSystem operatingSystem
-  ) -> fn::cstr;
+  [[nodiscard]] consteval auto OPERATING_SYSTEM_STR(OperatingSystem os) -> fn::strv;
 } // namespace IO::_internal
 
 /*----------------------------------------------------------------------------*\
@@ -71,32 +65,36 @@ namespace IO::_internal
 #endif
   }
 
-  [[nodiscard]] consteval auto COMPILER_STR(const Compiler compiler) -> fn::cstr
+  [[nodiscard]] consteval auto COMPILER_STR(const Compiler compiler) -> fn::strv
   {
     // Using declarations
     using enum Compiler;
 
     switch (compiler)
     {
-    case UNKNOWN: return "Unknown";
-    case MSVC   : return "Microsoft Visual C++";
-    case CLANG  : return "Clang";
-    case GCC    : return "GNU Compiler Collection";
+    case UNKNOWN:
+      return "Unknown";
+    case MSVC:
+      return "Microsoft Visual C++";
+    case CLANG:
+      return "Clang";
+    case GCC:
+      return "GNU Compiler Collection";
     }
 
     // Should never reach here
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] inline auto compilerVersionString(const Compiler compiler
-  ) -> std::string
+  [[nodiscard]] inline auto compilerVer(const Compiler compiler) -> std::string
   {
     // Using declarations
     using enum Compiler;
 
     switch (compiler)
     {
-    case UNKNOWN: return {""};
+    case UNKNOWN:
+      return {""};
     case MSVC:
     {
       constexpr fn::u16l MSVC_VER_FIRST_DOT{2};
@@ -166,32 +164,29 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] consteval auto LANGUAGE_STD_STR() noexcept -> fn::cstr
+  [[nodiscard]] consteval auto LANGUAGE_STD_STR() noexcept -> fn::strv
   {
-    constexpr fn::i32l CPPRE_CODE{199'711L};
-    constexpr fn::i32l CPP11_CODE{201'103L};
-    constexpr fn::i32l CPP14_CODE{201'402L};
-    constexpr fn::i32l CPP17_CODE{201'703L};
-    constexpr fn::i32l CPP20_CODE{202'002L};
-    constexpr fn::i32l CPP23_CODE{202'302L};
-    constexpr fn::i32l CPP26_CODE{202'612L};
-
-#pragma warning(push)
-#pragma warning(disable : 6'326)
-
-    switch (__cplusplus)
-    {
-    case CPPRE_CODE: return "Pre-C++11";
-    case CPP11_CODE: return "C++11";
-    case CPP14_CODE: return "C++14";
-    case CPP17_CODE: return "C++17";
-    case CPP20_CODE: return "C++20";
-    case CPP23_CODE: return "C++23";
-    case CPP26_CODE: return "C++26";
-    default        : return "Unknown C++ standard";
-    }
-
-#pragma warning(pop)
+#ifdef __cplusplus
+  #if __cplusplus >= 202'612L
+    return "C++26";
+  #elif __cplusplus >= 202'302L
+    return "C++23";
+  #elif __cplusplus >= 202'002L
+    return "C++20";
+  #elif __cplusplus >= 201'703L
+    return "C++17";
+  #elif __cplusplus >= 201'402L
+    return "C++14";
+  #elif __cplusplus >= 201'103L
+    return "C++11";
+  #elif __cplusplus >= 199'711L
+    return "Pre-C++11";
+  #else
+    return "Unknown C++ standard";
+  #endif
+#else
+    return "__cplusplus macro not defined";
+#endif
   }
 
   [[nodiscard]] consteval auto ARCHITECTURE() -> Architecture
@@ -202,7 +197,8 @@ namespace IO::_internal
     // NOLINTBEGIN(bugprone-branch-clone)
     switch (COMPILER())
     {
-    case UNKNOWN: return Architecture::UNKNOWN;
+    case UNKNOWN:
+      return Architecture::UNKNOWN;
     case MSVC:
     {
 #if defined(_M_IX86)
@@ -239,19 +235,23 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] consteval auto ARCHITECTURE_STR(const Architecture architecture
-  ) -> fn::cstr
+  [[nodiscard]] consteval auto ARCHITECTURE_STR(const Architecture arch) -> fn::strv
   {
     // Using declarations
     using enum Architecture;
 
-    switch (architecture)
+    switch (arch)
     {
-    case UNKNOWN: return "Unknown";
-    case X86    : return "x86";
-    case X64    : return "x64";
-    case ARM32  : return "ARM32";
-    case ARM64  : return "ARM64";
+    case UNKNOWN:
+      return "Unknown";
+    case X86:
+      return "x86";
+    case X64:
+      return "x64";
+    case ARM32:
+      return "ARM32";
+    case ARM64:
+      return "ARM64";
     }
 
     // Should never reach here
@@ -265,7 +265,8 @@ namespace IO::_internal
 
     switch (COMPILER())
     {
-    case UNKNOWN: return OperatingSystem::UNKNOWN;
+    case UNKNOWN:
+      return OperatingSystem::UNKNOWN;
     case MSVC:
     case CLANG:
     case GCC:
@@ -286,19 +287,21 @@ namespace IO::_internal
     throw fn::EnumeratorError{};
   }
 
-  [[nodiscard]] consteval auto OPERATING_SYSTEM_STR(
-    const OperatingSystem operatingSystem
-  ) -> fn::cstr
+  [[nodiscard]] consteval auto OPERATING_SYSTEM_STR(const OperatingSystem os) -> fn::strv
   {
     // Using declarations
     using enum OperatingSystem;
 
-    switch (operatingSystem)
+    switch (os)
     {
-    case UNKNOWN: return "Unknown";
-    case WINDOWS: return "Windows";
-    case MACOS  : return "macOS";
-    case LINUX  : return "Linux";
+    case UNKNOWN:
+      return "Unknown";
+    case WINDOWS:
+      return "Windows";
+    case MACOS:
+      return "macOS";
+    case LINUX:
+      return "Linux";
     }
 
     // Should never reach here

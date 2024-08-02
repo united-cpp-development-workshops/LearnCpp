@@ -6,22 +6,21 @@
 #include "Game/game.hpp"
 #include "Math/math.hpp"
 
+#include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
 
 #include <cctype>
 #include <iostream>
 #include <limits>
 #include <locale>
-#include <string>
-#include <vector>
 
 namespace IO
 {
   auto printHand(
-    const std::string&             holder,
-    const std::vector<Game::Card>& hand,
-    const fn::bln                  hideFirstCard,
-    fn::u16f                       adjustedHandTotal
+    const fn::strv             holder,
+    const fn::vec<Game::Card>& hand,
+    const fn::bln              hideFirstCard,
+    fn::u16f                   adjustedHandTotal
   ) -> fn::none
   {
     // Print holder
@@ -54,7 +53,10 @@ namespace IO
       }
       std::cout << " > " << adjustedHandTotal << '\n';
     }
-    else { std::cout << " > ?\n"; }
+    else
+    {
+      std::cout << " > ?\n";
+    }
   }
 
   [[nodiscard]] auto getPlayerBet(fn::u32f& playerBank) -> fn::u32f
@@ -108,7 +110,7 @@ namespace IO
   [[nodiscard]] auto getPlayerChoice() -> PlayerChoice
   {
     // Player choice input
-    std::string choice{};
+    fn::str choice{};
 
     // Input validation loop
     while (true)
