@@ -246,7 +246,7 @@ namespace
       std::this_thread::sleep_for(std::chrono::seconds(1));
 
       IO::printHand("\nDealer", dealerHand, false, 0);
-      std::cout << "Player: I lost!\n";
+      std::cout << "\nDealer: Sorry sir, you lost!\n";
       return;
     }
 
@@ -260,7 +260,7 @@ namespace
       std::this_thread::sleep_for(std::chrono::seconds(1));
 
       IO::printHand("\nDealer", dealerHand, false, dealerScore);
-      std::cout << "Player: I won!\n";
+      std::cout << "\nDealer: Good sir, you won!\n";
       playerBank += Game::WIN_MULTIPLIER * playerBet;
       return;
     }

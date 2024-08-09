@@ -30,11 +30,11 @@ namespace Math
     // Initialize the frequency map
     for (fn::i32f x{bounds.second}; x > bounds.first; x -= fn::narrow_cast<fn::i32f>(xAxisInterval))
     {
-      frequencyMap.at(x) = {0};
+      frequencyMap[x] = {0};
     }
 
     // If lower bound was not set, set it
-    frequencyMap.at(bounds.first) = {0};
+    frequencyMap[bounds.first] = {0};
 
     // Count the frequency of each interval
     std::ranges::for_each(
@@ -51,7 +51,7 @@ namespace Math
         )};
 
         // Increment the frequency of the key
-        ++frequencyMap.at(key);
+        ++frequencyMap[key];
       }
     );
 

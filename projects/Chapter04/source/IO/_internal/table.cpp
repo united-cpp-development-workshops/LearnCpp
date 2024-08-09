@@ -144,16 +144,16 @@ namespace IO::_internal
   auto printTypeTable(const std::set<Option>& options) -> fn::none
   {
     // Max column lengths
-    auto maxTypeNameColumnLength{fn::str{TYPE_NAME}.length()};
-    auto maxIsOptionalColumnLength{fn::str{OPTIONAL}.length()};
-    auto maxHeaderColumnLength{fn::str{HEADER}.length()};
-    auto maxStandardSizeColumnLength{fn::str{STANDARD_SIZE}.length()};
-    auto maxPlatformSizeColumnLength{fn::str{PLATFORM_SIZE}.length()};
-    auto maxSignednessColumnLength{fn::str{SIGNEDNESS}.length()};
-    auto maxMinValueColumnLength{fn::str{MIN_VALUE}.length()};
-    auto maxMaxValueColumnLength{fn::str{MAX_VALUE}.length()};
-    auto maxPrecisionColumnLength{fn::str{PRECISION}.length()};
-    auto maxLiteralSuffixesColumnLength{fn::str{SUFFIX}.length()};
+    auto maxTypeNameColLen{fn::str{TYPE_NAME}.length()};
+    auto maxIsOptionalColLen{fn::str{OPTIONAL}.length()};
+    auto maxHeaderColLen{fn::str{HEADER}.length()};
+    auto maxStandardSizeColLen{fn::str{STANDARD_SIZE}.length()};
+    auto maxPlatformSizeColLen{fn::str{PLATFORM_SIZE}.length()};
+    auto maxSignednessColLen{fn::str{SIGNEDNESS}.length()};
+    auto maxMinValueColLen{fn::str{MIN_VALUE}.length()};
+    auto maxMaxValueColLen{fn::str{MAX_VALUE}.length()};
+    auto maxPrecisionColLen{fn::str{PRECISION}.length()};
+    auto maxSuffixColLen{fn::str{SUFFIX}.length()};
 
     for (auto& option : options)
     {
@@ -161,24 +161,16 @@ namespace IO::_internal
       const auto typeRow{getTypeRow(option)};
 
       // Get column widths
-      maxTypeNameColumnLength   = {std::max(maxTypeNameColumnLength, typeRow.typeName.length())};
-      maxIsOptionalColumnLength = {std::max(maxIsOptionalColumnLength, typeRow.isOptional.length())
-      };
-      maxHeaderColumnLength     = {std::max(maxHeaderColumnLength, typeRow.header.length())};
-      maxStandardSizeColumnLength = {
-        std::max(maxStandardSizeColumnLength, typeRow.standardSize.length())
-      };
-      maxPlatformSizeColumnLength = {
-        std::max(maxPlatformSizeColumnLength, typeRow.platformSize.length())
-      };
-      maxSignednessColumnLength = {std::max(maxSignednessColumnLength, typeRow.signedness.length())
-      };
-      maxMinValueColumnLength   = {std::max(maxMinValueColumnLength, typeRow.minValue.length())};
-      maxMaxValueColumnLength   = {std::max(maxMaxValueColumnLength, typeRow.maxValue.length())};
-      maxPrecisionColumnLength  = {std::max(maxPrecisionColumnLength, typeRow.precision.length())};
-      maxLiteralSuffixesColumnLength = {
-        std::max(maxLiteralSuffixesColumnLength, typeRow.literalSuffix.length())
-      };
+      maxTypeNameColLen     = {std::max(maxTypeNameColLen, typeRow.typeName.length())};
+      maxIsOptionalColLen   = {std::max(maxIsOptionalColLen, typeRow.isOptional.length())};
+      maxHeaderColLen       = {std::max(maxHeaderColLen, typeRow.header.length())};
+      maxStandardSizeColLen = {std::max(maxStandardSizeColLen, typeRow.standardSize.length())};
+      maxPlatformSizeColLen = {std::max(maxPlatformSizeColLen, typeRow.platformSize.length())};
+      maxSignednessColLen   = {std::max(maxSignednessColLen, typeRow.signedness.length())};
+      maxMinValueColLen     = {std::max(maxMinValueColLen, typeRow.minValue.length())};
+      maxMaxValueColLen     = {std::max(maxMaxValueColLen, typeRow.maxValue.length())};
+      maxPrecisionColLen    = {std::max(maxPrecisionColLen, typeRow.precision.length())};
+      maxSuffixColLen       = {std::max(maxSuffixColLen, typeRow.literalSuffix.length())};
     }
 
     // Print title
@@ -200,46 +192,42 @@ namespace IO::_internal
 
     // Print table header
     std::cout
-      << "     +-" << fn::str(maxTypeNameColumnLength, '-') << "-+-"
-      << fn::str(maxIsOptionalColumnLength, '-') << "-+-" << fn::str(maxHeaderColumnLength, '-')
-      << "-+-" << fn::str(maxStandardSizeColumnLength, '-') << "-+-"
-      << fn::str(maxPlatformSizeColumnLength, '-') << "-+-"
-      << fn::str(maxSignednessColumnLength, '-') << "-+-" << fn::str(maxMinValueColumnLength, '-')
-      << "-+-" << fn::str(maxMaxValueColumnLength, '-') << "-+-"
-      << fn::str(maxPrecisionColumnLength, '-') << "-+-"
-      << fn::str(maxLiteralSuffixesColumnLength, '-') << "-+\n";
+      << "     +-" << fn::str(maxTypeNameColLen, '-') << "-+-" << fn::str(maxIsOptionalColLen, '-')
+      << "-+-" << fn::str(maxHeaderColLen, '-') << "-+-" << fn::str(maxStandardSizeColLen, '-')
+      << "-+-" << fn::str(maxPlatformSizeColLen, '-') << "-+-" << fn::str(maxSignednessColLen, '-')
+      << "-+-" << fn::str(maxMinValueColLen, '-') << "-+-" << fn::str(maxMaxValueColLen, '-')
+      << "-+-" << fn::str(maxPrecisionColLen, '-') << "-+-" << fn::str(maxSuffixColLen, '-')
+      << "-+\n";
 
     std::cout << "     | ";
-    printLeftAligned(TYPE_NAME, maxTypeNameColumnLength);
+    printLeftAligned(TYPE_NAME, maxTypeNameColLen);
     std::cout << " | ";
-    printLeftAligned(OPTIONAL, maxIsOptionalColumnLength);
+    printLeftAligned(OPTIONAL, maxIsOptionalColLen);
     std::cout << " | ";
-    printLeftAligned(HEADER, maxHeaderColumnLength);
+    printLeftAligned(HEADER, maxHeaderColLen);
     std::cout << " | ";
-    printLeftAligned(STANDARD_SIZE, maxStandardSizeColumnLength);
+    printLeftAligned(STANDARD_SIZE, maxStandardSizeColLen);
     std::cout << " | ";
-    printLeftAligned(PLATFORM_SIZE, maxPlatformSizeColumnLength);
+    printLeftAligned(PLATFORM_SIZE, maxPlatformSizeColLen);
     std::cout << " | ";
-    printLeftAligned(SIGNEDNESS, maxSignednessColumnLength);
+    printLeftAligned(SIGNEDNESS, maxSignednessColLen);
     std::cout << " | ";
-    printLeftAligned(MIN_VALUE, maxMinValueColumnLength);
+    printLeftAligned(MIN_VALUE, maxMinValueColLen);
     std::cout << " | ";
-    printLeftAligned(MAX_VALUE, maxMaxValueColumnLength);
+    printLeftAligned(MAX_VALUE, maxMaxValueColLen);
     std::cout << " | ";
-    printLeftAligned(PRECISION, maxPrecisionColumnLength);
+    printLeftAligned(PRECISION, maxPrecisionColLen);
     std::cout << " | ";
-    printLeftAligned(SUFFIX, maxLiteralSuffixesColumnLength);
+    printLeftAligned(SUFFIX, maxSuffixColLen);
     std::cout << " |\n";
 
     std::cout
-      << "     +-" << fn::str(maxTypeNameColumnLength, '-') << "-+-"
-      << fn::str(maxIsOptionalColumnLength, '-') << "-+-" << fn::str(maxHeaderColumnLength, '-')
-      << "-+-" << fn::str(maxStandardSizeColumnLength, '-') << "-+-"
-      << fn::str(maxPlatformSizeColumnLength, '-') << "-+-"
-      << fn::str(maxSignednessColumnLength, '-') << "-+-" << fn::str(maxMinValueColumnLength, '-')
-      << "-+-" << fn::str(maxMaxValueColumnLength, '-') << "-+-"
-      << fn::str(maxPrecisionColumnLength, '-') << "-+-"
-      << fn::str(maxLiteralSuffixesColumnLength, '-') << "-+\n";
+      << "     +-" << fn::str(maxTypeNameColLen, '-') << "-+-" << fn::str(maxIsOptionalColLen, '-')
+      << "-+-" << fn::str(maxHeaderColLen, '-') << "-+-" << fn::str(maxStandardSizeColLen, '-')
+      << "-+-" << fn::str(maxPlatformSizeColLen, '-') << "-+-" << fn::str(maxSignednessColLen, '-')
+      << "-+-" << fn::str(maxMinValueColLen, '-') << "-+-" << fn::str(maxMaxValueColLen, '-')
+      << "-+-" << fn::str(maxPrecisionColLen, '-') << "-+-" << fn::str(maxSuffixColLen, '-')
+      << "-+\n";
 
     // Print table rows
     for (auto& option : options)
@@ -248,36 +236,34 @@ namespace IO::_internal
       const auto typeRow{getTypeRow(option)};
 
       std::cout << "     | ";
-      printLeftAligned(typeRow.typeName, maxTypeNameColumnLength);
+      printLeftAligned(typeRow.typeName, maxTypeNameColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.isOptional, maxIsOptionalColumnLength);
+      printLeftAligned(typeRow.isOptional, maxIsOptionalColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.header, maxHeaderColumnLength);
+      printLeftAligned(typeRow.header, maxHeaderColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.standardSize, maxStandardSizeColumnLength);
+      printLeftAligned(typeRow.standardSize, maxStandardSizeColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.platformSize, maxPlatformSizeColumnLength);
+      printLeftAligned(typeRow.platformSize, maxPlatformSizeColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.signedness, maxSignednessColumnLength);
+      printLeftAligned(typeRow.signedness, maxSignednessColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.minValue, maxMinValueColumnLength);
+      printLeftAligned(typeRow.minValue, maxMinValueColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.maxValue, maxMaxValueColumnLength);
+      printLeftAligned(typeRow.maxValue, maxMaxValueColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.precision, maxPrecisionColumnLength);
+      printLeftAligned(typeRow.precision, maxPrecisionColLen);
       std::cout << " | ";
-      printLeftAligned(typeRow.literalSuffix, maxLiteralSuffixesColumnLength);
+      printLeftAligned(typeRow.literalSuffix, maxSuffixColLen);
       std::cout << " |\n";
 
       std::cout
-        << "     +-" << fn::str(maxTypeNameColumnLength, '-') << "-+-"
-        << fn::str(maxIsOptionalColumnLength, '-') << "-+-" << fn::str(maxHeaderColumnLength, '-')
-        << "-+-" << fn::str(maxStandardSizeColumnLength, '-') << "-+-"
-        << fn::str(maxPlatformSizeColumnLength, '-') << "-+-"
-        << fn::str(maxSignednessColumnLength, '-') << "-+-" << fn::str(maxMinValueColumnLength, '-')
-        << "-+-" << fn::str(maxMaxValueColumnLength, '-') << "-+-"
-        << fn::str(maxPrecisionColumnLength, '-') << "-+-"
-        << fn::str(maxLiteralSuffixesColumnLength, '-') << "-+\n";
+        << "     +-" << fn::str(maxTypeNameColLen, '-') << "-+-"
+        << fn::str(maxIsOptionalColLen, '-') << "-+-" << fn::str(maxHeaderColLen, '-') << "-+-"
+        << fn::str(maxStandardSizeColLen, '-') << "-+-" << fn::str(maxPlatformSizeColLen, '-')
+        << "-+-" << fn::str(maxSignednessColLen, '-') << "-+-" << fn::str(maxMinValueColLen, '-')
+        << "-+-" << fn::str(maxMaxValueColLen, '-') << "-+-" << fn::str(maxPrecisionColLen, '-')
+        << "-+-" << fn::str(maxSuffixColLen, '-') << "-+\n";
     }
   }
 } // namespace IO::_internal

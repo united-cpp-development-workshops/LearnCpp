@@ -29,21 +29,21 @@ namespace
     RIGHT
   };
 
-  template <typename Type>
-  requires fn::IsSame<Type, fn::i32f> or fn::IsSame<Type, fn::cdef> or fn::IsSame<Type, fn::strv>
+  template <typename T>
+  requires fn::IsSame<T, fn::i32f> or fn::IsSame<T, fn::cdef> or fn::IsSame<T, fn::strv>
   auto printAligned(
-    const Type& input, const fn::cdef padSymbol, const fn::u16f width, const Alignment alignment
+    const T& input, const fn::cdef padSymbol, const fn::u16f width, const Alignment alignment
   ) -> std::ostream&
   {
     // Find the length of the input
     fn::u16f inputLength{};
 
     // Check if the input is a character
-    if constexpr (fn::IsSame<Type, fn::cdef>)
+    if constexpr (fn::IsSame<T, fn::cdef>)
     {
       inputLength = {1};
     }
-    else if constexpr (fn::IsSame<Type, fn::strv>)
+    else if constexpr (fn::IsSame<T, fn::strv>)
     {
       // Get the length of input
       inputLength = {fn::narrow_cast<fn::u16f>(input.length())};

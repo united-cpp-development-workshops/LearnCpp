@@ -1,6 +1,6 @@
 # +----------------------------------------------------------------------------+
 # |                        C++ Clang-Tidy Configuration                        |
-# |                              Version 24.08.02                              |
+# |                              Version 24.08.06                              |
 # +----------------------------------------------------------------------------+
 # | What is it?                                                                |
 # | It is a configuration file for Clang-Tidy, a static analysis tool from the |
@@ -30,7 +30,7 @@
 # | Language     : YAML                                                        |
 # | C++ Standard : C++20                                                       |
 # | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-08-02                                                  |
+# | Date         : 2024-08-06                                                  |
 # +----------------------------------------------------------------------------+
 ---
 # ExcludeHeaderFilterRegex: // v19
@@ -568,7 +568,7 @@ CheckOptions:
   - key: readability-identifier-length.MinimumLoopCounterNameLength
     value: 2
   - key: readability-identifier-length.IgnoredLoopCounterNames
-    value: "[xyz]"
+    value: "[ijkxyz]"
   - key: readability-identifier-length.MinimumExceptionNameLength
     value: 2
   - key: readability-identifier-length.IgnoredExceptionVariableNames
@@ -1105,8 +1105,9 @@ CheckOptions:
   - key: readability-identifier-naming.TypeTemplateParameterCase
     value: "CamelCase"
   - key: readability-identifier-naming.TypeTemplateParameterPrefix
-    value: ""
-# - key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp // None
+    value: "T"
+  - key: readability-identifier-naming.TypeTemplateParameterIgnoredRegexp
+    value: "^T$"
   - key: readability-identifier-naming.TypeTemplateParameterSuffix
     value: ""
 # -

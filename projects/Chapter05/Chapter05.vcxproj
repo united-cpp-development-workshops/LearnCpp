@@ -11,21 +11,125 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <Import Project="$(ProjectDir)..\..\.build.props" />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Clang - Debug|ARM64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Clang - Release|ARM64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Debug|ARM64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Release|ARM64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Clang - Debug|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Clang - Release|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Debug|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Release|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
   <!-- Items -->
   <ItemGroup>
+    <ClCompile Include="source\Data\Repository.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="source\File\_internal\details.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="source\Game\Wordsman.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="source\Game\_internal\details.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="source\Text\text.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="source\Data\Repository.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\File\structure.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\File\_internal\constants.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\File\_internal\details.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\Game\Wordsman.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\Game\_internal\constants.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\Game\_internal\details.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\IO\io.ipp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\IO\_internal\details.ipp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\Model\Dictionary.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\File\file.ipp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\Model\Entry.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\Model\Save.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="source\pch.hpp" />
+    <ClInclude Include="source\Text\text.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
   </ItemGroup>
   <!-- References -->
   <ItemGroup>
     <ProjectReference Include="..\..\modules\Foundation++\projects\Foundation++\Foundation++.vcxproj">
       <Project>{9462e205-b23d-4aa8-9d57-447e2d1f274b}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\dictionary.csv" />
+    <None Include="data\saves.csv" />
   </ItemGroup>
   <!-- Targets -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

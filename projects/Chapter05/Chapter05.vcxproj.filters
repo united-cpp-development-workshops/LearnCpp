@@ -21,40 +21,71 @@
     <ClCompile Include="source\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\Data\Repository.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\Wordsman.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\File\_internal\details.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Game\_internal\details.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Text\text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\pch.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\constants.hpp">
+    <ClInclude Include="source\File\file.ipp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\types.hpp">
+    <ClInclude Include="source\Model\Dictionary.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\_internal\Exception\_internal\concepts.hpp">
+    <ClInclude Include="source\Data\Repository.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\_internal\Exception\Exception.ipp">
+    <ClInclude Include="source\Game\Wordsman.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\_internal\Exception\Name.ipp">
+    <ClInclude Include="source\File\_internal\details.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\Support\narrow.ipp">
+    <ClInclude Include="source\File\_internal\constants.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\concepts.hpp">
+    <ClInclude Include="source\File\structure.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\errors.hpp">
+    <ClInclude Include="source\IO\io.ipp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\Utility\log.ipp">
+    <ClInclude Include="source\Model\Entry.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\Foundation\Utility\what.ipp">
+    <ClInclude Include="source\Game\_internal\details.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\Game\_internal\constants.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\IO\_internal\details.ipp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Text\text.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Model\Save.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\dictionary.csv" />
+    <None Include="data\saves.csv" />
   </ItemGroup>
 </Project>

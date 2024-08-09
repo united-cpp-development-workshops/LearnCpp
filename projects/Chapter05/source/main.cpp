@@ -1,32 +1,49 @@
 #include "pch.hpp"
 
+#include "Data/Repository.hpp"
+#include "Game/Wordsman.hpp"
+
 #include <Foundation/constants.hpp>
-#include <Foundation/containers.hpp>
+#include <Foundation/errors.hpp>
 #include <Foundation/types.hpp>
 #include <Foundation/Utility/log.ipp>
 #include <Foundation/Utility/what.ipp>
 
 #include <exception>
+#include <filesystem>
 #include <iostream>
+#include <memory>
 
 auto main() noexcept -> fn::idef
 try
 {
-  // Print Hello World!
-  std::cout << "Please enter your full name: ";
+  // Initialize the repository
+  const auto repository{std::make_shared<Data::Repository>()};
 
-  fn::str name;
-  std::getline(std::cin, name);
+  // Initialize the game
+  Game::Wordsman game{repository};
 
-  std::cout << "Please enter your age: ";
-
-  fn::i16f age{};
-  std::cin >> age;
-
-  std::cout << "Your age + length of name is: " << (std::ssize(name) + age) << '\n';
+  // Run the game
+  game.run();
 
   // Return success
   return fn::EXIT_SUCCESS_CODE;
+}
+catch (const fn::FileError& error)
+{
+  // Log error
+  fn::elog(error);
+
+  // Return failure
+  return fn::EXIT_FAILURE_CODE;
+}
+catch (const fn::StateError& error)
+{
+  // Log error
+  fn::elog(error);
+
+  // Return failure
+  return fn::EXIT_FAILURE_CODE;
 }
 catch (const std::exception& exception)
 {
