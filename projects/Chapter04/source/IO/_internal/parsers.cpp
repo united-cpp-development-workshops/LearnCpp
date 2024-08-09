@@ -127,7 +127,7 @@ namespace IO::_internal
     return invalidCmdHandler(token);
   }
 
-  [[nodiscard]] auto invalidCmdHandler(fn::strv token) -> fn::opt<Command>
+  [[nodiscard]] auto invalidCmdHandler(const fn::strv token) -> fn::opt<Command>
   {
     // Get command map
     const auto& commandMap{getCommandMap()};

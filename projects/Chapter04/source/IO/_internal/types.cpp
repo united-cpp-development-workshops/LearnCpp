@@ -527,7 +527,7 @@ namespace IO::_internal
       std::cout << "     - You can use 'bool' as flags or binary states.\n";
       std::cout << "     - Initialize 'bool' variables, they wont be initialized implicitly.\n";
       std::cout << "     - Use boolean expressions directly in conditional statements.\n";
-      std::cout << "     - Avoid implicit conversions, use boolean arithmetics when assigning.\n";
+      std::cout << "     - Avoid implicit conversions, use boolean arithmetic when assigning.\n";
       return;
     }
     case T_I8:

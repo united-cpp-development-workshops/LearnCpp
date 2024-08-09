@@ -27,8 +27,6 @@ namespace Game
 
   Wordsman::Wordsman(std::shared_ptr<Data::Repository> repository) noexcept
     : m_repository{std::move(repository)}
-    , m_score{}
-    , m_passRights{_internal::PASS_RIGHTS}
   {}
 
   /*-------------------------------------------------------------------------------------+--------*\
