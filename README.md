@@ -2,6 +2,7 @@
 
 Following the [learncpp](https://www.learncpp.com/) tutorials, this repository
 contains training workshops with the aim of learning the C++ programming language.
+
 Workshops include custom projects and exercises to practice the concepts learned
 in the tutorials. The workshops are written in **modern C++** following the best
 practices and idioms.

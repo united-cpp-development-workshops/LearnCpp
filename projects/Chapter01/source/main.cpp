@@ -1,6 +1,7 @@
 #include "pch.hpp"
 
 #include <Foundation/constants.hpp>
+#include <Foundation/errors.hpp>
 #include <Foundation/types.hpp>
 #include <Foundation/Utility/log.ipp>
 #include <Foundation/Utility/what.ipp>
@@ -41,7 +42,7 @@ try
   // If width or height is 0 then error out
   if (width == 0 or height == 0)
   {
-    throw fn::InputError{"Witdh/Height must'not be zero!"};
+    throw fn::InputError{"Width/Height must not be zero!"};
   }
 
   // Calculate greatest common divisor
