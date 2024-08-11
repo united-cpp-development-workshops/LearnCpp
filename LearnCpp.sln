@@ -30,6 +30,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Foundation++", "modules\Fou
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter05", "projects\Chapter05\Chapter05.vcxproj", "{C7F2545F-7097-4C63-8DDF-7905FFF2C9DB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Chapter06", "projects\Chapter06\Chapter06.vcxproj", "{A642CB2A-397E-4092-9385-5A95CDB9BD21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Clang - Debug|ARM64 = Clang - Debug|ARM64
@@ -154,6 +156,22 @@ Global
 		{C7F2545F-7097-4C63-8DDF-7905FFF2C9DB}.MSVC - Release|ARM64.Build.0 = MSVC - Release|ARM64
 		{C7F2545F-7097-4C63-8DDF-7905FFF2C9DB}.MSVC - Release|x64.ActiveCfg = MSVC - Release|x64
 		{C7F2545F-7097-4C63-8DDF-7905FFF2C9DB}.MSVC - Release|x64.Build.0 = MSVC - Release|x64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.Clang - Debug|ARM64.ActiveCfg = Clang - Debug|ARM64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.Clang - Debug|ARM64.Build.0 = Clang - Debug|ARM64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.Clang - Debug|x64.ActiveCfg = Clang - Debug|x64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.Clang - Debug|x64.Build.0 = Clang - Debug|x64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.Clang - Release|ARM64.ActiveCfg = Clang - Release|ARM64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.Clang - Release|ARM64.Build.0 = Clang - Release|ARM64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.Clang - Release|x64.ActiveCfg = Clang - Release|x64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.Clang - Release|x64.Build.0 = Clang - Release|x64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.MSVC - Debug|ARM64.ActiveCfg = MSVC - Debug|ARM64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.MSVC - Debug|ARM64.Build.0 = MSVC - Debug|ARM64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.MSVC - Debug|x64.ActiveCfg = MSVC - Debug|x64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.MSVC - Debug|x64.Build.0 = MSVC - Debug|x64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.MSVC - Release|ARM64.ActiveCfg = MSVC - Release|ARM64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.MSVC - Release|ARM64.Build.0 = MSVC - Release|ARM64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.MSVC - Release|x64.ActiveCfg = MSVC - Release|x64
+		{A642CB2A-397E-4092-9385-5A95CDB9BD21}.MSVC - Release|x64.Build.0 = MSVC - Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,3 +23,5 @@ a Visual Studio solution.
   - Types Explorer
 - **[Chapter 05:](./projects/Chapter05/) Constants and Strings**
   - Wordsman: A word guessing game
+- **[Chapter 06:](./projects/Chapter06/) Operators**
+  - See&Crypt: A simple encryption program

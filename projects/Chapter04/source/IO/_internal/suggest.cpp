@@ -13,7 +13,7 @@ namespace
 {
   [[nodiscard]] auto keyDistance(const fn::cdef key1, const fn::cdef key2) -> fn::f32
   {
-    static const fn::umap keyMap{
+    static const fn::umap s_keyMap{
       // Row 0
       fn::pair{'1', fn::pair{0, 0} },
       fn::pair{'2', fn::pair{1, 0} },
@@ -58,14 +58,14 @@ namespace
     };
 
     // Get the coordinates of the keys
-    const auto& [x1, y1]{keyMap.at(key1)};
-    const auto& [x2, y2]{keyMap.at(key2)};
+    const auto& [x1, y1]{s_keyMap.at(key1)};
+    const auto& [x2, y2]{s_keyMap.at(key2)};
 
     // Calculate x and y distances
     const auto xDistance{std::abs(x1 - x2)};
     const auto yDistance{std::abs(y1 - y2)};
 
-    // Calculate distance using eucledian distance
+    // Calculate distance using Euclidian distance
     const auto distance{
       std::sqrt(fn::narrow_cast<fn::f32>((xDistance * xDistance) + (yDistance * yDistance)))
     };
