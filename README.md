@@ -26,3 +26,5 @@ a Visual Studio solution.
   - Wordsman: A word guessing game
 - **[Chapter 06:](./projects/Chapter06/) Operators**
   - See&Crypt: A simple encryption program
+- **[Chapter O:](./projects/ChapterO/) Bit Manipulation (Optional Chapter)**
+  - Bit&Guess: An interactive bit manipulation game

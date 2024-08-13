@@ -1081,6 +1081,7 @@ CheckOptions:
       ^unit$|\
       ^opt$|\
       ^pair$|\
+      ^bitset$|\
       ^arr$|\
       ^vec$|\
       ^([bp]?)que$|\

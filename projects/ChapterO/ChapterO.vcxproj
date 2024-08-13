@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Globals -->
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{ca6ed186-9160-44d3-8b7d-ed40c6b15187}</ProjectGuid>
+    <RootNamespace>ChapterO</RootNamespace>
+  </PropertyGroup>
+  <!-- Props -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(ProjectDir)..\..\.build.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Clang - Debug|ARM64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Clang - Release|ARM64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Debug|ARM64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Release|ARM64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Clang - Debug|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Clang - Release|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Debug|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MSVC - Release|x64'">
+    <EnableClangTidyCodeAnalysis>false</EnableClangTidyCodeAnalysis>
+  </PropertyGroup>
+  <!-- Items -->
+  <ItemGroup>
+    <ClCompile Include="source\Core\core.cpp" />
+    <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="source\Random\random.cpp" />
+    <ClCompile Include="source\Utility\utility.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="source\Core\constants.hpp" />
+    <ClInclude Include="source\Core\core.hpp" />
+    <ClInclude Include="source\Core\_internal\details.ipp" />
+    <ClInclude Include="source\IO\io.ipp" />
+    <ClInclude Include="source\IO\_internal\details.ipp" />
+    <ClInclude Include="source\pch.hpp" />
+    <ClInclude Include="source\Random\random.hpp" />
+    <ClInclude Include="source\Utility\utility.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="source\Utility\_internal\constants.hpp">
+      <SubType>
+      </SubType>
+    </ClInclude>
+  </ItemGroup>
+  <!-- References -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\modules\Foundation++\projects\Foundation++\Foundation++.vcxproj">
+      <Project>{9462e205-b23d-4aa8-9d57-447e2d1f274b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <!-- Targets -->
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

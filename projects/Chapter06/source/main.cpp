@@ -25,7 +25,7 @@ try
     IO::printAppTitle();
     IO::printSectionDivider();
     IO::printTitle("MAIN MENU");
-    IO::printParagraph("Please select an option from the menu below:");
+    IO::printParagraph("Select an option from the menu below:");
     IO::printMenuOption("Encrypt", "Encrypt a string.", Core::ENCRYPT_OPTION);
     IO::printMenuOption("Decrypt", "Decrypt a string.", Core::DECRYPT_OPTION);
     IO::printMenuOption("Exit   ", "Exit the application.", Core::EXIT_OPTION);
