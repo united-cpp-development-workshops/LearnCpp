@@ -37,7 +37,7 @@
   <!-- Build Configurations | Common -->
   <PropertyGroup >
     <ConfigurationType>Application</ConfigurationType>
-    <LLVMInstallDir>C:\Program Files\LLVM</LLVMInstallDir>
+    <LLVMInstallDir>$(ProgramFiles)\LLVM</LLVMInstallDir>
     <LLVMToolsVersion>18.1.8</LLVMToolsVersion>
     <OutDir>$(MSBuildThisFileDirectory)out\$(MSBuildProjectName)\bin\$(Configuration) - $(Platform)\</OutDir>
     <IntDir>$(MSBuildThisFileDirectory)out\$(MSBuildProjectName)\int\$(Configuration) - $(Platform)\</IntDir>
