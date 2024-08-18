@@ -11,15 +11,15 @@
 
 namespace
 {
-  [[nodiscard]] constexpr auto GCD(fn::i32l number1, fn::i32l number2) noexcept -> fn::i32l
+  [[nodiscard]] constexpr auto GCD(fn::i32l a, fn::i32l b) noexcept -> fn::i32l
   {
-    while (number2 != 0)
+    while (b != 0)
     {
-      const auto tempNumber2{number2};
-      number2 = {number1 % number2};
-      number1 = {tempNumber2};
+      const auto temp{b};
+      b = {a % b};
+      a = {temp};
     }
-    return number1;
+    return a;
   }
 } // namespace
 

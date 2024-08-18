@@ -4,6 +4,7 @@
 
 #include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
+#include <Foundation/utilities.hpp>
 
 namespace Math
 {
@@ -29,18 +30,18 @@ namespace Math
     return count;
   }
 
-  struct ChartFeed
+  struct Feed
   {
-    fn::map<fn::i32f, fn::u32f> frequencyMap;
+    fn::map<fn::i32f, fn::u32f> frequencies;
     fn::u32f                    maxFrequency{};
     fn::u32f                    xAxisInterval{};
     fn::u32f                    yAxisInterval{};
     fn::i32f                    lowerBound{};
   };
 
-  [[nodiscard]] auto generateChartFeed(
+  [[nodiscard]] auto generateFeed(
     const fn::vec<fn::i32f>&            values,
     const fn::pair<fn::i32f, fn::i32f>& bounds,
-    const fn::pair<fn::u16f, fn::u16f>& chartSize
-  ) -> fn::pair<ChartFeed, fn::pair<fn::u16f, fn::u16f>>;
+    const fn::pair<fn::u16f, fn::u16f>& size
+  ) -> fn::pair<Feed, fn::pair<fn::u16f, fn::u16f>>;
 } // namespace Math

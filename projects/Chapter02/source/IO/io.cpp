@@ -89,7 +89,7 @@ namespace
   }
 
   auto printChartRow(
-    const fn::map<fn::i32f, fn::u32f>&  frequencyMap,
+    const fn::map<fn::i32f, fn::u32f>&  frequencies,
     const fn::i32f                      lowerBound,
     const fn::pair<fn::u32f, fn::u16f>& xAxisValues,
     const fn::bln                       lastRow,
@@ -104,7 +104,7 @@ namespace
     if (lastRow)
     {
       // Traverse through x-axis with respect to interval
-      for ([[maybe_unused]] const auto index : std::views::iota(fn::size{0}, frequencyMap.size()))
+      for ([[maybe_unused]] const auto index : std::views::iota(fn::size{0}, frequencies.size()))
       {
         // Print the line
         printAligned('|', '-', xAxisValues.second, Alignment::RIGHT);
@@ -125,7 +125,7 @@ namespace
       );
 
       // Print x-axis labels
-      for (const auto& [x, ignored] : frequencyMap)
+      for (const auto& [x, ignored] : frequencies)
       {
         // Value is not used
         std::ignore = ignored;
@@ -139,12 +139,12 @@ namespace
     }
 
     // Traverse through x-axis with respect to interval
-    for (const auto& [x, frequency] : frequencyMap)
+    for (const auto& [x, frequency] : frequencies)
     {
       // Determine if we need to print horizontal grid
-      const auto& iteratorToNextColumnNeedingGrid{std::ranges::find_if(
-        frequencyMap.find(x),
-        frequencyMap.end(),
+      const auto& nextColumnNeedingGridIt{std::ranges::find_if(
+        frequencies.find(x),
+        frequencies.end(),
         [&y, &yAxisValues](const auto& pair) noexcept -> fn::bln
         {
           return (pair.second >= y) and (pair.second < (y + yAxisValues.first));
@@ -155,7 +155,7 @@ namespace
       fn::cdef symbolBetweenColumns{' '};
 
       // Determine if we need to print horizontal grid
-      if (iteratorToNextColumnNeedingGrid != frequencyMap.end())
+      if (nextColumnNeedingGridIt != frequencies.end())
       {
         symbolBetweenColumns = '.';
       }
@@ -172,7 +172,7 @@ namespace
     }
   }
 
-  auto zoomOptionHandler(const fn::strv option, const fn::bln zoomIn) -> fn::opt<IO::Option>
+  auto zoomOptionHandler(const fn::strv option, const fn::bln isZoomIn) -> fn::opt<IO::Option>
   {
     // Using declarations
     using enum IO::Option;
@@ -183,13 +183,13 @@ namespace
       // Check direction of the zoom
       if (option.find('h') != fn::str::npos or option.find('H') != fn::str::npos)
       {
-        return zoomIn ? ZOOM_IN_HORIZONTAL : ZOOM_OUT_HORIZONTAL;
+        return isZoomIn ? ZOOM_IN_HORIZONTAL : ZOOM_OUT_HORIZONTAL;
       }
 
       // Check direction of the zoom
       if (option.find('v') != fn::str::npos or option.find('V') != fn::str::npos)
       {
-        return zoomIn ? ZOOM_IN_VERTICAL : ZOOM_OUT_VERTICAL;
+        return isZoomIn ? ZOOM_IN_VERTICAL : ZOOM_OUT_VERTICAL;
       }
 
       // Wrong input
@@ -202,7 +202,7 @@ namespace
     // If non-directional zoom is requested, the length must be 1
     if (option.length() == 1)
     {
-      return zoomIn ? ZOOM_IN : ZOOM_OUT;
+      return isZoomIn ? ZOOM_IN : ZOOM_OUT;
     }
 
     // Wrong input
@@ -299,7 +299,7 @@ namespace IO
     return upperBound;
   }
 
-  auto getPreferredChartSizeInput() -> fn::pair<fn::u16f, fn::u16f>
+  auto getSizeInput() -> fn::pair<fn::u16f, fn::u16f>
   {
     resetInputBuffer();
 
@@ -336,26 +336,25 @@ namespace IO
     std::cout << " RESULTS\n";
   }
 
-  auto printChart(const Math::ChartFeed& chartFeed) -> fn::none
+  auto printChart(const Math::Feed& feed) -> fn::none
   {
     std::cout << "\n - Chart:\n\n";
 
     // Find label width for x-axis
     const fn::u16f xAxisLabelWidth{
       std::ranges::max(
-        chartFeed.frequencyMap | std::views::keys | std::views::transform(Math::NUMBER_LENGTH)
+        feed.frequencies | std::views::keys | std::views::transform(Math::NUMBER_LENGTH)
       )
       + fn::u16f{1}
     };
 
     // Find the length of first x label
     const auto xFirstLabelLength{
-      Math::NUMBER_LENGTH(chartFeed.lowerBound - fn::narrow_cast<fn::i32f>(chartFeed.xAxisInterval))
+      Math::NUMBER_LENGTH(feed.lowerBound - fn::narrow_cast<fn::i32f>(feed.xAxisInterval))
     };
 
     // Find the length of last y label
-    const auto yLastLabelLength{Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency
-    ))};
+    const auto yLastLabelLength{Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(feed.maxFrequency))};
 
     // Find label width for y-axis
     fn::u16f yAxisLabelWidth{};
@@ -363,12 +362,12 @@ namespace IO
     // Compare effective width of x and y label widths
     if ((xFirstLabelLength - fn::u16f{LEFT_MARGIN}) > yLastLabelLength)
     {
-      yAxisLabelWidth = {Math::NUMBER_LENGTH(chartFeed.lowerBound) - fn::u16f{1}};
+      yAxisLabelWidth = {Math::NUMBER_LENGTH(feed.lowerBound) - fn::u16f{1}};
     }
     else
     {
       yAxisLabelWidth = {
-        Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(chartFeed.maxFrequency)) + fn::u16f{1}
+        Math::NUMBER_LENGTH(fn::narrow_cast<fn::i32f>(feed.maxFrequency)) + fn::u16f{1}
       };
     }
 
@@ -387,30 +386,30 @@ namespace IO
 
     // Print row by row
     fn::bln  lastRow{false};
-    fn::u32f y{chartFeed.maxFrequency};
+    fn::u32f y{feed.maxFrequency};
     while (not lastRow)
     {
       // Check if we are in last row
-      if ((fn::narrow_cast<fn::i32f>(y) - fn::narrow_cast<fn::i32f>(chartFeed.yAxisInterval)) < 0)
+      if ((fn::narrow_cast<fn::i32f>(y) - fn::narrow_cast<fn::i32f>(feed.yAxisInterval)) < 0)
       {
         lastRow = {true};
       }
 
       // Print row
       printChartRow(
-        chartFeed.frequencyMap,
-        chartFeed.lowerBound,
-        {chartFeed.xAxisInterval, xAxisLabelWidth},
+        feed.frequencies,
+        feed.lowerBound,
+        {feed.xAxisInterval, xAxisLabelWidth},
         lastRow,
         y,
-        {chartFeed.yAxisInterval, yAxisLabelWidth}
+        {feed.yAxisInterval, yAxisLabelWidth}
       );
 
       // End the row
       std::cout << '\n';
 
       // Decrement y
-      y -= chartFeed.yAxisInterval;
+      y -= feed.yAxisInterval;
     }
   }
 

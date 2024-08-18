@@ -28,13 +28,19 @@ try
     const auto optional{IO::parseInput(input)};
 
     // Check if input is valid
-    if (not optional.has_value()) { continue; }
+    if (not optional.has_value())
+    {
+      continue;
+    }
 
-    // Destructure input
+    // Destructured input
     const auto& [command, options]{optional.value()};
 
     // Exit if command is 'exit' and has no options
-    if (command == IO::Command::EXIT and options.empty()) { break; }
+    if (command == IO::Command::EXIT and options.empty())
+    {
+      break;
+    }
 
     // Respond
     IO::printResponse(command, options);

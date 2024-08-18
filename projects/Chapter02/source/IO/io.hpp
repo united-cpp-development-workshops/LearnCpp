@@ -5,6 +5,7 @@
 
 #include <Foundation/containers.hpp>
 #include <Foundation/types.hpp>
+#include <Foundation/utilities.hpp>
 
 namespace IO
 {
@@ -32,9 +33,9 @@ namespace IO
   [[nodiscard]] auto getSamplesCountInput() -> fn::i32f;
   [[nodiscard]] auto getLowerBoundInput() -> fn::i32f;
   [[nodiscard]] auto getUpperBoundInput() -> fn::i32f;
-  [[nodiscard]] auto getPreferredChartSizeInput() -> fn::pair<fn::u16f, fn::u16f>;
+  [[nodiscard]] auto getSizeInput() -> fn::pair<fn::u16f, fn::u16f>;
   auto               printResultsHeader() -> fn::none;
-  auto               printChart(const Math::ChartFeed& chartFeed) -> fn::none;
+  auto               printChart(const Math::Feed& feed) -> fn::none;
   auto               printStatistics(const fn::vec<fn::i32f>& values) -> fn::none;
   auto               printOptionsHeader() -> fn::none;
   [[nodiscard]] auto getOptionInput() -> Option;

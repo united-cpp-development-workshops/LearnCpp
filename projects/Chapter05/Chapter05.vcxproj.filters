@@ -85,7 +85,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\dictionary.csv" />
     <None Include="data\saves.csv" />
+    <None Include="assets\dictionary.csv" />
   </ItemGroup>
 </Project>

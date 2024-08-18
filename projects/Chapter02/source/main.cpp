@@ -31,33 +31,31 @@ try
     const fn::i32f               samplesCount{IO::getSamplesCountInput()};
     const fn::i32f               lowerBound{IO::getLowerBoundInput()};
     const fn::i32f               upperBound{IO::getUpperBoundInput()};
-    fn::pair<fn::u16f, fn::u16f> preferredChartSize{IO::getPreferredChartSizeInput()};
+    fn::pair<fn::u16f, fn::u16f> preferredSize{IO::getSizeInput()};
 
     // Distribute randomly
     auto values{Random::distribute(samplesCount, {lowerBound, upperBound})};
 
     // Print results
     IO::printResultsHeader();
-    auto [chartFeed, resultingChartSize]{
-      Math::generateChartFeed(values, {lowerBound, upperBound}, preferredChartSize)
-    };
+    auto [feed, resultingSize]{Math::generateFeed(values, {lowerBound, upperBound}, preferredSize)};
 
-    // Remember intervals and frequencyMap to determine if we can zoom further
-    fn::u32f                    xAxisInterval{chartFeed.xAxisInterval};
-    fn::u32f                    yAxisInterval{chartFeed.yAxisInterval};
-    fn::map<fn::i32f, fn::u32f> frequencyMap{chartFeed.frequencyMap};
+    // Remember intervals and frequencies to determine if we can zoom further
+    fn::u32f                    xAxisInterval{feed.xAxisInterval};
+    fn::u32f                    yAxisInterval{feed.yAxisInterval};
+    fn::map<fn::i32f, fn::u32f> frequencies{feed.frequencies};
 
     // Print chart
-    IO::printChart(chartFeed);
+    IO::printChart(feed);
 
     // Print Statistics
     IO::printStatistics(values);
 
     // Options
     running = {Utility::optionsHandler(
-      preferredChartSize,
-      resultingChartSize,
-      frequencyMap,
+      preferredSize,
+      resultingSize,
+      frequencies,
       {xAxisInterval, yAxisInterval},
       values,
       {lowerBound, upperBound}

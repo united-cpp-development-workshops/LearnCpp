@@ -67,7 +67,7 @@ namespace IO::_internal
 
   [[nodiscard]] inline auto autofixCmdMsg(fn::strv token, fn::strv suggestion) -> fn::str
   {
-    return std::format("Invalid command '{}'. Closest natcg '{}' was used.", token, suggestion);
+    return std::format("Invalid command '{}'. Closest match '{}' was used.", token, suggestion);
   }
 
   [[nodiscard]] inline auto autofixOptMsg(fn::strv token, fn::strv suggestion) -> fn::str
@@ -82,7 +82,7 @@ namespace IO::_internal
 
   [[nodiscard]] inline auto invalidOptMsg(fn::strv token) -> fn::str
   {
-    return std::format("Invalid option '{}' was dicarded.", token);
+    return std::format("Invalid option '{}' was discarded.", token);
   }
 
   [[nodiscard]] inline auto invalidOptSuggestMsg(fn::strv token, fn::strv suggestion) -> fn::str

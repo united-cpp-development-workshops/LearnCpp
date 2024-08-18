@@ -16,25 +16,25 @@ namespace Utility
   };
 
   [[nodiscard]] auto optionsHandler(
-    fn::pair<fn::u16f, fn::u16f>&       preferredChartSize,
-    fn::pair<fn::u16f, fn::u16f>&       currentChartSize,
-    fn::map<fn::i32f, fn::u32f>&        frequencyMap,
+    fn::pair<fn::u16f, fn::u16f>&       preferredSize,
+    fn::pair<fn::u16f, fn::u16f>&       currentSize,
+    fn::map<fn::i32f, fn::u32f>&        frequencies,
     fn::pair<fn::u32f&, fn::u32f&>      intervals,
     const fn::vec<fn::i32f>&            values,
     const fn::pair<fn::i32f, fn::i32f>& bounds
   ) -> fn::bln;
   [[nodiscard]] auto noFurtherZoomHandler(
-    fn::bln                             zoomIn,
+    fn::bln                             isZoomIn,
     Direction                           direction,
     const fn::pair<fn::u32f, fn::u32f>& intervals,
-    const fn::map<fn::i32f, fn::u32f>&  frequencyMap
+    const fn::map<fn::i32f, fn::u32f>&  frequencies
   ) -> fn::bln;
-  [[nodiscard]] auto chartZoom(
-    fn::bln                             zoomIn,
+  [[nodiscard]] auto zoom(
+    fn::bln                             isZoomIn,
     Direction                           zoomDirection,
-    fn::pair<fn::u16f, fn::u16f>&       preferredChartSize,
-    fn::pair<fn::u16f, fn::u16f>&       currentChartSize,
+    fn::pair<fn::u16f, fn::u16f>&       preferredSize,
+    fn::pair<fn::u16f, fn::u16f>&       currentSize,
     const fn::vec<fn::i32f>&            values,
     const fn::pair<fn::i32f, fn::i32f>& bounds
-  ) -> fn::opt<Math::ChartFeed>;
+  ) -> fn::opt<Math::Feed>;
 } // namespace Utility

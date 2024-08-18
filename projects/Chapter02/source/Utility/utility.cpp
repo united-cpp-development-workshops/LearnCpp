@@ -15,10 +15,10 @@
 namespace
 {
   auto zoomHandler(
-    const fn::bln                        zoomIn,
-    fn::pair<fn::u16f, fn::u16f>&        preferredChartSize,
-    fn::pair<fn::u16f, fn::u16f>&        currentChartSize,
-    fn::map<fn::i32f, fn::u32f>&         frequencyMap,
+    const fn::bln                        isZoomIn,
+    fn::pair<fn::u16f, fn::u16f>&        preferredSize,
+    fn::pair<fn::u16f, fn::u16f>&        currentSize,
+    fn::map<fn::i32f, fn::u32f>&         frequencies,
     const fn::pair<fn::u32f&, fn::u32f&> intervals,
     const fn::vec<fn::i32f>&             values,
     const fn::pair<fn::i32f, fn::i32f>&  bounds,
@@ -48,44 +48,42 @@ namespace
     }
 
     // Check if we can zoom further
-    if (noFurtherZoomHandler(zoomIn, direction, intervals, frequencyMap))
+    if (noFurtherZoomHandler(isZoomIn, direction, intervals, frequencies))
     {
       return;
     }
 
     // Zoom
-    const auto optionalNewChartFeed{
-      chartZoom(zoomIn, direction, preferredChartSize, currentChartSize, values, bounds)
-    };
+    const auto newFeedOpt{zoom(isZoomIn, direction, preferredSize, currentSize, values, bounds)};
 
     // Check if zoom failed
-    if (not optionalNewChartFeed.has_value())
+    if (not newFeedOpt.has_value())
     {
       IO::printNoFurtherZoom(direction);
       return;
     }
 
     // Success
-    const auto& newChartFeed{optionalNewChartFeed.value()};
+    const auto& newFeed{newFeedOpt.value()};
 
     // Update intervals
-    intervals.first  = {newChartFeed.xAxisInterval};
-    intervals.second = {newChartFeed.yAxisInterval};
+    intervals.first  = {newFeed.xAxisInterval};
+    intervals.second = {newFeed.yAxisInterval};
 
     // Update frequency map
-    frequencyMap = {newChartFeed.frequencyMap};
+    frequencies = {newFeed.frequencies};
 
     // Print chart again
-    IO::printChart(newChartFeed);
+    IO::printChart(newFeed);
   }
 } // namespace
 
 namespace Utility
 {
   [[nodiscard]] auto optionsHandler(
-    fn::pair<fn::u16f, fn::u16f>&        preferredChartSize,
-    fn::pair<fn::u16f, fn::u16f>&        currentChartSize,
-    fn::map<fn::i32f, fn::u32f>&         frequencyMap,
+    fn::pair<fn::u16f, fn::u16f>&        preferredSize,
+    fn::pair<fn::u16f, fn::u16f>&        currentSize,
+    fn::map<fn::i32f, fn::u32f>&         frequencies,
     const fn::pair<fn::u32f&, fn::u32f&> intervals,
     const fn::vec<fn::i32f>&             values,
     const fn::pair<fn::i32f, fn::i32f>&  bounds
@@ -109,14 +107,7 @@ namespace Utility
       case ZOOM_IN_VERTICAL:
       {
         zoomHandler(
-          true,
-          preferredChartSize,
-          currentChartSize,
-          frequencyMap,
-          intervals,
-          values,
-          bounds,
-          option
+          true, preferredSize, currentSize, frequencies, intervals, values, bounds, option
         );
         break;
       }
@@ -125,14 +116,7 @@ namespace Utility
       case ZOOM_OUT_VERTICAL:
       {
         zoomHandler(
-          false,
-          preferredChartSize,
-          currentChartSize,
-          frequencyMap,
-          intervals,
-          values,
-          bounds,
-          option
+          false, preferredSize, currentSize, frequencies, intervals, values, bounds, option
         );
         break;
       }
@@ -154,10 +138,10 @@ namespace Utility
   }
 
   [[nodiscard]] auto noFurtherZoomHandler(
-    const fn::bln                       zoomIn,
+    const fn::bln                       isZoomIn,
     const Direction                     direction,
     const fn::pair<fn::u32f, fn::u32f>& intervals,
-    const fn::map<fn::i32f, fn::u32f>&  frequencyMap
+    const fn::map<fn::i32f, fn::u32f>&  frequencies
   ) -> fn::bln
   {
     // Can zoom in
@@ -165,9 +149,9 @@ namespace Utility
     const auto canZoomInVertical{intervals.second > 1};
 
     // Can zoom out
-    const auto canZoomOutHorizontal{(frequencyMap.size() - 1) > 1};
+    const auto canZoomOutHorizontal{(frequencies.size() - 1) > 1};
     const auto canZoomOutVertical{
-      (*std::ranges::max_element(std::views::values(frequencyMap)) / intervals.second) > 1
+      (*std::ranges::max_element(std::views::values(frequencies)) / intervals.second) > 1
     };
 
     auto canZoom{true};
@@ -178,13 +162,13 @@ namespace Utility
     case Direction::BOTH:
     {
       // Check if we can zoom in both directions
-      if (zoomIn and (not canZoomInHorizontal and not canZoomInVertical))
+      if (isZoomIn and (not canZoomInHorizontal and not canZoomInVertical))
       {
         canZoom = {false};
       }
 
       // Check if we can zoom out in both directions
-      if (not zoomIn and (not canZoomOutHorizontal and not canZoomOutVertical))
+      if (not isZoomIn and (not canZoomOutHorizontal and not canZoomOutVertical))
       {
         canZoom = {false};
       }
@@ -193,13 +177,13 @@ namespace Utility
     case Direction::HORIZONTAL:
     {
       // Check if we can zoom in in horizontal direction
-      if (zoomIn and not canZoomInHorizontal)
+      if (isZoomIn and not canZoomInHorizontal)
       {
         canZoom = {false};
       }
 
       // Check if we can zoom out in horizontal direction
-      if (not zoomIn and not canZoomOutHorizontal)
+      if (not isZoomIn and not canZoomOutHorizontal)
       {
         canZoom = {false};
       }
@@ -208,13 +192,13 @@ namespace Utility
     case Direction::VERTICAL:
     {
       // Check if we can zoom in in vertical direction
-      if (zoomIn and not canZoomInVertical)
+      if (isZoomIn and not canZoomInVertical)
       {
         canZoom = {false};
       }
 
       // Check if we can zoom out in vertical direction
-      if (not zoomIn and not canZoomOutVertical)
+      if (not isZoomIn and not canZoomOutVertical)
       {
         canZoom = {false};
       }
@@ -233,21 +217,21 @@ namespace Utility
     return false;
   }
 
-  [[nodiscard]] auto chartZoom(
-    const fn::bln                       zoomIn,
+  [[nodiscard]] auto zoom(
+    const fn::bln                       isZoomIn,
     const Direction                     zoomDirection,
-    fn::pair<fn::u16f, fn::u16f>&       preferredChartSize,
-    fn::pair<fn::u16f, fn::u16f>&       currentChartSize,
+    fn::pair<fn::u16f, fn::u16f>&       preferredSize,
+    fn::pair<fn::u16f, fn::u16f>&       currentSize,
     const fn::vec<fn::i32f>&            values,
     const fn::pair<fn::i32f, fn::i32f>& bounds
-  ) -> fn::opt<Math::ChartFeed>
+  ) -> fn::opt<Math::Feed>
   {
     // Save old chart sizes
-    const fn::pair<fn::u16f, fn::u16f> oldPreferredChartSize{preferredChartSize};
-    const fn::pair<fn::u16f, fn::u16f> oldChartSize{currentChartSize};
+    const fn::pair<fn::u16f, fn::u16f> oldPreferredSize{preferredSize};
+    const fn::pair<fn::u16f, fn::u16f> oldSize{currentSize};
 
     // Initialize new chart feed and size
-    Math::ChartFeed newChartFeed;
+    Math::Feed newFeed;
 
     // Zoom loop
     fn::bln zoomed{false};
@@ -256,52 +240,48 @@ namespace Utility
       // Increase preferred column count if direction allows it
       if (zoomDirection == Direction::BOTH or zoomDirection == Direction::HORIZONTAL)
       {
-        preferredChartSize.first = {
-          zoomIn ? (preferredChartSize.first + fn::u16f{1})
-                 : (preferredChartSize.first - fn::u16f{1})
+        preferredSize.first = {
+          isZoomIn ? (preferredSize.first + fn::u16f{1}) : (preferredSize.first - fn::u16f{1})
         };
       }
 
       // Increase preferred row count if direction allows it
       if (zoomDirection == Direction::BOTH or zoomDirection == Direction::VERTICAL)
       {
-        preferredChartSize.first = {
-          zoomIn ? (preferredChartSize.first + fn::u16f{1})
-                 : (preferredChartSize.first - fn::u16f{1})
+        preferredSize.first = {
+          isZoomIn ? (preferredSize.first + fn::u16f{1}) : (preferredSize.first - fn::u16f{1})
         };
       }
 
-      if (preferredChartSize.first == 0 or preferredChartSize.second == 0)
+      if (preferredSize.first == 0 or preferredSize.second == 0)
       {
-        preferredChartSize = {oldPreferredChartSize};
-        currentChartSize   = {oldChartSize};
+        preferredSize = {oldPreferredSize};
+        currentSize   = {oldSize};
 
         // Return empty optional
         return {};
       }
 
       // Generate chart feed and size
-      const auto [tempChartFeed, resultingChartSize]{
-        Math::generateChartFeed(values, bounds, preferredChartSize)
-      };
+      const auto [tempFeed, resultingChartSize]{Math::generateFeed(values, bounds, preferredSize)};
 
       // If no change occurred, zoom again
-      if (currentChartSize == resultingChartSize)
+      if (currentSize == resultingChartSize)
       {
         continue;
       }
 
       // Check if zoomed
-      if (resultingChartSize.first > preferredChartSize.first
-          or resultingChartSize.second > preferredChartSize.second)
+      if (resultingChartSize.first > preferredSize.first
+          or resultingChartSize.second > preferredSize.second)
       {
-        zoomed           = {true};
-        newChartFeed     = {tempChartFeed};
-        currentChartSize = {resultingChartSize};
+        zoomed      = {true};
+        newFeed     = {tempFeed};
+        currentSize = {resultingChartSize};
       }
     }
 
     // Return new chart feed
-    return newChartFeed;
+    return newFeed;
   }
 } // namespace Utility
