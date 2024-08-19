@@ -1,0 +1,38 @@
+<Solution>
+  <!-- Configurations -->
+  <Configurations>
+    <BuildType Name="Clang - Debug" />
+    <BuildType Name="Clang - Release" />
+    <BuildType Name="MSVC - Debug" />
+    <BuildType Name="MSVC - Release" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+  </Configurations>
+  <!-- Folders -->
+  <Folder Name="/Solution Items/">
+    <File Path=".build.props" />
+    <File Path=".clang-format" />
+    <File Path=".clang-tidy" />
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path=".gitmodules" />
+    <File Path="LICENSE.md" />
+    <File Path="README.md" />
+  </Folder>
+  <!-- Projects -->
+  <Project Path="projects\Chapter00\Chapter00.vcxproj" />
+  <Project Path="projects\Chapter01\Chapter01.vcxproj" />
+  <Project Path="projects\Chapter02\Chapter02.vcxproj" />
+  <Project Path="projects\Chapter03\Chapter03.vcxproj" />
+  <Project Path="projects\Chapter04\Chapter04.vcxproj" />
+  <Project Path="projects\Chapter05\Chapter05.vcxproj" />
+  <Project Path="projects\Chapter06\Chapter06.vcxproj" />
+  <Project Path="projects\Chapter07\Chapter07.vcxproj" />
+  <Project Path="projects\ChapterO\ChapterO.vcxproj" />
+  <Project Path="modules\LibFoundation++\projects\LibFoundation++\LibFoundation++.vcxproj" />
+  <!-- Properties -->
+  <Properties Name="Visual Studio">
+    <Property Name="OpenWith" Value="17" />
+  </Properties>
+</Solution>
