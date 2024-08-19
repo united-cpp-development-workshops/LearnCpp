@@ -98,7 +98,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>source;include;$(MSBuildThisFileDirectory)modules\Foundation++\projects\Foundation++\source</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>source;include;$(MSBuildThisFileDirectory)modules\LibFoundation++\projects\LibFoundation++\source</AdditionalIncludeDirectories>
       <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>

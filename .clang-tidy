@@ -1,37 +1,39 @@
-# +----------------------------------------------------------------------------+
-# |                        C++ Clang-Tidy Configuration                        |
-# |                              Version 24.08.06                              |
-# +----------------------------------------------------------------------------+
-# | What is it?                                                                |
-# | It is a configuration file for Clang-Tidy, a static analysis tool from the |
-# | LLVM project, used to analyze C++ code. The configuration file comprises a |
-# | mix of recommended checks from various widely recognized guidelines in the |
-# | C++ community. It is designed to be as strict as possible to catch as many |
-# | common issues as possible.                                                 |
-# |                                                                            |
-# | How to use it?                                                             |
-# | Simply place it in the root directory of your project. If you are using an |
-# | IDE, specific configurations may be required to enable and use Clang-Tidy. |
-# | Command line usage is also possible. Refer to the official Clang-Tidy docs |
-# | for more information.                                                      |
-# |                                                                            |
-# | What is the purpose?                                                       |
-# | It's intended for use in general C++ projects that require a high level of |
-# | code quality. Combined with my "C++ Clang-Format Configuration" file, this |
-# | becomes a powerful tool to enforce coding standards and best practices.    |
-# |                                                                            |
-# | Who is it for?                                                             |
-# | It is designed for intermediate to advanced C++ developers who are looking |
-# | to improve their code quality and enforce coding standards.                |
-# +----------------------------------------------------------------------------+
-# | File         : .clang-tidy                                                 |
-# | LLVM Version : 18.1.8                                                      |
-# | License      : MIT                                                         |
-# | Language     : YAML                                                        |
-# | C++ Standard : C++20                                                       |
-# | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-08-06                                                  |
-# +----------------------------------------------------------------------------+
+# +------------------------------------------------------------------------------------------------+
+# |                                  C++ Clang-Tidy Configuration                                  |
+# |                                        Version 24.08.19                                        |
+# +------------------------------------------------------------------------------------------------+
+# | What is it?                                                                                    |
+# | -----------                                                                                    |
+# | It is a configuration file for Clang-Tidy, a static analysis tool from the LLVM project, used  |
+# | to analyze C++ code. The configuration file comprises a mix of recommended checks from various |
+# | widely recognized guidelines in the C++ community. It is designed to be as strict as possible  |
+# | to catch as many common issues as possible.                                                    |
+# |                                                                                                |
+# | How to use it?                                                                                 |
+# | --------------                                                                                 |
+# | Simply place it in the root directory of your solution. If you are using an IDE, there may be  |
+# | specific configurations required to enable and use the Clang-Tidy. Command line usage is also  |
+# | possible. Refer to the official Clang-Tidy docs for more information.                          |
+# |                                                                                                |
+# | What is the purpose?                                                                           |
+# | --------------------                                                                           |
+# | It's intended for use in general C++ projects that require consistency and high level of code  |
+# | quality. When combined with the "C++ Clang-Format Configuration" file, they become a powerful  |
+# | tool to enforce coding standards and best practices.                                           |
+# |                                                                                                |
+# | Who is it for?                                                                                 |
+# | --------------                                                                                 |
+# | It is designed for intermediate to advanced C++ developers who are looking to enforce coding   |
+# | standards and improve the codebase's code quality.                                             |
+# +------------------------------------------------------------------------------------------------+
+# | File         : .clang-tidy                                                                     |
+# | LLVM Version : 18.1.8                                                                          |
+# | License      : MIT                                                                             |
+# | Language     : YAML                                                                            |
+# | C++ Standard : C++20                                                                           |
+# | Author       : @EmrecanKaracayir                                                               |
+# | Date         : 2024-08-19                                                                      |
+# +------------------------------------------------------------------------------------------------+
 ---
 # ExcludeHeaderFilterRegex: // v19
 ExtraArgs: ["-Weverything"]

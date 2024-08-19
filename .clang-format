@@ -1,37 +1,38 @@
-# *----------------------------------------------------------------------------*
-# |                       C++ Clang-Format Configuration                       |
-# |                              Version 24.08.02                              |
-# *----------------------------------------------------------------------------*
-# | What is it?                                                                |
-# | It is a configuration file for Clang-Format, a formatting tool for C, C++, |
-# | and Objective-C code, designed to enforce a consistent coding style and to |
-# | improve code readability. This configuration file achieves modern C++ code |
-# | by comprising a mix of widely recognized guidelines in the C++ community.  |
-# |                                                                            |
-# | How to use it?                                                             |
-# | Simply place it in the root directory of your project. If you are using an |
-# | IDE, specific configurations may be required to enable & use Clang-Format. |
-# | Command line usage, also possible. Refer to the official Clang-Format docs |
-# | for more information.                                                      |
-# |                                                                            |
-# | What is the purpose?                                                       |
-# | It's intended for any C++ project whose authors like the look of Prettier, |
-# | formatting tool for JavaScript, and want to achieve a similar look in C++. |
-# | When combined with my "C++ Clang-Tidy Configuration" file, this becomes a  |
-# | powerful tool to enforce coding standards and best practices.              |
-# |                                                                            |
-# | Who is it for?                                                             |
-# | It is designed for intermediate to advanced C++ developers who are looking |
-# | to improve their code readability and enforce coding styles.               |
-# *----------------------------------------------------------------------------*
-# | File         : .clang-format                                               |
-# | LLVM Version : 18.1.8                                                      |
-# | License      : MIT                                                         |
-# | Language     : YAML                                                        |
-# | C++ Standard : C++20                                                       |
-# | Author       : @EmrecanKaracayir                                           |
-# | Date         : 2024-08-02                                                  |
-# *----------------------------------------------------------------------------*
+# *------------------------------------------------------------------------------------------------*
+# |                                 C++ Clang-Format Configuration                                 |
+# |                                        Version 24.08.19                                        |
+# *------------------------------------------------------------------------------------------------*
+# | What is it?                                                                                    |
+# | -----------                                                                                    |
+# | It is a configuration file for Clang-Format, a formatting tool for C-family of languages built |
+# | to enforce a consistent coding style and to improve code readability. This configuration file  |
+# | achieves modern C++ code by comprising a mix of widely recognized guidelines in the community. |
+# |                                                                                                |
+# | How to use it?                                                                                 |
+# | --------------                                                                                 |
+# | Simply place it in the root directory of your solution. If you are using an IDE, there may be  |
+# | specific configurations required to enable and use the Clang-Format. Command line usage, also  |
+# | possible. Refer to the official Clang-Format docs for more information.                        |
+# |                                                                                                |
+# | What is the purpose?                                                                           |
+# | --------------------                                                                           |
+# | It's intended for any C++ project whose authors like the look of Prettier, formatting tool for |
+# | JavaScript, and want to achieve a similar look in C++. When combined with the "C++ Clang-Tidy  |
+# | Configuration" file, they become a powerful tool to enforce coding standards & best practices. |
+# |                                                                                                |
+# | Who is it for?                                                                                 |
+# | --------------                                                                                 |
+# | It is designed for intermediate to advanced C++ developers who are looking to enforce coding   |
+# | styles and improve the codebase's code readability.                                            |
+# *------------------------------------------------------------------------------------------------*
+# | File         : .clang-format                                                                   |
+# | LLVM Version : 18.1.8                                                                          |
+# | License      : MIT                                                                             |
+# | Language     : YAML                                                                            |
+# | C++ Standard : C++20                                                                           |
+# | Author       : @EmrecanKaracayir                                                               |
+# | Date         : 2024-08-19                                                                      |
+# *------------------------------------------------------------------------------------------------*
 ---
 BasedOnStyle: LLVM
 AccessModifierOffset: -2

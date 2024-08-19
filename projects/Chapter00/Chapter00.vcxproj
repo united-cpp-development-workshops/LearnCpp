@@ -23,7 +23,7 @@
   </ItemGroup>
   <!-- References -->
   <ItemGroup>
-    <ProjectReference Include="..\..\modules\Foundation++\projects\Foundation++\Foundation++.vcxproj">
+    <ProjectReference Include="..\..\modules\LibFoundation++\projects\LibFoundation++\LibFoundation++.vcxproj">
       <Project>{9462e205-b23d-4aa8-9d57-447e2d1f274b}</Project>
     </ProjectReference>
   </ItemGroup>

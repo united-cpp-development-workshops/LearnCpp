@@ -4,8 +4,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{98d638b1-a3d8-44e9-8f5e-89065829a764}</ProjectGuid>
-    <RootNamespace>Chapter02</RootNamespace>
+    <ProjectGuid>{b27b05fa-d8a2-4499-a916-52c25fdf400c}</ProjectGuid>
+    <RootNamespace>Chapter07</RootNamespace>
   </PropertyGroup>
   <!-- Props -->
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -17,18 +17,9 @@
     <ClCompile Include="source\pch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="source\Math\math.cpp" />
-    <ClCompile Include="source\Random\random.cpp" />
-    <ClCompile Include="source\IO\io.cpp" />
-    <ClCompile Include="source\Utility\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Math\_internal\base.hpp" />
-    <ClInclude Include="source\Math\math.ipp" />
     <ClInclude Include="source\pch.hpp" />
-    <ClInclude Include="source\Random\random.hpp" />
-    <ClInclude Include="source\IO\io.hpp" />
-    <ClInclude Include="source\Utility\utility.hpp" />
   </ItemGroup>
   <!-- References -->
   <ItemGroup>

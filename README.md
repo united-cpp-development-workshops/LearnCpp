@@ -1,4 +1,4 @@
-# LearnCpp Workshops
+# LearnC++ Workshops
 
 Following the [learncpp](https://www.learncpp.com/) tutorials, this repository
 contains training workshops with the aim of learning the C++ programming language.
