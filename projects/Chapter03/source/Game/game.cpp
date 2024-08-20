@@ -312,7 +312,7 @@ namespace Game
     std::default_random_engine eng{std::random_device{}()};
 
     // Shuffle deck
-    std::shuffle(deck.begin(), deck.end(), eng);
+    std::ranges::shuffle(deck, eng);
 
     // Game loop
     while (true)
@@ -333,7 +333,7 @@ namespace Game
         std::cout << "\nPlayer: Game played with " << DECK_COUNT << " deck(s).\n";
 
         // Shuffle deck
-        std::shuffle(deck.begin(), deck.end(), eng);
+        std::ranges::shuffle(deck, eng);
         std::cout << "Player: Deck(s) shuffled!\n";
       }
 
