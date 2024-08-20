@@ -10,22 +10,22 @@ namespace Game
   {
   public:
     // Constructors
-    Card(fn::str&& suit, fn::cdef rank, fn::u8f value) noexcept;
+    Card(fn::str&& suit, fn::u16f value, fn::cdef rank) noexcept;
 
     // Accessors
     [[nodiscard]] auto getSuit() const noexcept -> const fn::str&;
-    [[nodiscard]] auto getRank() const noexcept -> fn::cdef;
     [[nodiscard]] auto getValue() const noexcept -> fn::u16f;
+    [[nodiscard]] auto getRank() const noexcept -> fn::cdef;
     [[nodiscard]] auto isAce() const noexcept -> fn::bln;
 
     // Mutators
-    auto setValue(fn::u8f value) noexcept -> fn::none;
+    auto setValue(fn::u16f value) noexcept -> fn::none;
 
   private:
     // Fields
     fn::str  m_suit;
-    fn::cdef m_rank;
     fn::u16f m_value;
+    fn::cdef m_rank;
     fn::bln  m_isAce;
 
     // Friends

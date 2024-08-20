@@ -45,7 +45,7 @@ namespace
         }
 
         // Add card to deck
-        deck.emplace_back(fn::str{suit}, rank, value);
+        deck.emplace_back(fn::str{suit}, value, rank);
       }
     }
   }

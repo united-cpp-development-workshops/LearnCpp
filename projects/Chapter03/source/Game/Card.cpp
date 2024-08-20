@@ -9,10 +9,10 @@
 namespace Game
 {
   // Constructors
-  Card::Card(fn::str&& suit, const fn::cdef rank, const fn::u8f value) noexcept
+  Card::Card(fn::str&& suit, const fn::u16f value, const fn::cdef rank) noexcept
     : m_suit{std::move(suit)}
-    , m_rank{rank}
     , m_value{value}
+    , m_rank{rank}
     , m_isAce{rank == 'A'}
   {}
 
@@ -22,14 +22,14 @@ namespace Game
     return m_suit;
   }
 
-  [[nodiscard]] auto Card::getRank() const noexcept -> fn::cdef
-  {
-    return m_rank;
-  }
-
   [[nodiscard]] auto Card::getValue() const noexcept -> fn::u16f
   {
     return m_value;
+  }
+
+  [[nodiscard]] auto Card::getRank() const noexcept -> fn::cdef
+  {
+    return m_rank;
   }
 
   [[nodiscard]] auto Card::isAce() const noexcept -> fn::bln
@@ -38,7 +38,7 @@ namespace Game
   }
 
   // Mutators
-  auto Card::setValue(const fn::u8f value) noexcept -> fn::none
+  auto Card::setValue(const fn::u16f value) noexcept -> fn::none
   {
     m_value = {value};
   }

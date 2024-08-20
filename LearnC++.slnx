@@ -35,4 +35,14 @@
   <Properties Name="Visual Studio">
     <Property Name="OpenWith" Value="17" />
   </Properties>
+  <Project Path="D:\Projects\LearnC++\modules\LibFoundation++\projects\LibFoundation++\LibFoundation++.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\Chapter00\Chapter00.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\Chapter01\Chapter01.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\Chapter02\Chapter02.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\Chapter03\Chapter03.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\Chapter04\Chapter04.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\Chapter05\Chapter05.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\Chapter06\Chapter06.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\Chapter07\Chapter07.vcxproj" />
+  <Project Path="D:\Projects\LearnC++\projects\ChapterO\ChapterO.vcxproj" />
 </Solution>

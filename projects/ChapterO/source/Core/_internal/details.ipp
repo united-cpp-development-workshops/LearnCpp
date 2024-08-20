@@ -86,7 +86,7 @@ namespace Core::_internal
     // Fill the bitsets with random values
     IO::printLoadingMessage("Loading...");
     fn::bln isFirstBitset{true};
-    for (fn::size [[maybe_unused]] i{}; i < operandCount; ++i)
+    for ([[maybe_unused]] fn::size i{}; i < operandCount; ++i)
     {
       if (isFirstBitset)
       {

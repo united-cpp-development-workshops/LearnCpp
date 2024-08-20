@@ -21,7 +21,11 @@ namespace IO::_internal
 
     std::cout << "   EXPLORE: '";
 
+#pragma warning(push)
+#pragma warning(disable : 4'061)
+
     // NOLINTBEGIN(clang-diagnostic-switch-enum)
+
     switch (typeName)
     {
     case T_NONE:
@@ -465,7 +469,10 @@ namespace IO::_internal
       std::cout << "   ERROR: In 'explore' command!\n";
     }
     }
+
     // NOLINTEND(clang-diagnostic-switch-enum)
+
+#pragma warning(pop)
   }
 
   // NOLINTNEXTLINE(readability-function-size)
@@ -476,7 +483,11 @@ namespace IO::_internal
 
     std::cout << "   TIPS: '";
 
+#pragma warning(push)
+#pragma warning(disable : 4'061)
+
     // NOLINTBEGIN(clang-diagnostic-switch-enum)
+
     switch (typeName)
     {
     case T_NONE:
@@ -970,7 +981,10 @@ namespace IO::_internal
       std::cout << "   ERROR: In 'tips' command!\n";
     }
     }
+
     // NOLINTEND(clang-diagnostic-switch-enum)
+
+#pragma warning(pop)
   }
 
   // NOLINTNEXTLINE(readability-function-size)
@@ -979,7 +993,11 @@ namespace IO::_internal
     // Using declarations
     using enum Option;
 
+#pragma warning(push)
+#pragma warning(disable : 4'061)
+
     // NOLINTBEGIN(clang-diagnostic-switch-enum)
+
     switch (typeName)
     {
     case T_NONE:
@@ -1752,6 +1770,9 @@ namespace IO::_internal
       };
     }
     }
+
     // NOLINTEND(clang-diagnostic-switch-enum)
+
+#pragma warning(pop)
   }
 } // namespace IO::_internal
